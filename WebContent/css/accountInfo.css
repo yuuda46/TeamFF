@@ -1,0 +1,123 @@
+/* 共通 */
+/* 背景画像の設定 */
+header {
+    height: 300px; /* 高さを画面の一部に設定 */
+    position: relative;
+    background: url(../images/mainimg.jpg) no-repeat center center / cover; /* 背景画像の読み込み */
+}
+
+/* ロゴ画像のスタイル */
+header #logo img {
+    display: block;
+    width: 200px; /* ロゴ画像の幅 */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 80px; /* 画像を下から20pxに配置 */
+}
+
+
+body {
+	margin: 0;
+}
+
+h1{
+	margin: 0;
+}
+
+/* タイトル */
+h3 {
+	font-size: 105px;
+    color: #ffffff;
+    width: 60px; /* ロゴ画像の幅 */
+    height:140px;
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 90px; /* 画像を下から20pxに配置 */
+
+    margin: 0;
+}
+
+/* タイトル */
+section.mo-3 h2 {
+    color: #333;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+
+
+}
+
+/* テーブルのスタイル */
+table {
+    width: 80%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #000000;
+    color: #fff;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* リンクのスタイル */
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ボタンのスタイル */
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #6c757d;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #5a6268;
+}
+
+/*フッター設定
+---------------------------------------------------------------------------*/
+footer {
+	position: absolute;
+ 	bottom: -210;
+ 	left: 40%;
+	clear: both;
+	text-align: center;
+	background: #ffffff;	/*背景色*/
+	color: #000000;		/*文字色*/
+	font-size: 85%;		/*文字サイズ*/
+}
+
+/* 全体の余白設定 */
+section.mo-3 {
+    margin: 0;
+    padding: 0 20px; /* 左右に空白を追加 */
+    box-sizing: border-box;
+}

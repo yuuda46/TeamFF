@@ -1,0 +1,272 @@
+/* 共通 */
+/* 背景画像の設定 */
+header {
+    height: 300px; /* 高さを画面の一部に設定 */
+    position: relative;
+    background: url(../images/mainimg.jpg) no-repeat center center / cover; /* 背景画像の読み込み */
+}
+
+/* ロゴ画像のスタイル */
+header #logo img {
+    display: block;
+    width: 200px; /* ロゴ画像の幅 */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 80px; /* 画像を下から20pxに配置 */
+}
+
+body {
+	margin: 0;
+}
+
+h1{
+	margin: 0;
+}
+
+/* タイトル */
+h3 {
+	font-size: 105px;
+    color: #ffffff;
+    width: 60px; /* ロゴ画像の幅 */
+    height:140px;
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 90px; /* 画像を下から20pxに配置 */
+
+    margin: 0;
+}
+
+/*フッター設定
+---------------------------------------------------------------------------*/
+/* フッターを画面下部に固定 */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #ffffff; /* 背景色 */
+    color: #000000; /* 文字色 */
+    text-align: center;
+    padding: 10px 0;
+    font-size: 85%; /* 文字サイズ */
+
+}
+
+---------------------------------------------------------------------------*/
+/* 全体の余白設定 */
+
+
+
+/* セクションのスタイル */
+section.mo-4 {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+/* タイトル */
+section.mo-4 h2 {
+    color: #333;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+
+
+}
+
+/* ラベル */
+form label {
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px;
+    display: block;
+}
+
+/* 入力フィールド */
+.select-shape {
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: calc(100% - 40px); /* 左右の空白を確保 */
+    font-size: 1em;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+/* エラーメッセージ */
+#error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* ボタンスタイル */
+button[type="submit"],
+button[type="button"] {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #000000;
+    cursor: pointer;
+}
+
+/* 戻るボタン */
+button.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    margin-top: 10px;
+}
+
+
+
+/* フォーム内の要素のスペース調整 */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 入力フィールドを2つずつ横並びに */
+.form-row {
+    display: flex;
+    gap: 20px; /* フィールド間の間隔 */
+}
+
+/* 各入力フィールドを等しい幅に */
+.form-row .form-group {
+    flex: 10;
+}
+
+
+/* スマートフォンやタブレット用のレスポンシブ対応 */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+.password-container {
+     position: relative;
+     display: flex;
+     flex-direction: column;
+}
+
+.password-toggle-label {
+	 margin-top: 8px;
+	 font-size: 0.9em;
+}
+
+.password-toggle {
+      margin-left: 5px;
+}
+
+
+
+/* 全体の余白設定 */
+section.mo-4 {
+    margin: 0;
+    padding: 0 20px; /* 左右に空白を追加 */
+    box-sizing: border-box;
+}
+
+---------------------------------------------------------------------------*/
+/* タイトルのスタイル */
+.main-container h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+/* 説明文のスタイル */
+.main-container p {
+    color: #666;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+/* リンクのスタイル */
+.main-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.main-container a:hover {
+    text-decoration: underline;
+}
+
+/* スマートフォンやタブレット用のレスポンシブ対応 */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+/* 全体の余白設定 */
+.main-container {
+    margin: 0;
+    padding: 0 20px; /* 左右に空白を追加 */
+    box-sizing: border-box;
+}
+
+---------------------------------------------------------------------------*/
+/* タイトルのスタイル */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+/* テーブルのスタイル */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #000000;
+    color: #fff;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #e9ecef;
+}
+
+/* リンクのスタイル */
+table td a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+table td a:hover {
+    text-decoration: underline;
+}
+
+/* 全体の余白設定 */
+section.mo-3 {
+    margin: 0;
+    padding: 0 20px; /* 左右に空白を追加 */
+    box-sizing: border-box;
+}
+
