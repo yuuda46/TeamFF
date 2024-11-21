@@ -82,7 +82,7 @@
     </form>
 
 
-    <button class="btn btn-secondary mt-3" type="button" onclick="history.back()">戻る</button>
+    <button class="btn btn-secondary mt-3" type="submit" onclick="history.back()">戻る</button>
 </section>
 
 <footer>

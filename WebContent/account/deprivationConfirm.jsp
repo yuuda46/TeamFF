@@ -19,7 +19,7 @@
 <body>
 <section class="mo-3">
     <h2>アカウント権限剥奪確認</h2>
-    <p>以下のアカウントの権限を剥奪しますか？</p>
+    <p>以下のアカウントの権限を外しますか？</p>
 
     <table border="1">
         <tr><th>名前</th><td>${account.name}</td></tr>
@@ -33,10 +33,10 @@
 
     <form action="Deprivation" method="post">
         <input type="hidden" name="email" value="${account.email}">
-        <button type="submit">剥奪する</button>
+        <button type="submit">外す</button>
     </form>
 
-    <button onclick="history.back()">戻る</button>
+    <button class="btn btn-secondary mt-3" type="submit" onclick="history.back()">戻る</button>
     <footer>
 	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
 	</footer>

@@ -39,7 +39,7 @@
                 <a href="AccountAuthority?email=${account.email}">権限を付与する</a>
             </c:when>
             <c:otherwise>
-                <a href="Deprivation?email=${account.email}">権限を剥奪する</a>
+                <a href="Deprivation?email=${account.email}">権限を外す</a>
             </c:otherwise>
         </c:choose>
     </div>

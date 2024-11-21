@@ -43,7 +43,7 @@
         <button type="submit">削除する</button>
     </form>
 
-	<button onclick="history.back()">戻る</button>
+	<button type="submit" onclick="history.back()">戻る</button>
 	<footer>
 	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
 	</footer>
