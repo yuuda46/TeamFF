@@ -46,7 +46,7 @@
 
 
 
-    <form action="../menu/index.html" method="get">
+    <form action="../common/index.html" method="get">
     <button class="btn btn-secondary" type="submit">戻る</button>
     </form>
     </section>
