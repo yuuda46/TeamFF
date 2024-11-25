@@ -125,8 +125,10 @@ button.btn-secondary {
 
 
 
+
+
 /* フォーム内の要素のスペース調整 */
-form {
+form, .mo-4.d{
     display: flex;
     flex-direction: column;
     gap: 15px;

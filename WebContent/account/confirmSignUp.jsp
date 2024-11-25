@@ -79,10 +79,15 @@
 
 
         <button type="submit" class="btn btn-primary">登録</button>
+
     </form>
 
 
     <button class="btn btn-secondary mt-3" type="submit" onclick="history.back()">戻る</button>
+
+
+
+
 </section>
 
 <footer>
