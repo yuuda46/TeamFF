@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ログインページ</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+    }
+    .hidden {
+        display: none;
+    }
+    .container {
+        width: 300px;
+        margin: 0 auto;
+        padding: 30px;
+        border: 2px solid #007bff; /* 青色の枠線 */
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+    .form-group {
+        margin: 10px 0;
+    }
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        width: 100%;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    h2 {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<h1>回覧板</h1>
+
+<div class="container">
+<div id="registerForm" class="hidden">
+<h2>アカウントを作成</h2>
+<div class="form-group">
+<input type="text" id="newUsername" placeholder="ユーザー名" required>
+</div>
+<div class="form-group">
+<input type="password" id="newPassword" placeholder="パスワード" required>
+</div>
+<button onclick="register()">登録</button>
+<button onclick="showLoginForm()">戻る</button> <!-- 戻るボタンを追加 -->
+</div>
+
+    <div id="loginForm" class="hidden">
+<h2>ログイン</h2>
+<div class="form-group">
+<input type="text" id="username" placeholder="ユーザー名" required>
+</div>
+<div class="form-group">
+<input type="password" id="password" placeholder="パスワード" required>
+</div>
+<button onclick="login()">ログイン</button>
+<p style="text-align: center;"><a href="#" onclick="showResetForm()">パスワードを忘れた場合</a></p>
+<p style="text-align: center;"><a href="#" onclick="showRegisterForm()">アカウントを作成する</a></p>
+</div>
+
+    <div id="resetForm" class="hidden">
+<h2>パスワードを再設定</h2>
+<div class="form-group">
+<input type="text" id="resetUsername" placeholder="ユーザー名" required>
+</div>
+<div class="form-group">
+<input type="password" id="newPasswordReset" placeholder="新しいパスワード" required>
+</div>
+<button onclick="resetPassword()">再設定</button>
+<button onclick="hideResetForm()">キャンセル</button>
+</div>
+
+    <div id="welcomeMessage" class="hidden">
+<h2>ログイン確認</h2>
+<p>こんにちは, <span id="userDisplay"></span>!</p>
+<button onclick="logout()">ログアウト</button>
+</div>
+</div>
+
+<script>
+    window.onload = function() {
+        const users = JSON.parse(localStorage.getItem("users")) || {};
+        if (Object.keys(users).length === 0) {
+            showRegisterForm();
+        } else {
+            showLoginForm();
+        }
+    };
+
+    function showRegisterForm() {
+        document.getElementById("loginForm").classList.add("hidden");
+        document.getElementById("resetForm").classList.add("hidden");
+        document.getElementById("welcomeMessage").classList.add("hidden");
+        document.getElementById("registerForm").classList.remove("hidden");
+    }
+
+    function showLoginForm() {
+        document.getElementById("registerForm").classList.add("hidden");
+        document.getElementById("resetForm").classList.add("hidden");
+        document.getElementById("welcomeMessage").classList.add("hidden");
+        document.getElementById("loginForm").classList.remove("hidden");
+    }
+
+    function showResetForm() {
+        document.getElementById("loginForm").classList.add("hidden");
+        document.getElementById("resetForm").classList.remove("hidden");
+    }
+
+    function hideResetForm() {
+        document.getElementById("resetForm").classList.add("hidden");
+        showLoginForm();
+    }
+
+    function register() {
+        const newUsername = document.getElementById("newUsername").value;
+        const newPassword = document.getElementById("newPassword").value;
+
+        if (newUsername && newPassword) {
+            let users = JSON.parse(localStorage.getItem("users")) || {};
+            if (users[newUsername]) {
+                alert("このユーザー名はすでに使用されています。");
+                return;
+            }
+            users[newUsername] = newPassword;
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("アカウントが作成されました！");
+            showLoginForm();
+        } else {
+            alert("ユーザー名とパスワードを入力してください。");
+        }
+    }
+
+    function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        let users = JSON.parse(localStorage.getItem("users")) || {};
+        if (users[username] && users[username] === password) {
+            showWelcomeMessage(username);
+        } else {
+            alert("ユーザー名またはパスワードが正しくありません。");
+        }
+    }
+
+    function showWelcomeMessage(username) {
+        document.getElementById("loginForm").classList.add("hidden");
+        document.getElementById("registerForm").classList.add("hidden");
+        document.getElementById("resetForm").classList.add("hidden");
+        document.getElementById("welcomeMessage").classList.remove("hidden");
+        document.getElementById("userDisplay").innerText = username;
+    }
+
+    function logout() {
+        document.getElementById("loginForm").classList.remove("hidden");
+        document.getElementById("welcomeMessage").classList.add("hidden");
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+    }
+
+    function resetPassword() {
+        const resetUsername = document.getElementById("resetUsername").value;
+        const newPassword = document.getElementById("newPasswordReset").value;
+
+        let users = JSON.parse(localStorage.getItem("users")) || {};
+
+        if (users[resetUsername]) {
+            users[resetUsername] = newPassword;
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("パスワードが再設定されました。");
+            hideResetForm();
+            showLoginForm();
+
+            // フィールドの値をクリア
+            document.getElementById("resetUsername").value = "";
+            document.getElementById("newPasswordReset").value = "";
+        } else {
+            alert("ユーザー名が正しくありません。");
+        }
+    }
+</script>
+</body>
+</html>
