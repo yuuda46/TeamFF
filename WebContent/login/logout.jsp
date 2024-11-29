@@ -7,7 +7,13 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+<header>
+    <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+    <h3 class="titlesize">Logout</h3>
+</header>
+
 <head>
+    <link rel="stylesheet" href="../css/account.css">
     <meta charset="UTF-8">
     <title>ログアウト</title>
     <script>
@@ -29,9 +35,15 @@
     </script>
 </head>
 <body>
+<div class="main-container">
     <h1>ログアウトしました</h1>
     <p id="countdown">5秒後にホーム画面へ戻ります</p> <!-- カウントダウン表示 -->
 
     <p><a href="../common/index.jsp">今すぐ戻る</a></p> <!-- 手動で戻るリンク -->
+        </div>
+
+    <footer>
+    <small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+	</footer>
 </body>
 </html>
