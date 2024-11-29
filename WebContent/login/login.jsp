@@ -7,13 +7,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ログインページ</title>
-<style>
+<header>
 
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
+
+<h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+<h3 class="titlesize">Login</h3>
+
+
+
+</header>
+
+<style>
+/* 共通 */
+/* 背景画像の設定 */
+header {
+    height: 300px; /* 高さを画面の一部に設定 */
+    position: relative;
+    background: url(../images/mainimg.jpg) no-repeat center center / cover; /* 背景画像の読み込み */
+}
+
+/* ロゴ画像のスタイル */
+header #logo img {
+    display: block;
+    width: 200px; /* ロゴ画像の幅 */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 80px; /* 画像を下から20pxに配置 */
+}
+
+/* タイトル */
+h3 {
+	font-size: 105px;
+    color: #ffffff;
+    width: 60px; /* ロゴ画像の幅 */
+    height:140px;
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 90px; /* 画像を下から20pxに配置 */
+
+    margin: 0;
+}
+body {
+	margin: 0;
+}
+
 
         .container {
             width: 300px;
@@ -40,7 +79,7 @@
         }
 
         button {
-            background-color: #007bff;
+            background-color: #000000;
             color: white;
             cursor: pointer;
             border: none;
@@ -49,6 +88,9 @@
         button:hover {
             background-color: #0056b3;
         }
+        h1{
+			margin: 0;
+		}
 
         h2 {
             text-align: center;
@@ -60,7 +102,7 @@
 
         .logout-btn a {
             padding: 10px 20px;
-            background-color: #dc3545;
+            background-color: #000000;
             color: white;
             text-decoration: none;
             border-radius: 4px;
@@ -89,6 +131,18 @@
         border: 2px solid red;  /* 赤色の枠線 */
         outline: none; /* 追加のアウトラインを削除 */
     }
+
+    footer {
+	position: absolute;
+ 	bottom: -210;
+ 	left: 40%;
+	clear: both;
+	text-align: center;
+	background: #ffffff;	/*背景色*/
+	color: #000000;		/*文字色*/
+	font-size: 85%;		/*文字サイズ*/
+}
+
 </style>
 </head>
 
@@ -208,6 +262,8 @@
 
     <p style="text-align: center;"><a href="pass_reset.jsp">パスワードを忘れた</a></p>
 </div>
-
+    <footer>
+	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+	</footer>
 </body>
 </html>
