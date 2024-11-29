@@ -1,0 +1,10 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="3.0">
+    <servlet>
+        <servlet-name>ContactServlet</servlet-name>
+        <servlet-class>com.ContactServlet</servlet-class> <!-- クラスパスが正しいか確認 -->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/ContactServlet</url-pattern> <!-- 正しいURLパターン -->
+    </servlet-mapping>
+</web-app>

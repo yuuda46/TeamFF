@@ -1,0 +1,116 @@
+header {
+    height: 300px; /* 高さを画面の一部に設定 */
+    position: relative;
+    background: url(../images/mainimg.jpg) no-repeat center center / cover; /* 背景画像の読み込み */
+}
+
+/* ロゴ画像のスタイル */
+header #logo img {
+    display: block;
+    width: 200px; /* ロゴ画像の幅 */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 80px; /* 画像を下から20pxに配置 */
+}
+
+
+/* 全体のスタイル */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff; /* 背景色 */
+    margin: 0;
+    padding: 0;
+}
+
+
+
+h1{
+	margin: 0;
+}
+
+/* フォームのスタイル */
+form {
+    max-width: 600px; /* フォーム全体の幅 */
+    margin: 50px auto; /* 中央揃え */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ボックスシャドウで立体感 */
+}
+
+/* ラベルのスタイル */
+form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* 入力欄のスタイル */
+form input[type="text"],
+form input[type="email"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* パディングを含めたボックスサイズ */
+    font-size: 1em;
+}
+
+/* テキストエリアの高さ調整 */
+form textarea {
+    height: 150px; /* 高さを指定 */
+}
+
+/* ボタンのスタイル */
+form button[type="submit"] {
+    display: block;
+    width: 100%;
+    background-color: #000000; /* 色 */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #45a049; /* ホバー時に濃い緑 */
+}
+
+/* 戻るリンクのスタイル */
+form a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* 見出しのスタイル */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+footer {
+	position: absolute;
+ 	bottom: -210;
+ 	left: 40%;
+	clear: both;
+	text-align: center;
+	background: #ffffff;	/*背景色*/
+	color: #000000;		/*文字色*/
+	font-size: 85%;		/*文字サイズ*/
+}

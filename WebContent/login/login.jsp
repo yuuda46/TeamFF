@@ -145,7 +145,7 @@ h2 {
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 30px;
-    padding-left: 20px
+    padding-left: 580px
 
 
 }
