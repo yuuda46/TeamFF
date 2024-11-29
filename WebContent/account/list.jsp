@@ -46,12 +46,12 @@
 
 
 
-    <form action="../common/index.html" method="get">
+    <form action="../common/index.jsp" method="get">
     <button class="btn btn-secondary" type="submit">戻る</button>
     </form>
     </section>
         <footer>
-	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+	<small>Copyright&copy; <a href="index.jsp">SAMPLE COMPANY</a> All Rights Reserved.</small>
 	</footer>
 </body>
 </html>

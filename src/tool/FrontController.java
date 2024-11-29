@@ -18,9 +18,23 @@ public class FrontController extends HttpServlet {
 	) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
 		try {
-			HttpSession session=request.getSession();
-			String teacher_id = (String) session.getAttribute("teacher_id");
-			String teacher_name = (String) session.getAttribute("teacher_name");
+            HttpSession session = request.getSession();
+            String user_name = (String) session.getAttribute("username");
+            String password = (String) session.getAttribute("password");
+            System.out.println(user_name);
+            System.out.println(password);
+            // 未ログインの場合、ログイン画面にリダイレクト
+            if (user_name == null || password == null) {
+                // リダイレクト前に遷移元のURLを保存
+                String requestedUrl = request.getRequestURI();
+                session.setAttribute("requestedUrl", requestedUrl);
+                // ログインページにリダイレクト
+                response.sendRedirect("../login/login.jsp");
+                return;
+            }
+
+
+
 
 
 			// URLの取得
@@ -45,6 +59,11 @@ public class FrontController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace(out);
 		}
+	}
+
+	private boolean isHomePageRequest(HttpServletRequest request) {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
 	}
 
 	public void doGet(

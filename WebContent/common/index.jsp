@@ -1,7 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
+<% response.setContentType("text/html; charset=UTF-8"); %>
+
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,19 +18,36 @@
 <body>
 
 <header>
+
+<%String username = (String) session.getAttribute("username");
+    if (username != null) {%>
+    <a href="../login/logout.jsp" class="button12">ログアウト</a>
+<%} else {%>
+    <a href="../login/login.jsp" class="button12">ログイン</a>
+<%}%>
 <a href="../account/signUp.jsp" class="button12">新規登録</a>
-<a href="../login/login.jsp" class="button12">ログイン</a>
-<a href="../login/logout.jsp" class="button12">ログアウト</a>
 
 
-    <!-- ドロップダウンメニューを追加 -->
-    <div class="dropdown">
-        <button class="dropdown-toggle">メニュー ▼</button>
-        <ul class="dropdown-menu">
-            <li><a href="../account/AccountList.action">アカウント</a></li>
-            <li><a href="#">メール</a></li>
-        </ul>
-    </div>
+
+ <%
+        // セッションからadminフラグを取得
+        Boolean isAdmin = (Boolean) session.getAttribute("admin");
+
+        // 管理者フラグがtrueの場合にメニューを表示
+        if (isAdmin != null && isAdmin) {
+    %>
+        <!-- 管理者用ドロップダウンメニュー -->
+        <div class="dropdown">
+            <button class="dropdown-toggle">メニュー ▼</button>
+            <ul class="dropdown-menu">
+                <li><a href="../account/AccountList.action">アカウント</a></li>
+                <li><a href="#">メール</a></li>
+            </ul>
+        </div>
+    <% } %>
+
+
+
 <h1 id="logo"><a href="index.html"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
 <nav id="menubar">
 <ul>

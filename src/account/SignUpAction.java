@@ -53,8 +53,11 @@ public class SignUpAction extends Action {
 
             if (name.length() > 15) errorName = "氏名は15文字以内で入力してください。";
             if (user_name.length() > 20) errorUserName = "ユーザ名は20文字以内で入力してください。";
+         // パスワードが6文字以上50文字以内かつ英字と数字の両方を含むかチェック
             if (password.length() < 6 || password.length() > 50) {
                 errorPassword = "パスワードは6文字以上50文字以内で入力してください。";
+            } else if (!Pattern.matches(".*[a-zA-Z].*", password) || !Pattern.matches(".*\\d.*", password)) {
+                errorPassword = "パスワードは英字と数字の両方を含む必要があります。";
             }
             if (email.length() > 50) errorEmail = "メールアドレスは50文字以内で入力してください。";
             if (post_code.length() > 10) errorPostCode = "郵便番号は10文字以内で入力してください。";

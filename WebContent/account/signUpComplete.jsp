@@ -9,14 +9,14 @@
 
     <title>登録完了</title>
     <link rel="stylesheet" href="../css/account.css">
-    <meta http-equiv="refresh" content="5;url=../menu/index.html">
+    <meta http-equiv="refresh" content="5;url=../login/login.jsp">
 </head>
 
 <body>
     <div class="main-container">
         <h2>登録が完了しました。</h2>
-        <p>5秒後にホーム画面に移動します。</p>
-        <p>すぐに移動する場合は<a href="../menu/index.html">こちら</a>をクリックしてください。</p>
+        <p>5秒後にログイン画面に移動します。</p>
+        <p>すぐに移動する場合は<a href="../login/login.jsp">こちら</a>をクリックしてください。</p>
     </div>
     <footer>
     <small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
