@@ -2,15 +2,62 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="ja">
+<header>
+    <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+    <h3 class="titlesize">PsReset</h3>
+</header>
+
 <head>
 <meta charset="UTF-8">
 <title>パスワードリセット</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 20px;
-    }
+
+header {
+    height: 300px; /* 高さを画面の一部に設定 */
+    position: relative;
+    background: url(../images/mainimg.jpg) no-repeat center center / cover; /* 背景画像の読み込み */
+}
+
+/* ロゴ画像のスタイル */
+header #logo img {
+    display: block;
+    width: 200px; /* ロゴ画像の幅 */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 80px; /* 画像を下から20pxに配置 */
+}
+
+h1{
+	margin: 0;
+}
+
+/* タイトル */
+h3 {
+	font-size: 105px;
+    color: #ffffff;
+    width: 60px; /* ロゴ画像の幅 */
+    height:140px;
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 90px; /* 画像を下から20pxに配置 */
+
+    margin: 0;
+}
+body {
+	margin: 0;
+}
+footer {
+	position: absolute;
+ 	bottom: -210;
+ 	left: 40%;
+	clear: both;
+	text-align: center;
+	background: #ffffff;	/*背景色*/
+	color: #000000;		/*文字色*/
+	font-size: 85%;		/*文字サイズ*/
+}
     .container {
         width: 300px;
         margin: 0 auto;
@@ -36,7 +83,7 @@
         border: 1px solid #ccc;
     }
     button {
-        background-color: #ff4d4d; /* 赤色 */
+        background-color: #000000; /* 赤色 */
         color: white;
         border: none;
         cursor: pointer;
@@ -62,10 +109,19 @@
         color: red;
         margin-bottom: 15px;
     }
+h2 {
+    color: #333;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding-left: 20px
+
+
+}
 </style>
 </head>
 <body>
-<h1>パスワードの再設定</h1>
+<h2>パスワードの再設定</h2>
 <div class="container">
 
 <%
@@ -149,7 +205,8 @@
 <% } %>
 
 <%-- パスワードリセットフォーム --%>
-<form method="POST" action="pass_reset.jsp">
+
+	<form method="POST" action="pass_reset.jsp">
     <label for="username">ユーザー名:</label>
     <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
 
@@ -157,11 +214,15 @@
     <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
 
     <button type="submit">パスワードを変更</button>
-</form>
+	</form>
 
-<!-- 戻るボタン -->
-<a href="login.jsp" class="back-btn">ログイン画面に戻る</a>
+	<!-- 戻るボタン -->
+	<a href="login.jsp" class="back-btn">ログイン画面に戻る</a>
 
-</div>
+	</div>
+
+    <footer>
+    <small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+	</footer>
 </body>
 </html>

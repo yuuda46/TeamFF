@@ -92,9 +92,7 @@ body {
 			margin: 0;
 		}
 
-        h2 {
-            text-align: center;
-        }
+
 
         .logout-btn {
             text-align: center;
@@ -142,6 +140,15 @@ body {
 	color: #000000;		/*文字色*/
 	font-size: 85%;		/*文字サイズ*/
 }
+h2 {
+    color: #333;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding-left: 20px
+
+
+}
 
 </style>
 </head>
@@ -154,7 +161,7 @@ body {
 %>
 <body>
 
-<h1>ログインページ</h1>
+<h2>ログインページ</h2>
 
 <div class="container">
 
