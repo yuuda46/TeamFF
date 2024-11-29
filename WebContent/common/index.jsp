@@ -21,7 +21,7 @@
 
 <%String username = (String) session.getAttribute("username");
     if (username != null) {%>
-    <a href="../login/logout.jsp" class="button12">ログアウト</a>
+    <a href="../login/logout-in.jsp" class="button12">ログアウト</a>
 <%} else {%>
     <a href="../login/login.jsp" class="button12">ログイン</a>
 <%}%>

@@ -13,7 +13,7 @@
 </header>
 
 <head>
-    <link rel="stylesheet" href="../css/account.css">
+    <link rel="stylesheet" href="../css/account2.css">
     <meta charset="UTF-8">
     <title>ログアウト</title>
     <script>
