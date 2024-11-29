@@ -114,3 +114,16 @@ footer {
 	color: #000000;		/*文字色*/
 	font-size: 85%;		/*文字サイズ*/
 }
+/* タイトル */
+h3 {
+	font-size: 105px;
+    color: #ffffff;
+    width: 60px; /* ロゴ画像の幅 */
+    height:140px;
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%); /* 画像を中央に配置 */
+    bottom: 90px; /* 画像を下から20pxに配置 */
+
+    margin: 0;
+}
