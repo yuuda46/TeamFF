@@ -42,6 +42,8 @@
             <ul class="dropdown-menu">
                 <li><a href="../account/AccountList.action">アカウント</a></li>
                 <li><a href="#">メール</a></li>
+                <li><a href="../notice/NoticeForm.action">アップロード</a></li>
+				<li><a href="../notice/NoticeAdmin.action">投稿編集</a></li>
             </ul>
         </div>
     <% } %>
