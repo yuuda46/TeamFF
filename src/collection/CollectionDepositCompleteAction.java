@@ -15,41 +15,64 @@ import tool.Action;
 public class CollectionDepositCompleteAction extends Action {
 
 	public String execute(
-            HttpServletRequest request, HttpServletResponse response
-    ) throws ServletException, IOException {
+	        HttpServletRequest request, HttpServletResponse response
+	) throws ServletException, IOException {
 
-        response.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = response.getWriter();
+	    response.setContentType("text/html; charset=UTF-8");
+	    PrintWriter out = response.getWriter();
 
-        try {
-            // セッションからIDを取得
-            HttpSession session = request.getSession();
-            String sessionId = (String) session.getAttribute("sessionId");
+	    try {
+	        // セッションからIDを取得
+	        HttpSession session = request.getSession();
+	        String sessionId = (String) session.getAttribute("sessionId");
 
-            // フォームからpostIdを取得
-            String postId = request.getParameter("postId");
+	        // デバッグメッセージ
+	        System.out.println("Session ID: " + sessionId);
 
-            // Paymentオブジェクトを作成
-            Payment payment = new Payment();
-            payment.setPostID(postId);
-            payment.setSignID(sessionId);
+	        // セッションIDがnullでないことを確認
+	        if (sessionId == null) {
+	            System.out.println("Session ID is null");
+	            return "ErrorPage1.jsp";
+	        }
 
-            // DAOを使用してデータを挿入
-            CollectionDAO dao = new CollectionDAO();
-            int result = dao.insert(payment);
+	        // フォームからpostIdを取得
+	        String postId = request.getParameter("postId");
 
-            // 挿入結果を確認
-            if (result > 0) {
-                // 挿入成功
-                return "SuccessPage.jsp";
-            } else {
-                // 挿入失敗
-                return "ErrorPage.jsp";
-            }
+	        // デバッグメッセージ
+	        System.out.println("Post ID: " + postId);
 
-        } catch (Exception e) {
-            e.printStackTrace(out);
-            return "ErrorPage.jsp";
-        }
-    }
+	        // Paymentオブジェクトを作成
+	        Payment payment = new Payment();
+	        payment.setPostID(postId);
+	        payment.setSignID(sessionId);
+
+	        // DAOを使用してデータを挿入
+	        CollectionDAO dao = new CollectionDAO();
+	        int result = dao.insert(payment);
+
+	        // デバッグメッセージ
+	        System.out.println("Insert result: " + result);
+
+	        // 挿入結果を確認
+	        if (result <= 0) {
+	            // 挿入失敗
+	            System.out.println("Insert failed, redirecting to ErrorPage1.jsp");
+	            return "ErrorPage1.jsp";
+	        }
+            // 挿入成功
+            System.out.println("Insert successful, redirecting to Collection_Deposit_Done.jsp");
+
+
+	    } catch (Exception e) {
+	        // ログにエラーを記録
+	        e.printStackTrace();
+	        return "ErrorPage2.jsp";
+	    } finally {
+	        // PrintWriterを閉じる
+	        if (out != null) {
+	            out.close();
+	        }
+	    }
+        return "Collection_Deposit_Done.jsp";
+	}
 }

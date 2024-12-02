@@ -14,8 +14,7 @@ import tool.Action;
 
 public class CollectionDepositAction extends Action {
 
-
-	public String execute(
+    public String execute(
             HttpServletRequest request, HttpServletResponse response
     ) throws ServletException, IOException {
 

@@ -47,12 +47,13 @@
                              </tr>
 
                         <%--ここでsignidとcollectionidをCompleteActionに渡して登録 --%>
-                        <form action="../collection/CollectionDepositComplete.action" method="get">
-    					<input type="hidden" name="postId" value="${post.id}">
-    					<button type="submit" class="CollectionDepositComplete.action">
-        				入金を完了する
-    					</button>
-						</form>
+                        <td class="text-center test-boder student-table-wide">
+					    <a href="../collection/CollectionDepositComplete.action?postId=${Collection.id}">
+					        <button type="submit" class="CollectionDepositComplete.action">
+					            入金を完了する
+					        </button>
+					    </a>
+						</td>
 
                         </c:forEach>
                     </table>

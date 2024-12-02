@@ -41,10 +41,11 @@
 
 								<%-- 入金ボタン↓現状張りぼて。
 								こちらをのボタンを押したらpostのidを持っていってdeposit.jspで表示する --%>
-                        		<td class="text-center test-boder student-table-wide"><a href="CollectionDeposit.jsp?no=${Collection.id}">
-								<button>入金する</button></a>
-                                </td>
-
+                        		<td class="text-center test-boder student-table-wide">
+							    <a href="../collection/CollectionDeposit.action?no=${Collection.id}">
+							        <button>入金する</button>
+							    </a>
+								</td>
 								<%-- 二次目標：一つ一つそれぞれのお知らせに飛ぶようにする。
 								もしくは、入金ボタンを押した先で詳細な説明が読めるようにするかのどちらか。
 								前者の場合、入金ボタンを押した後のワンクッションが空っぽになる。 --%>

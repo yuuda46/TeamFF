@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,25 +76,45 @@ public class CollectionDAO extends DAO {
 	    return list;
 	}
 
-//	入金
+	// 入金
 	public int insert(Payment payment) throws Exception {
+	    Connection con = null;
+	    PreparedStatement st = null;
+	    int line = 0;
 
-		Connection con=getConnection();
-		PreparedStatement st=con.prepareStatement(
-			"INSERT INTO payment (paymentid, postid, signid, depositdate)"
-			+"SELECT IFNULL(MAX(paymentid), 0) + 1, ?, ?, CURDATE()"
-			+"FROM payment");
+	    try {
+	        con = getConnection();
+	        st = con.prepareStatement(
+	            "INSERT INTO payment (paymentid, postid, signid, depositdate) " +
+	            "SELECT IFNULL(MAX(paymentid), 0) + 1, ?, ?, CURDATE() " +
+	            "FROM payment"
+	        );
 
-		st.setString(1, payment.getPostID());
-		st.setString(2, payment.getSignID());
+	        st.setString(1, payment.getPostID());
+	        st.setString(2, payment.getSignID());
 
+	        line = st.executeUpdate();
+	    } catch (SQLException e) {
+	        // ログにエラーを記録
+	        e.printStackTrace();
+	        throw new Exception("Database error: " + e.getMessage());
+	    } finally {
+	        if (st != null) {
+	            try {
+	                st.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (con != null) {
+	            try {
+	                con.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
 
-		int line= st.executeUpdate();
-		st.close();
-		con.close();
-
-		return line;
+	    return line;
 	}
-
-
 }
