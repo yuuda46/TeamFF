@@ -15,31 +15,27 @@ import tool.Action;
 public class CollectionDepositAction extends Action {
 
 
-	public String execute (
-			HttpServletRequest request, HttpServletResponse response
-			) throws ServletException, IOException {
+	public String execute(
+            HttpServletRequest request, HttpServletResponse response
+    ) throws ServletException, IOException {
 
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out=response.getWriter();
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
-			try{
+        try {
+            // postIdを取得
+            String postId = request.getParameter("no");
 
-//			    ここで最終確認を行うためのやつ。postidを使ってタイトル、説明を持ってきて何に入金するのかを確認する。
+            // postIdを使ってタイトル、説明を持ってきて何に入金するのかを確認する
+            CollectionDAO dao = new CollectionDAO();
+            List<Post> list = dao.retrieval(postId);
 
-				CollectionDAO dao=new CollectionDAO();
-				List<Post> list=dao.retrieval(payment);
+            // データをjspへ
+            request.setAttribute("Post", list);
 
-				// データをjspへ
-				request.setAttribute("Post", list);
-
-
-//
-
-			} catch (Exception e) {
-				e.printStackTrace(out);
-		}
-			return "Collection_Deposit.jsp";
-	}
-
-
+        } catch (Exception e) {
+            e.printStackTrace(out);
+        }
+        return "Collection_Deposit.jsp";
+    }
 }

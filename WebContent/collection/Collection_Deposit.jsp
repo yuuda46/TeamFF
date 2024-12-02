@@ -45,14 +45,15 @@
                                 <td class="subject-table-wide test-boder">${Collection.content}</td>
 
                              </tr>
-                        <%-- 入金ボタン↓現状張りぼて。
-								こちらをCollectionDepositActionに飛ばしてDAOのinsertに繋げ、記録する。 --%>
+
                         <%--ここでsignidとcollectionidをCompleteActionに渡して登録 --%>
-                        <form action="../collection/CollectionList.action" method="get">
-          				<button type="submit" class="CollectionList.action">
-          				入金を完了する
-          				</button>
-        				</form>
+                        <form action="../collection/CollectionDepositComplete.action" method="get">
+    					<input type="hidden" name="postId" value="${post.id}">
+    					<button type="submit" class="CollectionDepositComplete.action">
+        				入金を完了する
+    					</button>
+						</form>
+
                         </c:forEach>
                     </table>
                 </c:when>

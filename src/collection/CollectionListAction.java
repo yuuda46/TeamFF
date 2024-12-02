@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.Post;
 import dao.CollectionDAO;
@@ -15,28 +16,28 @@ import tool.Action;
 public class CollectionListAction extends Action {
 
 
-	public String execute (
-			HttpServletRequest request, HttpServletResponse response
-			) throws ServletException, IOException {
+	public String execute(
+            HttpServletRequest request, HttpServletResponse response
+    ) throws ServletException, IOException {
 
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out=response.getWriter();
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
-			try{
+        try {
+            // セッションからIDを取得
+            HttpSession session = request.getSession();
+            String sessionId = (String) session.getAttribute("sessionId");
 
-			    // h2コンソールからリストを取得、この際、ログインしている人のidを取得して表示する。
-				CollectionDAO dao=new CollectionDAO();
-				List<Post> list=dao.search(Payment);
+            // セッションIDを使用してPOSTのリストを取得
+            CollectionDAO dao = new CollectionDAO();
+            List<Post> list = dao.search(sessionId);
 
-				// アトリビュート
-				request.setAttribute("Post", list);
+            // データをjspへ
+            request.setAttribute("Post", list);
 
-
-
-			} catch (Exception e) {
-				e.printStackTrace(out);
-		}
-			return "Collection_List.jsp";
-	}
-
+        } catch (Exception e) {
+            e.printStackTrace(out);
+        }
+        return "Collection_List.jsp";
+    }
 }

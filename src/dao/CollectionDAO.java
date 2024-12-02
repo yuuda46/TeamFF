@@ -12,42 +12,41 @@ import bean.Post;
 public class CollectionDAO extends DAO {
 
 //	未入金検索
-	public List<Post> search(Payment payment) throws Exception {
+	public List<Post> search(String sessionId) throws Exception {
 		List<Post> list=new ArrayList<>();
 
 		Connection con= getConnection();
 
 //		sql文は、idで検索をかけ、idがpaymentテーブルにないもののみ表示するようになっている。
-		PreparedStatement st=con.prepareStatement(
-		 "SELECT * "
-	     + "FROM PUBLIC.POST p "
-	     + "LEFT JOIN PUBLIC.PAYMENT pay ON p.ID = pay.POSTID AND pay.SIGNID = ? "
-	     + "WHERE p.CATEGORY_ID = 2 "
-	     + "AND pay.SIGNID IS NULL;");
+		PreparedStatement st = con.prepareStatement(
+	            "SELECT * "
+	            + "FROM PUBLIC.POST p "
+	            + "LEFT JOIN PUBLIC.PAYMENT pay ON p.ID = pay.POSTID AND pay.SIGNID = ? "
+	            + "WHERE p.CATEGORY_ID = 2 "
+	            + "AND pay.SIGNID IS NULL;"
+	        );
 
-		st.setString(1, payment.getSignID());
+	        st.setString(1, sessionId);
 
-		ResultSet rs=st.executeQuery();
+	        ResultSet rs = st.executeQuery();
 
-		while (rs.next()){
-			Post p=new Post();
-			p.setId(rs.getString("ID"));
-			p.setTitle(rs.getString("title"));
-			p.setPost_day(rs.getDate("Post_Day"));
-			p.setContent(rs.getString("Content"));
+	        while (rs.next()) {
+	            Post p = new Post();
+	            p.setId(rs.getString("ID"));
+	            p.setTitle(rs.getString("TITLE"));
+	            p.setContent(rs.getString("CONTENT"));
+	            p.setPost_day(rs.getDate("POST_DAY"));
 
+	            list.add(p);
+	        }
+	        st.close();
+	        con.close();
 
-			list.add(p);
-		}
-		st.close();
-		con.close();
-
-		return list;
-
-	}
+	        return list;
+	    }
 
 // 未入金検索
-	public List<Post> retrieval(String postId) throws Exception {
+	public List<Post> retrieval(String payment) throws Exception {
 	    List<Post> list = new ArrayList<>();
 
 	    Connection con = getConnection();
@@ -57,7 +56,7 @@ public class CollectionDAO extends DAO {
 	        "SELECT ID, TITLE, CONTENT, POST_DAY FROM PUBLIC.POST WHERE ID = ?"
 	    );
 
-	    st.setString(1, postId);
+	    st.setString(1, payment);
 
 	    ResultSet rs = st.executeQuery();
 
