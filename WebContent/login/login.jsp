@@ -226,6 +226,7 @@ h2 {
                     session.setAttribute("password", inputPassword);
                  // 管理者フラグの取得とセッション保存
                     String adminFlag = rs.getString("ADMINI");
+                 	String idFrag = rs.getString("ID");
                     session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有                    // ログイン成功後、トップページへリダイレクト
                     response.sendRedirect("../common/index.jsp"); // ログイン成功後、トップページへリダイレクト
                     return; // 処理終了
