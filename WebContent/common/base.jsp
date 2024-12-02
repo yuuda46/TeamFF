@@ -20,14 +20,42 @@
 
 <body>
 
+<%String username = (String) session.getAttribute("username");
+    if (username != null) {%>
+    <a href="../login/logout-in.jsp" class="button12">ログアウト</a>
+<%} else {%>
+    <a href="../login/login.jsp" class="button12">ログイン</a>
+<%}%>
+<a href="../account/signUp.jsp" class="button12">新規登録</a>
+
+
+
+ <%
+        // セッションからadminフラグを取得
+        Boolean isAdmin = (Boolean) session.getAttribute("admin");
+
+        // 管理者フラグがtrueの場合にメニューを表示
+        if (isAdmin != null && isAdmin) {
+    %>
+        <!-- 管理者用ドロップダウンメニュー -->
+        <div class="dropdown">
+            <button class="dropdown-toggle">メニュー ▼</button>
+            <ul class="dropdown-menu">
+                <li><a href="../account/AccountList.action">アカウント</a></li>
+                <li><a href="#">メール</a></li>
+                <li><a href="../notice/NoticeForm.action">アップロード</a></li>
+				<li><a href="../notice/NoticeAdmin.action">投稿編集</a></li>
+            </ul>
+        </div>
+    <% } %>
+
+
 <header class="head">
 <h1 id="logo"><a href="index.html"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
 <nav class="menubar">
 <ul>
-<li><a href="../common/index.html">ホーム</a></li>
+<li><a href="../common/index.jsp">ホーム</a></li>
 <li><a href="../notice/Notice.action">投稿</a></li>
-<li><a href="../notice/NoticeForm.action">アップロード(仮)</a></li>
-<li><a href="../notice/NoticeAdmin.action">投稿編集</a></li>
 <li><a href="../notice/Tokou.action">掲示板</a></li>
 <li><a href="../collection/CollectionList.action">集金一覧</a></li>
 </ul>
