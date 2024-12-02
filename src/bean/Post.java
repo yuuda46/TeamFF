@@ -10,7 +10,33 @@ public class Post {
 	private Date post_day;
 	private int category_id;
 
+	private String id ;
 
+
+	public String getPost_id() {
+		return post_id;
+	}
+	public void setPost_id(String post_id) {
+		this.post_id = post_id;
+	}
+	public Date getPost_day() {
+		return post_day;
+	}
+	public void setPost_day(Date post_day) {
+		this.post_day = post_day;
+	}
+	public int getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getPostId() {
 		return post_id;
 	}
