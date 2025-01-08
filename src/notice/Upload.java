@@ -43,8 +43,11 @@ public class Upload extends HttpServlet {
 		System.out.println("b");
 
 		String title=request.getParameter("title");
+		System.out.println(title);
 		String name=request.getParameter("name");
+		System.out.println(name);
 		Integer num = Integer.parseInt(request.getParameter("num"));
+		System.out.println(num);
 
 		//name属性がpictのファイルをPartオブジェクトとして取得
 		Part part=request.getPart("pict");

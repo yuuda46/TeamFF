@@ -179,6 +179,9 @@ footer {
 	background: #222;	/*背景色*/
 	color: #fff;		/*文字色*/
 	font-size: 85%;		/*文字サイズ*/
+	/* フッターを一番下に固定するCSS */
+	top: 100vh;
+	position: sticky;
 }
 footer a {
 	color: #fff;	/*リンクテキストの文字色*/
