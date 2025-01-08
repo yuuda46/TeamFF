@@ -36,10 +36,10 @@
 ${param.content}
 </div>
 
-<footer>
-<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
-<span class="pr">《<a href="https://template-party.com/" target="_blank">Web Design:Template-Party</a>》</span>
-</footer>
+    <footer>
+	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+	</footer>
+
 
 <!--jQueryファイルの読み込み-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -50,3 +50,4 @@ ${param.content}
 
 </body>
 </html>
+
