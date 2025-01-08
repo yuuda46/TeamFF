@@ -24,6 +24,8 @@ import dao.CategoryDAO;
 @WebServlet("/notice/Upload")
 @MultipartConfig(
 	location="/tmp/files",
+//	C:\Users\*個人のファイル名*\Downloads\4.6.3\pleiades\Team_F2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\teee\tmp\files?
+//	このディレクトリ存在しないから手動で作る
 	maxFileSize=10000000,
 	maxRequestSize=10000000,
 	fileSizeThreshold=10000000
@@ -43,11 +45,11 @@ public class Upload extends HttpServlet {
 		System.out.println("b");
 
 		String title=request.getParameter("title");
-		System.out.println(title);
 		String name=request.getParameter("name");
-		System.out.println(name);
 		Integer num = Integer.parseInt(request.getParameter("num"));
-		System.out.println(num);
+//		String numParam = request.getParameter("num");
+//        Integer num = (numParam != null && !numParam.isEmpty()) ? Integer.parseInt(numParam) : 0;
+
 
 		//name属性がpictのファイルをPartオブジェクトとして取得
 		Part part=request.getPart("pict");
