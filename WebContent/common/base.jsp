@@ -21,7 +21,7 @@
 <body>
 
 <header class="head">
-<h1 id="logo"><a href="index.html"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
+<h1 id="logo"><a href="index.jsp"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
 <nav class="menubar">
 <ul>
 <li><a href="../common/index.jsp">ホーム</a></li>
