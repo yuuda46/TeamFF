@@ -8,7 +8,7 @@
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="org.postgresql.Driver"
-		url="jdbc:postgresql://localhost/~/Team_F"
+		url="jdbc:postgresql://localhost:5432/team_f"
 		username="postgres"
 		password="Team_F"
 	/>

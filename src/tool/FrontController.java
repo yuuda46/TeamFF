@@ -27,11 +27,15 @@ public class FrontController extends HttpServlet {
             if (user_name == null || password == null) {
                 // リダイレクト前に遷移元のURLを保存
                 String requestedUrl = request.getRequestURI();
-                session.setAttribute("requestedUrl", requestedUrl);
-                // ログインページにリダイレクト
-                response.sendRedirect("../login/login.jsp");
-                return;
+                if (!requestedUrl.contains("SignUp.action")) {
+                    // リダイレクト前に遷移元のURLを保存
+                    session.setAttribute("requestedUrl", requestedUrl);
+                    // ログインページにリダイレクト
+                    response.sendRedirect("../login/login.jsp");
+                    return;
+                }
             }
+
 
 
 

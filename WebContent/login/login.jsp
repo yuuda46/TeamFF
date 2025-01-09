@@ -166,9 +166,9 @@ h2 {
 <div class="container">
 
 <%
-    String url = "jdbc:h2:tcp://localhost:9092/~/Team_F";  // データベースURL
-    String dbUser = "sa";  // ユーザー名
-    String dbPassword = "";  // パスワード
+    String url = "jdbc:postgresql://localhost:5432/team_f";  // データベースURL
+    String dbUser = "postgres";  // ユーザー名
+    String dbPassword = "Team_F";  // パスワード
     String loginMessage = "";  // エラーメッセージを格納する変数
     Connection conn = null;
     PreparedStatement stmt = null;
@@ -209,7 +209,7 @@ h2 {
 
             } else {
                 // データベース接続
-                Class.forName("org.h2.Driver");
+                Class.forName("org.postgresql.Driver");
                 conn = DriverManager.getConnection(url, dbUser, dbPassword);
                 // ユーザー名とパスワードの組み合わせを確認するクエリ
                 String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
