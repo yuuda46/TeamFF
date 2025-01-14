@@ -32,7 +32,8 @@ public class CollectionDepositCompleteAction extends Action {
             // セッションIDがnullでないことを確認
             if (sessionId == null) {
                 System.out.println("Session ID is null");
-                return "ErrorPage1.jsp";
+                response.sendRedirect("ErrorPage1.jsp");
+                return null;
             }
 
             // フォームからpostIdを取得
@@ -57,16 +58,19 @@ public class CollectionDepositCompleteAction extends Action {
             if (result <= 0) {
                 // 挿入失敗
                 System.out.println("Insert failed, redirecting to ErrorPage1.jsp");
-                return "ErrorPage1.jsp";
+                response.sendRedirect("ErrorPage1.jsp");
+                return null;
             }
             // 挿入成功
             System.out.println("Insert successful, redirecting to Collection_Deposit_Done.jsp");
-            return "Collection_Deposit_Done.jsp"; // 挿入成功時のリダイレクト
+            response.sendRedirect("Collection_Deposit_Done.jsp");
+            return null;
 
         } catch (Exception e) {
             // ログにエラーを記録
             e.printStackTrace();
-            return "ErrorPage2.jsp";
+            response.sendRedirect("ErrorPage2.jsp");
+            return null;
         } finally {
             // PrintWriterを閉じる
             if (out != null) {
@@ -75,28 +79,3 @@ public class CollectionDepositCompleteAction extends Action {
         }
     }
 }
-
-
-//	        // 挿入結果を確認
-//	        if (result <= 0) {
-//	            // 挿入失敗
-//	            System.out.println("Insert failed, redirecting to ErrorPage1.jsp");
-//	            return "ErrorPage1.jsp";
-//	        }
-//            // 挿入成功
-//            System.out.println("Insert successful, redirecting to Collection_Deposit_Done.jsp");
-//
-//
-//	    } catch (Exception e) {
-//	        // ログにエラーを記録
-//	        e.printStackTrace();
-//	        return "ErrorPage2.jsp";
-//	    } finally {
-//	        // PrintWriterを閉じる
-//	        if (out != null) {
-//	            out.close();
-//	        }
-//	    }
-//        return "Collection_Deposit_Done.jsp";
-//	}
-//}
