@@ -26,7 +26,7 @@
           </button>
         </form>
 
-        <form action="../common/index.html" method="get">
+        <form action="../common/index.jsp" method="get">
           <button type="submit" class="home">
           ホームに戻る
           </button>
