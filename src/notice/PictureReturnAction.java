@@ -23,7 +23,10 @@ public class PictureReturnAction extends Action {
 			String filename = request.getParameter("filename");
 			String post_id=request.getParameter("post_id");
 
+//			削除するファイルのパス文字列をPath型に変換
 			Path delete_path = Paths.get(path+"/"+ filename);
+
+//			ファイル削除
 			Files.deleteIfExists(delete_path);
 
 			request.setAttribute("post_id", post_id);

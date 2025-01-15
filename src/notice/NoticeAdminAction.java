@@ -28,7 +28,7 @@ public class NoticeAdminAction extends Action {
 
 //			h2コンソールから投稿内容のリストを取得
 			PostDAO dao1=new PostDAO();
-			List<Post> list1=dao1.all();
+			List<Post> list1=dao1.notice_all();
 
 //			アトリビュートの中に入れるやつ
 			request.setAttribute("select_list", list);
@@ -42,7 +42,7 @@ public class NoticeAdminAction extends Action {
 				if (boot == 0){
 //					h2コンソールから投稿内容のリストを取得
 					PostDAO dao3=new PostDAO();
-					List<Post> list3=dao3.notice();
+					List<Post> list3=dao3.notice_all();
 					System.out.println("True");
 
 //					アトリビュートの中に入れるやつ

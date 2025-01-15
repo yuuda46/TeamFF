@@ -6,14 +6,16 @@ import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import tool.Action;
-
+@WebServlet("/notice/PictureUpdateExcute")
 @MultipartConfig(
 		location="/tmp/files",
 		maxFileSize=10000000,
@@ -21,27 +23,21 @@ import tool.Action;
 		fileSizeThreshold=10000000
 		)
 
-public class PictureUpdateExcuteAction extends Action {
+public class PictureUpdateExcute extends HttpServlet {
 
 	private static final String UPLOAD_DIR = "upload";
 
-	public String execute (
-		HttpServletRequest request, HttpServletResponse response
-		) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		PrintWriter out=response.getWriter();
 		try{
 
-			System.out.println("asdf");
+//			System.out.println("asdf");
 
 			String post_id=request.getParameter("post_id");
 
-			System.out.println(post_id);
-
 			//name属性がpictのファイルをPartオブジェクトとして取得
 			Part part=request.getPart("pict");
-
-			System.out.println(part);
 
 			//ファイル名を取得
 			//String filename=part.getSubmittedFileName();//ie対応が不要な場合
@@ -75,10 +71,10 @@ public class PictureUpdateExcuteAction extends Action {
 			request.setAttribute("post_id", post_id);
 			request.setAttribute("path", upload_path);
 			request.setAttribute("filename", uuid+".png");
-
+			RequestDispatcher rd=request.getRequestDispatcher("/notice/picture_permission.jsp");
+			rd.forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace(out);
 		}
-		return "picture_permission.jsp";
 	}
 }
