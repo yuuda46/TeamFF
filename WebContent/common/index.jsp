@@ -53,10 +53,10 @@
 <h1 id="logo"><a href="index.jsp"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
 <nav id="menubar">
 <ul>
-<li><a href="../account/contactForm.jsp">お問い合わせ</a></li>
 <li><a href="../notice/Notice.action">投稿</a></li>
 <li><a href="../notice/Tokou.action">掲示板</a></li>
 <li><a href="../collection/CollectionList.action">集金一覧</a></li>
+<li><a href="../account/contactForm.jsp">お問い合わせ</a></li>
 </ul>
 </nav>
 </header>
