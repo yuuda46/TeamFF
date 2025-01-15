@@ -22,7 +22,7 @@
 
 	</c:choose>
 
-	<form action="../notice/Notice.action">
+	<form action="../notice/NoticeAdmin.action">
 		<button type="submit">戻る</button>
 	</form>
 

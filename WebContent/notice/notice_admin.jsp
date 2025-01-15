@@ -42,10 +42,10 @@
 				<c:forEach var="notice_content" items="${notice_content}">
 					<tr>
 					<td>${notice_content.title}</td>
-					<td><a href="../notice/NoticeDetail.action?id=${notice_content.postId}">${notice_content.content}</a></td>
+					<td><a href="../notice/AdminDetail.action?id=${notice_content.postId}">${notice_content.content}</a></td>
 					<td>${notice_content.name}</td>
 					<td>${notice_content.postDay}</td>
-					<td>${notice_content.categoryId}</td>
+					<td>　　${notice_content.categoryId}</td>
 					<td>
 						<form action="../notice/NoticeUpdate.action" method="get">
 						<input type="hidden" name="post_id" value="${notice_content.postId}">
