@@ -166,9 +166,9 @@ public class PostDAO extends DAO {
 				+ "post_day = ?"
 				+ "where id = ?");
 
-		st.setString(1, post.getPostId());
-		st.setString(2, post.getContent());
-		st.setDate(3, post.getPostDay());
+		st.setString(1, post.getContent());
+		st.setDate(2, post.getPostDay());
+		st.setString(3, post.getPostId());
 		int line= st.executeUpdate();
 
 		st.close();
@@ -199,6 +199,33 @@ public class PostDAO extends DAO {
 		st.close();
 		con.close();
 		return line;
+	}
+
+	public List<Post> notice_all() throws Exception {
+		List<Post> list=new ArrayList<>();
+
+		Connection con=getConnection();
+
+		PreparedStatement st=con.prepareStatement(
+			"select id, title, content, name, post_day, category_id from post "
+			+ "where category_id is not null");
+		ResultSet rs=st.executeQuery();
+
+		while (rs.next()){
+			Post p=new Post();
+			p.setPostId(rs.getString("id"));
+			p.setTitle(rs.getString("title"));
+			p.setContent(rs.getString("content"));
+			p.setName(rs.getString("name"));
+			p.setPostDay(rs.getDate("post_day"));
+			p.setCategoryId(rs.getInt("category_id"));
+
+			list.add(p);
+		}
+		st.close();
+		con.close();
+
+		return list;
 	}
 
 	public List<Post> admin_search(Integer boot) throws Exception {
