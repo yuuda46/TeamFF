@@ -83,7 +83,7 @@
     </form>
 
 
-    <button class="btn btn-secondary mt-3" type="submit" onclick="history.back()">戻る</button>
+    <button class="btn btn-secondary mt-7" type="submit" onclick="history.back()">戻る</button>
 
 
 
