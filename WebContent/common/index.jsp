@@ -2,6 +2,8 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -71,7 +73,8 @@
 <section id="new">
 
 <h2>What's New</h2>
-
+<c:import url="/common/base2.jsp">
+<c:param name="content">
 <%-- ここにコンテンツを挟む --%>
 		<form action="../notice/Tokou.action" method="get">
 		    <input placeholder="検索" name="searchQuery">
@@ -91,6 +94,8 @@
 		        </c:when>
 		    </c:choose>
 		</form>
+		</c:param>
+		</c:import>
 
 </section>
 <!--/#new-->
@@ -99,9 +104,7 @@
 
 
 
-<footer>
-<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
-</footer>
+
 
 <!--jQueryファイルの読み込み-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
