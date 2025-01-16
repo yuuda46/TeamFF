@@ -148,7 +148,7 @@
                 <span>お問い合わせ</span>
             </div>
             <div class="text">
-				D
+				問い合わせメールを管理アカウントに送信できる
             </div>
         </div>
     </div>
