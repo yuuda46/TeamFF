@@ -42,25 +42,25 @@ h3 {
 ---------------------------------------------------------------------------*/
 /* フッターを画面下部に固定 */
 footer {
-	clear: both;
-	text-align: center;
-	background: #222;	/*背景色*/
-	color: #fff;		/*文字色*/
-	font-size: 85%;		/*文字サイズ*/
-	/* フッターを一番下に固定するCSS */
-	top: 100vh;
-	position: sticky;
+    text-align: center;
+    background: #222; /* 背景色 */
+    color: #fff; /* 文字色 */
+    font-size: 85%; /* 文字サイズ */
+    position: fixed; /* フッターを固定 */
+    bottom: 0; /* 画面の下端に固定 */
+    left: 0;
+    width: 100%; /* 幅を画面全体に広げる */
+    padding: 10px 0; /* 上下の余白を設定 */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 上の影を追加 */
 }
+
 footer a {
-	color: #fff;	/*リンクテキストの文字色*/
-	text-decoration: none;
+    color: #fff; /* リンクテキストの文字色 */
+    text-decoration: none;
 }
+
 footer a:hover {
-	color: #fff;	/*マウスオン時の文字色*/
-}
-footer .pr {
-	display: block;
-	font-size: 80%;
+    color: #fff; /* マウスオン時の文字色 */
 }
 
 ---------------------------------------------------------------------------*/
@@ -68,24 +68,7 @@ footer .pr {
 
 
 
-/* セクションのスタイル */
-section.mo-4 {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-}
 
-/* タイトル */
-section.mo-4 h2 {
-    color: #333;
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 30px;
-
-
-}
 
 /* ラベル */
 form label {
