@@ -45,7 +45,7 @@
 
 	<button type="submit" onclick="history.back()">戻る</button>
 	<footer>
-	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+	<small>Copyright&copy;SAMPLE COMPANY All Rights Reserved.</small>
 	</footer>
 
 </body>

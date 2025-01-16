@@ -32,24 +32,31 @@
         <tr><th>権限</th><td>${account.admini}</td></tr>
     </table>
 
-    <div class="link-container">
-        <a href="AccountDelete?email=${account.email}">削除</a>
-        <c:choose>
-            <c:when test="${account.admini == null}">
-                <a href="AccountAuthority?email=${account.email}">権限を付与する</a>
-            </c:when>
-            <c:otherwise>
-                <a href="Deprivation?email=${account.email}">権限を外す</a>
-            </c:otherwise>
-        </c:choose>
-    </div>
+
+
+
+<div class="link-container">
+    <!-- 削除リンク -->
+    <a href="AccountDelete?email=${account.email}" class="btn">削除</a>
+
+    <c:choose>
+        <c:when test="${account.admini == null}">
+            <!-- 権限を付与するリンク -->
+            <a href="AccountAuthority?email=${account.email}" class="btn">権限を付与する</a>
+        </c:when>
+        <c:otherwise>
+            <!-- 権限を外すリンク -->
+            <a href="Deprivation?email=${account.email}" class="btn">権限を外す</a>
+        </c:otherwise>
+    </c:choose>
+</div>
 
     <form action="AccountList.action" method="get">
         <button type="submit">戻る</button>
     </form>
     </section>
         <footer>
-	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+	<small>Copyright&copy; SAMPLE COMPANY All Rights Reserved.</small>
 	</footer>
 </body>
 </html>

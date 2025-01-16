@@ -75,16 +75,27 @@ table tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-/* リンクのスタイル */
-a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    margin-right: 15px;
+/* リンクをボタン風にするスタイル */
+.link-container {
+    display: flex;
+    gap: 10px; /* ボタン間の間隔 */
 }
 
-a:hover {
-    text-decoration: underline;
+a{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #6c757d; /* ボタン背景色 */
+    text-decoration: none; /* 下線を消す */
+    border: none;
+    border-radius: 4px; /* 角を丸める */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* ホバー時のスムーズな色変化 */
+}
+
+a {
+    background-color: #5a6268; /* ホバー時の色 */
 }
 
 /* ボタンのスタイル */
@@ -99,8 +110,10 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #5a6268;
+    background-color: #6c757d;
 }
+
+
 
 /*フッター設定
 ---------------------------------------------------------------------------*/
@@ -132,3 +145,5 @@ section.mo-3 {
     padding: 0 20px; /* 左右に空白を追加 */
     box-sizing: border-box;
 }
+
+
