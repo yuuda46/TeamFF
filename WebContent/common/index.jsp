@@ -106,7 +106,7 @@
     <div class="container">
     	<div class="card" data-number="01">
             <div class="icon">
-                <img src="../images/icon4.png" alt="アイコン1">
+                <img src="../images/toukou.jpg" alt="アイコン1">
             </div>
             <div class="title">
                 <span>投稿</span>
@@ -118,7 +118,7 @@
 
         <div class="card" data-number="02">
             <div class="icon">
-                <img src="../images/icon1.png" alt="アイコン2">
+                <img src="../images/keiji.png" alt="アイコン2">
             </div>
             <div class="title">
                 <span>掲示板</span>
@@ -130,7 +130,7 @@
 
         <div class="card" data-number="03">
             <div class="icon">
-                <img src="../images/icon2.png" alt="アイコン3">
+                <img src="../images/mane.jpg" alt="アイコン3">
             </div>
             <div class="title">
                 <span>集金一覧</span>
@@ -142,7 +142,7 @@
 
         <div class="card" data-number="04">
             <div class="icon">
-                <img src="../images/icon3.png" alt="アイコン4">
+                <img src="../images/toiawase.jpg" alt="アイコン4">
             </div>
             <div class="title">
                 <span>お問い合わせ</span>
