@@ -29,9 +29,6 @@
 
         <a href="../common/index.jsp">戻る</a>
     </form>
-    <footer>
-    <small>Copyright&copy; <a href="index.jsp">SAMPLE COMPANY</a> All Rights Reserved.</small>
-	</footer>
 
     <%-- メール送信処理 --%>
     <%
