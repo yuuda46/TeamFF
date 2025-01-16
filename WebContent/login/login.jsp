@@ -230,7 +230,7 @@ h2 {
                     String idFrag = rs.getString("ID");
                     session.setAttribute("sessionId", idFrag);
                     System.out.println("Session ID set: " + idFrag);
-                    response.sendRedirect("../common/index.jsp"); // ログイン成功後、トップページへリダイレクト
+                    response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
                     return; // 処理終了
                 } else {
 

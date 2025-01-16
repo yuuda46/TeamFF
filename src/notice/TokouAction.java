@@ -25,13 +25,13 @@ public class TokouAction extends Action {
 			Postdao2 dao=new Postdao2();
 			List<Post2> list=dao.tokou();
 
-			// JSP‚ÉƒŠƒXƒg‚ğ“n‚·
+			// JSPï¿½Éƒï¿½ï¿½Xï¿½gï¿½ï¿½nï¿½ï¿½
 			request.setAttribute("list2", list);
 
 		} catch (Exception e) {
 	 		e.printStackTrace(out);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "“à•”ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½");
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ï¿½ï¿½ï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½");
 		}
-		return "toukou.jsp";
+		return "../common/index.jsp";
 	}
 }

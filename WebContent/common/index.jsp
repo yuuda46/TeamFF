@@ -71,7 +71,7 @@
 <section id="new">
 
 <h2>What's New</h2>
-<c:param name="content">
+
 <%-- ここにコンテンツを挟む --%>
 		<form action="../notice/Tokou.action" method="get">
 		    <input placeholder="検索" name="searchQuery">
@@ -91,7 +91,6 @@
 		        </c:when>
 		    </c:choose>
 		</form>
-</c:param>
 
 </section>
 <!--/#new-->
