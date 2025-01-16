@@ -15,6 +15,7 @@
 <meta name="description" content="ここにサイト説明を入れます">
 <meta name="keywords" content="キーワード１,キーワード２,キーワード３,キーワード４,キーワード５">
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/style2.css">
 </head>
 
 <body>
@@ -67,38 +68,94 @@
 
 
 
+<!-- 掲示板機能ここから -->
+<%
+    // ユーザーがログインしているか確認
+    if (username != null) {
+%>
+    <h2>掲示板</h2>
+    <c:import url="/common/base2.jsp">
+    <c:param name="content">
+    <%-- ここにコンテンツを挟む --%>
+        <form action="../notice/Tokou.action" method="get">
+            <input placeholder="検索" name="searchQuery">
+            <div>
+                <button id="filter-button" type="submit">検索</button>
+            </div>
 
-<h2>掲示板</h2>
-<c:import url="/common/base2.jsp">
-<c:param name="content">
-<%-- ここにコンテンツを挟む --%>
-		<form action="../notice/Tokou.action" method="get">
-		    <input placeholder="検索" name="searchQuery">
-		    <div>
-		        <button id="filter-button" type="submit">検索</button>
-		    </div>
-
-		    <c:choose>
-		        <c:when test="${not empty list2}">
-		            <div>件数:${list2.size()}件</div>
-		            <c:forEach var="post" items="${list2}">
-		                <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
-		                <p>${post.postDay}</p>
-		                <p>${post.content}</p>
-		                <hr>
-		            </c:forEach>
-		        </c:when>
-		    </c:choose>
-		</form>
-		</c:param>
-		</c:import>
-
-</section>
-<!--/#new-->
-
-<section id="company">
+            <c:choose>
+                <c:when test="${not empty list2}">
+                    <div>件数:${list2.size()}件</div>
+                    <c:forEach var="post" items="${list2}">
+                        <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
+                        <p>${post.postDay}</p>
+                        <p>${post.content}</p>
+                        <hr>
+                    </c:forEach>
+                </c:when>
+            </c:choose>
+        </form>
+    </c:param>
+    </c:import>
+<%
+    } else {
+%>
+    <!-- 未ログイン時のメッセージ -->
 
 
+    <div class="container">
+    	<div class="card" data-number="01">
+            <div class="icon">
+                <img src="../images/icon4.png" alt="アイコン1">
+            </div>
+            <div class="title">
+                <span>投稿</span>
+            </div>
+            <div class="text">
+                A
+            </div>
+        </div>
+
+        <div class="card" data-number="02">
+            <div class="icon">
+                <img src="../images/icon1.png" alt="アイコン2">
+            </div>
+            <div class="title">
+                <span>掲示板</span>
+            </div>
+            <div class="text">
+				B
+			</div>
+        </div>
+
+        <div class="card" data-number="03">
+            <div class="icon">
+                <img src="../images/icon2.png" alt="アイコン3">
+            </div>
+            <div class="title">
+                <span>集金一覧</span>
+            </div>
+            <div class="text">
+				C
+			</div>
+        </div>
+
+        <div class="card" data-number="04">
+            <div class="icon">
+                <img src="../images/icon3.png" alt="アイコン4">
+            </div>
+            <div class="title">
+                <span>お問い合わせ</span>
+            </div>
+            <div class="text">
+				D
+            </div>
+        </div>
+    </div>
+<%
+    }
+%>
+<!-- 掲示板機能ここまで -->
 
 
 

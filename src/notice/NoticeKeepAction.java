@@ -25,7 +25,9 @@ public class NoticeKeepAction extends Action {
 			String uuid = UUID.randomUUID().toString();
 
 			String title = request.getParameter("title");
+			System.out.println(title);
 			String name = request.getParameter("name");
+			System.out.println(name);
 
 //			LocalDate型の日付を取得
 			LocalDate localDate = LocalDate.now();
@@ -38,7 +40,9 @@ public class NoticeKeepAction extends Action {
 //			Date post_day = (Date) simpleDateFormat.parse(localDate.toString());
 
 			Integer num = Integer.parseInt(request.getParameter("num"));
+			System.out.println(num);
 			String filename = request.getParameter("filename");
+			System.out.println(filename);
 
 			// dbに登録
 			PostDAO dao=new PostDAO();

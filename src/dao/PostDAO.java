@@ -127,7 +127,7 @@ public class PostDAO extends DAO {
 		Connection con=getConnection();
 		PreparedStatement st=con.prepareStatement(
 				"insert into post (id,title,content,name,post_day,category_id)"
-				+ "values(?,?,?,?,?,?)");
+				+ " values(?,?,?,?,?,?)");
 
 		st.setString(1, post.getPostId());
 		st.setString(2, post.getTitle());
@@ -159,20 +159,29 @@ public class PostDAO extends DAO {
 
 	public int picture_update(Post post) throws Exception {
 
+		System.out.println("update in!");
+
 		Connection con=getConnection();
 		PreparedStatement st=con.prepareStatement(
 				 "update post set "
 				+ "content = ?,"
 				+ "post_day = ?"
-				+ "where id = ?");
+				+ " where id = ?");
+
+		System.out.println("SQL complete!!");
 
 		st.setString(1, post.getContent());
 		st.setDate(2, post.getPostDay());
 		st.setString(3, post.getPostId());
 		int line= st.executeUpdate();
 
+		System.out.println("update complete!!!");
+
 		st.close();
 		con.close();
+
+		System.out.println("insert out!!!!");
+
 		return line;
 	}
 
@@ -185,9 +194,7 @@ public class PostDAO extends DAO {
 				+ "name = ?,"
 				+ "category_id = ?,"
 				+ "post_day = ?"
-				+ "where id = ?");
-
-		System.out.println("asdf");
+				+ " where id = ?");
 
 		st.setString(1, post.getTitle());
 		st.setString(2, post.getName());
