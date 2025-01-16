@@ -93,7 +93,7 @@ input {
 }
 
 button {
-    background-color: #000000; /* 赤色 */
+    background-color: #ff3333; /* 赤色 */
     color: white;
     border: none;
     cursor: pointer;
