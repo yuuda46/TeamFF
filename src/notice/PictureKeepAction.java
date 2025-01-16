@@ -28,16 +28,18 @@ public class PictureKeepAction extends Action {
 			try{
 				String post_id = request.getParameter("post_id");
 
+				System.out.println("ここから:" + post_id);
+
 //				h2コンソールから投稿内容を取得
 				PostDAO dao1=new PostDAO();
 				List<Post> list=dao1.notice_detail(post_id);
 
 //				削除する画像の名前をリストから取得
-				System.out.println(list.get(0).getContent());
+				System.out.println("画像タイトル:" + list.get(0).getContent());
 
 //				Webアプリケーションの実際のファイルパスを取得
 				String path=request.getServletContext().getRealPath("");
-				System.out.println(path);
+				System.out.println("パス:" + path);
 
 //				削除するファイルの入っているフォルダのパスと結合
 				String searth_path = path + UPLOAD_DIR;
@@ -59,14 +61,16 @@ public class PictureKeepAction extends Action {
 
 				String filename = request.getParameter("filename");
 
+				System.out.println("新規画像:" + filename);
+
 //				h2コンソールに書き込み
+//				PostDAO dao=new PostDAO();
 				Post p = new Post();
 				p.setPostId(post_id);
 				p.setContent(filename);
 				p.setPostDay(post_day);
 
-				PostDAO dao=new PostDAO();
-				int line=dao.picture_update(p);
+				int line=dao1.picture_update(p);
 
 			}catch (Exception e) {
 				e.printStackTrace(out);
