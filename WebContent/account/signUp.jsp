@@ -159,7 +159,7 @@
      <button type="submit" class="SignUp.action">登録して終了</button>
         </form>
 
-        <form action="../common/index.jsp" method="get">
+        <form action="../notice/Tokou.action" method="get">
             <button class="btn btn-secondary mt-3" type="submit">戻る</button>
         </form>
     </section>
