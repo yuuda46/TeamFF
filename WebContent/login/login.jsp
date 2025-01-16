@@ -78,12 +78,15 @@ body {
             height: 40px;
         }
 
-        button {
-            background-color: #000000;
-            color: white;
-            cursor: pointer;
-            border: none;
-        }
+       button {
+    background-color: #00bfff; /* 薄い青色 */
+    color: white;
+    cursor: pointer;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+}
 
         button:hover {
             background-color: #0056b3;
@@ -141,12 +144,11 @@ body {
 	font-size: 85%;		/*文字サイズ*/
 }
 h2 {
+    text-align: center;  /* 中央揃え */
     color: #333;
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 30px;
-    padding-left: 580px
-
 
 }
 
@@ -230,7 +232,7 @@ h2 {
                     String idFrag = rs.getString("ID");
                     session.setAttribute("sessionId", idFrag);
                     System.out.println("Session ID set: " + idFrag);
-                    response.sendRedirect("../common/index.jsp"); // ログイン成功後、トップページへリダイレクト
+                    response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
                     return; // 処理終了
                 } else {
 
@@ -258,11 +260,11 @@ h2 {
 <form method="POST" action="login.jsp" autocomplete="off">
 <div class="form-group">
 <label for="username">ユーザー名:</label>
-<input type="text" name="username" placeholder="ユーザー名を入力" value="" required autocomplete="off">
+<input type="text" name="username" placeholder="😆‍ユーザー名を入力" value="" required autocomplete="off">
 </div>
 <div class="form-group">
 <label for="password">パスワード:</label>
-<input type="password" name="password" placeholder="パスワードを入力" value="" required autocomplete="off">
+<input type="password" name="password" placeholder="🔒パスワードを入力" value="" required autocomplete="off">
 </div>
 <button type="submit">ログイン</button>
 </form>
