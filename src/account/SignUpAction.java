@@ -79,8 +79,8 @@ public class SignUpAction extends Action {
             if (!Pattern.matches("^\\d+(-\\d+){2}$", phone_number)) {
                 errorPhoneNumber = "電話番号は「-」を2つ含めた形式で入力してください。";
             }
-            if (!Pattern.matches("\\d+-\\d+", post_code)) {
-                errorPostCode = "郵便番号は数字と-を使って入力してください。";
+            if (!Pattern.matches("\\d{3}-\\d{4}", post_code)) {
+                errorPostCode = "郵便番号は3桁-4桁の形式で入力してください。";
             }
 
             // 各エラーメッセージをリクエスト属性に設定

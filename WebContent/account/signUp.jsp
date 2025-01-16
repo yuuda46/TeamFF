@@ -138,7 +138,7 @@
 
 	<div class="form-group">
 		<label>郵便番号</label><br>
-		<input class="select-shape" type="text" name="post_code" placeholder="郵便番号(例)090-090" required="required" value="${post_code}"><br>
+		<input class="select-shape" type="text" name="post_code" placeholder="郵便番号(例)090-0909" required="required" value="${post_code}"><br>
 		<c:if test="${not empty errorPostCode}">
 		    <div id="error-message" style="color:red;">
 		        ${errorPostCode}
