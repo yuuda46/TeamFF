@@ -101,7 +101,7 @@
     } else {
 %>
     <!-- 未ログイン時のメッセージ -->
-
+	<!-- サイトの機能説明  -->
 
     <div class="container">
     	<div class="card" data-number="01">
