@@ -66,13 +66,9 @@
 
 
 
-<div id="container">
 
-<div id="contents">
 
-<section id="new">
-
-<h2>What's New</h2>
+<h2>掲示板</h2>
 <c:import url="/common/base2.jsp">
 <c:param name="content">
 <%-- ここにコンテンツを挟む --%>
