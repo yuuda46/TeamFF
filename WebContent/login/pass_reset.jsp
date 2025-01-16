@@ -1,4 +1,5 @@
 <%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="java.sql.*, java.util.*" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="ja">
@@ -28,98 +29,125 @@ header #logo img {
     bottom: 80px; /* 画像を下から20pxに配置 */
 }
 
-h1{
-	margin: 0;
+h1 {
+    margin: 0;
 }
 
 /* タイトル */
 h3 {
-	font-size: 105px;
+    font-size: 105px;
     color: #ffffff;
     width: 60px; /* ロゴ画像の幅 */
-    height:140px;
+    height: 140px;
     position: absolute;
     left: 55%;
     transform: translateX(-50%); /* 画像を中央に配置 */
     bottom: 90px; /* 画像を下から20pxに配置 */
-
     margin: 0;
 }
+
 body {
-	margin: 0;
+    margin: 0;
+    min-height: 100vh; /* ビューポートの高さに合わせて最小高さを設定 */
+    display: flex;
+    flex-direction: column; /* コンテンツを縦に並べる */
 }
+
 footer {
-	position: absolute;
- 	bottom: -210;
- 	left: 40%;
-	clear: both;
-	text-align: center;
-	background: #ffffff;	/*背景色*/
-	color: #000000;		/*文字色*/
-	font-size: 85%;		/*文字サイズ*/
+    color: #000000; /* 文字色 */
+    text-align: center;
+    font-size: 85%; /* 文字サイズ */
+    padding: 10px 0; /* 上下の余白を追加 */
+    background-color: #f8f8f8; /* 背景色を薄いグレーに設定 */
+    margin-top: 20px; /* 青い枠線の下に表示されるように余白を追加 */
 }
-    .container {
-        width: 300px;
-        margin: 0 auto;
-        padding: 30px;
-        border: 2px solid #007bff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    label {
-        display: block;
-        text-align: left;
-        margin-bottom: 5px;
-    }
-    input, button {
-        width: 100%; /* 幅を100%に設定して枠の長さを統一 */
-        padding: 10px; /* パディングを追加して内部スペースを統一 */
-        margin-bottom: 15px;
-        border-radius: 4px;
-        box-sizing: border-box; /* ボックスの幅にパディングとボーダーを含める */
-        height: 40px; /* 高さを指定してボタンと一致させる */
-    }
-    input {
-        border: 1px solid #ccc;
-    }
-    button {
-        background-color: #000000; /* 赤色 */
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #e60000; /* ホバー時に少し濃い赤 */
-    }
-    .back-btn {
-        display: inline-block;
-        padding: 5px 10px; /* 少し小さめに調整 */
-        text-decoration: underline; /* 下線を引く */
-        color: #007bff; /* 青色に設定 */
-        font-size: 16px; /* 文字サイズを調整 */
-    }
-    .back-btn:hover {
-        color: #0056b3; /* ホバー時に青色が少し濃くなる */
-    }
-    .message {
-        color: green;
-        margin-bottom: 15px;
-    }
-    .error {
-        color: red;
-        margin-bottom: 15px;
-    }
+
+.container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px; /* 上部に余白 */
+    margin-bottom: 60px; /* footerとの間に余白を確保 */
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+input, button {
+    width: 100%; /* 幅を100%に設定して枠の長さを統一 */
+    padding: 10px; /* パディングを追加して内部スペースを統一 */
+    margin-bottom: 15px;
+    border-radius: 4px;
+    box-sizing: border-box; /* ボックスの幅にパディングとボーダーを含める */
+    height: 40px; /* 高さを指定してボタンと一致させる */
+}
+
+input {
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #000000; /* 赤色 */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e60000; /* ホバー時に少し濃い赤 */
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 5px 10px; /* 少し小さめに調整 */
+    text-decoration: underline; /* 下線を引く */
+    color: #007bff; /* 青色に設定 */
+    font-size: 16px; /* 文字サイズを調整 */
+}
+
+.back-btn:hover {
+    color: #0056b3; /* ホバー時に青色が少し濃くなる */
+}
+
+.message {
+    color: green;
+    margin-bottom: 15px;
+}
+
+.error {
+    color: red;
+    margin-bottom: 15px;
+}
+
 h2 {
     color: #333;
     font-size: 2em;
     font-weight: bold;
-    margin-bottom: 30px;
-    padding-left: 20px
-
-
+    margin-bottom: 15px; /* 下の余白を減らす */
+    padding-left: 20px;
+    text-align: center; /* 文字を中央揃え */
 }
+
+.container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px; /* 上部の余白を縮める */
+    margin-bottom: 40px; /* footerとの間隔を縮める */
+}
+
 </style>
 </head>
+
 <body>
 <h2>パスワードの再設定</h2>
 <div class="container">
@@ -211,7 +239,7 @@ h2 {
     <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
 
     <label for="newPassword">新しいパスワード:</label>
-    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
+    <input type="password" id="newPassword" name="newPassword" placeholder="🔒新しいパスワードを入力" required>
 
     <button type="submit">パスワードを変更</button>
 	</form>
@@ -219,10 +247,13 @@ h2 {
 	<!-- 戻るボタン -->
 	<a href="login.jsp" class="back-btn">ログイン画面に戻る</a>
 
-	</div>
+</div>
 
-    <footer>
-    <small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
-	</footer>
+<footer>
+    <small>Copyright&copy; <a href="index.html" style="text-decoration: underline; color: #007bff; border: none; background: transparent;">SAMPLE COMPANY</a> All Rights Reserved.</small>
+</footer>
+
+</footer>
+
 </body>
 </html>
