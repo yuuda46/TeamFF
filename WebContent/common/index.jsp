@@ -59,6 +59,7 @@
 <li><a href="../notice/Tokou.action">掲示板</a></li>
 <li><a href="../collection/CollectionList.action">集金一覧</a></li>
 <li><a href="../account/contactForm.jsp">お問い合わせ</a></li>
+<li><a href="../notice/ToukouForm.action">掲示板投稿</a></li>
 </ul>
 </nav>
 </header>
