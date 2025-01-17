@@ -17,6 +17,12 @@
 	<c:param name="content">
 		<p>差し替え画像:<br><img src="../upload/<%=filename %>"></p>
 
+		<form action="../notice/PictureKeep.action" method="post">
+			<input type="hidden" name="post_id" value=<%=post_id %>>
+			<input type="hidden" name="filename" value=<%=filename %>>
+			<button type="submit">確定</button>
+		</form>
+
 		<form action="../notice/PictureReturn.action" method="post">
 			<input type="hidden" name="post_id" value=<%=post_id %>>
 			<input type="hidden" name="path" value=<%=path %>>
@@ -24,10 +30,5 @@
 			<button type="submit">戻る</button>
 		</form>
 
-		<form action="../notice/PictureKeep.action" method="post">
-			<input type="hidden" name="post_id" value=<%=post_id %>>
-			<input type="hidden" name="filename" value=<%=filename %>>
-			<button type="submit">確定</button>
-		</form>
 	</c:param>
 </c:import>

@@ -33,13 +33,13 @@
 		<button type="submit">画像変更</button>
 	</form>
 
-	<form action="../notice/NoticeAdmin.action" method="get">
-		<button type="submit">戻る</button>
-	</form>
-
 	<form action="../notice/UpdatePermission.action" method="get">
 		<input type="hidden" name="post_id" value=<%=post_id %>>
 		<button type="submit">完了</button>
+	</form>
+
+	<form action="../notice/NoticeAdmin.action" method="get">
+		<button type="submit">戻る</button>
 	</form>
 
 	</c:param>

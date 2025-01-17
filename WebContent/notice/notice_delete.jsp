@@ -11,13 +11,13 @@
 	<c:param name="content">
 	<h3>削除しますか</h3>
 
-	<form action="../notice/NoticeAdmin.action" method="get">
-		<button type="submit">戻る</button>
-	</form>
-
 	<form action="../notice/NoticeDelete.action" method="get">
 		<input type="hidden" name="filename" value="${post_id}">
 		<button type="submit">削除</button>
+	</form>
+
+	<form action="../notice/NoticeAdmin.action" method="get">
+		<button type="submit">戻る</button>
 	</form>
 
 	</c:param>

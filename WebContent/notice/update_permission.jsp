@@ -12,13 +12,14 @@
 
 		<p>保存完了しました</p>
 
+		<form action="../notice/NoticeAdmin.action" method="get">
+			<button type="submit">編集終了</button>
+		</form>
+
 		<form action="../notice/NoticeUpdate.action" method="get">
 			<input type="hidden" name="post_id" value="${post_id}">
 			<button type="submit">再編集</button>
 		</form>
 
-		<form action="../notice/NoticeAdmin.action" method="get">
-			<button type="submit">編集終了</button>
-		</form>
 	</c:param>
 </c:import>

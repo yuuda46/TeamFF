@@ -22,6 +22,14 @@
 		<p>カテゴリーID:<%=num %></p>
 		<p>お知らせ画像:<br><img src="../upload/<%=filename %>"></p>
 
+		<form action="../notice/NoticeKeep.action" method="post">
+			<input type="hidden" name="title" value=<%=title %>>
+			<input type="hidden" name="name" value=<%=name %>>
+			<input type="hidden" name="num" value=<%=num %>>
+			<input type="hidden" name="filename" value=<%=filename %>>
+			<button type="submit">確定</button>
+		</form>
+
 		<form action="../notice/NoticeReturn.action" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
 			<input type="hidden" name="name" value=<%=name %>>
@@ -29,14 +37,6 @@
 			<input type="hidden" name="path" value=<%=path %>>
 			<input type="hidden" name="filename" value=<%=filename %>>
 			<button type="submit">戻る</button>
-		</form>
-
-		<form action="../notice/NoticeKeep.action" method="post">
-			<input type="hidden" name="title" value=<%=title %>>
-			<input type="hidden" name="name" value=<%=name %>>
-			<input type="hidden" name="num" value=<%=num %>>
-			<input type="hidden" name="filename" value=<%=filename %>>
-			<button type="submit">確定</button>
 		</form>
 
 	</c:param>
