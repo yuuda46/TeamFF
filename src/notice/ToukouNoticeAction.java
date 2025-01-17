@@ -25,7 +25,7 @@ public class ToukouNoticeAction extends Action {
 			String id = request.getParameter("items");
 
 			if (id == null || id.isEmpty()) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID���w�肳��Ă��܂���");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "IDが指定されていません");
                 return null;
             }
 
@@ -49,7 +49,7 @@ public class ToukouNoticeAction extends Action {
 			//System.out.println(id);
 		}catch (Exception e) {
 			e.printStackTrace(out);
-			 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "�f�[�^�̎擾���ɃG���[���������܂���");
+			 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "データの取得中にエラーが発生しました");
 		}
 		//toukou2.jsp�Ƀf�[�^�𑗐M
 		return "toukou2.jsp";
