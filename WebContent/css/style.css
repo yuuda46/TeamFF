@@ -365,14 +365,14 @@ header .dropdown {
 header .dropdown .dropdown-menu {
     display: none;                     /* 初期状態で非表示 */
     position: absolute;
-    top: 100%;                         /* ボタンの真下に表示 */
-    right: -80px;                            /* 右揃え */
+    top: 60%;                         /* ボタンの真下に表示 */
+    right: 0px;                            /* 右揃え */
     background-color: transparent;     /* 背景を完全に透過 */
     border: none;                      /* 枠線を非表示 */
     padding: 10px 0;
     list-style: none;
     text-align: left;
-    min-width: 160px;
+    min-width: 100px;
     transition: opacity 0.3s ease;     /* スムーズな遷移 */
     opacity: 0;                        /* 初期状態で透明 */
 }

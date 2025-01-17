@@ -30,7 +30,7 @@
 			<c:forEach var="notice_content" items="${notice_content}">
 				<h2><a href="../notice/NoticeDetail.action?id=${notice_content.postId}">${notice_content.title}</a></h2>
 				<p>${notice_content.postDay}</p>
-				<p></p>
+				<hr>
 			</c:forEach>
 		</c:when>
 	</c:choose>

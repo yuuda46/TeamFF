@@ -13,13 +13,13 @@
 	<c:choose>
 		<c:when test="${content.size()>0}">
 			<c:forEach var="content" items="${content}">
-				<h2>${content.title}</h2>
-				<p>連絡文書</p>
-				<p><img src="../upload/${content.content}"></p>
-				<p>投稿者氏名</p>
-				<p>${content.name}</p>
-				<p>投稿日</p>
-				<p>${content.postDay}</p>
+				<h1>${content.title}</h2>
+				<p>連絡文書<br>
+				<img src="../upload/${content.content}"></p>
+				<p>投稿者氏名<br>
+				${content.name}</p>
+				<p>投稿日<br>
+				${content.postDay}</p>
 			</c:forEach>
 		</c:when>
 
