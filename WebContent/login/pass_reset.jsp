@@ -1,5 +1,4 @@
 <%@ page import="java.sql.*, java.util.*" %>
-<%@ page import="java.sql.*, java.util.*" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="ja">
@@ -53,6 +52,7 @@ body {
     flex-direction: column; /* コンテンツを縦に並べる */
 }
 
+/* フッター */
 footer {
     color: #000000; /* 文字色 */
     text-align: center;
@@ -71,6 +71,18 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 30px; /* 上部に余白 */
     margin-bottom: 60px; /* footerとの間に余白を確保 */
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-group {
+    margin: 10px 0;
 }
 
 label {
@@ -134,23 +146,12 @@ h2 {
     text-align: center; /* 文字を中央揃え */
 }
 
-.container {
-    width: 300px;
-    margin: 0 auto;
-    padding: 30px;
-    border: 2px solid #007bff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 10px; /* 上部の余白を縮める */
-    margin-bottom: 40px; /* footerとの間隔を縮める */
-}
-
 </style>
 </head>
 
 <body>
 <h2>パスワードの再設定</h2>
-<div class="container">
+<div class="container" id="resetFormContainer">
 
 <%
     // 初期化
@@ -239,13 +240,13 @@ h2 {
     <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
 
     <label for="newPassword">新しいパスワード:</label>
-    <input type="password" id="newPassword" name="newPassword" placeholder="🔒新しいパスワードを入力" required>
+    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
 
     <button type="submit">パスワードを変更</button>
 	</form>
 
 	<!-- 戻るボタン -->
-	<a href="login.jsp" class="back-btn">ログイン画面に戻る</a>
+	<p style="text-align: center;"><a href="login.jsp" class="back-btn">ログイン画面に戻る</a></p>
 
 </div>
 
@@ -253,7 +254,31 @@ h2 {
     <small>Copyright&copy; <a href="index.html" style="text-decoration: underline; color: #007bff; border: none; background: transparent;">SAMPLE COMPANY</a> All Rights Reserved.</small>
 </footer>
 
-</footer>
+<script>
+    window.onload = function() {
+        // フォームを表示
+        var resetForm = document.getElementById('resetFormContainer');
+        resetForm.classList.add('visible');
+
+        // スクロール対象の位置
+        var targetPosition = resetForm.offsetTop - 20; // 20pxの余白をつけてスクロール
+        var currentPosition = window.pageYOffset; // 現在のスクロール位置
+        var distance = targetPosition - currentPosition; // 移動すべき距離
+        var step = distance / 100; // スクロールのステップ数を指定小さいほど遅くなる
+
+        // スクロールを遅くするための遅延処理
+        var scrollInterval = setInterval(function() {
+            window.scrollBy(0, step); // スクロール位置を少しずつ更新
+
+            // スクロールが目標位置に近づいたら停止
+            if (Math.abs(window.pageYOffset - targetPosition) <= Math.abs(step)) {
+                window.scrollTo(0, targetPosition); // 目標位置にぴったりスクロール
+                clearInterval(scrollInterval); // インターバルをクリア
+            }
+        }, 15); // 15ミリ秒ごとにスクロールを更新
+    };
+</script>
+
 
 </body>
 </html>
