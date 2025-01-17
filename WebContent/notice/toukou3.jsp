@@ -7,7 +7,7 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
-<%@page import="bean.Post, java.util.List" %>
+<%@page import="bean.Post2, java.util.List" %>
 
 
 <c:import url="/common/base.jsp">

@@ -191,13 +191,14 @@ public class Postdao2 extends DAO {
 
 
 
-    public void insertComment(int id, int user_id, String proposal, java.util.Date time) throws Exception {
+    public void insertComment(int id, String user_id, String proposal, java.util.Date time) throws Exception {
         Connection con = getConnection();
         PreparedStatement st = con.prepareStatement(
-            "INSERT INTO comment (id, proposal, time) VALUES (?, ?, ?)");
+            "INSERT INTO comment (id, user_id, proposal, time) VALUES (?, ?, ?, ?)");
         st.setInt(1,id);
-        st.setString(2, proposal);
-        st.setTimestamp(3, new java.sql.Timestamp(time.getTime()));
+        st.setString(2,user_id);
+        st.setString(3, proposal);
+        st.setTimestamp(4, new java.sql.Timestamp(time.getTime()));
 
 //        System.out.println("Id: " + id);
 //        System.out.println("Proposal: " + proposal);
@@ -207,41 +208,46 @@ public class Postdao2 extends DAO {
         st.close();
         con.close();
     }
+//
+//
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//	    request.setCharacterEncoding("UTF-8");
+//
+//	    String proposal = request.getParameter("proposal"); // テキストエリアの内容
+//	    java.util.Date time = new java.util.Date(); // 現在の日時
+//
+//	    try {
+//	        Postdao2 dao = new Postdao2();
+//	        dao.insertComment(0, , proposal, time);
+//	     // 投稿内容をリクエスト属性に設定する
+//	        request.setAttribute("proposal", proposal);
+//	        request.setAttribute("time", time);
+//	     // リダイレクトまたは、再度リクエスト属性として設定しJSPに返す処理
+//	        response.sendRedirect("toukou2.jsp?");
+//
+//	    } catch (Exception e) {
+//	        e.printStackTrace();
+//	        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "データの保存に失敗しましたw");
+//	    }
+//	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    request.setCharacterEncoding("UTF-8");
-
-	    String proposal = request.getParameter("proposal"); // テキストエリアの内容
-	    java.util.Date time = new java.util.Date(); // 現在の日時
-
-	    try {
-	        Postdao2 dao = new Postdao2();
-	        dao.insertComment(0, 0, proposal, time);
-	     // 投稿内容をリクエスト属性に設定する
-	        request.setAttribute("proposal", proposal);
-	        request.setAttribute("time", time);
-	     // リダイレクトまたは、再度リクエスト属性として設定しJSPに返す処理
-	        response.sendRedirect("toukou2.jsp?");
-
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "データの保存に失敗しましたw");
-	    }
-	}
-
-	public List<Comment> come() throws Exception {
+	public List<Comment> come(String id) throws Exception {
 		List<Comment> list4=new ArrayList<>();
 
 		Connection con=getConnection();
-		//System.out.println("o2");
 		PreparedStatement st=con.prepareStatement(
-			"select proposal, time from comment");
+			"select comment.user_id, comment.id, comment.comment_id, comment.proposal, comment.time, signup.user_name from comment inner join signup on comment.user_id = signup.id"
+			+ " where comment.id = ?");
+
+		st.setString(1, id);
+
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()){
 			Comment p=new Comment();
 
+			p.setUser_name(rs.getString("user_name"));
+			p.setComment_id(rs.getString("comment_id"));
 			p.setProposal(rs.getString("proposal"));
 			p.setTime(rs.getString("time"));
 
@@ -271,7 +277,7 @@ public class Postdao2 extends DAO {
 
 		while (rs.next()){
 			Comment p=new Comment();
-			p.setUser_id(rs.getInt("id"));
+			p.setUser_id(rs.getString("id"));
 
 
 			list.add(p);

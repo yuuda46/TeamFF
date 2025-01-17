@@ -40,8 +40,8 @@ public class CommentSubmitServlet extends HttpServlet {
             Postdao2 comment = new Postdao2();
             List<Comment> userList = comment.id_search(user_name, password);
 
-            if (!userList.isEmpty()) {
-                int user_id = userList.get(0).getUser_id();  // user_idを取得
+//            if (!userList.isEmpty()) {
+                String user_id = userList.get(0).getUser_id();  // user_idを取得
 
             dao.insertComment(id, user_id, proposal, time);
             request.setAttribute("items", id);
@@ -50,7 +50,8 @@ public class CommentSubmitServlet extends HttpServlet {
             // コメント挿入後、投稿詳細ページにリダイレクト
             request.getRequestDispatcher("toukou3.jsp")
             	.forward(request, response);
-        }} catch (Exception e) {
+//        }
+            } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "データの保存に失敗しました");
         }
