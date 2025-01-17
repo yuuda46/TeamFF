@@ -7,21 +7,21 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
-<%@page import="bean.Post, java.util.List" %>
+<%@page import="bean.Post2, java.util.List" %>
 <%@page import="bean.Comment, java.util.List" %>
 
 
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 		<%
-		    List<Post> list = (List<Post>) request.getAttribute("content");
+		    List<Post2> list = (List<Post2>) request.getAttribute("content");
 			if (list != null && !list.isEmpty()) {
 		%>
 
 
 		<!-- 現在表示されている投稿情報の表示 -->
 		<form name="pos" action="../notice/commentSubmit" method="post">
-		    <% for (Post p : list) { %>
+		    <% for (Post2 p : list) { %>
 		        <h1><%= p.getTitle() %></h1>
 		        <p><%= p.getContent() %></p>
 		        <p><%= p.getName() %></p>
