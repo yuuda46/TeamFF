@@ -263,7 +263,7 @@ public class Postdao2 extends DAO {
 
 	public List<Comment> id_search(String gin, String ss) throws Exception {
 		List<Comment> list=new ArrayList<>();
-
+//a
 		Connection con=getConnection();
 		//select id from signup‚Åid‚ðŽæ“¾‚·‚é‚¯‚Çuser_name‚Æpassword‚Ì‚¨‚È‚¶id
 		PreparedStatement st=con.prepareStatement(
