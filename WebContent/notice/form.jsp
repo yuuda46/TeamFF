@@ -6,10 +6,11 @@
 <%-- 文字化けの対策 --%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+<link rel="stylesheet" href="../css/notice.css">
 
 <c:import url="/common/base.jsp">
 	<c:param name="content">
-	<form action="../notice/Upload" method="post" enctype="multipart/form-data">
+	<form class="detail_font" action="../notice/Upload" method="post" enctype="multipart/form-data">
 	タイトル:(<input type="text" name="title" value="${title}"><br>
 	<%-- エラー文 --%>
 	<div id="error">${error_message}</div>
