@@ -133,13 +133,26 @@ body {
         outline: none; /* 追加のアウトラインを削除 */
     }
 
-    footer {
-    color: #000000; /* 文字色 */
-    text-align: center;
-    font-size: 85%; /* 文字サイズ */
-    padding: 10px 0; /* 上下の余白を追加 */
-    background-color: #f8f8f8; /* 背景色を薄いグレーに設定 */
-    margin-top: 20px; /* 青い枠線の下に表示されるように余白を追加 */
+footer {
+	clear: both;
+	text-align: center;
+	background: #222;	/*背景色*/
+	color: #fff;		/*文字色*/
+	font-size: 85%;		/*文字サイズ*/
+	/* フッターを一番下に固定するCSS */
+	top: 100vh;
+	position: sticky;
+}
+footer a {
+	color: #fff;	/*リンクテキストの文字色*/
+	text-decoration: none;
+}
+footer a:hover {
+	color: #fff;	/*マウスオン時の文字色*/
+}
+footer .pr {
+	display: block;
+	font-size: 80%;
 }
 h2 {
     text-align: center;  /* 中央揃え */
