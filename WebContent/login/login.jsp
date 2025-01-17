@@ -54,14 +54,26 @@ body {
 
 /* フッター */
 footer {
-    color: #000000; /* 文字色 */
-    text-align: center;
-    font-size: 85%; /* 文字サイズ */
-    padding: 10px 0; /* 上下の余白を追加 */
-    background-color: #f8f8f8; /* 背景色を薄いグレーに設定 */
-    margin-top: 20px; /* フッターとの間に余白を追加 */
+	clear: both;
+	text-align: center;
+	background: #222;	/*背景色*/
+	color: #fff;		/*文字色*/
+	font-size: 85%;		/*文字サイズ*/
+	/* フッターを一番下に固定するCSS */
+	top: 100vh;
+	position: sticky;
 }
-
+footer a {
+	color: #fff;	/*リンクテキストの文字色*/
+	text-decoration: none;
+}
+footer a:hover {
+	color: #fff;	/*マウスオン時の文字色*/
+}
+footer .pr {
+	display: block;
+	font-size: 80%;
+}
 .container {
     width: 300px;
     margin: 0 auto;
