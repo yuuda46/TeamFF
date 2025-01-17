@@ -137,7 +137,7 @@
                 <span>集金一覧</span>
             </div>
             <div class="text">
-				C
+				集金をお願いしています。
 			</div>
         </div>
 
