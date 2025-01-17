@@ -113,7 +113,7 @@
                 <span>投稿</span>
             </div>
             <div class="text">
-                A
+                連絡文書をカテゴリーごとに絞り込んで閲覧できる
             </div>
         </div>
 
