@@ -16,9 +16,13 @@
     <div class="function">
 <%--<c:import url="/common/sidemenu.jsp">
     </c:import> --%>
+
+    <link rel="stylesheet" href="../css/collection.css">
+
         <section class="mo-4">
-            <h2 class="h3 mb-3 fw-norma student bg-opacity-10 py-2 px-4">入金管理</h2>
-			<label class="btn-position">エラーです、やり直してください。</label>
+            <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">入金管理</h2>
+			<label class="btn-position">エラーです、やり直してください。<br>
+			<a>何度もこの画面が表示される場合、管理者に問い合わせてください。</a></label>
 
 
 		<form action="../collection/CollectionList.action" method="get">

@@ -15,9 +15,15 @@
     <div class="function">
 <%--<c:import url="/common/sidemenu.jsp">
     </c:import> --%>
+
+        <link rel="stylesheet" href="../css/collection.css">
+
         <section class="mo-4">
-            <h2 class="h3 mb-3 fw-norma student bg-opacity-10 py-2 px-4">入金管理</h2>
-			<label class="btn-position">入金が完了しました。</label>
+            <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">入金管理</h2>
+			<label class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">
+			入金が完了しました。<br>
+			ご協力ありがとうございました。
+			</label>
 
 
 		<form action="../collection/CollectionList.action" method="get">

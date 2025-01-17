@@ -1,0 +1,37 @@
+.test-table {
+    width: 100%;
+    gap: 0px 20px;
+    text-align: center; /* 追加 */
+}
+
+.test-table-wide {
+    width: 15%;
+    height: 45px;
+    text-align: center; /* 追加 */
+}
+
+.test-boder {
+    border-top: 1px solid #d3d3d3;
+}
+
+.test-table-description {
+    width: 50%; /* 説明のセルの幅を広げる */
+    text-align: left; /* テキストを左揃えにする */
+    padding: 10px; /* セル内の余白を設定 */
+}
+
+.test-boder2 {
+    border-top: 1px solid #d3d3d3;
+    text-align: center; /* 他のセルは中央揃え */
+}
+
+.large-bold {
+    font-size: 1.5em; /* 大きくする */
+    font-weight: bold; /* 太字にする */
+}
+
+.small-bold {
+    font-size: 1.1em; /* 上の文より小さくする */
+    font-weight: bold; /* 太字にする */
+}
+
