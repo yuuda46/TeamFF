@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import bean.Comment;
 import bean.Post2;
 import dao.Postdao2;
@@ -22,37 +21,37 @@ public class ToukouNoticeAction extends Action {
 		PrintWriter out=response.getWriter();
 
 		try{
-			//toukou.jsp‚©‚çƒf[ƒ^‚ğæ“¾‚·‚é
+			//toukou.jspï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
 			String id = request.getParameter("items");
 
 			if (id == null || id.isEmpty()) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "IDï¿½ï¿½ï¿½wï¿½è‚³ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½");
                 return null;
             }
 
-            // w’èID‚Ìƒf[ƒ^‚ğæ“¾
+            // ï¿½wï¿½ï¿½IDï¿½Ìƒfï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾
 			Postdao2 dao=new Postdao2();
 			List<Post2> list=dao.notice_detail(id);
 
 			Postdao2 com=new Postdao2();
 			//System.out.println("w");
-			List<Comment> list4=com.come();
+			List<Comment> list4=com.come(id);
 			request.setAttribute("comment", list4);
-			// ƒRƒƒ“ƒg—pƒŠƒXƒg
+			// ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½Xï¿½g
 			//System.out.println("o-");
-			// JSP‚ÉƒŠƒXƒg‚ğ“n‚·
+			// JSPï¿½Éƒï¿½ï¿½Xï¿½gï¿½ï¿½nï¿½ï¿½
 			request.setAttribute("list2", list);
 
-			// ƒf[ƒ^‚ğƒŠƒNƒGƒXƒg‘®«‚Éİ’è
+			// ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½Gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Éİ’ï¿½
             request.setAttribute("content", list);
-			request.setAttribute("items", id);//‡@ƒqƒhƒDƒ“
+			request.setAttribute("items", id);//ï¿½@ï¿½qï¿½hï¿½Dï¿½ï¿½
 
 			//System.out.println(id);
 		}catch (Exception e) {
 			e.printStackTrace(out);
-			 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ƒf[ƒ^‚Ìæ“¾’†‚ÉƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½");
+			 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ï¿½fï¿½[ï¿½^ï¿½Ìæ“¾ï¿½ï¿½ï¿½ÉƒGï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½");
 		}
-		//toukou2.jsp‚Éƒf[ƒ^‚ğ‘—M
+		//toukou2.jspï¿½Éƒfï¿½[ï¿½^ï¿½ğ‘—M
 		return "toukou2.jsp";
 	}
 }
