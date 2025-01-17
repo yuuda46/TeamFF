@@ -9,7 +9,7 @@
 <%
 	String title=(String)request.getAttribute("title");
 	String name=(String)request.getAttribute("name");
-	String content=(String)request.getAttribute("indent_content");
+	String content=(String)request.getAttribute("content");
 %>
 
 <c:import url="/common/base.jsp">
@@ -17,21 +17,21 @@
 
 		<p>タイトル:<%=title %></p>
 		<p>氏名:<%=name %></p>
-		<p>コンテンツ:<%=content %></p>
-
+		<p>コンテンツ:</p>
+		<p><%=content %></p>
 
 		<form action="" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
 			<input type="hidden" name="name" value=<%=name %>>
-			<input type="hidden" name="content" value=<%=content %>>
-			<button type="submit">戻る</button>
+			<input type="hidden" name="content" value="<%=content %>">
+			<button type="submit">確定</button>
 		</form>
 
 		<form action="" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
 			<input type="hidden" name="name" value=<%=name %>>
-			<input type="hidden" name="content" value=<%=content %>>
-			<button type="submit">確定</button>
+			<input type="hidden" name="content" value="<%=content %>">
+			<button type="submit">戻る</button>
 		</form>
 
 	</c:param>

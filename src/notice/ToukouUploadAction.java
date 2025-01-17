@@ -15,7 +15,6 @@ public class ToukouUploadAction extends Action {
 		) throws ServletException,IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
-
 		try{
 
 		String title=request.getParameter("title");
@@ -26,20 +25,12 @@ public class ToukouUploadAction extends Action {
 //		テキストエリアの入力内容を取得
 		String content = request.getParameter("content");
 
-		System.out.println("Received Content: " + content);
-
 //		改行をHTML用に変換
 		String indent_content = content.replace("\n", "<br>");
 
-		PrintWriter out2= response.getWriter();
-        out2.println("<html><body>");
-        out2.println("<h1>送信内容</h1>");
-        out2.println("<p>" + indent_content + "</p>");
-        out2.println("</body></html>");
-
-        request.setAttribute("title", title);
-        request.setAttribute("name", name);
-        request.setAttribute("content", indent_content);
+		request.setAttribute("title", title);
+		request.setAttribute("name", name);
+		request.setAttribute("content", indent_content);
 
 		} catch (Exception e) {
 		e.printStackTrace(out);
