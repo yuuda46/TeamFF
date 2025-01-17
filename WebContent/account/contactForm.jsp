@@ -27,7 +27,7 @@
 
         <button type="submit">送信</button>
 
-        <a href="../common/index.jsp">戻る</a>
+        <a href="../notice/Tokou.action">戻る</a>
     </form>
 
     <%-- メール送信処理 --%>
