@@ -11,7 +11,6 @@
 
 
 <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-<h3 class="titlesize">Login</h3>
 
 
 

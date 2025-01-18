@@ -4,7 +4,6 @@
 <html lang="ja">
 <header>
     <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-    <h3 class="titlesize">ACCOUNT</h3>
 </header>
 
 <head>
