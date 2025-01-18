@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
 <header>
     <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+<nav class="menubar">
+<ul>
+<li><a href="../notice/Tokou.action">ホーム</a></li>
+<li><a href="../notice/Notice.action">投稿</a></li>
+<li><a href="../notice/Tokou.action">掲示板</a></li>
+<li><a href="../collection/CollectionList.action">集金一覧</a></li>
+<li><a href="../account/contactForm.jsp">お問い合わせ</a></li>
+</ul>
+</nav>
 </header>
 
 <head>
     <!-- Link to the same stylesheet as the first JSP -->
     <link rel="stylesheet" href="../css/form.css">
+
 </head>
 
 
@@ -74,5 +84,8 @@
             }
         }
     %>
+    	<footer>
+	<small>Copyright&copy;SAMPLE COMPANY All Rights Reserved.</small>
+	</footer>
 </body>
 </html>
