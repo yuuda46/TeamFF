@@ -53,8 +53,9 @@
         <h1>コメント欄</h1>
 
         <c:forEach var="comment" items="<%=list4 %>">
-            <h2>${comment.proposal}</h2>
-            <p>${comment.time}</p>
+            <p>No.${comment.comment_id}</p>
+            <h2>コメント💬${comment.proposal}</h2>
+            <p>🕝${comment.time}</p>
             <hr>
         </c:forEach>
     <% } else { %>
