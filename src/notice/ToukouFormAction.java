@@ -17,7 +17,7 @@ public class ToukouFormAction extends Action {
 			PrintWriter out=response.getWriter();
 			try{
 
-//				ç¾çŠ¶ã¯ä½•ã‚‚ã„ã‚Œã‚‹ã‚‚ã®ãŒã‚ã‚Šã¾ã›ã‚“
+//				Œ»ó‚Í‰½‚à“ü‚ê‚é‚à‚Ì‚ª‚ ‚è‚Ü‚¹‚ñ
 
 			} catch (Exception e) {
 				e.printStackTrace(out);
