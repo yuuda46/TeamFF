@@ -17,9 +17,9 @@
 		<form action="../notice/Tokou.action" method="get">
 
 		    <c:choose>
-		    <button type="submit">議題投稿する</button>
 		        <c:when test="${not empty list2}">
 		            <div>件数:${list2.size()}件</div>
+		            <button type="submit">議題投稿する</button>
 		            <c:forEach var="post" items="${list2}">
 		                <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
 		                <p>${post.postDay}</p>

@@ -77,12 +77,11 @@
     <c:import url="/common/base2.jsp">
     <c:param name="content">
     <%-- ここにコンテンツを挟む --%>
-        <form action="../notice/Tokou.action" method="get">
-            <input placeholder="検索" name="searchQuery">
-            <div>
-                <button id="filter-button" type="submit">検索</button>
-            </div>
+    <form action="ToukouForm.action" method="post">
+			<button type="submit">議題投稿する</button>
+		</form>
 
+        <form action="../notice/Tokou.action" method="get">
             <c:choose>
                 <c:when test="${not empty list2}">
                     <div>件数:${list2.size()}件</div>
