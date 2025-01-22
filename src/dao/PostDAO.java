@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import bean.Post;
 
 public class PostDAO extends DAO {
 
-  //Postãƒ†ãƒ¼ãƒ–ãƒ«ã®ä¸­ã®ãƒ‡ãƒ¼ã‚¿ã‚’å…¨ã¦å–ã‚Šå‡ºã™
+  //Postƒe[ƒuƒ‹‚Ì’†‚Ìƒf[ƒ^‚ğ‚·‚×‚Äæ‚èo‚·
 	public List<Post> all() throws Exception {
 		List<Post> list=new ArrayList<>();
 
@@ -265,4 +266,25 @@ public class PostDAO extends DAO {
 
 		return list;
 	}
+
+
+	public void insertPost(String id, String title, String content, String name, Date post_day) throws Exception {
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement(
+            "INSERT INTO POST (id, title, content, name, post_day) VALUES (?, ?, ?, ?, ?)");
+        st.setString(1,id);
+        st.setString(2,title);
+        st.setString(3, content);
+        st.setString(4, name);
+        st.setTimestamp(5, new java.sql.Timestamp(post_day.getTime()));
+        System.out.println("Id: " + id);
+        System.out.println("title: " + title);
+        System.out.println("content: " + content);
+        System.out.println("name: " + name);
+        System.out.println("post_day: " + post_day);
+        st.executeUpdate();
+        st.close();
+        con.close();
+
+    }
 }

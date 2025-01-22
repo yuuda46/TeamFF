@@ -10,13 +10,14 @@
 <c:import url="/common/base.jsp">
 <c:param name="content">
 <%-- ここにコンテンツを挟む --%>
+		<form action="ToukouForm.action" method="post">
+			<button type="submit">議題投稿する</button>
+		</form>
+
 		<form action="../notice/Tokou.action" method="get">
-		    <input placeholder="検索" name="searchQuery">
-		    <div>
-		        <button id="filter-button" type="submit">検索</button>
-		    </div>
 
 		    <c:choose>
+		    <button type="submit">議題投稿する</button>
 		        <c:when test="${not empty list2}">
 		            <div>件数:${list2.size()}件</div>
 		            <c:forEach var="post" items="${list2}">

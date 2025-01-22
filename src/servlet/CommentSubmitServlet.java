@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Comment;
+import bean.Post2;
 import dao.Postdao2;
 
 
@@ -30,8 +31,21 @@ public class CommentSubmitServlet extends HttpServlet {
         String proposal = request.getParameter("proposalContent"); // テキストエリアの内容
         Date time = new Date(); // 現在の日時
         try {
+
+        	//toukou.jspからデータを取得する
+			String id = request.getParameter("items");
+
+			if (id == null || id.isEmpty()) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "IDが指定されていません");
+                return;
+            }
+
+            // 指定IDのデータを取得
+			Postdao2 dao1=new Postdao2();
+			List<Post2> list=dao1.notice_detail(id);
+			request.setAttribute("list2", list);
+
             Postdao2 dao = new Postdao2();
-            int id = Integer.parseInt(request.getParameter("items"));
             HttpSession session = request.getSession();
             String user_name = (String) session.getAttribute("username");
             String password = (String) session.getAttribute("password");
@@ -40,9 +54,8 @@ public class CommentSubmitServlet extends HttpServlet {
             Postdao2 comment = new Postdao2();
             List<Comment> userList = comment.id_search(user_name, password);
 
-//            if (!userList.isEmpty()) {
-                String user_id = userList.get(0).getUser_id();  // user_idを取得
-
+//          if (!userList.isEmpty()) {
+            String user_id = userList.get(0).getUser_id();  // user_idを取得
             dao.insertComment(id, user_id, proposal, time);
             request.setAttribute("items", id);
         	//③getparameteでヒドゥンを取得

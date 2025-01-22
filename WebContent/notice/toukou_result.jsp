@@ -15,19 +15,19 @@
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 
-		<p>タイトル:<%=title %></p>
-		<p>氏名:<%=name %></p>
+		<p>タイトル:${ title }</p>
+		<p>氏名:${ name }</p>
 		<p>コンテンツ:</p>
-		<p><%=content %></p>
+		<p>${ content }</p>
 
-		<form action="" method="post">
+		<form action="Tokou.action" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
 			<input type="hidden" name="name" value=<%=name %>>
 			<input type="hidden" name="content" value="<%=content %>">
 			<button type="submit">確定</button>
 		</form>
 
-		<form action="" method="post">
+		<form action="ToukouForm.action" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
 			<input type="hidden" name="name" value=<%=name %>>
 			<input type="hidden" name="content" value="<%=content %>">

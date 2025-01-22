@@ -2,11 +2,16 @@ package notice;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import java.util.UUID;
+import dao.PostDAO;
 import tool.Action;
 
 public class ToukouUploadAction extends Action {
@@ -16,26 +21,40 @@ public class ToukouUploadAction extends Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		try{
+			PostDAO dao2 = new PostDAO();
+//			â‘Î‚Éd•¡‚µ‚È‚¢‚Å‚ ‚ë‚¤ID(36Œ…)
+			String id = UUID.randomUUID().toString();
 
-		String title=request.getParameter("title");
-		System.out.println(title);
-		String name=request.getParameter("name");
-		System.out.println(name);
+			System.out.println("id:"+id);
+			String title=request.getParameter("title");
+			System.out.println("title:"+title);
+			String name=request.getParameter("name");
+			System.out.println("name:"+name);
+			String content=request.getParameter("content");
+			System.out.println("content:"+content);
 
-//		ãƒ†ã‚­ã‚¹ãƒˆã‚¨ãƒªã‚¢ã®å…¥åŠ›å†…å®¹ã‚’å–å¾—
-		String content = request.getParameter("content");
+//			LocalDateŒ^‚Ì“ú•t‚ğæ“¾
+			LocalDate localDate = LocalDate.now();
+//			LocalDateŒ^‚©‚çsql.DateŒ^‚É•ÏŠ·
+			java.sql.Date post_day= java.sql.Date.valueOf(localDate);
 
-//		æ”¹è¡Œã‚’HTMLç”¨ã«å¤‰æ›
-		String indent_content = content.replace("\n", "<br>");
 
-		request.setAttribute("title", title);
-		request.setAttribute("name", name);
-		request.setAttribute("content", indent_content);
+			dao2.insertPost(id, title, content, name, post_day);
+	//		ƒeƒLƒXƒgƒGƒŠƒA‚Ì“ü—Í“à—e‚ğæ“¾
+			String content1 = request.getParameter("content");
 
-		} catch (Exception e) {
-		e.printStackTrace(out);
-	}
-		return "toukou_result.jsp";
-	}
+	//		‰üs‚ğHTML—p‚É•ÏŠ·
+			String indent_content = content1.replace("\n", "<br>");
+
+
+			request.setAttribute("title", title);
+			request.setAttribute("name", name);
+			request.setAttribute("content", indent_content);
+
+			} catch (Exception e) {
+				e.printStackTrace(out);
+		}
+			return "toukou_result.jsp";
+		}
 
 }

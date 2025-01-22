@@ -3,7 +3,7 @@ package bean;
 import java.util.Date;
 
 public class Post2{
-	private int post_id;
+	private String post_id;
 	private String title;
 	private String content;
 	private String name;
@@ -11,7 +11,7 @@ public class Post2{
 	private int category_id;
 
 
-	public int getPostId() {
+	public String getPostId() {
 		return post_id;
 	}
 	public String getTitle() {
@@ -31,8 +31,8 @@ public class Post2{
 	}
 
 
-	public void setPostId(int id){
-		this.post_id=id;
+	public void setPostId(String string){
+		this.post_id=string;
 	}
 	public void setTitle(String title){
 		this.title=title;

@@ -5,10 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletException;
-import java.io.IOException;
 
 import bean.Post2;
 import bean.Comment;
@@ -28,7 +24,7 @@ public class Postdao2 extends DAO {
 
 		while (rs.next()){
 			Post2 p=new Post2();
-			p.setPostId(rs.getInt("id"));
+			p.setPostId(rs.getString("id"));
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("name"));
@@ -55,7 +51,7 @@ public class Postdao2 extends DAO {
 
 		while (rs.next()){
 			Post2 p=new Post2();
-			p.setPostId(rs.getInt("id"));
+			p.setPostId(rs.getString("id"));
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("name"));
@@ -84,7 +80,7 @@ public class Postdao2 extends DAO {
 
 		while (rs.next()){
 			Post2 p=new Post2();
-			p.setPostId(rs.getInt("id"));
+			p.setPostId(rs.getString("id"));
 			p.setTitle(rs.getString("title"));
 			p.setPostDay(rs.getDate("post_day"));
 
@@ -104,12 +100,13 @@ public class Postdao2 extends DAO {
 
 		PreparedStatement st=con.prepareStatement(
 			"select id, title, content, name, post_day from post "
-			+ "where category_id is null");
+				+ "where category_id is null "
+				+" order by post_day desc");
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()){
 			Post2 p=new Post2();
-			p.setPostId(rs.getInt("id"));
+			p.setPostId(rs.getString("id"));
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setPostDay(rs.getDate("post_day"));
@@ -175,7 +172,7 @@ public class Postdao2 extends DAO {
 
 		while (rs.next()){
 			Post2 p=new Post2();
-			p.setPostId(rs.getInt("post_id"));
+			p.setPostId(rs.getString("post_id"));
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("name"));
@@ -191,16 +188,17 @@ public class Postdao2 extends DAO {
 
 
 
-    public void insertComment(int id, String user_id, String proposal, java.util.Date time) throws Exception {
+    public void insertComment(String id, String user_id, String proposal, java.util.Date time) throws Exception {
         Connection con = getConnection();
         PreparedStatement st = con.prepareStatement(
             "INSERT INTO comment (id, user_id, proposal, time) VALUES (?, ?, ?, ?)");
-        st.setInt(1,id);
+        st.setString(1,id);
         st.setString(2,user_id);
         st.setString(3, proposal);
         st.setTimestamp(4, new java.sql.Timestamp(time.getTime()));
 
 //        System.out.println("Id: " + id);
+//        System.out.println("User_Id: " + user_id);
 //        System.out.println("Proposal: " + proposal);
 //        System.out.println("Current Time: " + time);
 
@@ -237,7 +235,8 @@ public class Postdao2 extends DAO {
 		Connection con=getConnection();
 		PreparedStatement st=con.prepareStatement(
 			"select comment.user_id, comment.id, comment.comment_id, comment.proposal, comment.time, signup.user_name from comment inner join signup on comment.user_id = signup.id"
-			+ " where comment.id = ?");
+				+ " where comment.id = ? "
+				+" order by time desc");
 
 		st.setString(1, id);
 
