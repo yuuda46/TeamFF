@@ -88,39 +88,68 @@ public class Upload extends HttpServlet {
 		System.out.println(uuid);
 
 		// エラーメッセージの文字列
-		String error_message = "";
+		String error_message_title = "";
+		String error_message_name = "";
+		String error_message_num = "";
+
+//		タイトルのnull判定
+		if (title == null || title.isEmpty()){
+			System.out.println("error");
+			error_message_title = "タイトルを入力してください";
+		}
 
 //		タイトルの文字数を調べる
 		int count_title = title.length();
 		System.out.println(count_title);
 		if (count_title > 20){
 			System.out.println("error");
-			error_message = "タイトルが20文字以上です";
+			error_message_title = "タイトルが20文字以上です";
 		}
 
-			if (error_message != ""){
+//		氏名のnull判定
+		if (name == null || name.isEmpty()){
+			System.out.println("error");
+			error_message_name = "氏名を入力してください";
+		}
 
-				System.out.println("True");
-//				h2コンソールからカテゴリーを取得
-				CategoryDAO dao=new CategoryDAO();
-				List<Category> list=dao.all();
+//		氏名の文字数を調べる
+		int count_name = name.length();
+		System.out.println(count_name);
+		if (count_name > 20){
+			System.out.println("error");
+			error_message_name = "氏名が20文字以上です";
+		}
 
-				Path delete_path = Paths.get(upload_path+"/"+uuid+".png");
-				Files.deleteIfExists(delete_path);
+		if (num == 0){
+			System.out.println("error");
+			error_message_num = "カテゴリーを選択してください";
+		}
 
-				System.out.println(part);
+		if (error_message_title != "" || error_message_name != "" || error_message_num != ""){
 
-				request.setAttribute("title", title);
-				request.setAttribute("name", name);
-				request.setAttribute("select_list", list);
-				request.setAttribute("error_message", error_message);
-				RequestDispatcher rd = request.getRequestDispatcher("/notice/form.jsp");
-				rd.forward(request,response);
+			System.out.println("True");
+//			h2コンソールからカテゴリーを取得
+			CategoryDAO dao=new CategoryDAO();
+			List<Category> list=dao.all();
 
-			}
-			else{
-				System.out.println("False");
-			}
+			Path delete_path = Paths.get(upload_path+"/"+uuid+".png");
+			Files.deleteIfExists(delete_path);
+
+			System.out.println(part);
+
+			request.setAttribute("title", title);
+			request.setAttribute("name", name);
+			request.setAttribute("select_list", list);
+			request.setAttribute("error_message_title", error_message_title);
+			request.setAttribute("error_message_name", error_message_name);
+			request.setAttribute("error_message_num", error_message_num);
+			RequestDispatcher rd = request.getRequestDispatcher("/notice/form.jsp");
+			rd.forward(request,response);
+
+		}
+		else{
+			System.out.println("False");
+		}
 
 		request.setAttribute("title",title);
 		request.setAttribute("name", name);

@@ -11,7 +11,7 @@ import bean.Post;
 
 public class PostDAO extends DAO {
 
-  //Postƒe[ƒuƒ‹‚Ì’†‚Ìƒf[ƒ^‚ğ‚·‚×‚Äæ‚èo‚·
+  //Postï¿½eï¿½[ï¿½uï¿½ï¿½ï¿½Ì’ï¿½ï¿½Ìƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½×‚Äï¿½ï¿½oï¿½ï¿½
 	public List<Post> all() throws Exception {
 		List<Post> list=new ArrayList<>();
 
@@ -45,7 +45,8 @@ public class PostDAO extends DAO {
 
 		PreparedStatement st=con.prepareStatement(
 			"select id, title, content, name, post_day from post "
-			+ "where category_id is not null");
+			+ "where category_id is not null "
+			+ "order by post_day desc");
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()){
@@ -102,7 +103,8 @@ public class PostDAO extends DAO {
 
 		PreparedStatement st=con.prepareStatement(
 			"select id, title, post_day from post "
-			+ "where category_id = ?");
+			+ "where category_id = ? "
+			+ "order by post_day desc");
 
 		st.setInt(1, boot);
 
