@@ -11,6 +11,7 @@
 
 
 <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+<h3 class="titlesize">Login</h3>
 
 
 
@@ -32,7 +33,7 @@ header #logo img {
     position: absolute;
     left: 50%;
     transform: translateX(-50%); /* 画像を中央に配置 */
-    bottom: 80px; /* 画像を下から20pxに配置 */
+    bottom: 80px; /* 画像を下から80pxに配置 */
 }
 
 /* タイトル */
@@ -44,12 +45,14 @@ h3 {
     position: absolute;
     left: 55%;
     transform: translateX(-50%); /* 画像を中央に配置 */
-    bottom: 90px; /* 画像を下から20pxに配置 */
-
+    bottom: 90px; /* 画像を下から90pxに配置 */
     margin: 0;
 }
 body {
 	margin: 0;
+    min-height: 100vh; /* ビューポートの高さに合わせて最小高さを設定 */
+    display: flex;
+    flex-direction: column; /* コンテンツを縦に並べる */
 }
 
 
@@ -60,8 +63,11 @@ body {
             border: 2px solid #007bff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: left;
+            margin-top: 20px; /* 上部に余白 */
+            margin-bottom: 10x; /* footerとの間に余白を確保 */
         }
+
+
 
         .form-group {
             margin: 10px 0;
@@ -138,14 +144,14 @@ body {
     font-size: 85%; /* 文字サイズ */
     padding: 10px 0; /* 上下の余白を追加 */
     background-color: #f8f8f8; /* 背景色を薄いグレーに設定 */
-    margin-top: 20px; /* 青い枠線の下に表示されるように余白を追加 */
+    margin-top: 80px; /* 青い枠線の下に表示されるように余白を追加 */
 }
 h2 {
     text-align: center;  /* 中央揃え */
     color: #333;
     font-size: 2em;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
 }
 
@@ -162,117 +168,127 @@ h2 {
 
 <h2>ログインページ</h2>
 
-<div class="container">
+<div class="container" id="loginFormContainer">
+    <%
+        String url = "jdbc:postgresql://localhost:5432/team_f";  // データベースURL
+        String dbUser = "postgres";  // ユーザー名
+        String dbPassword = "Team_F";  // パスワード
+        String loginMessage = "";  // エラーメッセージを格納する変数
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            // 入力されたユーザー名とパスワードを取得
+            String inputUsername = request.getParameter("username");
+            String inputPassword = request.getParameter("password");
+            // パスワードの正規表現（半角英数字5文字以上、英字と数字を両方含む）
+            String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上、英字と数字を両方含む
+            // ユーザー名は1文字以上の任意の文字列
+            String usernameRegex = ".{1,}"; // 1文字以上
+            // ユーザー名とパスワードのチェック
 
-<%
-    String url = "jdbc:postgresql://localhost:5432/team_f";  // データベースURL
-    String dbUser = "postgres";  // ユーザー名
-    String dbPassword = "Team_F";  // パスワード
-    String loginMessage = "";  // エラーメッセージを格納する変数
-    Connection conn = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
-    try {
-        // 入力されたユーザー名とパスワードを取得
-        String inputUsername = request.getParameter("username");
-        String inputPassword = request.getParameter("password");
-        // パスワードの正規表現（半角英数字5文字以上、英字と数字を両方含む）
-        String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上、英字と数字を両方含む
-        // ユーザー名は1文字以上の任意の文字列
-        String usernameRegex = ".{1,}"; // 1文字以上
-        // ユーザー名とパスワードのチェック
+            if (inputUsername != null && inputPassword != null) {
 
-        if (inputUsername != null && inputPassword != null) {
+                // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
 
-            // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
+                if (!inputUsername.matches(usernameRegex)) {
 
-            if (!inputUsername.matches(usernameRegex)) {
+                    loginMessage = "ユーザー名は1文字以上で入力してください。";
 
-                loginMessage = "ユーザー名は1文字以上で入力してください。";
+                }
 
-            }
+                // パスワードが正規表現に一致しない場合、エラーメッセージを設定
 
-            // パスワードが正規表現に一致しない場合、エラーメッセージを設定
+                else if (!inputPassword.matches(regex)) {
 
-            else if (!inputPassword.matches(regex)) {
+                    loginMessage = "パスワードは半角英数字5文字以上で、英字と数字を両方含む必要があります。";
 
-                loginMessage = "パスワードは半角英数字5文字以上で、英字と数字を両方含む必要があります。";
+                }
 
-            }
+                // パスワードに同じ文字が連続して使われていないかチェック
 
-            // パスワードに同じ文字が連続して使われていないかチェック
+                else if (inputPassword.matches("(.)\\1")) {
 
-            else if (inputPassword.matches("(.)\\1")) {
+                    loginMessage = "パスワードには同じ文字を連続して使用できません。";
 
-                loginMessage = "パスワードには同じ文字を連続して使用できません。";
-
-            } else {
-                // データベース接続
-                Class.forName("org.postgresql.Driver");
-                conn = DriverManager.getConnection(url, dbUser, dbPassword);
-                // ユーザー名とパスワードの組み合わせを確認するクエリ
-                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
-                stmt = conn.prepareStatement(query);
-                stmt.setString(1, inputUsername.trim()); // 入力値をトリム
-                stmt.setString(2, inputPassword.trim());
-                // クエリ実行
-                rs = stmt.executeQuery();
-                if (rs.next()) {
-                    // ログイン成功時
-                    loginMessage = "ログイン成功";
-                    // セッションを設定
-                    session.setAttribute("username", inputUsername);
-                    session.setAttribute("password", inputPassword);
-                 // 管理者フラグの取得とセッション保存
-                    String adminFlag = rs.getString("ADMINI");
-                    session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有                    // ログイン成功後、トップページへリダイレクト
-                    String idFrag = rs.getString("ID");
-                    session.setAttribute("sessionId", idFrag);
-                    System.out.println("Session ID set: " + idFrag);
-                    response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
-                    return; // 処理終了
                 } else {
-
-                    // ログイン失敗時
-
-                    loginMessage = "ユーザー名またはパスワードが間違っています。";
+                    // データベース接続
+                    Class.forName("org.postgresql.Driver");
+                    conn = DriverManager.getConnection(url, dbUser, dbPassword);
+                    // ユーザー名とパスワードの組み合わせを確認するクエリ
+                    String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
+                    stmt = conn.prepareStatement(query);
+                    stmt.setString(1, inputUsername.trim()); // 入力値をトリム
+                    stmt.setString(2, inputPassword.trim());
+                    // クエリ実行
+                    rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        // ログイン成功時
+                        loginMessage = "ログイン成功";
+                        // セッションを設定
+                        session.setAttribute("username", inputUsername);
+                        session.setAttribute("password", inputPassword);
+                     // 管理者フラグの取得とセッション保存
+                        String adminFlag = rs.getString("ADMINI");
+                        session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有                    // ログイン成功後、トップページへリダイレクト
+                        String idFrag = rs.getString("ID");
+                        session.setAttribute("sessionId", idFrag);
+                        System.out.println("Session ID set: " + idFrag);
+                        response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
+                        return; // 処理終了
+                    } else {
+                        // ログイン失敗時
+                        loginMessage = "ユーザー名またはパスワードが間違っています。";
+                    }
                 }
             }
+        } catch (Exception e) {
+            loginMessage = "データベースエラー: " + e.getMessage();
+        } finally {
+            // リソースのクローズ
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-    } catch (Exception e) {
-        loginMessage = "データベースエラー: " + e.getMessage();
-    } finally {
-        // リソースのクローズ
-        try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-%>
+    %>
 
     <!-- ログインフォーム -->
-<form method="POST" action="login.jsp" autocomplete="off">
-<div class="form-group">
-<label for="username">ユーザー名:</label>
-<input type="text" name="username" placeholder="😆‍ユーザー名を入力" value="" required autocomplete="off">
-</div>
-<div class="form-group">
-<label for="password">パスワード:</label>
-<input type="password" name="password" placeholder="🔒パスワードを入力" value="" required autocomplete="off">
-</div>
-<button type="submit">ログイン</button>
-</form>
+    <form method="POST" action="login.jsp" autocomplete="off">
+        <div class="form-group">
+            <label for="username">ユーザー名:</label>
+            <input type="text" name="username" placeholder="😆‍ユーザー名を入力" value="" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="password">パスワード:</label>
+            <input type="password" name="password" placeholder="🔒パスワードを入力" value="" required autocomplete="off">
+        </div>
+        <button type="submit">ログイン</button>
+    </form>
 
     <!-- エラーメッセージ表示 -->
-<p class="login-message"><%= loginMessage %></p>
+    <p class="login-message"><%= loginMessage %></p>
 
     <p style="text-align: center;"><a href="pass_reset.jsp">パスワードを忘れた</a></p>
 </div>
-    <footer>
-	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
-	</footer>
+
+<!-- フッター -->
+<footer>
+    <small>Copyright&copy; <a href="index.html" style="text-decoration: underline; color: #007bff; border: none; background: transparent;">SAMPLE COMPANY</a> All Rights Reserved.</small>
+</footer>
+
+<script>
+    window.onload = function() {
+        // フォームを表示
+        var loginForm = document.getElementById('loginFormContainer');
+        loginForm.classList.add('visible');
+    };
+</script>
+<!-- スクロール機能の読み込み -->
+<%@ include file="scroll.jsp" %>
+
 </body>
 </html>
