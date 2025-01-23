@@ -56,16 +56,18 @@ body {
 }
 
 
-        .container {
-            width: 300px;
-            margin: 0 auto;
-            padding: 30px;
-            border: 2px solid #007bff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px; /* 上部に余白 */
-            margin-bottom: 10x; /* footerとの間に余白を確保 */
-        }
+    .container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 30px;  /* 余白を少し小さく */
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0px; /* 上部の余白 */
+    margin-bottom: 0px; /* 下部の余白 */
+    max-height: 300px;  /* 高さを指定して、見切れを防ぐ */
+}
+
 
 
 
@@ -144,7 +146,7 @@ body {
     font-size: 85%; /* 文字サイズ */
     padding: 10px 0; /* 上下の余白を追加 */
     background-color: #f8f8f8; /* 背景色を薄いグレーに設定 */
-    margin-top: 80px; /* 青い枠線の下に表示されるように余白を追加 */
+    margin-top: 60px; /* 青い枠線の下に表示されるように余白を追加 */
 }
 h2 {
     text-align: center;  /* 中央揃え */
@@ -260,11 +262,11 @@ h2 {
     <form method="POST" action="login.jsp" autocomplete="off">
         <div class="form-group">
             <label for="username">ユーザー名:</label>
-            <input type="text" name="username" placeholder="😆‍ユーザー名を入力" value="" required autocomplete="off">
+            <input type="text" name="username" placeholder="‍ユーザー名を入力" value="" required autocomplete="off">
         </div>
         <div class="form-group">
             <label for="password">パスワード:</label>
-            <input type="password" name="password" placeholder="🔒パスワードを入力" value="" required autocomplete="off">
+            <input type="password" name="password" placeholder="パスワードを入力" value="" required autocomplete="off">
         </div>
         <button type="submit">ログイン</button>
     </form>
@@ -272,7 +274,36 @@ h2 {
     <!-- エラーメッセージ表示 -->
     <p class="login-message"><%= loginMessage %></p>
 
-    <p style="text-align: center;"><a href="pass_reset.jsp">パスワードを忘れた</a></p>
+    <!-- パスワードを忘れたリンク -->
+<p style="text-align: center;">
+    <a href="pass_reset.jsp" class="reset-link">パスワードを忘れた</a>
+</p>
+
+<!-- 戻るリンク -->
+<p style="text-align: center;">
+    <a href="index.jsp" class="back-link">戻る</a>
+</p>
+
+<style>
+    /* 戻るリンクのスタイル（下線なし） */
+    .back-link {
+        color: black; /* 通常の文字色は黒 */
+        text-decoration: none; /* 下線を削除 */
+        font-size: 16px; /* フォントサイズ */
+    }
+
+    /* パスワードを忘れたリンクのホバー時のスタイル */
+    .reset-link:hover {
+        color: #FF0000; /* ホバー時にさらに濃い赤に変更 */
+    }
+
+    /* 戻るリンクのホバー時のスタイル */
+    .back-link:hover {
+        color: #ff4d4d; /* 薄い赤色に変更 */
+    }
+
+</style>
+
 </div>
 
 <!-- フッター -->
