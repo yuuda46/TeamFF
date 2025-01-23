@@ -11,24 +11,27 @@
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 
-	<c:choose>
-		<c:when test="${content.size()>0}">
-			<c:forEach var="content" items="${content}">
-				<h1 class="notice_left">${content.title}</h1>
-				<p class="position_right detail_top detail_font">投稿日<br>
-				${content.postDay}</p>
-				<p class="detail_font">連絡文書</p>
-				<p class="position_center detail_font"><img src="../upload/${content.content}"></p>
-				<p class="position_right detail_font">投稿者氏名<br>
-				${content.name}</p>
-			</c:forEach>
-		</c:when>
+	<div class="container2">
+		<c:choose>
+			<c:when test="${content.size()>0}">
+				<c:forEach var="content" items="${content}">
+					<h1>${content.title}</h1>
+					<div class="detail_flex">
+					<p class="detail_font">${content.categoryName}</p>
+					<p class="detail_font">🕑${content.postDay}</p>
+					</div>
+					<p class="detail_font">連絡文書</p>
+					<p class="position_center detail_font"><img src="../upload/${content.content}"></p>
+					<p class="position_right detail_font">投稿者氏名<br>
+					${content.name}</p>
+				</c:forEach>
+			</c:when>
+		</c:choose>
 
-	</c:choose>
-
-	<form action="../notice/Notice.action">
-		<button class="detail_button button_style" type="submit">戻る</button>
-	</form>
+		<form action="../notice/Notice.action">
+			<button class="detail_button button_style" type="submit">戻る</button>
+		</form>
+	</div>
 
 	</c:param>
 </c:import>

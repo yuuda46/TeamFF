@@ -10,13 +10,13 @@
 
 <c:import url="/common/base.jsp">
 	<c:param name="content">
-	<form class="detail_font" action="../notice/Upload" method="post" enctype="multipart/form-data">
+	<form class="detail_font container2" action="../notice/Upload" method="post" enctype="multipart/form-data">
 	タイトル:(<input class="form_text form_top" type="text" name="title" placeholder="タイトルを入力してください" required="required" value="${title}"><br>
 	<%-- エラー文 --%>
 	<div id="error-message" style="color:red;">${error_message_title}</div>
 	氏名:)<input class="form_text form_top" type="text" name="name" placeholder="氏名を入力してください" required="required" value="${name}"><br>
 	<div id="error" style="color:red;">${error_message_name}</div>
-	カテゴリー:<select class="select_size form_top form_select" name="num">
+	カテゴリー:<select class="form_top form_select" name="num">
 					<option value=0>----------</option>
 					<c:forEach var="select_list" items="${select_list}">
 					<option value=${select_list.categoryId } <c:if test="${select_list.categoryName==f2}">selected</c:if>>${select_list.categoryName}</option>
