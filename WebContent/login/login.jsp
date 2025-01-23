@@ -281,7 +281,7 @@ h2 {
 
 <!-- 戻るリンク -->
 <p style="text-align: center;">
-    <a href="index.jsp" class="back-link">戻る</a>
+    <a href="../common/index.jsp" class="back-link">戻る</a>
 </p>
 
 <style>
