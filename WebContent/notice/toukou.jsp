@@ -22,6 +22,7 @@
 </style>
 
 
+
 	<c:param name="content">
 	<%-- ここにコンテンツを挟む --%>
 		<form action="ToukouForm.action" method="post">
