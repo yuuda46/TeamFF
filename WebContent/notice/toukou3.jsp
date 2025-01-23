@@ -22,6 +22,6 @@
 	</c:param>
 </c:import>
 
-<%@include file="../footer.html" %>
+<!--  %@include file="../footer.html" %-->
 
 

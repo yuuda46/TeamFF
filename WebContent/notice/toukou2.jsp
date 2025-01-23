@@ -11,6 +11,7 @@
 <%@page import="bean.Comment, java.util.List" %>
 
 
+
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 		<%
@@ -23,7 +24,7 @@
 		<form name="pos" action="../notice/commentSubmit" method="post">
 		    <% for (Post2 p : list) { %>
 		        <h1><%= p.getTitle() %></h1>
-		        <p><%= p.getContent() %></p>
+		        <p class=f><%= p.getContent() %></p>
 		        <p><%= p.getName() %></p>
 		        <p><%= p.getPostDay() %></p>
 		    <% } %>
@@ -54,7 +55,7 @@
 
         <c:forEach var="comment" items="<%=list4 %>">
             <p>No.${comment.comment_id}</p>
-            <h2>コメント💬${comment.proposal}</h2>
+            <p>コメント💬${comment.proposal}</p>
             <p>🕝${comment.time}</p>
             <hr>
         </c:forEach>
@@ -64,4 +65,4 @@
 	</c:param>
 </c:import>
 
-<%@include file="../footer.html" %>
+<!-- @include file="../footer.html"  -->

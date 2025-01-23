@@ -411,7 +411,18 @@ header .dropdown .dropdown-menu li a:hover {
   transition: all .3s ease 0s;
 }
 
-
+/*掲示板投稿画面の文字数制限*/
+.f {
+　color: red;
+  width: 300px;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* ブラウザがサポートしていない場合のフェールセーフ */
+  max-height: 24px;
+}
 
 /*新規登録*/
 .button12 {
