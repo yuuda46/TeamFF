@@ -24,13 +24,13 @@
 						</c:forEach>
 					</select><br>
 		<input type="hidden" name="post_id" value=<%=post_id %>>
-		<button type="submit">投稿情報変更</button>
+		<button type="submit">投稿情報編集</button>
 	</form>
 
 	<p>お知らせ画像:<br><img src="../upload/${notice_content.content}"></p>
 	<form action="../notice/PictureUpdate.action" method="get">
 		<input type="hidden" name="post_id" value=<%=post_id %>>
-		<button type="submit">画像変更</button>
+		<button type="submit">画像編集</button>
 	</form>
 
 	<form action="../notice/UpdatePermission.action" method="get">

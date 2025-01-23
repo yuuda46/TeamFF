@@ -10,7 +10,7 @@
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 
-		<p>変更完了しました</p>
+		<p>編集完了しました</p>
 
 		<form action="../notice/NoticeAdmin.action" method="get">
 			<button type="submit">戻る</button>

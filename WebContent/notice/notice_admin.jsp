@@ -49,7 +49,7 @@
 					<td>
 						<form action="../notice/NoticeUpdate.action" method="get">
 						<input type="hidden" name="post_id" value="${notice_content.postId}">
-							<button type="submit">変更</button>
+							<button type="submit">編集</button>
 						</form>
 					</td>
 					<td>

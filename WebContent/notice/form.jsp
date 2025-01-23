@@ -30,5 +30,10 @@
 	</div>
 
 	</form>
+
+	<form class="container2 position_form" action="../notice/Tokou.action">
+		<button class="button_style detail_button" type="submit">戻る	</button>
+	</form>
+
 	</c:param>
 </c:import>
