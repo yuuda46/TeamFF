@@ -162,7 +162,7 @@ h2 {
 
 <%
     if (session.getAttribute("username") != null) {
-        response.sendRedirect("../common/index.jsp");
+        response.sendRedirect("WebContent/common/index.jsp");
         return;
     }
 %>
