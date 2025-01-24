@@ -16,11 +16,13 @@ public class ToukouFormAction extends Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			try{
-
-//				迴ｾ迥ｶ蜈･繧後ｋ繧ゅ�ｮ縺御ｽ輔ｂ縺ゅｊ縺ｾ縺帙ｓ
-
 			} catch (Exception e) {
-				e.printStackTrace(out);
+	            // エラーが発生した場合の処理
+	            out.println("<html><body>");
+	            out.println("<h3>エラーが発生しました。もう一度お試しください。</h3>");
+	            out.println("<p>詳細: " + e.getMessage() + "</p>");
+	            out.println("</body></html>");
+	            e.printStackTrace(out); // エラーログを出力
 		}
 			return "toukou_form.jsp";
 		}

@@ -15,19 +15,24 @@
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 
-		<p>タイトル:${ title }</p>
-		<p>氏名:${ name }</p>
-		<p>コンテンツ:</p>
-		<p>${ content }</p>
+		<h2>投稿結果</h2>
+
+        <!-- エラーがあった場合の表示 -->
+        <c:if test="${not empty errorMessage}">
+            <div style="color: red;">
+                <p>${errorMessage}</p>
+            </div>
+        </c:if>
+
+        <!-- 投稿が正常に完了した場合の表示 -->
+        <c:if test="${empty errorMessage}">
+            <h3>投稿が完了しました！</h3>
+            <p>タイトル: ${title}</p>
+            <p>ユーザーネーム: ${name}</p>
+            <p>内容: ${content}</p>
+        </c:if>
 
 		<form action="Tokou.action" method="post">
-			<input type="hidden" name="title" value=<%=title %>>
-			<input type="hidden" name="name" value=<%=name %>>
-			<input type="hidden" name="content" value="<%=content %>">
-			<button type="submit">確定</button>
-		</form>
-
-		<form action="ToukouForm.action" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
 			<input type="hidden" name="name" value=<%=name %>>
 			<input type="hidden" name="content" value="<%=content %>">

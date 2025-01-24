@@ -30,6 +30,13 @@ public class CommentSubmitServlet extends HttpServlet {
 
         String proposal = request.getParameter("proposalContent"); // テキストエリアの内容
         Date time = new Date(); // 現在の日時
+
+     // コメントが空でないか確認
+        if (proposal == null || proposal.trim().isEmpty()) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "コメント内容が空です。コメントを入力してください。");
+            return;
+        }
+
         try {
 
         	//toukou.jspからデータを取得する
@@ -53,6 +60,11 @@ public class CommentSubmitServlet extends HttpServlet {
          // Postdaoクラスのインスタンスを生成して、id_searchメソッドを呼び出す
             Postdao2 comment = new Postdao2();
             List<Comment> userList = comment.id_search(user_name, password);
+
+            if (userList.isEmpty()) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ユーザー情報が正しくありません");
+                return;
+            }
 
 //          if (!userList.isEmpty()) {
             String user_id = userList.get(0).getUser_id();  // user_idを取得

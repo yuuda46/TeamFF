@@ -24,14 +24,18 @@ public class ToukouUploadAction extends Action {
 			PostDAO dao2 = new PostDAO();
 //			絶対に重複しないであろうID(36桁)
 			String id = UUID.randomUUID().toString();
-
-			System.out.println("id:"+id);
+			//System.out.println("id:"+id);
 			String title=request.getParameter("title");
-			System.out.println("title:"+title);
+			//System.out.println("title:"+title);
 			String name=request.getParameter("name");
-			System.out.println("name:"+name);
+			//System.out.println("name:"+name);
 			String content=request.getParameter("content");
-			System.out.println("content:"+content);
+			//System.out.println("content:"+content);
+
+			// 入力された内容の検証
+            if (title == null || title.isEmpty() || name == null || name.isEmpty() || content == null || content.isEmpty()) {
+                throw new IllegalArgumentException("すべてのフィールドを入力してください。");
+            }
 
 //			LocalDate型の日付を取得
 			LocalDate localDate = LocalDate.now();
@@ -46,15 +50,21 @@ public class ToukouUploadAction extends Action {
 	//		改行をHTML用に変換
 			String indent_content = content1.replace("\n", "<br>");
 
-
+			// 成功した場合、JSPにデータを設定
 			request.setAttribute("title", title);
 			request.setAttribute("name", name);
 			request.setAttribute("content", indent_content);
 
-			} catch (Exception e) {
-				e.printStackTrace(out);
+		} catch (IllegalArgumentException e) {
+			request.setAttribute("errorMessage", e.getMessage());  // エラーメッセージをリクエストスコープに設定
+            e.printStackTrace(out); // エラーログを出力
+            return "toukou_form.jsp";  // フォームに戻る
+		} catch (Exception e) {
+            // その他のエラーの場合
+			 request.setAttribute("errorMessage", "エラーが発生しました。もう一度お試しください。");
+	            e.printStackTrace(out); // エラーログを出力
+	            return "toukou_form.jsp";  // フォームに戻る
 		}
-			return "toukou_result.jsp";
-		}
-
+		return "toukou_result.jsp";
+	}
 }
