@@ -6,6 +6,9 @@
 <%-- 文字化けの対策 --%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+<%
+	Integer category=(Integer)request.getAttribute("category");
+%>
 <link rel="stylesheet" href="../css/notice.css">
 
 <c:import url="/common/base.jsp">
@@ -34,15 +37,25 @@
 				<c:forEach var="notice_content" items="${notice_content}">
 					<h2><a href="../notice/NoticeDetail.action?id=${notice_content.postId}">${notice_content.title}</a></h2>
 
-						<p class="notice_right">${notice_content.categoryName}</p>
+						<p class="notice_left margin-1px padding_left_20">${notice_content.categoryName}</p>
 						<p class="position_right">🕑${notice_content.postDay}</p>
 
-					<hr>
+					<hr class="notice_line">
 				</c:forEach>
 			</c:when>
 		</c:choose>
 
 	</div>
+
+	<script type="text/javascript">
+		var hoge = '<%=request.getAttribute("category") %>';
+	</script>
+
+	<script type="text/javascript">
+		var hoge = '<%=category%>';
+		var select = document.getElementById("notice-f1-select");
+		select.options[hoge].selected = true
+	</script>
 
 	</form>
 	</c:param>

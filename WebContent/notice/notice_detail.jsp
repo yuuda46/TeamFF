@@ -20,7 +20,7 @@
 					<p class="detail_font">${content.categoryName}</p>
 					<p class="detail_font">🕑${content.postDay}</p>
 					</div>
-					<p class="detail_font">連絡文書</p>
+					<p class="detail_font">回覧物</p>
 					<p class="position_center detail_font"><img src="../upload/${content.content}"></p>
 					<p class="position_right detail_font">投稿者氏名<br>
 					${content.name}</p>

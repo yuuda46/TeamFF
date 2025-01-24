@@ -55,6 +55,7 @@ public class NoticeAction extends Action {
 
 //					アトリビュートの中に入れるやつ
 					request.setAttribute("notice_content", list3);
+					request.setAttribute("category", boot);
 				}else {
 //					h2コンソールからカテゴリーIDがbootの中の数値と一致する投稿内容のリストを取得
 					PostDAO dao2=new PostDAO();
@@ -62,6 +63,7 @@ public class NoticeAction extends Action {
 
 //					アトリビュートの中に入れるやつ
 					request.setAttribute("notice_content", list2);
+					request.setAttribute("category", boot);
 				}
 			}
 		} catch (Exception e) {

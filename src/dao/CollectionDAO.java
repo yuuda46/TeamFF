@@ -85,10 +85,10 @@ public class CollectionDAO extends DAO {
 	    try {
 	        con = getConnection();
 	        st = con.prepareStatement(
-	            "INSERT INTO payment (paymentid, postid, signid, depositdate) " +
-	            "SELECT COALESCE(MAX(paymentid)::integer, 0) + 1, ?, ?, CURRENT_DATE " +
-	            "FROM payment"
-	        );
+		            "INSERT INTO payment (paymentid, postid, signid, depositdate) " +
+		            "SELECT COALESCE(MAX(paymentid)::integer, 0) + 1, ?, ?, CURRENT_DATE " +
+		            "FROM payment"
+		        );
 
 	        st.setString(1, payment.getPostID());
 	        st.setString(2, payment.getSignID());
