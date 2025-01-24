@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <header>
-    <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-    <h3 class="titlesize">PsReset</h3>
+<h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+<h3 class="titlesize">PsReset</h3>
 </header>
 
 <head>
@@ -16,7 +16,6 @@ header {
     height: 300px; /* 高さを画面の一部に設定 */
     position: relative;
     background: url(../images/mainimg.jpg) no-repeat center center / cover; /* 背景画像の読み込み */
-
 }
 
 /* ロゴ画像のスタイル */
@@ -36,7 +35,6 @@ header #logo img {
     bottom: 80px; /* 画像を下から80pxに配置 */
 }
 
-
 /* タイトル */
 h3 {
     font-size: 105px;
@@ -49,7 +47,6 @@ h3 {
     bottom: 90px; /* 画像を下から20pxに配置 */
     margin: 0;
 }
-
 
 body {
     margin: 0;
@@ -65,7 +62,7 @@ footer {
     font-size: 85%; /* 文字サイズ */
     padding: 10px 0; /* 上下の余白を追加 */
     background-color: #f8f8f8; /* 背景色を薄いグレーに設定 */
-    margin-top: 20px; /* 青い枠線の下に表示されるように余白を追加 */
+    margin-top: 10px; /* 青い枠線の下に表示されるように余白を追加 */
 }
 
 .container {
@@ -121,13 +118,25 @@ button:hover {
 .back-btn {
     display: inline-block;
     padding: 5px 10px; /* 少し小さめに調整 */
-    text-decoration: underline; /* 下線を引く */
-    color: #007bff; /* 青色に設定 */
+    text-decoration: none; /* 下線を引かない */
+    color: black; /* 通常時は黒色 */
     font-size: 16px; /* 文字サイズを調整 */
 }
 
 .back-btn:hover {
-    color: #0056b3; /* ホバー時に青色が少し濃くなる */
+    color: red; /* ホバー時に赤色に変更 */
+}
+
+.login-link {
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #007bff; /* 通常時は青色 */
+    font-size: 16px;
+}
+
+.login-link:hover {
+    color: #0056b3; /* ホバー時に少し濃い青に変更 */
 }
 
 .message {
@@ -227,35 +236,40 @@ h2 {
 <% } %>
 <% if (!errorMessages.isEmpty()) { %>
 <div class="error">
-    <ul>
-        <% for (String error : errorMessages) { %>
-        <li><%= error %></li>
-        <% } %>
-    </ul>
+<ul>
+<% for (String error : errorMessages) { %>
+<li><%= error %></li>
+<% } %>
+</ul>
 </div>
 <% } %>
 
 <%-- パスワードリセットフォーム --%>
 
-	<form method="POST" action="pass_reset.jsp">
+	<form method="POST" action="">
     <label for="username">ユーザー名:</label>
     <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
+
+    <label for="currentPassword">現在のパスワード:</label>
+    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力" required>
 
     <label for="newPassword">新しいパスワード:</label>
     <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
 
     <button type="submit">パスワードを変更</button>
-	</form>
+</form>
+
+	<!-- ログイン画面に戻る -->
+<p style="text-align: center;"><a href="login.jsp" class="login-link">ログイン画面に戻る</a></p>
 
 	<!-- 戻るボタン -->
-	<p style="text-align: center;"><a href="login.jsp" class="back-btn">ログイン画面に戻る</a></p>
+<p style="text-align: center;"><a href="javascript:history.back()" class="back-btn" id="backLink">戻る</a></p>
 
 </div>
 
 <footer>
-    <small>Copyright&copy; <a href="index.html" style="text-decoration: underline; color: #007bff; border: none; background: transparent;">SAMPLE COMPANY</a> All Rights Reserved.</small>
+<small>Copyright&copy; <a href="index.html" style="text-decoration: underline; color: #007bff; border: none; background: transparent;">SAMPLE COMPANY</a> All Rights Reserved.</small>
 </footer>
-
 
 <!-- スクロール機能の読み込み -->
 <%@ include file="scroll.jsp" %>
