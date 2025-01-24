@@ -43,8 +43,8 @@
             <button class="dropdown-toggle">メニュー ▼</button>
             <ul class="dropdown-menu">
                 <li><a href="../account/AccountList.action">アカウント</a></li>
-                <li><a href="../notice/NoticeForm.action">アップロード</a></li>
-				<li><a href="../notice/NoticeAdmin.action">投稿編集</a></li>
+                <li><a href="../notice/NoticeForm.action">回覧物投稿</a></li>
+				<li><a href="../notice/NoticeAdmin.action">回覧物編集</a></li>
             </ul>
         </div>
     <% } %>
@@ -54,7 +54,7 @@
 <h1 id="logo"><a href="index.jsp"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
 <nav id="menubar">
 <ul>
-<li><a href="../notice/Notice.action">投稿</a></li>
+<li><a href="../notice/Notice.action">回覧物</a></li>
 <li><a href="../notice/Tokou.action">掲示板</a></li>
 <li><a href="../collection/CollectionList.action">集金一覧</a></li>
 <li><a href="../account/contactForm.jsp">お問い合わせ</a></li>
