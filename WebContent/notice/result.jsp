@@ -8,7 +8,6 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <%
 	String title=(String)request.getAttribute("title");
-	String name=(String)request.getAttribute("name");
 	Integer num=(Integer)request.getAttribute("num");
 	String path=(String)request.getAttribute("path");
 	String filename=(String)request.getAttribute("filename");
@@ -19,14 +18,14 @@
 	<c:param name="content">
 
 		<p>タイトル:<%=title %></p>
-		<p>氏名:<%=name %></p>
+		<p>氏名:${name[0].name}</p>
 		<p>カテゴリーID:<%=num %></p>
 		<p>お知らせ画像:</p>
 		<p class="position_center"><img  src="../upload/<%=filename %>"></p>
 
 		<form action="../notice/NoticeKeep.action" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
-			<input type="hidden" name="name" value=<%=name %>>
+			<input type="hidden" name="name" value="${name[0].name}">
 			<input type="hidden" name="num" value=<%=num %>>
 			<input type="hidden" name="filename" value=<%=filename %>>
 
@@ -38,7 +37,7 @@
 
 		<form action="../notice/NoticeReturn.action" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
-			<input type="hidden" name="name" value=<%=name %>>
+			<input type="hidden" name="name" value="${name[0].name}">
 			<input type="hidden" name="num" value=<%=num %>>
 			<input type="hidden" name="path" value=<%=path %>>
 			<input type="hidden" name="filename" value=<%=filename %>>

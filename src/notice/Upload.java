@@ -16,9 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import bean.Account;
 import bean.Category;
+import dao.AccountDAO;
 import dao.CategoryDAO;
 
 @WebServlet("/notice/Upload")
@@ -44,8 +47,17 @@ public class Upload extends HttpServlet {
 		try{
 		System.out.println("b");
 
+//		セッションからユーザーネームを取得
+		HttpSession session = request.getSession();
+		String user_name = (String) session.getAttribute("username");
+
+//		データベースから投稿者氏名を取得
+		AccountDAO dao1=new AccountDAO();
+		List<Account> list1=dao1.upload_name(user_name);
+
+//		System.out.println(list1.get(0).getName());
+
 		String title=request.getParameter("title");
-		String name=request.getParameter("name");
 		Integer num = Integer.parseInt(request.getParameter("num"));
 //		String numParam = request.getParameter("num");
 //        Integer num = (numParam != null && !numParam.isEmpty()) ? Integer.parseInt(numParam) : 0;
@@ -89,7 +101,6 @@ public class Upload extends HttpServlet {
 
 		// エラーメッセージの文字列
 		String error_message_title = "";
-		String error_message_name = "";
 		String error_message_num = "";
 
 //		タイトルのnull判定
@@ -106,26 +117,12 @@ public class Upload extends HttpServlet {
 			error_message_title = "タイトルが20文字以上です";
 		}
 
-//		氏名のnull判定
-		if (name == null || name.isEmpty()){
-			System.out.println("error");
-			error_message_name = "氏名を入力してください";
-		}
-
-//		氏名の文字数を調べる
-		int count_name = name.length();
-		System.out.println(count_name);
-		if (count_name > 20){
-			System.out.println("error");
-			error_message_name = "氏名が20文字以上です";
-		}
-
 		if (num == 0){
 			System.out.println("error");
 			error_message_num = "カテゴリーを選択してください";
 		}
 
-		if (error_message_title != "" || error_message_name != "" || error_message_num != ""){
+		if (error_message_title != "" || error_message_num != ""){
 
 			System.out.println("True");
 //			h2コンソールからカテゴリーを取得
@@ -138,10 +135,10 @@ public class Upload extends HttpServlet {
 			System.out.println(part);
 
 			request.setAttribute("title", title);
-			request.setAttribute("name", name);
+			request.setAttribute("name", list1);
 			request.setAttribute("select_list", list);
+			request.setAttribute("category", num);
 			request.setAttribute("error_message_title", error_message_title);
-			request.setAttribute("error_message_name", error_message_name);
 			request.setAttribute("error_message_num", error_message_num);
 			RequestDispatcher rd = request.getRequestDispatcher("/notice/form.jsp");
 			rd.forward(request,response);
@@ -152,7 +149,7 @@ public class Upload extends HttpServlet {
 		}
 
 		request.setAttribute("title",title);
-		request.setAttribute("name", name);
+		request.setAttribute("name", list1);
 		request.setAttribute("num", num);
 		request.setAttribute("path", upload_path);
 		request.setAttribute("filename", uuid+".png");

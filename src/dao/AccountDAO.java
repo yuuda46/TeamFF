@@ -234,15 +234,28 @@ public class AccountDAO extends DAO {
          return result;
      }
 
+//     ユーザーネームから指名を検索するSQL
+     public List<Account>upload_name(String user_name) throws Exception {
+    	 List<Account> list=new ArrayList<>();
 
+    	 Connection con=getConnection();
+    	 PreparedStatement st=con.prepareStatement(
+    			 "select name from signup where user_name=?");
+
+    	 st.setString(1, user_name);
+
+    	 ResultSet rs=st.executeQuery();
+
+    	 while (rs.next()){
+    		 Account account=new Account();
+    		 account.setName(rs.getString("name"));
+
+    		 list.add(account);
+    	 }
+    	 st.close();
+    	 con.close();
+
+    	 return list;
+     }
 
     }
-
-
-
-
-
-
-
-
-
