@@ -26,6 +26,7 @@ public class TokouAction extends Action {
 			Postdao2 dao=new Postdao2();
 			List<Post2> list=dao.tokou();
 
+
 //			セッションからユーザーネームを取得
 			HttpSession session = request.getSession();
 			String user_name = (String) session.getAttribute("username");
