@@ -11,19 +11,21 @@
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 
-		<p>保存完了しました</p>
+		<p class="position_center detail_top">保存完了しました</p>
 
-		<form action="../notice/Notice.action" method="get">
-			<button class="keep_button button_style" type="submit">
-				お知らせ一覧
-			</button>
-		</form>
+		<div class="notice_center">
+			<form action="../notice/Notice.action" method="get">
+				<button class="keep_button button_style right_margin" type="submit">
+					お知らせ一覧
+				</button>
+			</form>
 
-		<form action="../notice/NoticeForm.action" method="get">
-			<button class="keep_button button_style" type="submit">
-				続けて登録
-			</button>
-		</form>
+			<form action="../notice/NoticeForm.action" method="get">
+				<button class="keep_button button_style margin_left_10" type="submit">
+					続けて登録
+				</button>
+			</form>
+		</div>
 
 	</c:param>
 </c:import>

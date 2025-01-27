@@ -34,8 +34,6 @@ import dao.CategoryDAO;
 	fileSizeThreshold=10000000
 	)
 
-
-
 public class Upload extends HttpServlet {
 
 	private static final String UPLOAD_DIR = "/upload";
@@ -59,6 +57,7 @@ public class Upload extends HttpServlet {
 
 		String title=request.getParameter("title");
 		Integer num = Integer.parseInt(request.getParameter("num"));
+		System.out.println(num);
 //		String numParam = request.getParameter("num");
 //        Integer num = (numParam != null && !numParam.isEmpty()) ? Integer.parseInt(numParam) : 0;
 
@@ -111,7 +110,6 @@ public class Upload extends HttpServlet {
 
 //		タイトルの文字数を調べる
 		int count_title = title.length();
-		System.out.println(count_title);
 		if (count_title > 20){
 			System.out.println("error");
 			error_message_title = "タイトルが20文字以上です";

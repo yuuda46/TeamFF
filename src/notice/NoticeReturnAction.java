@@ -24,19 +24,24 @@ public class NoticeReturnAction extends Action {
 		PrintWriter out=response.getWriter();
 		try{
 
+//			データベースからカテゴリーを取得
 			CategoryDAO dao=new CategoryDAO();
 			List<Category> list=dao.all();
 
 			String title = request.getParameter("title");
 			String name = request.getParameter("name");
+			Integer num = Integer.parseInt(request.getParameter("num"));
+			System.out.println(num);
 			String path = request.getParameter("path");
 			String filename = request.getParameter("filename");
 
+//			渡されたファイル名のファイルを削除
 			Path delete_path = Paths.get(path+"/"+ filename);
 			Files.deleteIfExists(delete_path);
 
 			request.setAttribute("title", title);
 			request.setAttribute("name", name);
+			request.setAttribute("category", num);
 			request.setAttribute("select_list", list);
 			RequestDispatcher rd = request.getRequestDispatcher("/notice/form.jsp");
 			rd.forward(request,response);

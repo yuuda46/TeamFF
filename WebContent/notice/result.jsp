@@ -17,6 +17,7 @@
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 
+	<div class="container2">
 		<p>タイトル:<%=title %></p>
 		<p>氏名:${name[0].name}</p>
 		<p>カテゴリーID:<%=num %></p>
@@ -35,7 +36,7 @@
 
 		</form>
 
-		<form action="../notice/NoticeReturn.action" method="post">
+		<form class="position_form padding_bottom_0" action="../notice/NoticeReturn.action" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
 			<input type="hidden" name="name" value="${name[0].name}">
 			<input type="hidden" name="num" value=<%=num %>>
@@ -43,7 +44,7 @@
 			<input type="hidden" name="filename" value=<%=filename %>>
 			<button class="detail_button button_style" type="submit">戻る</button>
 		</form>
-
+	</div>
 	</c:param>
 </c:import>
 

@@ -8,13 +8,17 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <link rel="stylesheet" href="../css/notice.css">
 
+<%
+	Integer category=(Integer)request.getAttribute("category");
+%>
+
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 	<form class="detail_font container2" action="../notice/Upload" method="post" enctype="multipart/form-data">
 	タイトル:(<input class="form_text form_top" type="text" name="title" placeholder="タイトルを入力してください" required="required" value="${title}"><br>
 	<%-- エラー文 --%>
 	<div id="error-message" style="color:red;">${error_message_title}</div>
-	カテゴリー:)<select class="form_top form_select" name="num">
+	カテゴリー:)<select class="form_top form_select" id="notice-f1-select" name="num">
 					<option value=0>----------</option>
 					<c:forEach var="select_list" items="${select_list}">
 					<option value=${select_list.categoryId } <c:if test="${select_list.categoryName==f2}">selected</c:if>>${select_list.categoryName}</option>
@@ -32,6 +36,16 @@
 	<form class="container2 position_form" action="../notice/Tokou.action">
 		<button class="button_style detail_button" type="submit">戻る	</button>
 	</form>
+
+	<script type="text/javascript">
+		var hoge = '<%=request.getAttribute("category") %>';
+	</script>
+
+	<script type="text/javascript">
+		var hoge = '<%=category%>';
+		var select = document.getElementById("notice-f1-select");
+		select.options[hoge].selected = true
+	</script>
 
 	</c:param>
 </c:import>
