@@ -22,8 +22,8 @@
         <section class="mo-4">
             <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">入金管理</h2>
 			<label class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">
-			入金確認です、以下の入金が完了している場合、<br>
-			「入金を完了する」ボタンを押してください
+			最終確認です、以下の入金が完了している場合、<br>
+			「入金が完了しました」ボタンを押してください
 			</label>
 
 
@@ -55,7 +55,7 @@
                         <td class="text-center student-table-wide">
 					    <a href="../collection/CollectionDepositComplete.action?postId=${Collection.id}">
 					        <button type="submit" class="CollectionDepositComplete.action">
-					            入金を完了する
+					            入金が完了しました
 					        </button>
 					    </a>
 						</td>
