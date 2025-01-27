@@ -28,7 +28,7 @@
 	お知らせ画像:<br><input type="file" name="pict" accept="image/png" required multiple><br>
 
 	<div class="position_right position_bottom">
-		<button class="button_style detail_button" type="submit">送信()</button>
+		<button class="button_style detail_button" type="submit">送信</button>
 	</div>
 
 	</form>
