@@ -23,6 +23,7 @@ public class TokouAction extends Action {
 		PrintWriter out=response.getWriter();
 		try {
 
+
 			Postdao2 dao=new Postdao2();
 			List<Post2> list=dao.tokou();
 
