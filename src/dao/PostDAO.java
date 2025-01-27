@@ -11,7 +11,7 @@ import bean.Post;
 
 public class PostDAO extends DAO {
 
-  //Post�e�[�u���̒��̃f�[�^�����ׂĎ��o��
+  //Post
 	public List<Post> all() throws Exception {
 		List<Post> list=new ArrayList<>();
 
@@ -279,19 +279,19 @@ public class PostDAO extends DAO {
 	}
 
 
-	public void insertPost(String id, String title, String content, String name, Date post_day) throws Exception {
+	public void insertPost(String id, String title, String content, String user_name, Date post_day) throws Exception {
         Connection con = getConnection();
         PreparedStatement st = con.prepareStatement(
             "INSERT INTO POST (id, title, content, name, post_day) VALUES (?, ?, ?, ?, ?)");
         st.setString(1,id);
         st.setString(2,title);
         st.setString(3, content);
-        st.setString(4, name);
+        st.setString(4, user_name);
         st.setTimestamp(5, new java.sql.Timestamp(post_day.getTime()));
         System.out.println("Id: " + id);
         System.out.println("title: " + title);
         System.out.println("content: " + content);
-        System.out.println("name: " + name);
+        System.out.println("name: " + user_name);
         System.out.println("post_day: " + post_day);
         st.executeUpdate();
         st.close();

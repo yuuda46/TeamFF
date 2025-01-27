@@ -1,11 +1,12 @@
 package servlet;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 //import java.sql.Connection;
 //import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.List;
-
+import java.sql.Timestamp; // Timestampをインポート
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,19 +22,23 @@ import dao.Postdao2;
 
 @WebServlet("/notice/commentSubmit")
 public class CommentSubmitServlet extends HttpServlet {
-
-
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
         String proposal = request.getParameter("proposalContent"); // テキストエリアの内容
-        Date time = new Date(); // 現在の日時
+//        Date time = new Date(); // 現在の日時
+        Timestamp time = new Timestamp(System.currentTimeMillis());
 
-     // コメントが空でないか確認
+        // コメントが空でないか確認
         if (proposal == null || proposal.trim().isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "コメント内容が空です。コメントを入力してください。");
+            String errorMessage = "コメント内容が空です。コメントを入力してください。";
+            System.out.println("エラーメッセージ: " + errorMessage); // デバッグ用
+            // エラーメッセージをrequestにセットし、リダイレクト
+            request.setAttribute("errorMessage", errorMessage);
+            String id = request.getParameter("items");
+            request.getRequestDispatcher("/teee/notice/ToukouNotice.action?items=" + id).forward(request, response);
             return;
         }
 
@@ -73,8 +78,10 @@ public class CommentSubmitServlet extends HttpServlet {
         	//③getparameteでヒドゥンを取得
             //System.out.println("しらたき");
             // コメント挿入後、投稿詳細ページにリダイレクト
-            request.getRequestDispatcher("toukou3.jsp")
-            	.forward(request, response);
+//            request.getRequestDispatcher("toukou3.jsp")
+//            	.forward(request, response);
+         // コメント挿入後、ToukouNoticeActionにリダイレクト
+            response.sendRedirect("/teee/notice/ToukouNotice.action?items=" + id);
 //        }
             } catch (Exception e) {
             e.printStackTrace();

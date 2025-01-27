@@ -78,8 +78,10 @@
     <c:param name="content">
     <%-- ここにコンテンツを挟む --%>
     <form action="ToukouForm.action" method="post">
-			<button type="submit">議題投稿する</button>
-		</form>
+		<button type="submit">議題投稿する</button>
+	</form>
+
+		<button type="ToukouDelete.action">議題削除</button>
 
         <form action="../notice/Tokou.action" method="get">
             <c:choose>
@@ -123,7 +125,7 @@
                 <span>掲示板</span>
             </div>
             <div class="text">
-				B
+				住民どうしのコミュニケーションが出来ます
 			</div>
         </div>
 
