@@ -18,7 +18,7 @@
 </head>
 <body>
 <section class="mo-3">
-    <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">アカウント一覧</h2>
+    <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">個人情報一覧</h2>
     <table border="1">
         <tr>
             <th>名前</th>
