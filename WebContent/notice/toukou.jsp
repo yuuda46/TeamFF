@@ -8,7 +8,7 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <c:import url="/common/base.jsp">
 <style>
-	.f {
+	.cont {
 	　color: red !important;
 	  width: 300px !important;
 	  overflow: hidden !important;
@@ -34,11 +34,11 @@
 		    <c:choose>
 		        <c:when test="${not empty list2}">
 		            <div>件数:${list2.size()}件</div>
-		            <button type="submit">議題投稿す</button>
+		            <button type="submit">議題投稿す</button> <button type="delete">議題削除</button>
 		            <c:forEach var="post" items="${list2}">
 		                <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
 		                <p>${post.postDay}</p>
-		                <p class="f">${post.content}</p>
+		                <p class="cont">${post.content}</p>
 		                <hr>
 		            </c:forEach>
 		        </c:when>

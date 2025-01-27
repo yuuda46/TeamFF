@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 //import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 
 import bean.Post2;
 import dao.Postdao2;
@@ -22,15 +23,21 @@ public class TokouAction extends Action {
 		PrintWriter out=response.getWriter();
 		try {
 
+
 			Postdao2 dao=new Postdao2();
 			List<Post2> list=dao.tokou();
 
-			// JSPï¿½Éƒï¿½ï¿½Xï¿½gï¿½ï¿½nï¿½ï¿½
+
+//			ƒZƒbƒVƒ‡ƒ“‚©‚çƒ†[ƒU[ƒl[ƒ€‚ğæ“¾
+			HttpSession session = request.getSession();
+			String user_name = (String) session.getAttribute("username");
+
+			// JSP
 			request.setAttribute("list2", list);
 
 		} catch (Exception e) {
 	 		e.printStackTrace(out);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ï¿½ï¿½ï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½");
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ƒGƒ‰[‚ª‹N‚«‚Ü‚µ‚½");
 		}
 		return "../common/index.jsp";
 	}
