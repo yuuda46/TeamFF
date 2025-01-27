@@ -12,7 +12,7 @@ import bean.Post;
 
 public class CollectionDAO extends DAO {
 
-//	未入金検索
+//	未入金signID検索
 	public List<Post> search(String sessionId) throws Exception {
 		List<Post> list=new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class CollectionDAO extends DAO {
 	        return list;
 	    }
 
-// 未入金検索
+// 選択されたものを表示するためのやつ
 	public List<Post> retrieval(String payment) throws Exception {
 	    List<Post> list = new ArrayList<>();
 
@@ -76,6 +76,41 @@ public class CollectionDAO extends DAO {
 	    return list;
 	}
 
+//入金済み検索
+//	beanの再作成が必要。下記のpostはコピー時の物で後に変更予定。
+	public List<Post> Completed_search(String payment) throws Exception {
+	    List<Post> list = new ArrayList<>();
+
+	    Connection con = getConnection();
+
+	    //SQL要改良？
+	    PreparedStatement st = con.prepareStatement(
+	    		"SELECT * " +
+	    		"FROM payment AS pay " +
+	    		"JOIN post AS p ON pay.postid = p.id " +
+	    		"JOIN signup AS s ON pay.signid = s.id " +
+	    		"JOIN c_detail AS c ON p.id = c.postid " +
+	    		"WHERE p.category_id = 2 " +
+//	    		ここでそれぞれ表として出すための抽出文。作り方によっては使わない。
+//	    		"and pay.postid = '?'"+
+	    		"AND pay.signid IS NOT NULL"
+	    );
+
+	    st.setString(1, payment);
+
+	    ResultSet rs = st.executeQuery();
+
+	    while (rs.next()) {
+	        Post p = new Post();
+	        //ここに追加
+
+	        list.add(p);
+	    }
+	    st.close();
+	    con.close();
+
+	    return list;
+	}
 	// 入金
 	public int insert(Payment payment) throws Exception {
 	    Connection con = null;
