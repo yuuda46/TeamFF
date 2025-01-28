@@ -47,6 +47,7 @@ public class ToukouNoticeAction extends Action {
 			// JSP
 			request.setAttribute("list2", list);
 
+
 //			セッションからユーザーネームを取得
 			HttpSession session = request.getSession();
 			String user_name = (String) session.getAttribute("username");
