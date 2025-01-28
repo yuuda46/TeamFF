@@ -56,48 +56,54 @@ body {
 }
 
 
-    .container {
-    width: 300px;
-    margin: 0 auto;
-    padding: 30px;  /* 余白を少し小さく */
-    border: 2px solid #007bff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 0px; /* 上部の余白 */
-    margin-bottom: 0px; /* 下部の余白 */
-    max-height: 300px;  /* 高さを指定して、見切れを防ぐ */
-}
-
-
-
-
         .form-group {
             margin: 10px 0;
         }
 
-        input[type="text"], input[type="password"], button {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            height: 40px;
-        }
+/* フォーム内の入力欄とボタンの中央揃え */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平方向の中央揃え */
+    justify-content: center; /* 垂直方向の中央揃え（フォーム内のスペース調整） */
+    text-align: center; /* フォーム内のテキストも中央揃え */
+    margin-top: 50px; /* 必要に応じて上部に余白を追加 */
+}
 
-       button {
+/* 入力欄とボタンのスタイルを調整 */
+input[type="text"], input[type="password"], button, .reset-button, .back-button {
+    width: 300px; /* 入力欄とボタンを同じ幅にする */
+    height: 40px; /* 入力欄とボタンを同じ高さにする */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* 入力欄とボタンの間にスペース */
+}
+
+/* ボタンのスタイル */
+button {
     background-color: #00bfff; /* 薄い青色 */
     color: white;
     cursor: pointer;
     border: none;
-    padding: 12px;
-    border-radius: 5px;
     font-size: 16px;
 }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+button:hover {
+    background-color: #0056b3;
+}
+
+/* パスワードを忘れたボタンと戻るボタンのスタイル */
+.reset-button, .back-button {
+    display: inline-block; /* インラインブロック要素にして、横並びを防ぐ */
+}
+
+.reset-button:hover, .back-button:hover {
+    background-color: #ff0000; /* ホバー時の色 */
+}
+
+
         h1{
 			margin: 0;
 		}
@@ -135,10 +141,6 @@ body {
         margin-bottom: 5px;
         }
 
-        input:focus {
-        border: 2px solid red;  /* 赤色の枠線 */
-        outline: none; /* 追加のアウトラインを削除 */
-    }
 
     footer {
     color: #000000; /* 文字色 */
@@ -149,13 +151,36 @@ body {
     margin-top: 60px; /* 青い枠線の下に表示されるように余白を追加 */
 }
 h2 {
+
     text-align: center;  /* 中央揃え */
     color: #333;
     font-size: 2em;
     font-weight: bold;
-    margin-bottom: 20px;
-
+    margin-bottom: 10px; /* 下部のマージンを縮める */
 }
+
+.container {
+    margin-top: 10px; /* ログインフォームの上部の余白を縮める */
+}
+
+
+/* ボタンの間隔を縮める */
+button {
+    margin-bottom: 5px; /* ログインボタンの下の余白を縮める */
+}
+
+/* 「パスワードを忘れた」ボタンとログインボタンの間隔を縮める */
+p {
+    margin-top: 5px;
+    margin-bottom: 5px; /* 「パスワードを忘れた」ボタンとログインボタンの間隔を縮める */
+}
+
+/* 戻るボタンの間隔を縮める */
+p a {
+    margin-top: 5px;
+    margin-bottom: 5px; /* 戻るボタンと「パスワードを忘れた」ボタンの間隔を縮める */
+}
+
 
 </style>
 </head>
@@ -168,7 +193,7 @@ h2 {
 %>
 <body>
 
-<h2>ログインページ</h2>
+<h2>Login</h2>
 
 <div class="container" id="loginFormContainer">
     <%
@@ -258,50 +283,110 @@ h2 {
         }
     %>
 
-    <!-- ログインフォーム -->
-    <form method="POST" action="login.jsp" autocomplete="off">
-        <div class="form-group">
-            <label for="username">ユーザー名:</label>
-            <input type="text" name="username" placeholder="‍ユーザー名を入力" value="" required autocomplete="off">
-        </div>
-        <div class="form-group">
-            <label for="password">パスワード:</label>
-            <input type="password" name="password" placeholder="パスワードを入力" value="" required autocomplete="off">
-        </div>
-        <button type="submit">ログイン</button>
-    </form>
+   <!-- ログインフォーム -->
+<form method="POST" action="login.jsp" autocomplete="off">
+    <div class="form-group">
+        <label for="username">ユーザー名:</label>
+        <input type="text" name="username" placeholder="ユーザー名を入力" value="" required autocomplete="off">
+    </div>
+    <div class="form-group">
+        <label for="password">パスワード:</label>
+        <input type="password" name="password" placeholder="パスワードを入力" value="" required autocomplete="off">
+    </div>
+    <button type="submit" class="login-btn">ログイン</button>
+</form>
 
-    <!-- エラーメッセージ表示 -->
-    <p class="login-message"><%= loginMessage %></p>
-
-    <!-- パスワードを忘れたリンク -->
+<!-- 戻るボタン -->
 <p style="text-align: center;">
-    <a href="pass_reset.jsp" class="reset-link">パスワードを忘れた</a>
-</p>
-
-<!-- 戻るリンク -->
-<p style="text-align: center;">
-    <a href="../common/index.jsp" class="back-link">戻る</a>
+    <a href="../common/index.jsp" class="back-button">戻る</a>
 </p>
 
 <style>
-    /* 戻るリンクのスタイル（下線なし） */
-    .back-link {
-        color: black; /* 通常の文字色は黒 */
-        text-decoration: none; /* 下線を削除 */
+    /* ログインボタン */
+    .login-btn {
+        width: 300px; /* 幅を指定 */
+        height: 40px; /* 高さを指定 */
+        background-color: black; /* 通常時の色を黒に変更 */
+        color: white; /* 文字色は白 */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .login-btn:hover {
+        background-color: #ff4d4d;  /* ホバー時に少し薄い黒色に変更 */
+    }
+
+    /* 戻るボタン */
+    .back-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #808080; /* 通常時の色を灰色に変更 */
+        color: white; /* 文字色は白 */
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+
+
+<!-- パスワードを忘れたリンク -->
+<p style="text-align: center;">
+    <a href="pass_reset.jsp" class="reset-link">パスワードを忘れた方は<span class="highlight">こちら</span></a>
+</p>
+
+<style>
+    .reset-link {
         font-size: 16px; /* フォントサイズ */
+        color: black; /* 通常時のリンクの色 */
+        text-decoration: none; /* 下線を除去 */
     }
 
-    /* パスワードを忘れたリンクのホバー時のスタイル */
     .reset-link:hover {
-        color: #FF0000; /* ホバー時にさらに濃い赤に変更 */
+        color: black; /* リンク全体の色はホバー時も黒 */
     }
 
-    /* 戻るリンクのホバー時のスタイル */
-    .back-link:hover {
-        color: #ff4d4d; /* 薄い赤色に変更 */
+    /* 「こちら」部分の色を赤色、下線あり */
+    .highlight {
+        color: #ff0000; /* 通常時の色を赤色 */
+        text-decoration: underline; /* 下線を表示 */
     }
 
+    /* 「こちら」部分にホバー時に少し濃い赤色を適用 */
+    .highlight:hover {
+        color: #cc0000; /* ホバー時に少し濃い赤色 */
+    }
+</style>
+
+<!-- CSSスタイル -->
+<style>
+    /* ボタン共通のスタイル */
+    .reset-button, .back-button {
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    /* ホバー時のスタイル */
+    .reset-button:hover {
+        background-color: #ff0000; /* パスワードリセットボタンのホバー時の色 */
+    }
+
+    .back-button:hover {
+        background-color: #ff4d4d; /* 戻るボタンのホバー時の色 */
+    }
+
+    /* 左揃えにする */
+    p {
+        text-align: left; /* ボタンを左揃えにする */
+    }
 </style>
 
 </div>
