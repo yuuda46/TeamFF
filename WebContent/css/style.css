@@ -443,7 +443,7 @@ header .dropdown .dropdown-menu li a:hover {
 
 /*base.jspのヘッダーのcss*/
 .head {
-	height: 35%;
+	height: 45%;
 	overflow: auto;
 	position: relative;
 	background : none;
@@ -455,14 +455,14 @@ header .dropdown .dropdown-menu li a:hover {
 	width: 20%;	/*画像の幅*/
 	position: absolute;
 	left: 40%;		/*ロゴやメニューが入っているブロックに対して、左からの配置場所の指定。*/
-	top: 5%;	/*ロゴやメニューが入っているブロックに対して、下からの配置場所の指定。*/
+	top: 15%;	/*ロゴやメニューが入っているブロックに対して、下からの配置場所の指定。*/
 }
 
 /*メニュー
 ---------------------------------------------------------------------------*/
 /*メニューブロック全体への指定*/
 .menubar {
-	padding-top: 5%;
+	padding-top: 9%;
 	text-align: center;
 }
 /*メニュー１個あたりの指定*/
