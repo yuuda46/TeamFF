@@ -89,7 +89,6 @@
                     <c:forEach var="post" items="${list2}">
                         <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
                         <p>${post.postDay}</p>
-
                         <p>${post.content}</p>
                         <hr>
                     </c:forEach>
