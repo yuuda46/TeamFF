@@ -11,7 +11,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 
-
 <c:import url="/common/base.jsp">
     <c:param name="content">
         <%

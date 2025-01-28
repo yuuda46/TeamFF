@@ -110,6 +110,7 @@ public class Postdao2 extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setPostDay(rs.getDate("post_day"));
+			p.setName(rs.getString("name"));
 
 			list2.add(p);
 		}
@@ -130,6 +131,7 @@ public class Postdao2 extends DAO {
 
 		st.setString(1, id);
 
+
 		ResultSet rs=st.executeQuery();
 
 		System.out.println(rs);
@@ -146,6 +148,40 @@ public class Postdao2 extends DAO {
 
 		st.close();
 		con.close();
+
+		//System.out.println("bbb");
+		//System.out.println(list);
+
+		return list;
+	}
+
+	public List<Post2> delete() throws Exception {
+		List<Post2> list=new ArrayList<>();
+
+		Connection del=getConnection();
+
+		PreparedStatement st=del.prepareStatement(
+			"select title, content, name, post_day from post "
+			+ "where name = ?");
+
+		//st.setString(1, nam);
+
+		ResultSet rs=st.executeQuery();
+
+		System.out.println(rs);
+
+		while (rs.next()){
+			Post2 p=new Post2();
+			p.setTitle(rs.getString("title"));
+			p.setContent(rs.getString("content"));
+			p.setName(rs.getString("name"));
+			p.setPostDay(rs.getDate("post_day"));
+
+			list.add(p);
+		}
+
+		st.close();
+		del.close();
 
 		System.out.println("bbb");
 		System.out.println(list);

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.Comment;
 import bean.Post2;
@@ -46,11 +47,16 @@ public class ToukouNoticeAction extends Action {
 			// JSP
 			request.setAttribute("list2", list);
 
+//			セッションからユーザーネームを取得
+			HttpSession session = request.getSession();
+			String user_name = (String) session.getAttribute("username");
+			System.out.println("iwae:" + user_name);
+
 			//
             request.setAttribute("content", list);
 			request.setAttribute("items", id);//
 
-			//System.out.println(id);
+			System.out.println(id);
 		}catch (Exception e) {
 			 // 予期しないエラーの場合
             request.setAttribute("errorMessage", "エラーが発生しました。もう一度お試しください。");

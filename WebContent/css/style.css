@@ -412,7 +412,7 @@ header .dropdown .dropdown-menu li a:hover {
 }
 
 /*掲示板投稿画面の文字数制限*/
-.f {
+.cont {
 　color: red;
   width: 300px;
   overflow: hidden;

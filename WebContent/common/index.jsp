@@ -81,7 +81,6 @@
 		<button type="submit">議題投稿する</button>
 	</form>
 
-		<button type="ToukouDelete.action">議題削除</button>
 
         <form action="../notice/Tokou.action" method="get">
             <c:choose>
@@ -90,6 +89,7 @@
                     <c:forEach var="post" items="${list2}">
                         <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
                         <p>${post.postDay}</p>
+
                         <p>${post.content}</p>
                         <hr>
                     </c:forEach>
