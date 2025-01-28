@@ -45,12 +45,13 @@
                 <li><a href="../account/AccountList.action">アカウント</a></li>
                 <li><a href="../notice/NoticeForm.action">回覧物投稿</a></li>
 				<li><a href="../notice/NoticeAdmin.action">回覧物編集</a></li>
+            	<li><a href="../notice/NoticeForm.action">集金物投稿</a></li>
             </ul>
         </div>
     <% } %>
 
 <h1 id="logo"><a href="index.jsp"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
-<nav class="menubar">
+<nav class="menubar container3">
 <ul>
 <li><a href="../notice/Notice.action">回覧物</a></li>
 <li><a href="../notice/Tokou.action">掲示板</a></li>

@@ -45,6 +45,7 @@
                 <li><a href="../account/AccountList.action">アカウント</a></li>
                 <li><a href="../notice/NoticeForm.action">回覧物投稿</a></li>
 				<li><a href="../notice/NoticeAdmin.action">回覧物編集</a></li>
+				<li><a href="../notice/NoticeForm.action">集金物投稿</a></li>
             </ul>
         </div>
     <% } %>
