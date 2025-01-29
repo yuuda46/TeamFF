@@ -114,6 +114,15 @@ button[type="submit"]:hover {
 }
 
 
+/* ホバー時の色 */
+button[type="submit"]:hover,
+button[type="button"]:hover {
+    background-color: red; /* ホバー時の色を赤に設定 */
+}
+
+button.btn-secondary:hover {
+    background-color: red; /* ホバー時の色を赤に設定 */
+}
 
 /*フッター設定
 ---------------------------------------------------------------------------*/

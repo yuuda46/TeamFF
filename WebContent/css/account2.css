@@ -115,7 +115,15 @@ button.btn-secondary {
     color: #fff;
     margin-top: 10px;
 }
+/* ホバー時の色 */
+button[type="submit"]:hover,
+button[type="button"]:hover {
+    background-color: red; /* ホバー時の色を赤に設定 */
+}
 
+button.btn-secondary:hover {
+    background-color: red; /* ホバー時の色を赤に設定 */
+}
 
 
 /* フォーム内の要素のスペース調整 */
