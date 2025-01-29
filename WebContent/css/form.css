@@ -80,7 +80,7 @@ form button[type="submit"] {
 }
 
 form button[type="submit"]:hover {
-    background-color: #45a049; /* ホバー時に濃い緑 */
+    background-color: #ff0000; /* ホバー時に濃い緑 */
 }
 
 /* 戻るリンクのスタイル */
