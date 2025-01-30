@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.util.UUID;
+import bean.Post;
 import dao.PostDAO;
 import tool.Action;
 
@@ -22,9 +21,7 @@ public class ToukouUploadAction extends Action {
 		PrintWriter out=response.getWriter();
 		try{
 			PostDAO dao2 = new PostDAO();
-//			â‘Î‚Éd•¡‚µ‚È‚¢‚Å‚ ‚ë‚¤ID(36Œ…)
-			String id = UUID.randomUUID().toString();
-//			ƒZƒbƒVƒ‡ƒ“‚©‚çƒ†[ƒU[ƒl[ƒ€‚ğæ“¾
+//			ï¿½Zï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½çƒ†ï¿½[ï¿½Uï¿½[ï¿½lï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 			HttpSession session = request.getSession();
 			String user_name = (String) session.getAttribute("username");
 			//System.out.println("id:"+id);
@@ -35,38 +32,46 @@ public class ToukouUploadAction extends Action {
 			String content=request.getParameter("content");
 			//System.out.println("content:"+content);
 
-//			// “ü—Í‚³‚ê‚½“à—e‚ÌŒŸØ
+//			// ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½eï¿½ÌŒï¿½ï¿½ï¿½
 //            if (title == null || title.isEmpty() || name == null || name.isEmpty() || content == null || content.isEmpty()) {
-//                throw new IllegalArgumentException("‚·‚×‚Ä‚ÌƒtƒB[ƒ‹ƒh‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B");
+//                throw new IllegalArgumentException("ï¿½ï¿½ï¿½×‚Ä‚Ìƒtï¿½Bï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B");
 //            }
 
-//			LocalDateŒ^‚Ì“ú•t‚ğæ“¾
+//			LocalDateï¿½^ï¿½Ì“ï¿½ï¿½tï¿½ï¿½ï¿½æ“¾
 			LocalDate localDate = LocalDate.now();
-//			LocalDateŒ^‚©‚çsql.DateŒ^‚É•ÏŠ·
+//			LocalDateï¿½^ï¿½ï¿½ï¿½ï¿½sql.Dateï¿½^ï¿½É•ÏŠï¿½
 			java.sql.Date post_day= java.sql.Date.valueOf(localDate);
 
 
-			dao2.insertPost(id, title, content, user_name,  post_day);
-	//		ƒeƒLƒXƒgƒGƒŠƒA‚Ì“ü—Í“à—e‚ğæ“¾
+			Post p = new Post();
+			p.setTitle(title);
+			p.setContent(content);
+			p.setName(user_name);
+			p.setPostDay(post_day);
+
+			int line = dao2.insert2(p);
+//			dao2.insertPost(title, content, user_name,  post_day);
+
+	//		ï¿½eï¿½Lï¿½Xï¿½gï¿½Gï¿½ï¿½ï¿½Aï¿½Ì“ï¿½ï¿½Í“ï¿½ï¿½eï¿½ï¿½ï¿½æ“¾
 			String content1 = request.getParameter("content");
 
-	//		‰üs‚ğHTML—p‚É•ÏŠ·
+	//		ï¿½ï¿½ï¿½sï¿½ï¿½HTMLï¿½pï¿½É•ÏŠï¿½
 			String indent_content = content1.replace("\n", "<br>");
 
-			// ¬Œ÷‚µ‚½ê‡AJSP‚Éƒf[ƒ^‚ğİ’è
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½AJSPï¿½Éƒfï¿½[ï¿½^ï¿½ï¿½İ’ï¿½
 			request.setAttribute("title", title);
 			request.setAttribute("name", user_name);
 			request.setAttribute("content", indent_content);
 
 		} catch (IllegalArgumentException e) {
-			request.setAttribute("errorMessage", e.getMessage());  // ƒGƒ‰[ƒƒbƒZ[ƒW‚ğƒŠƒNƒGƒXƒgƒXƒR[ƒv‚Éİ’è
-            e.printStackTrace(out); // ƒGƒ‰[ƒƒO‚ğo—Í
-            return "toukou_form.jsp";  // ƒtƒH[ƒ€‚É–ß‚é
+			request.setAttribute("errorMessage", e.getMessage());  // ï¿½Gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½Gï¿½Xï¿½gï¿½Xï¿½Rï¿½[ï¿½vï¿½Éİ’ï¿½
+            e.printStackTrace(out); // ï¿½Gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½oï¿½ï¿½
+            return "toukou_form.jsp";  // ï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½É–ß‚ï¿½
 		} catch (Exception e) {
-//            // ‚»‚Ì‘¼‚ÌƒGƒ‰[‚Ìê‡
-//			 request.setAttribute("errorMessage", "ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B‚à‚¤ˆê“x‚¨‚µ‚­‚¾‚³‚¢B");
-//	            e.printStackTrace(out); // ƒGƒ‰[ƒƒO‚ğo—Í
-	            return "toukou_form.jsp";  // ƒtƒH[ƒ€‚É–ß‚é
+//            // ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ÌƒGï¿½ï¿½ï¿½[ï¿½Ìê‡
+//			 request.setAttribute("errorMessage", "ï¿½Gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B");
+//	            e.printStackTrace(out); // ï¿½Gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½oï¿½ï¿½
+	            return "toukou_form.jsp";  // ï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½É–ß‚ï¿½
 		}
 		return "toukou_result.jsp";
 	}

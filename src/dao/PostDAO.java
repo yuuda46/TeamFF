@@ -157,6 +157,27 @@ public class PostDAO extends DAO {
 		return line;
 	}
 
+	public int insert2(Post post) throws Exception {
+
+		Connection con=getConnection();
+		PreparedStatement st=con.prepareStatement(
+				"insert into post (id,title,content,name,post_day) "
+				+ "SELECT COALESCE(MAX(CAST(id AS integer)), 0) + 1,?,?,?,? " +
+				"from post");
+
+		st.setString(1, post.getTitle());
+		st.setString(2, post.getContent());
+		st.setString(3, post.getName());
+		st.setDate(4, post.getPostDay());
+
+		int line= st.executeUpdate();
+
+		st.close();
+		con.close();
+
+		return line;
+	}
+
 	public int delete(String post_id) throws Exception {
 
 		Connection con=getConnection();
