@@ -74,7 +74,7 @@ public class PostDAO extends DAO {
 		Connection con=getConnection();
 
 		PreparedStatement st=con.prepareStatement(
-			"select title, content, post.name as post_name, post_day, category.name as category_name from post "
+			"select title, content, post.name as post_name, post_day, category_id, category.name as category_name from post "
 			+ "left join category "
 			+ "on category_id = category.id "
 			+ "where post.id = ?");
@@ -91,6 +91,7 @@ public class PostDAO extends DAO {
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("post_name"));
 			p.setPostDay(rs.getDate("post_day"));
+			p.setCategoryId(rs.getInt("category_id"));
 			p.setCategoryName(rs.getString("category_name"));
 
 			list.add(p);
