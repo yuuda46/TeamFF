@@ -12,10 +12,10 @@
 		<form action="../notice/ToukouUpload.action" method="post">
 			<div>
 		        タイトル:
-		        <input type="text" name="title" required="required" value="${param.title}"><br>
+		        <input  type="text" name="title" required="required" value="${param.title}" placeholder="20文字以内で入力してください"><br>
 
 
-		        <textarea name="content"  required="required" rows="5" cols="50" maxlength="10000">${param.content}</textarea>
+		        <textarea name="content"  required="required" rows="5" cols="50" maxlength="10000" placeholder="本文を入力してください">${param.content}</textarea>
 		    </div>
 
 			<%--改行を保持したままjavaに送信するためのテキストエリア --%>

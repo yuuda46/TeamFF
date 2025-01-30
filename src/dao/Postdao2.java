@@ -155,16 +155,16 @@ public class Postdao2 extends DAO {
 		return list;
 	}
 
-	public List<Post2> delete() throws Exception {
+	public List<Post2> delete(String id) throws Exception {
 		List<Post2> list=new ArrayList<>();
 
 		Connection del=getConnection();
 
 		PreparedStatement st=del.prepareStatement(
-			"select title, content, name, post_day from post "
-			+ "where name = ?");
+			"UPDATE post SET display = false  "
+			+ "where id = ?");
 
-		//st.setString(1, nam);
+		st.setString(1, id);
 
 		ResultSet rs=st.executeQuery();
 

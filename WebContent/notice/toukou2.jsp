@@ -12,6 +12,7 @@
 <%@ page import="java.util.Date" %>
 
 
+
 <c:import url="/common/base.jsp">
     <c:param name="content">
         <%
@@ -35,7 +36,8 @@
                     String postName = p.getName();
                     if (username != null && username.equals(postName)) {
                 %>
-                    <button type="button" action="../notice/ToukouDelete.action">投稿を削除する</button>
+					<input name="yesproposal" id="yes-button" type="button" onclick="location.href='../notice/ToukouDelete.action'" value="掲示板から削除する">
+
                 <%
                     }
                 %>
@@ -49,7 +51,8 @@
 	            </div>
 	        <% } %>
 
-
+		<hr size="2" class="a" color="gray">
+        <h1>コメント🖊</h1>
 
             <!-- コメント入力欄 -->
 		    <textarea name="proposalContent" id="textarea" placeholder="コメントを入力"  required="required" rows="5"></textarea>
@@ -78,12 +81,10 @@
         %>
 
         <!-- コメント情報の表示 -->
-        <h1>コメント欄</h1>
 
         <c:forEach var="comment" items="<%=list4 %>">
             <p>No.${comment.comment_id}</p>
             <p>コメント💬 ${comment.proposal}</p>
-
             <p>🕝 ${comment.time}</p>
             <hr>
         </c:forEach>

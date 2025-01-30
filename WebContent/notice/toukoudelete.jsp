@@ -11,85 +11,17 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 
+
 <c:import url="/common/base.jsp">
-    <c:param name="content">
-        <%
-            List<Post2> list = (List<Post2>) request.getAttribute("content");
-            if (list != null && !list.isEmpty()) {
-        %>
-
-        <!-- 現在表示されている投稿情報の表示 -->
-        <form name="pos" action="../notice/commentSubmit" method="post">
-            <% for (Post2 p : list) { %>
-                <h1><%= p.getTitle() %></h1>
-                <p class="f"><%= p.getContent() %></p>
-                <p><%= p.getName() %></p>
-                <p><%= p.getPostDay() %></p>
+<c:param name="content">
 
 
-             <!-- ユーザー名と投稿のnameが一致する場合にボタンを表示 -->
-            <%
-                    // セッションからユーザー名を取得
-                    String username = (String) session.getAttribute("username");
-                    String postName = p.getName();
-                    if (username != null && username.equals(postName)) {
-                %>
-                    <button type="button" action="../notice/ToukouDelete.action">投稿を削除する</button>
-                <%
-                    }
-                %>
-
-            <% } %>
-
-            <!-- エラーメッセージの表示 -->
-	        <% if (request.getAttribute("errorMessage") != null) { %>
-	            <div class="error-message" style="color: red;">
-	                <%= request.getAttribute("errorMessage") %>
-	            </div>
-	        <% } %>
-
-
-
-            <!-- コメント入力欄 -->
-		    <textarea name="proposalContent" id="textarea" placeholder="コメントを入力"  required="required" rows="5"></textarea>
-
-		    <!-- エラーメッセージ表示 -->
-			<c:if test="${not empty errorMessage}">
-			    <div style="color: red;">
-			        <p>${errorMessage}</p>
-			    </div>
-			</c:if>
-
-		    <input type="hidden" name="items" value="${items}" required="required">
-		    <button id="filter-button" value="遷移" type="submit">送信</button>
-		</form>
-        <%
-            } else {
-        %>
-            <p>投稿はありません。</p>
-        <%
-            }
-        %>
-
-        <%
-            List<Comment> list4 = (List<Comment>) request.getAttribute("comment");
-            if (list4 != null && !list4.isEmpty()) {
-        %>
-
-        <!-- コメント情報の表示 -->
-        <h1>コメント欄</h1>
-
-        <c:forEach var="comment" items="<%=list4 %>">
-            <p>No.${comment.comment_id}</p>
-            <p>コメント💬 ${comment.proposal}</p>
-
-            <p>🕝 ${comment.time}</p>
-            <hr>
-        </c:forEach>
-        <% } else { %>
-            <p>コメントはありません。</p>
-        <% } %>
-    </c:param>
+	<title>投稿削除確認</title>
+	<h2>この投稿内容を本当に削除してもよろしいでしょうか？</h2>
+	<form action="your-url-here" method="get">
+    <input name="yesproposal" id="yes-button" type="button" onclick="location.href='../notice/ToukouNotice.action?items=${items}'" value="はい">
+    </form>
+	</c:param>
 </c:import>
 
 <!-- @include file="../footer.html" -->
