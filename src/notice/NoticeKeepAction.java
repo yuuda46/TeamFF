@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 //import java.util.Date.
 import java.time.LocalDate;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +20,6 @@ public class NoticeKeepAction extends Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		try{
-//			絶対に重複しないであろうID(36桁)
-			String uuid = UUID.randomUUID().toString();
 
 			String title = request.getParameter("title");
 			System.out.println(title);
@@ -47,7 +44,6 @@ public class NoticeKeepAction extends Action {
 			// dbに登録
 			PostDAO dao=new PostDAO();
 			Post p = new Post();
-			p.setPostId(uuid);
 			p.setTitle(title);
 			p.setContent(filename);
 			p.setName(name);

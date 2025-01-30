@@ -108,7 +108,7 @@ public class PostDAO extends DAO {
 		Connection con=getConnection();
 
 		PreparedStatement st=con.prepareStatement(
-			"select post.id as post_id, title, post_day, category.name as category_name from post "
+			"select post.id as post_id, title, content, post_day, category.name as category_name from post "
 			+ "left join category "
 			+ "on category_id = category.id "
 			+ "where category_id = ? "
@@ -122,6 +122,7 @@ public class PostDAO extends DAO {
 			Post p=new Post();
 			p.setPostId(rs.getString("post_id"));
 			p.setTitle(rs.getString("title"));
+			p.setContent(rs.getString("content"));
 			p.setPostDay(rs.getDate("post_day"));
 			p.setCategoryName(rs.getString("category_name"));
 
@@ -138,15 +139,15 @@ public class PostDAO extends DAO {
 
 		Connection con=getConnection();
 		PreparedStatement st=con.prepareStatement(
-				"insert into post (id,title,content,name,post_day,category_id)"
-				+ " values(?,?,?,?,?,?)");
+				"insert into post (id,title,content,name,post_day,category_id) "
+				+ "SELECT COALESCE(MAX(CAST(id AS integer)), 0) + 1,?,?,?,?,? " +
+				"from post");
 
-		st.setString(1, post.getPostId());
-		st.setString(2, post.getTitle());
-		st.setString(3, post.getContent());
-		st.setString(4, post.getName());
-		st.setDate(5, post.getPostDay());
-		st.setInt(6, post.getCategoryId());
+		st.setString(1, post.getTitle());
+		st.setString(2, post.getContent());
+		st.setString(3, post.getName());
+		st.setDate(4, post.getPostDay());
+		st.setInt(5, post.getCategoryId());
 
 		int line= st.executeUpdate();
 

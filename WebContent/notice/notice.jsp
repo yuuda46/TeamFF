@@ -11,6 +11,18 @@
 %>
 <link rel="stylesheet" href="../css/notice.css">
 
+<style>
+a.link_judgement::after {
+content: "";
+position: absolute;
+top: -10px;
+left: -1px;
+right: -1px;
+bottom: -70px;
+z-index: 1000;
+}
+</style>
+
 <c:import url="/common/base.jsp">
 
 	<c:param name="content">
@@ -35,10 +47,12 @@
 			<c:when test="${notice_content.size()>0}">
 				<div class="position_right">件数:${notice_content.size()}件</div>
 				<c:forEach var="notice_content" items="${notice_content}">
-					<h2><a href="../notice/NoticeDetail.action?id=${notice_content.postId}">${notice_content.title}</a></h2>
-
+				<div class="parent">
+					<h2 class="position_notice"><a class="link_judgement" href="../notice/NoticeDetail.action?id=${notice_content.postId}">${notice_content.title}</a></h2>
 						<p class="notice_left margin-1px padding_left_20">${notice_content.categoryName}</p>
+						<p class="preview absolute_element position_center child"><img src="../upload/${notice_content.content}"></p>
 						<p class="position_right">🕑${notice_content.postDay}</p>
+				</div>
 
 					<hr class="notice_line">
 				</c:forEach>
