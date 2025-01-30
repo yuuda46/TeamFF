@@ -21,6 +21,7 @@
         <section class="mo-4">
         <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">入金ページ</h2>
 		<h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">このページには、まだ入金していない項目のみ表示しています</h3>
+		<h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">入金が完了した場合、下の「入金完了」ボタンを押してください</h3>
         <%--    <div class="my-2 text-end px-4">
                 <a href="../test/testCreate.action">新規登録</a>
             </div> --%>
@@ -44,7 +45,7 @@
 								こちらをのボタンを押したらpostのidを持っていってdeposit.jspで表示する --%>
                         		<td class="text-center test-boder">
 							    <a href="../collection/CollectionDeposit.action?no=${Collection.id}">
-							        <button>入金する</button>
+							        <button>入金完了</button>
 							    </a>
 								</td>
 								<%-- 二次目標：一つ一つそれぞれのお知らせに飛ぶようにする --%>
