@@ -19,7 +19,7 @@ import dao.Postdao2;
 
 
 
-@WebServlet("/notice/commentSubmit")
+@WebServlet("/notice/toukoudeleteaction")
 public class ToukouDeleteAction extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -42,7 +42,6 @@ public class ToukouDeleteAction extends HttpServlet {
 			request.setAttribute("list2", list);
 
 			response.sendRedirect("/teee/notice/ToukouNotice.action?items=" + id);
-
             } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ÉfÅ[É^ÇÃï€ë∂Ç…é∏îsÇµÇ‹ÇµÇΩ");
