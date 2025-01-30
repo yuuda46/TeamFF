@@ -93,10 +93,14 @@ public class CollectionDAO extends DAO {
 	    		"WHERE p.category_id = 2 " +
 //	    		ここでそれぞれ表として出すための抽出文。作り方によっては使わない。
 //	    		"and pay.postid = '?'"+
-	    		"AND pay.signid IS NOT NULL"
+	    		"AND pay.signid IS NOT NULL "+
+	    		"ORDER BY CAST(paymentid AS INTEGER) ASC NULLS LAST;"
 	    );
 
-//	    st.setString(1, Collection);
+	 // デバッグ出力
+	    System.out.println(st.toString());
+
+//	    st.setString(1, Postid);
 
 	    ResultSet rs = st.executeQuery();
 
