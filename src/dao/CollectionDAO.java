@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.Collection;
 import bean.Payment;
 import bean.Post;
 
@@ -77,9 +78,8 @@ public class CollectionDAO extends DAO {
 	}
 
 //入金済み検索
-//	beanの再作成が必要。下記のpostはコピー時の物で後に変更予定。
-	public List<Post> Completed_search(String payment) throws Exception {
-	    List<Post> list = new ArrayList<>();
+	public List<Collection> Completed_search(String PostID) throws Exception {
+	    List<Collection> list = new ArrayList<>();
 
 	    Connection con = getConnection();
 
@@ -96,18 +96,30 @@ public class CollectionDAO extends DAO {
 	    		"AND pay.signid IS NOT NULL"
 	    );
 
-	    st.setString(1, payment);
+//	    st.setString(1, Collection);
 
 	    ResultSet rs = st.executeQuery();
 
 	    while (rs.next()) {
-	        Post p = new Post();
-	        //ここに追加
-
+	        Collection p = new Collection();
+	        // ResultSetからCollectionオブジェクトにデータを設定
+	        p.setPaymentID(rs.getString("paymentID"));
+	        p.setDepositdate(rs.getDate("depositDate"));
+	        p.setPostID(rs.getString("postID"));
+	        p.setTitle(rs.getString("title"));
+	        p.setPost_day(rs.getDate("post_day"));
+	        p.setSignID(rs.getString("signID"));
+	        p.setName(rs.getString("name"));
+	        p.setDetailid(rs.getString("detailID"));
+	        p.setMonetary(rs.getInt("monetary"));
 	        list.add(p);
 	    }
 	    st.close();
 	    con.close();
+
+ // デバッグ出力
+System.out.println("List size in DAO: " + list.size());
+
 
 	    return list;
 	}
