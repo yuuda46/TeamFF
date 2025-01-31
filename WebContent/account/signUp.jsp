@@ -15,7 +15,7 @@
 </header>
 <head>
     <meta charset="UTF-8">
-    <title>新規ユーザー登録</title>
+    <title>新規登録</title>
     <!-- style.cssを読み込む -->
     <link rel="stylesheet" href="../css/account.css">
     <script>
