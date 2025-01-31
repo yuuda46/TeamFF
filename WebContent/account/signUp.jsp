@@ -156,7 +156,7 @@
 		</c:if>
 
 
-     <button type="submit" class="SignUp.action">登録して終了</button>
+     <button type="submit" class="SignUp.action">登録確認画面へ</button>
         </form>
 
         <form action="../notice/Tokou.action" method="get">

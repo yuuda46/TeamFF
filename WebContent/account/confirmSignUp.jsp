@@ -13,7 +13,7 @@
 
 <body>
 <section class="mo-4">
-    <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">ユーザー情報確認</h2>
+    <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">入力情報確認</h2>
 
     <form class="mx-3" action="SignUp.action" method="post">
         <input type="hidden" name="confirm" value="true">
