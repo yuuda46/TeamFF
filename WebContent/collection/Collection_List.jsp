@@ -62,11 +62,7 @@
 
 								<%-- 入金ボタン↓現状張りぼて。
 								こちらをのボタンを押したらpostのidを持っていってdeposit.jspで表示する --%>
-                        		<td class="text-center test-boder">
-							    <a href="../collection/CollectionDeposit.action?no=${Collection.id}">
-							        <button>入金する</button>
-							    </a>
-								</td>
+
 								<%-- 二次目標：一つ一つそれぞれのお知らせに飛ぶようにする --%>
 
                              </tr>
