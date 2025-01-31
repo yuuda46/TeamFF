@@ -42,10 +42,10 @@
         <div class="dropdown">
             <button class="dropdown-toggle">メニュー ▼</button>
             <ul class="dropdown-menu">
-                <li><a href="../account/AccountList.action">アカウント</a></li>
+                <li><a href="../account/AccountList.action">個人情報</a></li>
                 <li><a href="../notice/NoticeForm.action">回覧物投稿</a></li>
 				<li><a href="../notice/NoticeAdmin.action">回覧物編集</a></li>
-				<li><a href="../c_detail/form.jsp">集金物投稿</a></li>
+				<li><a href="../c_detail/C_detailList.action">集金物投稿</a></li>
             </ul>
         </div>
     <% } %>

@@ -12,7 +12,9 @@ public class Post {
 	private String category_name;
 
 	private String id ;
-
+	private Integer monetary;
+	private Date deadline;
+	private String transferee;
 
 	public String getPost_id() {
 		return post_id;
@@ -81,5 +83,29 @@ public class Post {
 	}
 	public void setCategoryName(String name){
 		this.category_name=name;
+	}
+
+	public Integer getMonetary() {
+	    return monetary;
+	}
+
+	public void setMonetary(Integer monetary) {
+	    this.monetary = monetary;
+	}
+
+	public Date getDeadline() {
+	    return deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+	    this.deadline = deadline;
+	}
+
+	public String getTransferee() {
+	    return transferee;
+	}
+
+	public void setTransferee(String transferee) {
+	    this.transferee = transferee;
 	}
   }

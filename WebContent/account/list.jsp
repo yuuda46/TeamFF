@@ -4,19 +4,16 @@
 <%-- アカウント一覧表示 --%>
 <html>
 <header>
-
-
 <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-
-
-
-
 </header>
 <head>
     <title>アカウント一覧</title>
     <link rel="stylesheet" href="../css/account.css">
+
 </head>
 <body>
+
+
 <section class="mo-3">
     <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">個人情報一覧</h2>
     <table border="1">

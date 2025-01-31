@@ -10,6 +10,9 @@ public class Payment {
 	private String signID ;
 	private Date depositDate ;
 
+	private Integer monetary;
+	private Date deadline;
+	private String transferee;
 
 	public String getPaymentID() {
 		return paymentID;
@@ -37,6 +40,31 @@ public class Payment {
 	}
 	public void setDepositDate(Date depositDate) {
 		this.depositDate = depositDate;
+	}
+
+
+	public Integer getMonetary() {
+	    return monetary;
+	}
+
+	public void setMonetary(Integer monetary) {
+	    this.monetary = monetary;
+	}
+
+	public Date getDeadline() {
+	    return deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+	    this.deadline = deadline;
+	}
+
+	public String getTransferee() {
+	    return transferee;
+	}
+
+	public void setTransferee(String transferee) {
+	    this.transferee = transferee;
 	}
 
 
