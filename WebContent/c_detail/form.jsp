@@ -16,14 +16,22 @@
 
 <input type="hidden" name="postid" value="<%= postid %>">
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>金額</label><br>
-                        <input class="select-shape" type="number" name="monetary" placeholder="金額を入力してください" required="required" value="${monetary}"><br>
-                        <c:if test="${not empty errorMonetary}">
-                            <div id="error-message" style="color:red;">${errorMonetary}</div>
-                        </c:if>
-                    </div>
+					<div class="form-group">
+					    <label>金額</label><br>
+					    <input class="select-shape"
+					           type="number"
+					           name="monetary"
+					           placeholder="例: 1000 (円)"
+					           required="required"
+					           min="1"
+					           step="100"
+					           value="${monetary}"
+					           style="${not empty errorMonetary ? 'border: 2px solid red;' : ''}">
+					    <br>
+					    <c:if test="${not empty errorMonetary}">
+					        <div id="error-message" style="color:red;">${errorMonetary}</div>
+					    </c:if>
+					</div>
 
                     <div class="form-group">
                         <label>期限</label><br>
@@ -32,7 +40,7 @@
                             <div id="error-message" style="color:red;">${errorDeadline}</div>
                         </c:if>
                     </div>
-                </div>
+
 
                 <div class="form-row">
                     <div class="form-group">
