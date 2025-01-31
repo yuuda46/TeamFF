@@ -164,6 +164,7 @@ public class Postdao2 extends DAO {
 	    Connection del = getConnection();
 	    System.out.println(del);
 
+
 	    // display ƒJƒ‰ƒ€‚ğ false ‚ÉXV
 	    PreparedStatement st = del.prepareStatement(
 	        "UPDATE post SET display = false "

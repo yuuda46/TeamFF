@@ -162,8 +162,8 @@ public class PostDAO extends DAO {
 
 		Connection con=getConnection();
 		PreparedStatement st=con.prepareStatement(
-				"insert into post (id,title,content,name,post_day) "
-				+ "SELECT COALESCE(MAX(CAST(id AS integer)), 0) + 1,?,?,?,? " +
+				"insert into post (id, title, content, name, post_day, display) "
+				+ "SELECT COALESCE(MAX(CAST(id AS integer)), 0) + 1,?,?,?,?,true " +
 				"from post");
 
 		st.setString(1, post.getTitle());
