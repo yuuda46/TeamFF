@@ -222,18 +222,12 @@ p a {
 
                 // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
                 if (!inputUsername.matches(usernameRegex)) {
-                    usernameError = "ユーザー名は1文字以上で入力してください。";
                 }
 
                 // パスワードが正規表現に一致しない場合、エラーメッセージを設定
                 else if (!inputPassword.matches(regex)) {
-                    passwordError = "パスワードは半角英数字5文字以上で、英字と数字を両方含む必要があります。";
+                    passwordError = "半角英数字5文字以上で英数字を両方含む必要があります。";
                 }
-
-                // パスワードに同じ文字が連続して使われていないかチェック
-                else if (inputPassword.matches("(.)\\1")) {
-                    passwordError = "パスワードには同じ文字を連続して使用できません。";
-                } else {
                     // データベース接続
                     Class.forName("org.postgresql.Driver");
                     conn = DriverManager.getConnection(url, dbUser, dbPassword);
@@ -264,7 +258,6 @@ p a {
                         loginMessage = "ユーザー名またはパスワードが間違っています。";
                     }
                 }
-            }
         } catch (Exception e) {
             loginMessage = "データベースエラー: " + e.getMessage();
         } finally {
