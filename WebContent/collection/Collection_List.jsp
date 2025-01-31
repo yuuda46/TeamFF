@@ -5,6 +5,7 @@
 <%-- 文字化けの対策 --%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <c:import url="/common/base.jsp">
@@ -21,7 +22,6 @@
         <section class="mo-4">
         <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">入金ページ</h2>
 		<h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">このページには、まだ入金していない項目のみ表示しています</h3>
-		<h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">入金が完了した場合、下の「入金完了」ボタンを押してください</h3>
         <%--    <div class="my-2 text-end px-4">
                 <a href="../test/testCreate.action">新規登録</a>
             </div> --%>
@@ -33,19 +33,38 @@
                             <th class="test-boder test-table-wide">集金番号</th>
                             <th class="test-boder test-table-wide">目的</th>
                             <th class="test-boder test-table-wide">投稿日</th>
+                            <th class="test-boder test-table-wide">金額</th>
+                            <th class="test-boder test-table-wide">期限</th>
+                            <th class="test-boder test-table-wide">振込先</th>
                             <th class="test-boder test-table-wide"></th>
                         </tr>
                         <c:forEach var="Collection" items="${Post}">
-                            <tr>
+                        <%-- 期限をDate型に変換 --%>
+						        <fmt:parseDate var="deadlineDate" value="${Collection.deadline}" pattern="yyyy-MM-dd" type="date" />
+
+
+						        <%-- 現在の日付を取得し、Date型に変換 --%>
+						        <jsp:useBean id="now" class="java.util.Date" />
+						        <fmt:formatDate var="todayStr" value="${now}" pattern="yyyy-MM-dd" />
+						        <fmt:parseDate var="today" value="${todayStr}" pattern="yyyy-MM-dd" type="date" />
+
+						        <%-- 期限切れか判定 --%>
+						        <c:set var="isExpired" value="${deadlineDate.time < today.time}" />
+
+						        <tr style="${isExpired ? 'color:red;' : ''}">
                                 <td class="test-table-wide test-boder">${Collection.id}</td>
                                 <td class="test-table-wide test-boder">${Collection.title}</td>
                                 <td class="test-table-wide test-boder">${Collection.post_day}</td>
+                                <td class="test-table-wide test-boder">${Collection.monetary}</td>
+                                <td class="test-table-wide test-boder">${Collection.deadline}</td>
+                                <td class="test-table-wide test-boder">${Collection.transferee}</td>
+
 
 								<%-- 入金ボタン↓現状張りぼて。
 								こちらをのボタンを押したらpostのidを持っていってdeposit.jspで表示する --%>
                         		<td class="text-center test-boder">
 							    <a href="../collection/CollectionDeposit.action?no=${Collection.id}">
-							        <button>入金完了</button>
+							        <button>入金する</button>
 							    </a>
 								</td>
 								<%-- 二次目標：一つ一つそれぞれのお知らせに飛ぶようにする --%>
