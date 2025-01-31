@@ -64,7 +64,7 @@ public class SignUpAction extends Action {
             if (address.length() > 30) errorAddress = "住所は30文字以内で入力してください。";
 
             // フォーマットチェック
-            if (!Pattern.matches("^[\\p{IsHan}\\p{IsHiragana}\\p{IsKatakana}a-zA-Zー・]+$", name)) {
+            if (!Pattern.matches("^[\\p{IsHan}\\p{IsHiragana}\\p{IsKatakana}a-zA-Zー・\\s\u3000]+$", name)) {
                 errorName = "氏名には数字を含めないでください。";
             }
             if (!Pattern.matches("^[a-zA-Z0-9!@#\\$%\\^&*()_+=-]+$", user_name)) {
@@ -76,7 +76,7 @@ public class SignUpAction extends Action {
             if (Pattern.matches(".*[\\p{IsHan}\\p{IsHiragana}].*", email)) {
                 errorEmail = "メールアドレスにはひらがなや漢字を使用できません。";
             }
-            if (!Pattern.matches("^\\d{3}-\\d{3}-\\d{3}$", phone_number)) {
+            if (!Pattern.matches("^\\d{2,4}-\\d{3,4}-\\d{3,4}$", phone_number)) {
                 errorPhoneNumber = "電話番号は「-」を2つ含めた形式で入力してください。";
             }
             if (!Pattern.matches("\\d{3}-\\d{4}", post_code)) {
