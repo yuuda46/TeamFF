@@ -201,7 +201,9 @@ p a {
         String url = "jdbc:postgresql://localhost:5432/team_f";  // データベースURL
         String dbUser = "postgres";  // ユーザー名
         String dbPassword = "Team_F";  // パスワード
-        String loginMessage = "";  // エラーメッセージを格納する変数
+        String usernameError = "";  // ユーザー名エラーメッセージ
+        String passwordError = "";  // パスワードエラーメッセージ
+        String loginMessage = "";  // ログインメッセージ
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -210,39 +212,57 @@ p a {
             String inputUsername = request.getParameter("username");
             String inputPassword = request.getParameter("password");
 
-            if (inputUsername != null && inputPassword != null) {
-                // データベース接続
-                Class.forName("org.postgresql.Driver");
-                conn = DriverManager.getConnection(url, dbUser, dbPassword);
-                // ユーザー名とパスワードの組み合わせを確認するクエリ
-                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
-                stmt = conn.prepareStatement(query);
-                stmt.setString(1, inputUsername.trim()); // 入力値をトリム
-                // クエリ実行
-                rs = stmt.executeQuery();
+            // パスワードの正規表現（半角英数字5文字以上、英字と数字を両方含む）
+            String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上、英字と数字を両方含む
+            // ユーザー名は1文字以上の任意の文字列
+            String usernameRegex = ".{1,}"; // 1文字以上
+            // ユーザー名とパスワードのチェック
 
-                if (rs.next()) {
-                    // ユーザー名が一致した場合
-                    String storedPassword = rs.getString("PASSWORD");
-                    if (storedPassword.equals(inputPassword)) {
+            if (inputUsername != null && inputPassword != null) {
+
+                // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
+                if (!inputUsername.matches(usernameRegex)) {
+                    usernameError = "ユーザー名は1文字以上で入力してください。";
+                }
+
+                // パスワードが正規表現に一致しない場合、エラーメッセージを設定
+                else if (!inputPassword.matches(regex)) {
+                    passwordError = "パスワードは半角英数字5文字以上で、英字と数字を両方含む必要があります。";
+                }
+
+                // パスワードに同じ文字が連続して使われていないかチェック
+                else if (inputPassword.matches("(.)\\1")) {
+                    passwordError = "パスワードには同じ文字を連続して使用できません。";
+                } else {
+                    // データベース接続
+                    Class.forName("org.postgresql.Driver");
+                    conn = DriverManager.getConnection(url, dbUser, dbPassword);
+                    // ユーザー名とパスワードの組み合わせを確認するクエリ
+                    String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
+                    stmt = conn.prepareStatement(query);
+                    stmt.setString(1, inputUsername.trim()); // 入力値をトリム
+                    stmt.setString(2, inputPassword.trim());
+                    // クエリ実行
+                    rs = stmt.executeQuery();
+                    if (rs.next()) {
                         // ログイン成功時
                         loginMessage = "ログイン成功";
                         // セッションを設定
                         session.setAttribute("username", inputUsername);
                         session.setAttribute("password", inputPassword);
+                        // 管理者フラグの取得とセッション保存
                         String adminFlag = rs.getString("ADMINI");
                         session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有
+                        // ログイン成功後、トップページへリダイレクト
                         String idFrag = rs.getString("ID");
                         session.setAttribute("sessionId", idFrag);
+                        System.out.println("Session ID set: " + idFrag);
                         response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
                         return; // 処理終了
                     } else {
-                        // パスワードが間違っている場合
-                        loginMessage = "パスワードが間違っています。";
+                        // ログイン失敗時
+                        loginMessage = "ユーザー名またはパスワードが間違っています。";
                     }
-                } else {
-                    // ユーザー名が登録されていない場合
-                    loginMessage = "ユーザー名が登録されていません。";
                 }
             }
         } catch (Exception e) {
@@ -257,28 +277,35 @@ p a {
                 e.printStackTrace();
             }
         }
-
     %>
 
     <!-- ログインフォーム -->
     <form method="POST" action="login.jsp" autocomplete="off">
         <div class="form-group">
             <label for="username">ユーザー名:</label>
-            <input type="text" name="username" placeholder="ユーザー名を入力" value="" required autocomplete="off">
+            <input type="text" name="username" placeholder="ユーザー名を入力" value="<%= request.getParameter("username") %>" required autocomplete="off">
+            <!-- ユーザー名エラー表示 -->
+            <div class="error-message" style="color: red; font-size: 12px;">
+                <%= !usernameError.isEmpty() ? usernameError : "" %>
+            </div>
         </div>
         <div class="form-group">
             <label for="password">パスワード:</label>
-            <input type="password" name="password" placeholder="パスワードを入力" value="" required autocomplete="off">
+            <input type="password" name="password" placeholder="パスワードを入力" value="<%= request.getParameter("password") %>" required autocomplete="off">
+            <!-- パスワードエラー表示 -->
+            <div class="error-message" style="color: red; font-size: 12px;">
+                <%= !passwordError.isEmpty() ? passwordError : "" %>
+            </div>
         </div>
         <button type="submit" class="login-btn">ログイン</button>
     </form>
 
-    <!-- エラーメッセージの表示 -->
-    <% if (!loginMessage.isEmpty()) { %>
-        <div class="login-message">
-            <%= loginMessage %>
-        </div>
-    <% } %>
+    <!-- ログインの一般的なエラーメッセージ -->
+    <div class="error-message" style="color: red; text-align: center;">
+        <%= !loginMessage.isEmpty() ? loginMessage : "" %>
+    </div>
+</div>
+
 
     <!-- 戻るボタン -->
     <p style="text-align: center;">
