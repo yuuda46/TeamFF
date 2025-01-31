@@ -38,7 +38,7 @@
 
 
 
-        <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">新規ユーザー登録</h2>
+        <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">新規登録</h2>
 
 
         <form class="mx-3" action="../account/SignUp.action" method="post">
