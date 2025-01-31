@@ -20,8 +20,9 @@ public class ToukouUploadAction extends Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		try{
+
 			PostDAO dao2 = new PostDAO();
-//			�Z�b�V�������烆�[�U�[�l�[�����擾
+
 			HttpSession session = request.getSession();
 			String user_name = (String) session.getAttribute("username");
 			//System.out.println("id:"+id);
@@ -32,14 +33,12 @@ public class ToukouUploadAction extends Action {
 			String content=request.getParameter("content");
 			//System.out.println("content:"+content);
 
-//			// ���͂��ꂽ���e�̌���
-//            if (title == null || title.isEmpty() || name == null || name.isEmpty() || content == null || content.isEmpty()) {
-//                throw new IllegalArgumentException("���ׂẴt�B�[���h����͂��Ă��������B");
-//            }
 
-//			LocalDate�^�̓��t���擾
+
+
+
 			LocalDate localDate = LocalDate.now();
-//			LocalDate�^����sql.Date�^�ɕϊ�
+
 			java.sql.Date post_day= java.sql.Date.valueOf(localDate);
 
 
@@ -52,26 +51,24 @@ public class ToukouUploadAction extends Action {
 			int line = dao2.insert2(p);
 //			dao2.insertPost(title, content, user_name,  post_day);
 
-	//		�e�L�X�g�G���A�̓��͓��e���擾
+
 			String content1 = request.getParameter("content");
 
-	//		���s��HTML�p�ɕϊ�
+
 			String indent_content = content1.replace("\n", "<br>");
 
-			// ���������ꍇ�AJSP�Ƀf�[�^��ݒ�
+
 			request.setAttribute("title", title);
 			request.setAttribute("name", user_name);
 			request.setAttribute("content", indent_content);
 
-		} catch (IllegalArgumentException e) {
-			request.setAttribute("errorMessage", e.getMessage());  // �G���[���b�Z�[�W�����N�G�X�g�X�R�[�v�ɐݒ�
-            e.printStackTrace(out); // �G���[���O���o��
-            return "toukou_form.jsp";  // �t�H�[���ɖ߂�
+//		} catch (IllegalArgumentException e) {
+//			request.setAttribute("errorMessage", e.getMessage());
+//            e.printStackTrace(out);
+//            return "toukou_form.jsp";
 		} catch (Exception e) {
-//            // ���̑��̃G���[�̏ꍇ
-//			 request.setAttribute("errorMessage", "�G���[���������܂����B������x���������������B");
-//	            e.printStackTrace(out); // �G���[���O���o��
-	            return "toukou_form.jsp";  // �t�H�[���ɖ߂�
+
+	            return "toukou_form.jsp";
 		}
 		return "toukou_result.jsp";
 	}
