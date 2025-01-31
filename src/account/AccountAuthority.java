@@ -39,6 +39,7 @@ public class AccountAuthority extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
 	    response.setContentType("text/html; charset=UTF-8");
+	    String name = request.getParameter("name"); // name を取得
 	    String email = request.getParameter("email");
 
 	    try {
@@ -46,8 +47,11 @@ public class AccountAuthority extends HttpServlet {
 	        int result = dao.Authority(email);
 
 	        if (result > 0) {
+
+	        	 request.setAttribute("name", name);
+	             request.getRequestDispatcher("authority_done.jsp").forward(request, response);
 	            // 権限付与が成功した場合、signup_list.jspにリダイレクト
-	            response.sendRedirect("AccountList.action");
+
 	        } else {
 	            response.getWriter().println("権限付与に失敗しました。");
 	        }

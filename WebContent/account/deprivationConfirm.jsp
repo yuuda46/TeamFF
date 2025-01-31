@@ -33,6 +33,7 @@
 
     <form action="Deprivation" method="post">
         <input type="hidden" name="email" value="${account.email}">
+        <input type="hidden" name="name" value="${account.name}">
         <button type="submit">外す</button>
     </form>
 

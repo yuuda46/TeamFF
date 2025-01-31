@@ -41,6 +41,7 @@
 
 	<form action="AccountAuthority" method="post">
 	    <input type="hidden" name="email" value="${account.email}">
+	    <input type="hidden" name="name" value="${account.name}">
 	    <button type="submit">付与する</button>
 	</form>
 

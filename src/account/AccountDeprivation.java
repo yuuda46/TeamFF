@@ -41,6 +41,7 @@ public class AccountDeprivation extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
+	    String name = request.getParameter("name"); // name を取得
         String email = request.getParameter("email");
 
         try {
@@ -48,7 +49,9 @@ public class AccountDeprivation extends HttpServlet {
             int result = dao.RevokeAuthority(email);
 
             if (result > 0) {
-                response.sendRedirect("AccountList.action");
+	        	 request.setAttribute("name", name);
+	             request.getRequestDispatcher("deprivation_done.jsp").forward(request, response);
+
             } else {
                 response.getWriter().println("権限剥奪に失敗しました。");
             }
