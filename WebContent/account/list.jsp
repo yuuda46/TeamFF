@@ -27,7 +27,9 @@
             <th>権限</th>
             <th>詳細</th>
         </tr>
-       <c:forEach var="account" items="${accountList}">
+       <%-- 組長を先に表示 --%>
+    <c:forEach var="account" items="${accountList}">
+        <c:if test="${account.admini == true}">
             <tr>
                 <td>${account.name}</td>
                 <td>${account.user_name}</td>
@@ -35,12 +37,28 @@
                 <td>${account.email}</td>
                 <td>${account.post_code}</td>
                 <td>${account.address}</td>
-                <td>${account.admini}</td>
+                <td>組長</td>
                 <td><a href="AccountDetail?email=${account.email}">詳細</a></td>
-
             </tr>
-        </c:forEach>
-    </table>
+        </c:if>
+    </c:forEach>
+
+    <%-- 組員を最後に表示 --%>
+    <c:forEach var="account" items="${accountList}">
+        <c:if test="${empty account.admini}">
+            <tr>
+                <td>${account.name}</td>
+                <td>${account.user_name}</td>
+                <td>${account.phone_number}</td>
+                <td>${account.email}</td>
+                <td>${account.post_code}</td>
+                <td>${account.address}</td>
+                <td>組員</td>
+                <td><a href="AccountDetail?email=${account.email}">詳細</a></td>
+            </tr>
+        </c:if>
+    </c:forEach>
+</table>
 
 
 
