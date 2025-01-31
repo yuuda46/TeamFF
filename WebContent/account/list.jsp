@@ -25,6 +25,7 @@
             <th>郵便番号</th>
             <th>住所</th>
             <th>権限</th>
+            <th>詳細</th>
         </tr>
        <c:forEach var="account" items="${accountList}">
             <tr>
