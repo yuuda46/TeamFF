@@ -4,7 +4,7 @@
 <html lang="ja">
 <header>
     <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-    <h3 class="titlesize">PsReset</h3>
+    <title>パスワードリセット</title>
 </header>
 
 <style>
@@ -179,7 +179,13 @@ h2 {
     font-weight: bold; /* 「こちら」の部分を太字 */
     color: inherit; /* 「こちら」の部分の色を親の色（黒色）に合わせる */
 }
-
+    .error {
+        color: red;             /* エラーメッセージを赤文字に */
+        font-size: 14px;        /* フォントサイズを調整 */
+        text-align: left;       /* 文字を左揃えに */
+        margin-top: 10px;       /* 上部に余白を追加 */
+        padding-left: 20px;     /* 左に少し余白を追加 */
+    }
 </style>
 
 <%
@@ -335,7 +341,7 @@ h2 {
 </p>
 
 
-        <style>
+<style>
     .reset-link {
         font-size: 16px; /* フォントサイズ */
         color: black; /* 通常時のリンクの色 */
