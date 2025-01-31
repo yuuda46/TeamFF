@@ -22,7 +22,7 @@
 			<%--rows:テキストエリアの縦幅(行) cols:テキストエリアの横幅(文字) --%>
 
 
-			<button type="submit">送信</button>
+			<button type="submit">投稿</button>
 
 		</form>
 

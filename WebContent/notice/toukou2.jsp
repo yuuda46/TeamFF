@@ -36,8 +36,12 @@
                     String postName = p.getName();
                     if (username != null && username.equals(postName)) {
                 %>
-					<input name="yesproposal" id="yes-button" type="button" onclick="location.href='../notice/ToukouDelete.action'" value="掲示板から削除する">
 
+                    <!-- 削除ボタンをこのフォーム内で扱う -->
+            <div>
+            <input type="hidden" name="items" value="${items}">
+            <input type="submit" name="delete" value="掲示板から削除する" formaction="../notice/ToukouDelete.action">
+			</div>
                 <%
                     }
                 %>
@@ -56,21 +60,13 @@
 
             <!-- コメント入力欄 -->
 		    <textarea name="proposalContent" id="textarea" placeholder="コメントを入力"  required="required" rows="5"></textarea>
-
-		    <!-- エラーメッセージ表示 -->
-			<c:if test="${not empty errorMessage}">
-			    <div style="color: red;">
-			        <p>${errorMessage}</p>
-			    </div>
-			</c:if>
-
 		    <input type="hidden" name="items" value="${items}" required="required">
 		    <button id="filter-button" value="遷移" type="submit">送信</button>
 		</form>
         <%
             } else {
         %>
-            <p>投稿はありません。</p>
+            <p>投稿データを取得できませんでした。時間をおいて再試行してください。</p>
         <%
             }
         %>

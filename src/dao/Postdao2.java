@@ -101,6 +101,7 @@ public class Postdao2 extends DAO {
 		PreparedStatement st=con.prepareStatement(
 			"select id, title, content, name, post_day from post "
 				+ "where category_id is null "
+				+ "AND display = true "
 				+" order by post_day desc");
 		ResultSet rs=st.executeQuery();
 
@@ -126,7 +127,7 @@ public class Postdao2 extends DAO {
 		Connection con=getConnection();
 
 		PreparedStatement st=con.prepareStatement(
-			"select title, content, name, post_day from post "
+			"select id, title, content, name, post_day from post "
 			+ "where id = ?");
 
 		st.setString(1, id);
@@ -138,6 +139,7 @@ public class Postdao2 extends DAO {
 
 		while (rs.next()){
 			Post2 p=new Post2();
+			p.setPostId(rs.getString("id"));
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("name"));
@@ -156,38 +158,47 @@ public class Postdao2 extends DAO {
 	}
 
 	public List<Post2> delete(String id) throws Exception {
-		List<Post2> list=new ArrayList<>();
+	    List<Post2> list = new ArrayList<>();
 
-		Connection del=getConnection();
+	    // コネクションを取得
+	    Connection del = getConnection();
+	    System.out.println(del);
 
-		PreparedStatement st=del.prepareStatement(
-			"UPDATE post SET display = false  "
-			+ "where id = ?");
+	    // display カラムを false に更新
+	    PreparedStatement st = del.prepareStatement(
+	        "UPDATE post SET display = false "
+	    		+" WHERE id = ?");
 
-		st.setString(1, id);
+	    st.setString(1, id);
+	    st.executeUpdate(); // UPDATEを実行
 
-		ResultSet rs=st.executeQuery();
+	    // 更新後のデータを再取得（削除された投稿の詳細を取得するクエリ）
+	    PreparedStatement st2 = del.prepareStatement(
+	        "SELECT id, title, content, name, post_day FROM post"
+	    		+" WHERE id = ?");
 
-		System.out.println(rs);
+	    st2.setString(1, id);
+	    ResultSet rs = st2.executeQuery();
 
-		while (rs.next()){
-			Post2 p=new Post2();
-			p.setTitle(rs.getString("title"));
-			p.setContent(rs.getString("content"));
-			p.setName(rs.getString("name"));
-			p.setPostDay(rs.getDate("post_day"));
+	    // 結果をリストに追加
+	    while (rs.next()) {
+	        Post2 p = new Post2();
+	        p.setPostId(rs.getString("id"));
+	        p.setTitle(rs.getString("title"));
+	        p.setContent(rs.getString("content"));
+	        p.setName(rs.getString("name"));
+	        p.setPostDay(rs.getDate("post_day"));
+	        list.add(p);
+	    }
 
-			list.add(p);
-		}
+	    // クローズ処理
+	    st.close();
+	    st2.close();
+	    del.close();
 
-		st.close();
-		del.close();
-
-		System.out.println("bbb");
-		System.out.println(list);
-
-		return list;
+	    return list;
 	}
+
 
 
 	/**

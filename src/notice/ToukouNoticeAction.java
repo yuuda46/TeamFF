@@ -39,25 +39,22 @@ public class ToukouNoticeAction extends Action {
             }
 
 			Postdao2 com=new Postdao2();
-			//System.out.println("w");
 			List<Comment> list4=com.come(id);
 			request.setAttribute("comment", list4);
-			//
-			//System.out.println("o-");
-			// JSP
+
 			request.setAttribute("list2", list);
 
 
 //			セッションからユーザーネームを取得
 			HttpSession session = request.getSession();
 			String user_name = (String) session.getAttribute("username");
-			System.out.println("iwae:" + user_name);
+
 
 			//
             request.setAttribute("content", list);
 			request.setAttribute("items", id);//
 
-			System.out.println(id);
+
 		}catch (Exception e) {
 			 // 予期しないエラーの場合
             request.setAttribute("errorMessage", "エラーが発生しました。もう一度お試しください。");
