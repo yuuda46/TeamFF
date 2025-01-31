@@ -21,12 +21,14 @@ public class CollectionDAO extends DAO {
 
 //		sql文は、idで検索をかけ、idがpaymentテーブルにないもののみ表示するようになっている。
 		PreparedStatement st = con.prepareStatement(
-	            "SELECT * "
-	            + "FROM PUBLIC.POST p "
-	            + "LEFT JOIN PUBLIC.PAYMENT pay ON p.ID = pay.POSTID AND pay.SIGNID = ? "
-	            + "WHERE p.CATEGORY_ID = 2 "
-	            + "AND pay.SIGNID IS NULL;"
-	        );
+	    	    "SELECT p.ID, p.TITLE, p.CONTENT, p.POST_DAY, " +
+	    	    "       c.monetary, c.deadline, c.Transferee " +  // c_detail のカラムを追加
+	    	    "FROM PUBLIC.POST p " +
+	    	    "LEFT JOIN PUBLIC.PAYMENT pay ON p.ID = pay.POSTID AND pay.SIGNID = ? " +
+	    	    "LEFT JOIN PUBLIC.c_detail c ON p.ID = c.postid " + // c_detail を LEFT JOIN
+	    	    "WHERE p.CATEGORY_ID = 2 " +
+	    	    "AND pay.SIGNID IS NULL;"
+	    	);
 
 	        st.setString(1, sessionId);
 
@@ -38,6 +40,11 @@ public class CollectionDAO extends DAO {
 	            p.setTitle(rs.getString("TITLE"));
 	            p.setContent(rs.getString("CONTENT"));
 	            p.setPost_day(rs.getDate("POST_DAY"));
+
+		        // 追加: c_detail のデータもセット
+		        p.setMonetary(rs.getInt("MONETARY"));
+		        p.setDeadline(rs.getDate("DEADLINE"));
+		        p.setTransferee(rs.getString("TRANSFEREE"));
 
 	            list.add(p);
 	        }
