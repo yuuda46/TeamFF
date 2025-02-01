@@ -135,6 +135,8 @@ footer {
 	/* フッターを一番下に固定するCSS */
 	top: 100vh;
 	position: sticky;
+	margin: 0;
+
 }
 footer a {
 	color: #fff;	/*リンクテキストの文字色*/
