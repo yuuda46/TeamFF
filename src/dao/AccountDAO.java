@@ -79,7 +79,6 @@ public class AccountDAO extends DAO {
               account.setPost_code(rs.getString("post_code"));
               account.setAddress(rs.getString("address"));
               account.setAdmini(rs.getString("admini"));
-              //System.out.println("YYYY");
               accountList.add(account);
             }
 
