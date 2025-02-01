@@ -120,9 +120,11 @@ button[type="button"]:hover {
     background-color: red; /* ホバー時の色を赤に設定 */
 }
 
-button.btn-secondary:hover {
+a.btn:hover {
     background-color: red; /* ホバー時の色を赤に設定 */
 }
+
+
 
 /*フッター設定
 ---------------------------------------------------------------------------*/

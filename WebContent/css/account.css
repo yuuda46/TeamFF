@@ -310,4 +310,104 @@ section.mo-3 {
     padding: 0 20px; /* 左右に空白を追加 */
     box-sizing: border-box;
 }
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
 
+.pagination a, .pagination .current {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.pagination a {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
+
+.pagination .current {
+    background-color: #6c757d;
+    color: white;
+}
+/* ドロップダウンメニューボタンの配置 */
+header .dropdown {
+    position: absolute;
+    top: 10px;      /* 上からの位置 */
+    right: 10px;    /* 右からの位置 */
+}
+
+header .dropdown .dropdown-menu {
+    display: none;                     /* 初期状態で非表示 */
+    position: absolute;
+    top: 60%;                         /* ボタンの真下に表示 */
+    right: 0px;                            /* 右揃え */
+    background-color: transparent;     /* 背景を完全に透過 */
+    border: none;                      /* 枠線を非表示 */
+    padding: 10px 0;
+    list-style: none;
+    text-align: left;
+    min-width: 100px;
+    transition: opacity 0.3s ease;     /* スムーズな遷移 */
+    opacity: 0;                        /* 初期状態で透明 */
+}
+
+header .dropdown:hover .dropdown-menu,
+header .dropdown.show .dropdown-menu {
+    display: block;                    /* ホバー時に表示 */
+    opacity: 1;                        /* ホバー時にフェードイン */
+    z-index: 30;
+}
+
+header .dropdown .dropdown-menu li {
+    padding: 8px 0;                    /* 項目の余白を少し調整 */
+}
+
+header .dropdown .dropdown-menu li a {
+    color: #ffffff;                       /* 文字色 */
+    text-decoration: none;             /* 下線を消す */
+    display: block;
+    background: transparent;           /* 背景を完全に透過 */
+}
+
+header .dropdown .dropdown-menu li a:hover {
+    color: #ff4765;                    /* ホバー時の文字色 */
+    background: transparent;           /* ホバー時も背景を透過 */
+}
+
+.dropdown-toggle {
+  display: inline-block;
+  background: transparent;
+  border: solid 2px #FFF;
+  color: #FFF;
+  border-radius: 10px;
+  padding: 10px 30px;
+  text-decoration: none;
+  font-size: 1em;
+  transition: all .3s ease 0s;
+}
+/*新規登録*/
+.button12 {
+  display: inline-block;
+  background: transparent;
+  border: solid 2px #FFF;
+  color: #FFF;
+  border-radius: 10px;
+  padding: 10px 30px;
+  text-decoration: none;
+  font-size: 1em;
+  transition: all .3s ease 0s;
+
+}
+
+.button12:hover {
+    color: red; /* 文字を赤色に変更 */
+    background-color: transparent; /* 背景を透明にする */
+}
