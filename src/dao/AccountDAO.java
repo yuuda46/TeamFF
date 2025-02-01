@@ -65,7 +65,7 @@ public class AccountDAO extends DAO {
           List<Account> accountList = new ArrayList<>();
           Connection con = getConnection();
 
-          PreparedStatement st = con.prepareStatement("SELECT * FROM SIGNUP");
+          PreparedStatement st = con.prepareStatement("SELECT * FROM SIGNUP ORDER BY CASE WHEN admini = 'true' THEN 1 ELSE 0 END DESC,user_name ASC");
           ResultSet rs = st.executeQuery();
 
           while (rs.next()) {
