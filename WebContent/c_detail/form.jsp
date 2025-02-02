@@ -7,7 +7,7 @@
     <c:param name="content">
         <section class="mo-4">
             <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">集金物入力</h2>
-            <form class="mx-3" action="../c_detail/C_detail.action" method="post">
+            <form class="mx-3" action="c_detail_con.jsp" method="post">
 <%
     // Javaから受け取った postid を取得
     String postid = (String) request.getAttribute("postid");
@@ -21,10 +21,11 @@
 					    <input class="select-shape"
 					           type="number"
 					           name="monetary"
-					           placeholder="例: 1000 (円)"
+					           placeholder="例:1000(円)"
 					           required="required"
-					           min="1"
-					           step="100"
+					           min="0"
+					           max="999999999"
+					           step="10"
 					           value="${monetary}"
 					           style="${not empty errorMonetary ? 'border: 2px solid red;' : ''}">
 					    <br>
@@ -56,9 +57,24 @@
             </form>
 
             <form action="../notice/Tokou.action" method="get">
-                <button class="btn btn-secondary mt-3" type="submit">戻る</button>
+                <button class="btn btn-secondary" type="submit">戻る</button>
             </form>
 
         </section>
+
+        <script>
+        document.getElementById("monetary").addEventListener("input", function() {
+            let monetaryField = document.getElementById("monetary");
+            let errorField = document.getElementById("monetary-error");
+            let value = monetaryField.value;
+
+            if (value.length > 9) {
+                monetaryField.value = value.slice(0, 9); // 10桁に制限
+                errorField.textContent = "金額は10桁までしか入力できません。";
+            } else {
+                errorField.textContent = "";
+            }
+        });
+    </script>
     </c:param>
 </c:import>

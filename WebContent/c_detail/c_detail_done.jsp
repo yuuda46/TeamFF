@@ -18,7 +18,7 @@
 </header>
 <head>
     <meta charset="UTF-8">
-    <title>アカウント権限を外す</title>
+    <title>集金物投稿完了</title>
     <link rel="stylesheet" href="../css/account2.css">
     <style>
 
@@ -27,10 +27,10 @@
 <body>
 
     <div class="main-container">
-    <h2>アカウント権限を外しました</h2>
-    <p><c:out value="${name}" default="ユーザー" />さんは組員になりました<br>管理者の権限が外されました</p>
-        <form action="AccountList.action" method="get">
-        <button type="submit">アカウント一覧</button>
+    <h2>集金物投稿完了</h2>
+    <p>投稿されました</p>
+        <form action="C_detailList.action" method="get">
+        <button type="submit">集金物投稿へ</button>
     </form>
     </div>
     <footer>

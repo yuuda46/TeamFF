@@ -109,7 +109,7 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-button[type="submit"]:hover {
+button[type="submit"] {
     background-color: #6c757d;
 }
 

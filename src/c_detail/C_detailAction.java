@@ -20,14 +20,23 @@ public class C_detailAction extends Action {
 
         try {
             // JSPから受け取る情報
-        	String postid = request.getParameter("postid");
-        	System.out.println("Received postid: " + postid);  // 受け取った値をログに出力
+            String postid = request.getParameter("postid");
+            System.out.println("Received postid: " + postid);  // 受け取った値をログに出力
             String monetaryStr = request.getParameter("monetary");
             String deadlineStr = request.getParameter("deadline");
             String transferee = request.getParameter("transferee");
 
             // フィールドの変換と設定
-            Integer monetary = (monetaryStr != null && !monetaryStr.isEmpty()) ? Integer.parseInt(monetaryStr) : null;
+            Integer monetary = null;
+            if (monetaryStr != null && !monetaryStr.isEmpty()) {
+                if (monetaryStr.length() > 10) {
+                    request.setAttribute("errorMonetary", "金額は10桁までしか入力できません。");
+                    request.getRequestDispatcher("form.jsp").forward(request, response);
+                    return null;
+                }
+                monetary = Integer.parseInt(monetaryStr);
+            }
+
             Date deadline = (deadlineStr != null && !deadlineStr.isEmpty()) ? Date.valueOf(deadlineStr) : null;
 
             // C_detailオブジェクトを作成
@@ -44,7 +53,7 @@ public class C_detailAction extends Action {
 
             if (result > 0) {
                 // 挿入成功時の処理 (例: 成功画面へリダイレクト)
-                request.getRequestDispatcher("../notice/Tokou.action").forward(request, response);
+                request.getRequestDispatcher("c_detail_done.jsp").forward(request, response);
             } else {
                 // 挿入失敗時の処理 (例: エラー画面へリダイレクト)
                 request.getRequestDispatcher("index.jsp").forward(request, response);
