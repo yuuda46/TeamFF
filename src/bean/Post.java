@@ -15,6 +15,7 @@ public class Post {
 	private Integer monetary;
 	private Date deadline;
 	private String transferee;
+	private String judgement;
 
 	public String getPost_id() {
 		return post_id;
@@ -108,4 +109,11 @@ public class Post {
 	public void setTransferee(String transferee) {
 	    this.transferee = transferee;
 	}
+    public String getJudgement() {
+        return judgement;
+    }
+
+    public void setJudgement(String judgement) {
+        this.judgement = judgement;
+    }
   }
