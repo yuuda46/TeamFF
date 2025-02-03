@@ -226,7 +226,7 @@ p a {
 
                 // パスワードが正規表現に一致しない場合、エラーメッセージを設定
                 else if (!inputPassword.matches(regex)) {
-                    passwordError = "半角英数字5文字以上で英数字を両方含む必要があります。";
+                    passwordError = "半角英数字5文字以上で入力してください。";
                 }
                     // データベース接続
                     Class.forName("org.postgresql.Driver");
@@ -272,33 +272,35 @@ p a {
         }
     %>
 
-    <!-- ログインフォーム -->
-    <form method="POST" action="login.jsp" autocomplete="off">
-        <div class="form-group">
-            <label for="username">ユーザー名:</label>
-            <input type="text" name="username" placeholder="ユーザー名を入力" value="<%= request.getParameter("username") %>" required autocomplete="off">
-            <!-- ユーザー名エラー表示 -->
-            <div class="error-message" style="color: red; font-size: 12px;">
-                <%= !usernameError.isEmpty() ? usernameError : "" %>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password">パスワード:</label>
-            <input type="password" name="password" placeholder="パスワードを入力" value="<%= request.getParameter("password") %>" required autocomplete="off">
-            <!-- パスワードエラー表示 -->
-            <div class="error-message" style="color: red; font-size: 12px;">
-                <%= !passwordError.isEmpty() ? passwordError : "" %>
-            </div>
-        </div>
-        <button type="submit" class="login-btn">ログイン</button>
-    </form>
 
-    <!-- ログインの一般的なエラーメッセージ -->
-    <div class="error-message" style="color: red; text-align: center;">
+<!-- ログインフォーム -->
+<form method="POST" action="login.jsp" autocomplete="off">
+    <div class="form-group">
+        <label for="username">ユーザー名:</label>
+        <input type="text" name="username" placeholder="ユーザー名を入力" value="<%= (request.getParameter("username") != null ? request.getParameter("username") : "") %>" required autocomplete="off">
+        <!-- ユーザー名エラー表示 -->
+        <div class="error-message" style="color: red; font-size: 12px; margin-top: 2px; margin-left: 0;">
+            <%= !usernameError.isEmpty() ? usernameError : "" %>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="password">パスワード:</label>
+        <input type="password" name="password" placeholder="パスワードを入力" value="<%= (request.getParameter("password") != null ? request.getParameter("password") : "") %>" required autocomplete="off">
+
+        <!-- パスワードエラー表示 -->
+        <div class="error-message" style="color: red; font-size: 12px; margin-top: 2px; margin-left: 0;">
+            <%= !passwordError.isEmpty() ? passwordError : "" %>
+        </div>
+    </div>
+
+    <!-- ログインエラーメッセージ（1か所にまとめて表示） -->
+    <div class="error-message" style="color: red; text-align: left; font-size: 14px; margin-top: 5px; margin-bottom: 10px; margin-left: 0;">
         <%= !loginMessage.isEmpty() ? loginMessage : "" %>
     </div>
-</div>
 
+    <button type="submit" class="login-btn">ログイン</button>
+</form>
 
     <!-- 戻るボタン -->
     <p style="text-align: center;">
@@ -315,9 +317,7 @@ p a {
         text-align: center;
         margin-top: 10px;
     }
-</style>
 
-<style>
     /* ログインボタン */
     .login-btn {
         width: 300px; /* 幅を指定 */
@@ -346,7 +346,11 @@ p a {
         font-size: 16px;
         cursor: pointer;
     }
+
+
 </style>
+
+
 
 
 <!-- パスワードを忘れたリンク -->
