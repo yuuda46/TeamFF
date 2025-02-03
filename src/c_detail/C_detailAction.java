@@ -47,6 +47,7 @@ public class C_detailAction extends Action {
             detail.setDeadline(deadline);
             detail.setTransferee(transferee);
 
+
             // DAOを使用してデータを挿入
             C_detailDAO dao = new C_detailDAO();
             int result = dao.insert(detail);

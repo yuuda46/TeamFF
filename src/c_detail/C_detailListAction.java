@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Post;
-import dao.CollectionDAO;
+import dao.C_detailDAO;
 import tool.Action;
 
 public class C_detailListAction extends Action {
@@ -29,7 +29,7 @@ public class C_detailListAction extends Action {
             String sessionId = (String) session.getAttribute("sessionId");
 
             // セッションIDを使用してPOSTのリストを取得
-            CollectionDAO dao = new CollectionDAO();
+            C_detailDAO dao = new C_detailDAO();
             List<Post> list = dao.search(sessionId);
 
             // データをjspへ

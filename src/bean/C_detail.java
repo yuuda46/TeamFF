@@ -52,6 +52,7 @@ import java.sql.Date;
 	        this.transferee = transferee;
 	    }
 
+
 	    public String getJudgement() {
 	        return judgement;
 	    }
@@ -59,4 +60,4 @@ import java.sql.Date;
 	    public void setJudgement(String judgement) {
 	        this.judgement = judgement;
 	    }
-	}
+}

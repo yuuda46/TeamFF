@@ -47,6 +47,7 @@ public class CollectionDAO extends DAO {
 		        p.setDeadline(rs.getDate("DEADLINE"));
 		        p.setTransferee(rs.getString("TRANSFEREE"));
 
+
 	            list.add(p);
 	        }
 	        st.close();
@@ -176,4 +177,5 @@ System.out.println("List size in DAO: " + list.size());
 
 	    return line;
 	}
+
 }
