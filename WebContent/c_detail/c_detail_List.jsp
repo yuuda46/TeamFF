@@ -54,6 +54,26 @@
                              </tr>
                         </c:forEach>
                     </table>
+                    					 <div class="pagination">
+					    <c:if test="${currentPage > 1}">
+					        <a href="C_detailList.action?page=${currentPage - 1}">前へ</a>
+					    </c:if>
+
+					    <c:forEach var="i" begin="1" end="${totalPages}">
+					        <c:choose>
+					            <c:when test="${i == currentPage}">
+					                <strong>${i}</strong>
+					            </c:when>
+					            <c:otherwise>
+					                <a href="C_detailList.action?page=${i}">${i}</a>
+					            </c:otherwise>
+					        </c:choose>
+					    </c:forEach>
+
+					    <c:if test="${currentPage < totalPages}">
+					        <a href="C_detailList.action?page=${currentPage + 1}">次へ</a>
+					    </c:if>
+					</div>
                 </c:when>
                 <c:otherwise>
                     <div>現在入金待ちの項目はありません</div>

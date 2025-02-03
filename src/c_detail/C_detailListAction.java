@@ -14,7 +14,7 @@ import dao.C_detailDAO;
 import tool.Action;
 
 public class C_detailListAction extends Action {
-
+	 private static final int ITEMS_PER_PAGE = 10; // 1ページあたりの件数
 
 	public String execute(
             HttpServletRequest request, HttpServletResponse response
@@ -30,10 +30,25 @@ public class C_detailListAction extends Action {
 
             // セッションIDを使用してPOSTのリストを取得
             C_detailDAO dao = new C_detailDAO();
-            List<Post> list = dao.search(sessionId);
+            List<Post> allPosts = dao.search(sessionId);
 
-            // データをjspへ
-            request.setAttribute("Post", list);
+            int totalItems = allPosts.size(); // 全件数
+            int totalPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE); // 総ページ数計算
+
+            // クエリパラメータからページ番号を取得（デフォルト1）
+            String pageParam = request.getParameter("page");
+            int currentPage = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            // ページ範囲のデータを取得
+            int start = (currentPage - 1) * ITEMS_PER_PAGE;
+            int end = Math.min(start + ITEMS_PER_PAGE, totalItems);
+            List<Post> paginatedList = allPosts.subList(start, end);
+
+            request.setAttribute("Post", paginatedList);
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("totalPages", totalPages);
 
         } catch (Exception e) {
             e.printStackTrace(out);

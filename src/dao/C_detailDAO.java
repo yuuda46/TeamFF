@@ -51,8 +51,9 @@ public class C_detailDAO extends DAO {
 		    	    "LEFT JOIN PUBLIC.PAYMENT pay ON p.ID = pay.POSTID AND pay.SIGNID = ? " +
 		    	    "LEFT JOIN PUBLIC.c_detail c ON p.ID = c.postid " + // c_detail を LEFT JOIN
 		    	    "WHERE p.CATEGORY_ID = 2 " +
-		    	    "AND pay.SIGNID IS NULL " +
-		    	    "ORDER BY c.deadline ASC NULLS LAST;"
+		    	    "AND pay.SIGNID IS NULL "+
+		    	    "ORDER BY c.judgement DESC; "
+
 		    	);
 
 		        st.setString(1, sessionId);
