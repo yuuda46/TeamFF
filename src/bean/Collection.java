@@ -17,6 +17,7 @@ public class Collection {
 
 	private String detailid ;
 	private int monetary ;
+	private String judgement;
 
 
 	public String getPaymentID() {
@@ -84,5 +85,12 @@ public class Collection {
 	public void setMonetary(int monetary) {
 		this.monetary = monetary;
 	}
+    public String getJudgement() {
+        return judgement;
+    }
+
+    public void setJudgement(String judgement) {
+        this.judgement = judgement;
+    }
 
 }

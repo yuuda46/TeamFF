@@ -9,6 +9,7 @@ import java.sql.Date;
 	    private Integer monetary;
 	    private Date deadline;
 	    private String transferee;
+	    private String judgement;
 
 
 	    public String getDetailid() {
@@ -49,5 +50,13 @@ import java.sql.Date;
 
 	    public void setTransferee(String transferee) {
 	        this.transferee = transferee;
+	    }
+
+	    public String getJudgement() {
+	        return judgement;
+	    }
+
+	    public void setJudgement(String judgement) {
+	        this.judgement = judgement;
 	    }
 	}
