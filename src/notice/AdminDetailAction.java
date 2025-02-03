@@ -22,7 +22,7 @@ public class AdminDetailAction extends Action {
 
 			try{
 //				notice_admin.jspからデータを取得する
-				String id = request.getParameter("id");
+				String id = request.getParameter("post_id");
 
 //				if (id != null){
 //					System.out.println("abc");
@@ -36,6 +36,12 @@ public class AdminDetailAction extends Action {
 //				System.out.println(list);
 
 				request.setAttribute("content", list);
+
+				Integer category_id = Integer.parseInt(request.getParameter("category_id"));
+
+				if (category_id != null) {
+					request.setAttribute("category_id", category_id);
+				}
 
 			}catch (Exception e) {
 				e.printStackTrace(out);

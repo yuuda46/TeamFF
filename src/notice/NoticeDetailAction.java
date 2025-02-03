@@ -21,12 +21,9 @@ public class NoticeDetailAction extends Action {
 		PrintWriter out=response.getWriter();
 
 		try{
+			System.out.println("asdf");
 //			notice.jspからデータを取得する
 			String id = request.getParameter("id");
-
-//			if (id != null){
-//				System.out.println("abc");
-//			}
 
 //			h2コンソールから投稿内容を取得
 			PostDAO dao=new PostDAO();
@@ -36,6 +33,16 @@ public class NoticeDetailAction extends Action {
 //			System.out.println(list);
 
 			request.setAttribute("content", list);
+
+			Integer category = Integer.parseInt(request.getParameter("category_id"));
+
+//			if (id != null){
+//				System.out.println("abc");
+//			}
+
+			if (category != null){
+				request.setAttribute("category", category);
+			}
 
 		}catch (Exception e) {
 			e.printStackTrace(out);

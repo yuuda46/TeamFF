@@ -46,13 +46,19 @@
 				<c:forEach var="notice_content" items="${notice_content}">
 					<tr>
 					<td>${notice_content.title}</td>
-					<td><a href="../notice/AdminDetail.action?id=${notice_content.postId}">${notice_content.content}</a></td>
+					<td class="padding_none">
+						<form class="padding_bottom_0 text_left" action="../notice/AdminDetail.action?" method="post">
+							<input type="hidden" name="post_id" value="${notice_content.postId}">
+							<input type="hidden" name="category_id" value=<%=category%>>
+							<button class="button_style border-none padding_left_12 padding_top_10 padding_bottom_10 text_left" type="submit">${notice_content.content}</button>
+						</form>
+					</td>
 					<td>${notice_content.name}</td>
 					<td>${notice_content.postDay}</td>
 					<td>　　${notice_content.categoryId}</td>
 					<td class="padding_none">
 						<form class="padding_bottom_0" action="../notice/NoticeUpdate.action" method="get">
-						<input type="hidden" name="post_id" value="${notice_content.postId}">
+							<input type="hidden" name="post_id" value="${notice_content.postId}">
 							<button class="button_style border-none hit_judgment_mechanics" type="submit">編集</button>
 						</form>
 					</td>

@@ -6,6 +6,9 @@
 <%-- 文字化けの対策 --%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+<%
+	Integer category=(Integer)request.getAttribute("category");
+%>
 <link rel="stylesheet" href="../css/notice.css">
 
 <c:import url="/common/base.jsp">
@@ -29,6 +32,7 @@
 		</c:choose>
 
 		<form action="../notice/Notice.action">
+			<input type="hidden" name="f1" value="<%=category%>">
 			<button class="detail_button button_style" type="submit">戻る</button>
 		</form>
 	</div>

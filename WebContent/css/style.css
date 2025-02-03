@@ -447,7 +447,7 @@ header .dropdown .dropdown-menu li a:hover {
 
 /*base.jspのヘッダーのcss*/
 .head {
-	height: 45%;
+	height: 260px;
 	overflow: auto;
 	position: relative;
 	background : none;
@@ -456,10 +456,10 @@ header .dropdown .dropdown-menu li a:hover {
 /*ロゴ画像*/
 .head #logo img {
 	display: block;
-	width: 20%;	/*画像の幅*/
+	width: 250px;	/*画像の幅*/
 	position: absolute;
 	left: 40%;		/*ロゴやメニューが入っているブロックに対して、左からの配置場所の指定。*/
-	top: 15%;	/*ロゴやメニューが入っているブロックに対して、下からの配置場所の指定。*/
+	top: 40px;	/*ロゴやメニューが入っているブロックに対して、下からの配置場所の指定。*/
 }
 
 /*メニュー

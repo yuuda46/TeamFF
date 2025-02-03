@@ -6,25 +6,30 @@
 <%-- 文字化けの対策 --%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+<%
+	Integer category_id=(Integer)request.getAttribute("category_id");
+%>
+<link rel="stylesheet" href="../css/notice.css">
 
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 
-	<c:choose>
-		<c:when test="${content.size()>0}">
-			<c:forEach var="content" items="${content}">
-				<h2>${content.title}</h2>
-				<p><img src="../upload/${content.content}"></p>
-				<p>${content.name}</p>
-				<p>${content.postDay}</p>
-			</c:forEach>
-		</c:when>
+	<div class="container2">
+		<c:choose>
+			<c:when test="${content.size()>0}">
+				<c:forEach var="content" items="${content}">
+					<p class="detail_font">回覧物</p>
+					<p class="position_center detail_font"><img src="../upload/${content.content}"></p>
+				</c:forEach>
+			</c:when>
 
-	</c:choose>
+		</c:choose>
 
-	<form action="../notice/NoticeAdmin.action">
-		<button type="submit">戻る</button>
-	</form>
+		<form action="../notice/NoticeAdmin.action">
+			<input type="hidden" name="f1" value=<%=category_id%>>
+			<button class="detail_button button_style" type="submit">戻る</button>
+		</form>
+	</div>
 
 	</c:param>
 </c:import>

@@ -42,11 +42,26 @@
 .margin-1px {
 	margin-top: 1px;
 }
+.margin_top_50px {
+	margin-top: 50px;
+}
+.padding_top_50px {
+	padding-top: 50px;
+}
+.padding_top_10 {
+	padding-top: 10px;
+}
 
 /*下に余白をあけるCSS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .detail_bottom {
 	padding-bottom: 5px;
+}
+.padding_bottom_50 {
+	padding-bottom: 50px;
+}
+.padding_bottom_10 {
+	padding-bottom: 10px;
 }
 
 /*右に余白をあける
@@ -56,6 +71,9 @@
 }
 .notice_right {
 	margin-right: 30px;
+}
+.paddeng_right_20 {
+	padding-right: 20px;
 }
 
 /*左に余白をあける
@@ -74,6 +92,9 @@
 }
 .margin_left_45 {
 	margin-left: 45px;
+}
+.padding_left_12 {
+	padding-left: 12px;
 }
 
 /*余白を消すCSS
@@ -198,12 +219,29 @@
 }
 
 .border-none {
+	width: 100%;
+	height: 100%;
 	border: none;
 	outline: none;
 	background: transparent;
 }
 .hit_judgment_mechanics {
 	padding: 10px 15px;
+}
+.notice_full_button {
+	position: absolute;
+	width: 100%;
+	height: 110px;
+	text-align:left;
+	vertical-align: top;
+	font-size: 25px;
+	top: -17px;
+	z-index: 10;
+}
+.notice_full_button:hover {
+	color: #ff4765;
+	background-color: rgba(233,236,239,0.4);
+	cursor: pointer; /* マウスポインタを変更する */
 }
 
 /*文字のCSS
@@ -216,6 +254,12 @@
 	margin:-10px;
 	padding:10px;
 }
+.bold_text {
+	font-weight: bold;
+}
+.text_left {
+	text-align: left;
+}
 
 /*要素の幅を制限するCSS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -227,6 +271,9 @@
 .container2 {
 	max-width : 780px;
 	margin : 0 auto;
+}
+.notice_hight {
+	height:85px;
 }
 
 /* テーブルのCSS
@@ -265,4 +312,12 @@ table tr:hover {
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 p.preview img {
     height: 100px;  /* 横幅を200pxに */
+}
+.image_depth {
+	position: absolute;
+	right: 0;
+	left: 0;
+	margin: auto;
+	z-index: 15;
+	pointer-events: none;
 }
