@@ -6,13 +6,14 @@
 <%-- 文字化けの対策 --%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
+<link rel="stylesheet" href="../css/notice.css">
 
 <c:import url="/common/base.jsp">
 	<c:param name="content">
-	<p>削除完了しました</p>
+	<p class="detail_font container2 detail_top">削除完了しました</p>
 
-	<form action="../notice/NoticeAdmin.action" method="get">
-		<button type="submit">戻る</button>
+	<form class="position_center detail_top" action="../notice/NoticeAdmin.action" method="get">
+		<button class="button_style button_size" type="submit">戻る</button>
 	</form>
 
 	</c:param>

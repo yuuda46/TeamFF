@@ -14,20 +14,20 @@
 <style>
 a.link_judgement::after {
 content: "";
-position: absolute;
+
 top: -10px;
 left: -1px;
 right: -1px;
 bottom: -70px;
-z-index: 1000;
+
 }
 </style>
 
 <c:import url="/common/base.jsp">
 
 	<c:param name="content">
-	<form action="../notice/Notice.action" method="get">
 	<div  class="container">
+	<form action="../notice/Notice.action" method="get">
 		<div class="notice_center">
 			<div class="right_margin top_margin">
 				<select class="select_size detail_font" required id="notice-f1-select" name="f1">
@@ -42,16 +42,22 @@ z-index: 1000;
 				<button class="top_margin button_size button_style detail_font" id="filter-button">検索</button>
 			</div>
 		</div>
+	</form>
 
 		<c:choose>
 			<c:when test="${notice_content.size()>0}">
 				<div class="position_right">件数:${notice_content.size()}件</div>
+				<hr class="notice_line">
 				<c:forEach var="notice_content" items="${notice_content}">
-				<div class="parent">
-					<h2 class="position_notice"><a class="link_judgement" href="../notice/NoticeDetail.action?id=${notice_content.postId}">${notice_content.title}</a></h2>
-						<p class="notice_left margin-1px padding_left_20">${notice_content.categoryName}</p>
-						<p class="preview absolute_element position_center child"><img src="../upload/${notice_content.content}"></p>
-						<p class="position_right">🕑${notice_content.postDay}</p>
+				<div class="parent notice_hight">
+					<form action="../notice/NoticeDetail.action" method="post">
+						<input type="hidden" name="id" value="${notice_content.postId}">
+						<input type="hidden" name="category" value="<%=category%>">
+						<button class="notice_full_button padding_left_20 padding_bottom_50 bold_text border-none" type="submit">${notice_content.title}</button>
+					</form>
+					<p class="notice_left margin_top_50px padding_left_20">${notice_content.categoryName}</p>
+					<p class="preview absolute_element position_center child"><img class="image_depth" src="../upload/${notice_content.content}"></p>
+					<p class="position_right padding_top_50px paddeng_right_20">🕑${notice_content.postDay}</p>
 				</div>
 
 					<hr class="notice_line">
@@ -71,6 +77,5 @@ z-index: 1000;
 		select.options[hoge].selected = true
 	</script>
 
-	</form>
 	</c:param>
 </c:import>
