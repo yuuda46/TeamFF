@@ -26,8 +26,8 @@
 			</label>
 
 
-		<form action="../collection/CollectionList.action" method="get">
-          <button type="submit" class="CollectionList.action">
+		<form action="../collection/CollectionDeposit.action" method="get">
+          <button type="submit" class="CollectionDeposit.action">
           未入金確認画面に戻る
           </button>
         </form>

@@ -24,6 +24,13 @@
         </button>
     </form>
 
+    <form action="./CollectionDeposit.action" method="get">
+        <input type="hidden" name="postID" value="your_post_id_value_here">
+        <button type="submit">
+            入金完了画面へ
+        </button>
+    </form>
+
     </div>
     </c:param>
 </c:import>

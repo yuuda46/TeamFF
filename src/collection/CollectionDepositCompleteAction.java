@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import bean.Payment;
 import dao.CollectionDAO;
@@ -22,30 +21,25 @@ public class CollectionDepositCompleteAction extends Action {
         PrintWriter out = response.getWriter();
 
         try {
-            // セッションからIDを取得
-            HttpSession session = request.getSession();
-            String sessionId = (String) session.getAttribute("sessionId");
+            // フォームからsignidとpostIdを取得
+            String signid = request.getParameter("signid");
+            String postId = request.getParameter("postId");
 
             // デバッグメッセージ
-            System.out.println("Session ID: " + sessionId);
+            System.out.println("Sign ID: " + signid);
+            System.out.println("Post ID: " + postId);
 
-            // セッションIDがnullでないことを確認
-            if (sessionId == null) {
-                System.out.println("Session ID is null");
+            // signidとpostIdがnullでないことを確認
+            if (signid == null || signid.isEmpty() || postId == null || postId.isEmpty()) {
+                System.out.println("Sign ID or Post ID is null or empty");
                 response.sendRedirect("ErrorPage1.jsp");
                 return null;
             }
 
-            // フォームからpostIdを取得
-            String postId = request.getParameter("postId");
-
-            // デバッグメッセージ
-            System.out.println("Post ID: " + postId);
-
             // Paymentオブジェクトを作成
             Payment payment = new Payment();
             payment.setPostID(postId);
-            payment.setSignID(sessionId);
+            payment.setSignID(signid);
 
             // DAOを使用してデータを挿入
             CollectionDAO dao = new CollectionDAO();

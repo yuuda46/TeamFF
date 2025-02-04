@@ -10,6 +10,7 @@ import java.util.List;
 import bean.Collection;
 import bean.Payment;
 import bean.Post;
+import bean.Signup;
 
 public class CollectionDAO extends DAO {
 
@@ -56,35 +57,119 @@ public class CollectionDAO extends DAO {
 	        return list;
 	    }
 
-// 選択されたものを表示するためのやつ
-	public List<Post> retrieval(String payment) throws Exception {
-	    List<Post> list = new ArrayList<>();
+   // signidで検索する
+public List<Post> searchBySignId(String signid) throws Exception {
+    List<Post> list = new ArrayList<>();
 
-	    Connection con = getConnection();
+    Connection con = getConnection();
 
-	    // SQLは、WHEREで持ってきた番号（collection_listで選択された番号）を入れて返す。
-	    PreparedStatement st = con.prepareStatement(
-	        "SELECT ID, TITLE, CONTENT, POST_DAY FROM PUBLIC.POST WHERE ID = ?"
-	    );
+    // SQLクエリの準備
+    PreparedStatement st = con.prepareStatement(
+	    "SELECT * " +
+	    "FROM PUBLIC.POST p " +
+	    "LEFT JOIN PUBLIC.PAYMENT pay ON p.ID = pay.POSTID AND pay.SIGNID = ? " +
+	    "LEFT JOIN PUBLIC.c_detail c ON p.ID = c.postid " + // c_detail を LEFT JOIN
+	    "WHERE p.CATEGORY_ID = 2 " +
+	    "AND pay.SIGNID IS NULL;"
+    );
 
-	    st.setString(1, payment);
+    // パラメータの設定
+    st.setString(1, signid);
 
-	    ResultSet rs = st.executeQuery();
+    // クエリの実行
+    ResultSet rs = st.executeQuery();
 
-	    while (rs.next()) {
-	        Post p = new Post();
-	        p.setId(rs.getString("ID"));
-	        p.setTitle(rs.getString("TITLE"));
-	        p.setContent(rs.getString("CONTENT"));
-	        p.setPost_day(rs.getDate("POST_DAY"));
+    // 結果セットの処理
+    while (rs.next()) {
+        Post p = new Post();
+        p.setId(rs.getString("ID"));
+        p.setTitle(rs.getString("TITLE"));
+        p.setContent(rs.getString("CONTENT"));
+        p.setPost_day(rs.getDate("POST_DAY"));
+        p.setMonetary(rs.getInt("monetary"));
+        p.setDeadline(rs.getDate("deadline"));
+        p.setTransferee(rs.getString("Transferee"));
 
-	        list.add(p);
-	    }
-	    st.close();
-	    con.close();
+        list.add(p);
+    }
+    st.close();
+    con.close();
 
-	    return list;
-	}
+    return list;
+}
+
+public List<Signup> nameget(String signid) throws Exception {
+    List<Signup> list2 = new ArrayList<>();
+
+    Connection con = getConnection();
+
+    PreparedStatement st = con.prepareStatement(
+        "SELECT * " +
+        "FROM signup " +
+        "WHERE id = ?"
+    );
+
+    // パラメータの設定
+    st.setString(1, signid);
+
+    // デバッグ用にクエリとパラメータを出力
+    System.out.println("Executing query: SELECT * FROM signup WHERE id = " + signid);
+
+    // クエリの実行
+    ResultSet rs = st.executeQuery();
+
+    // 結果セットの処理
+    while (rs.next()) {
+        Signup n = new Signup();
+        n.setId(rs.getString("ID"));
+        n.setName(rs.getString("Name"));
+
+        // デバッグ用に取得したデータを出力
+        System.out.println("Retrieved Signup: ID=" + n.getId() + ", Name=" + n.getName());
+
+        list2.add(n);
+    }
+    st.close();
+    con.close();
+
+    return list2;
+}
+//選択されたものを表示するためのやつ
+public List<Post> retrieval(String payment) throws Exception {
+    List<Post> list = new ArrayList<>();
+
+    Connection con = getConnection();
+
+    // SQLは、WHEREで持ってきた番号（collection_listで選択された番号）を入れて返す。
+    PreparedStatement st = con.prepareStatement(
+    	"SELECT * " +
+        "FROM POST " +
+        "JOIN c_detail ON post.id = c_detail.postid " +
+        "WHERE ID = ?"
+    );
+
+    st.setString(1, payment);
+
+    ResultSet rs = st.executeQuery();
+
+    while (rs.next()) {
+    	Post p = new Post();
+        p.setId(rs.getString("ID"));
+        p.setTitle(rs.getString("TITLE"));
+        p.setContent(rs.getString("CONTENT"));
+        p.setPost_day(rs.getDate("POST_DAY"));
+        p.setMonetary(rs.getInt("monetary"));
+        p.setDeadline(rs.getDate("deadline"));
+        p.setTransferee(rs.getString("Transferee"));
+
+        list.add(p);
+    }
+    st.close();
+    con.close();
+
+    return list;
+}
+
 
 //入金済み検索
 	public List<Collection> Completed_search(String PostID) throws Exception {
