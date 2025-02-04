@@ -55,10 +55,37 @@
                                 <td class="test-table-wide test-boder">${Collection.id}</td>
                                 <td class="test-table-wide test-boder">${Collection.title}</td>
                                 <td class="test-table-wide test-boder">${Collection.post_day}</td>
-                                <td class="test-table-wide test-boder">${Collection.monetary}</td>
-                                <td class="test-table-wide test-boder">${Collection.deadline}</td>
-                                <td class="test-table-wide test-boder">${Collection.transferee}</td>
+                                <td class="test-table-wide test-boder">
+								    <c:choose>
+								        <c:when test="${empty Collection.monetary or Collection.monetary == 0}">
+								            -
+								        </c:when>
+								        <c:otherwise>
+								            ${Collection.monetary}
+								        </c:otherwise>
+								    </c:choose>
+								</td>
+                                <td class="test-table-wide test-boder">
+								    <c:choose>
+								        <c:when test="${empty Collection.deadline}">
+								            -
+								        </c:when>
+								        <c:otherwise>
+								            ${Collection.deadline}
+								        </c:otherwise>
+								    </c:choose>
+								</td>
 
+								<td class="test-table-wide test-boder">
+								    <c:choose>
+								        <c:when test="${empty Collection.transferee}">
+								            -
+								        </c:when>
+								        <c:otherwise>
+								            ${Collection.transferee}
+								        </c:otherwise>
+								    </c:choose>
+								</td>
 
 
 
