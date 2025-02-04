@@ -109,7 +109,7 @@
         </c:if>
     </div>
 
-    <form action="../common/index.jsp" method="get">
+    <form action="../notice/Tokou.action" method="get">
         <button class="btn btn-secondary" type="submit">戻る</button>
     </form>
 </section>

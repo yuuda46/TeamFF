@@ -56,7 +56,7 @@
                 <button type="submit" class="C_detail.action">データを登録</button>
             </form>
 
-            <form action="../notice/Tokou.action" method="get">
+            <form action="../c_detail/C_detailList.action" method="get">
                 <button class="btn btn-secondary" type="submit">戻る</button>
             </form>
 

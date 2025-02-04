@@ -123,6 +123,9 @@
                     <div>現在入金待ちの項目はありません</div>
                 </c:otherwise>
             </c:choose>
+                <form class="container2 position_form" action="../notice/Tokou.action">
+					<button class="button_style detail_button" type="submit">戻る	</button>
+				</form>
         </section>
         <p>
         ${forward_test}
