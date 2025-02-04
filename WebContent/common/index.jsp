@@ -14,6 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="ここにサイト説明を入れます">
 <meta name="keywords" content="キーワード１,キーワード２,キーワード３,キーワード４,キーワード５">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/style2.css">
 </head>
@@ -57,9 +58,9 @@
 <ul>
 <li><a href="../notice/Notice.action">回覧物</a></li>
 <li><a href="../notice/Tokou.action">掲示板</a></li>
+<li><a href="../notice/ToukouForm.action">掲示板投稿</a></li>
 <li><a href="../collection/CollectionList.action">集金一覧</a></li>
 <li><a href="../account/contactForm.jsp">お問い合わせ</a></li>
-<li><a href="../notice/ToukouForm.action">掲示板投稿</a></li>
 </ul>
 </nav>
 </header>
