@@ -21,9 +21,7 @@
         <section class="mo-4">
         <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">集金物登録</h2>
 		<h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold"></h3>
-        <%--    <div class="my-2 text-end px-4">
-                <a href="../test/testCreate.action">新規登録</a>
-            </div> --%>
+
 
             <c:choose>
                 <c:when test="${Post.size()>0}">
@@ -34,25 +32,33 @@
                             <th class="test-boder test-table-wide">投稿日</th>
                             <th class="test-boder test-table-wide"></th>
                         </tr>
-                        <c:forEach var="Collection" items="${Post}">
-                            <tr>
-                                <td class="test-table-wide test-boder">${Collection.id}</td>
-                                <td class="test-table-wide test-boder">${Collection.title}</td>
-                                <td class="test-table-wide test-boder">${Collection.post_day}</td>
+                       <c:forEach var="Collection" items="${Post}">
+						    <tr>
+						        <td class="test-table-wide test-boder">${Collection.id}</td>
+						        <td class="test-table-wide test-boder">${Collection.title}</td>
+						        <td class="test-table-wide test-boder">${Collection.post_day}</td>
 
+						        <td class="text-center test-boder">
+						            <c:choose>
+						                <c:when test="${Collection.judgement eq 'true'}">
+						                    <!-- 編集ボタン -->
+						                    <form action="../c_detail/C_detailEdit.action" method="get">
+						                        <input type="hidden" name="postid" value="${Collection.id}">
+						                        <button type="submit">編集</button>
+						                    </form>
+						                </c:when>
+						                <c:otherwise>
+						                    <!-- 投稿ボタン -->
+						                    <form action="../c_detail/C_detailReceive.action" method="post">
+						                        <input type="hidden" name="postid" value="${Collection.id}">
+						                        <button type="submit">投稿</button>
+						                    </form>
+						                </c:otherwise>
+						            </c:choose>
+						        </td>
+						    </tr>
+						</c:forEach>
 
-								<%-- 入金ボタン↓現状張りぼて。
-								こちらをのボタンを押したらpostのidを持っていってdeposit.jspで表示する --%>
-								<td class="text-center test-boder">
-								    <form action="../c_detail/C_detailReceive.action" method="post">
-								        <input type="hidden" name="postid" value="${Collection.id}">
-								        <button type="submit" >投稿</button>
-								    </form>
-								</td>
-								<%-- 二次目標：一つ一つそれぞれのお知らせに飛ぶようにする --%>
-
-                             </tr>
-                        </c:forEach>
                     </table>
                     					 <div class="pagination">
 					    <c:if test="${currentPage > 1}">

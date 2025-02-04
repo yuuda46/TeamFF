@@ -38,48 +38,94 @@ public class C_detailDAO extends DAO {
 	        return result;
 	    }
 //		未入金signID検索
-		public List<Post> search(String sessionId) throws Exception {
-			List<Post> list=new ArrayList<>();
+	    public List<Post> search(String sessionId) throws Exception {
+	        List<Post> list = new ArrayList<>();
+	        Connection con = getConnection();
 
-			Connection con= getConnection();
+	        PreparedStatement st = con.prepareStatement(
+	            "SELECT p.ID, p.TITLE, p.CONTENT, p.POST_DAY, " +
+	            "       c.monetary, c.deadline, c.Transferee, c.judgement " +  // c_detail の judgement を取得
+	            "FROM PUBLIC.POST p " +
+	            "LEFT JOIN PUBLIC.PAYMENT pay ON p.ID = pay.POSTID AND pay.SIGNID = ? " +
+	            "LEFT JOIN PUBLIC.c_detail c ON p.ID = c.postid " +
+	            "WHERE p.CATEGORY_ID = 2 " +
+	            "AND pay.SIGNID IS NULL " +
+	            "ORDER BY c.judgement DESC"
+	        );
 
-//			sql文は、idで検索をかけ、idがpaymentテーブルにないもののみ表示するようになっている。
-			PreparedStatement st = con.prepareStatement(
-		    	    "SELECT p.ID, p.TITLE, p.CONTENT, p.POST_DAY, " +
-		    	    "       c.monetary, c.deadline, c.Transferee " +  // c_detail のカラムを追加
-		    	    "FROM PUBLIC.POST p " +
-		    	    "LEFT JOIN PUBLIC.PAYMENT pay ON p.ID = pay.POSTID AND pay.SIGNID = ? " +
-		    	    "LEFT JOIN PUBLIC.c_detail c ON p.ID = c.postid " + // c_detail を LEFT JOIN
-		    	    "WHERE p.CATEGORY_ID = 2 " +
-		    	    "AND pay.SIGNID IS NULL "+
-		    	    "ORDER BY c.judgement DESC; "
+	        st.setString(1, sessionId);
+	        ResultSet rs = st.executeQuery();
 
-		    	);
+	        while (rs.next()) {
+	            Post p = new Post();
+	            p.setId(rs.getString("ID"));
+	            p.setTitle(rs.getString("TITLE"));
+	            p.setContent(rs.getString("CONTENT"));
+	            p.setPost_day(rs.getDate("POST_DAY"));
 
-		        st.setString(1, sessionId);
+	            // 追加: c_detail のデータをセット
+	            p.setMonetary(rs.getInt("MONETARY"));
+	            p.setDeadline(rs.getDate("DEADLINE"));
+	            p.setTransferee(rs.getString("TRANSFEREE"));
 
-		        ResultSet rs = st.executeQuery();
+	            // 追加: judgement をセット
+	            String judgement = rs.getString("JUDGEMENT");  // 取得
+	            p.setJudgement(judgement);  // Post にセット
 
-		        while (rs.next()) {
-		            Post p = new Post();
-		            p.setId(rs.getString("ID"));
-		            p.setTitle(rs.getString("TITLE"));
-		            p.setContent(rs.getString("CONTENT"));
-		            p.setPost_day(rs.getDate("POST_DAY"));
+	            list.add(p);
+	        }
 
-			        // 追加: c_detail のデータもセット
-			        p.setMonetary(rs.getInt("MONETARY"));
-			        p.setDeadline(rs.getDate("DEADLINE"));
-			        p.setTransferee(rs.getString("TRANSFEREE"));
+	        rs.close();
+	        st.close();
+	        con.close();
+
+	        return list;
+	    }
+
+	    public C_detail findByPostId(String postid) throws Exception {
+	        Connection con = getConnection();
+	        PreparedStatement st = con.prepareStatement(
+	            "SELECT detailid, postid, monetary, deadline, transferee FROM c_detail WHERE postid = ?"
+	        );
+	        st.setString(1, postid);
+	        ResultSet rs = st.executeQuery();
+
+	        C_detail detail = null;
+	        if (rs.next()) {
+	            detail = new C_detail();
+	            detail.setDetailid(rs.getString("detailid"));
+	            detail.setPostid(rs.getString("postid"));
+	            detail.setMonetary(rs.getInt("monetary"));
+	            detail.setDeadline(rs.getDate("deadline"));
+	            detail.setTransferee(rs.getString("transferee"));
+	        }
+
+	        rs.close();
+	        st.close();
+	        con.close();
+
+	        return detail;
+	    }
 
 
-		            list.add(p);
-		        }
-		        st.close();
-		        con.close();
+	    public int update(C_detail detail) throws Exception {
+	        Connection con = getConnection();
+	        PreparedStatement st = con.prepareStatement(
+	            "UPDATE c_detail SET monetary = ?, deadline = ?, transferee = ? WHERE postid = ?"
+	        );
 
-		        return list;
-		    }
+	        st.setInt(1, detail.getMonetary());
+	        st.setDate(2, detail.getDeadline());
+	        st.setString(3, detail.getTransferee());
+	        st.setString(4, detail.getPostid());
+
+	        int result = st.executeUpdate();
+	        st.close();
+	        con.close();
+
+	        return result;
+	    }
+
 
 
 
