@@ -7,7 +7,7 @@
     <c:param name="content">
         <section class="mo-4">
             <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">編集画面</h2>
-            <form class="mx-3" action="C_detailUpdate.action" method="post">
+            <form class="mx-3" action="c_detail_edit_con.jsp" method="post">
 
                 <input type="hidden" name="postid" value="${postid}">
 
@@ -26,10 +26,10 @@
                     <input class="select-shape" type="text" name="transferee" placeholder="振込先を入力してください" required="required" value="${transferee}">
                 </div>
 
-                <button type="submit" class="btn btn-primary">更新</button>
+                <button type="submit" class="btn btn-primary">確認画面へ</button>
             </form>
 
-            <form action="c_detail_List.jsp" method="get">
+            <form action="C_detailList.action" method="get">
                 <button class="btn btn-secondary" type="submit">戻る</button>
             </form>
         </section>

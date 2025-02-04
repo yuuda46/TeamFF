@@ -37,6 +37,6 @@ public class C_detailUpdateAction extends Action {
             e.printStackTrace();
             request.setAttribute("error", "データ更新中にエラーが発生しました。");
         }
-        return "C_detailList.action";
+        return "c_detail_edit_done.jsp";
     }
 }
