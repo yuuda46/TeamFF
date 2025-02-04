@@ -226,7 +226,7 @@ p a {
 
                 // パスワードが正規表現に一致しない場合、エラーメッセージを設定
                 else if (!inputPassword.matches(regex)) {
-                    passwordError = "半角英数字5文字以上で入力してください。";
+                    passwordError = "・半角英数字5文字以上で入力してください。";
                 }
                     // データベース接続
                     Class.forName("org.postgresql.Driver");
@@ -255,11 +255,11 @@ p a {
                         return; // 処理終了
                     } else {
                         // ログイン失敗時
-                        loginMessage = "ユーザー名またはパスワードが間違っています。";
+                        loginMessage = "・ユーザー名またはパスワードが間違っています。";
                     }
                 }
         } catch (Exception e) {
-            loginMessage = "データベースエラー: " + e.getMessage();
+            loginMessage = "・データベースエラー: " + e.getMessage();
         } finally {
             // リソースのクローズ
             try {
@@ -274,12 +274,13 @@ p a {
 
 
 <!-- ログインフォーム -->
+<!-- ログインフォーム -->
 <form method="POST" action="login.jsp" autocomplete="off">
     <div class="form-group">
         <label for="username">ユーザー名:</label>
         <input type="text" name="username" placeholder="ユーザー名を入力" value="<%= (request.getParameter("username") != null ? request.getParameter("username") : "") %>" required autocomplete="off">
         <!-- ユーザー名エラー表示 -->
-        <div class="error-message" style="color: red; font-size: 12px; margin-top: 2px; margin-left: 0;">
+        <div class="error-message">
             <%= !usernameError.isEmpty() ? usernameError : "" %>
         </div>
     </div>
@@ -287,38 +288,50 @@ p a {
     <div class="form-group">
         <label for="password">パスワード:</label>
         <input type="password" name="password" placeholder="パスワードを入力" value="<%= (request.getParameter("password") != null ? request.getParameter("password") : "") %>" required autocomplete="off">
-
         <!-- パスワードエラー表示 -->
-        <div class="error-message" style="color: red; font-size: 12px; margin-top: 2px; margin-left: 0;">
+        <div class="error-message">
             <%= !passwordError.isEmpty() ? passwordError : "" %>
         </div>
     </div>
 
     <!-- ログインエラーメッセージ（1か所にまとめて表示） -->
-    <div class="error-message" style="color: red; text-align: left; font-size: 14px; margin-top: 5px; margin-bottom: 10px; margin-left: 0;">
+    <div class="error-message" style="font-size: 14px; margin-top: 10px; margin-bottom: 15px;">
         <%= !loginMessage.isEmpty() ? loginMessage : "" %>
     </div>
 
     <button type="submit" class="login-btn">ログイン</button>
 </form>
 
-    <!-- 戻るボタン -->
-    <p style="text-align: center;">
-        <a href="../common/index.jsp" class="back-button">戻る</a>
-    </p>
+<!-- 戻るボタン -->
+<p style="text-align: center;">
+    <a href="../common/index.jsp" class="back-button">戻る</a>
+</p>
 
-</div>
-
-<!-- CSSの追加部分 -->
 <style>
-    .login-message {
-        color: red;
-        font-weight: bold;
-        text-align: center;
-        margin-top: 10px;
+    .form-group {
+        margin: 5px 0; /* 上下の余白を少し広げる */
+        position: relative; /* エラーメッセージの配置基準にする */
+    }
+    .error-message {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px; /* エラーメッセージと入力欄の間隔を開ける */
+      text-align: left; /* 左揃えにする */
+      width: 100%; /* 入力欄に合わせて幅を広げる */
+      padding-left: 0; /* 左端からの余白を削除 */
     }
 
-    /* ログインボタン */
+
+    .error-message:last-child {
+        margin-top: 10px; /* ログインエラーメッセージの間隔調整 */
+        font-size: 14px; /* ログインエラーメッセージのフォントサイズを調整 */
+    }
+
+    button {
+        margin-top: 10px; /* ボタンとエラーメッセージの間隔を確保 */
+    }
+
+        /* ログインボタン */
     .login-btn {
         width: 300px; /* 幅を指定 */
         height: 40px; /* 高さを指定 */
@@ -330,13 +343,12 @@ p a {
         font-size: 16px;
         text-align: center;
     }
-
     .login-btn:hover {
         background-color: #ff4d4d;  /* ホバー時に少し薄い黒色に変更 */
     }
 
-    /* 戻るボタン */
-    .back-button {
+    /* 戻るボタンのスタイル */
+     .back-button {
         display: inline-block;
         padding: 10px 20px;
         background-color: #808080; /* 通常時の色を灰色に変更 */
@@ -347,11 +359,7 @@ p a {
         cursor: pointer;
     }
 
-
 </style>
-
-
-
 
 <!-- パスワードを忘れたリンク -->
 <p style="text-align: center;">
