@@ -249,18 +249,21 @@ public class PostDAO extends DAO {
 		Connection con=getConnection();
 
 		PreparedStatement st=con.prepareStatement(
-			"select id, title, content, name, post_day, category_id from post "
+			"select post.id as post_id, title, content, post.name as post_name, post_day, category_id, category.name as category_name from post "
+			+ "left join category "
+			+ "on category_id = category.id "
 			+ "where category_id is not null");
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()){
 			Post p=new Post();
-			p.setPostId(rs.getString("id"));
+			p.setPostId(rs.getString("post_id"));
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
-			p.setName(rs.getString("name"));
+			p.setName(rs.getString("post_name"));
 			p.setPostDay(rs.getDate("post_day"));
 			p.setCategoryId(rs.getInt("category_id"));
+			p.setCategoryName(rs.getString("category_name"));
 
 			list.add(p);
 		}
@@ -276,7 +279,9 @@ public class PostDAO extends DAO {
 		Connection con=getConnection();
 
 		PreparedStatement st=con.prepareStatement(
-			"select * from post "
+			"select post.id as post_id, title, content, post.name as post_name, post_day, category_id, category.name as category_name from post "
+			+ "left join category "
+			+ "on category_id = category.id "
 			+ "where category_id = ?");
 
 		st.setInt(1, boot);
@@ -285,12 +290,13 @@ public class PostDAO extends DAO {
 
 		while (rs.next()){
 			Post p=new Post();
-			p.setPostId(rs.getString("id"));
+			p.setPostId(rs.getString("post_id"));
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
-			p.setName(rs.getString("name"));
+			p.setName(rs.getString("post_name"));
 			p.setPostDay(rs.getDate("post_day"));
 			p.setCategoryId(rs.getInt("category_id"));
+			p.setCategoryName(rs.getString("category_name"));
 
 			list.add(p);
 		}

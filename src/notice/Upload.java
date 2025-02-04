@@ -57,10 +57,11 @@ public class Upload extends HttpServlet {
 
 		String title=request.getParameter("title");
 		Integer num = Integer.parseInt(request.getParameter("num"));
-		System.out.println(num);
 //		String numParam = request.getParameter("num");
 //        Integer num = (numParam != null && !numParam.isEmpty()) ? Integer.parseInt(numParam) : 0;
 
+		CategoryDAO dao2=new CategoryDAO();
+		List<Category> list2=dao2.category_upload(num);
 
 		//name属性がpictのファイルをPartオブジェクトとして取得
 		Part part=request.getPart("pict");
@@ -149,6 +150,7 @@ public class Upload extends HttpServlet {
 		request.setAttribute("title",title);
 		request.setAttribute("name", list1);
 		request.setAttribute("num", num);
+		request.setAttribute("category_name", list2);
 		request.setAttribute("path", upload_path);
 		request.setAttribute("filename", uuid+".png");
 		RequestDispatcher rd=request.getRequestDispatcher("/notice/result.jsp");

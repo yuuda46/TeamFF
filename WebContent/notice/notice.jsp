@@ -11,18 +11,6 @@
 %>
 <link rel="stylesheet" href="../css/notice.css">
 
-<style>
-a.link_judgement::after {
-content: "";
-
-top: -10px;
-left: -1px;
-right: -1px;
-bottom: -70px;
-
-}
-</style>
-
 <c:import url="/common/base.jsp">
 
 	<c:param name="content">

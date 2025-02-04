@@ -20,7 +20,7 @@
 	<div class="container2">
 		<p>タイトル:<%=title %></p>
 		<p>氏名:${name[0].name}</p>
-		<p>カテゴリーID:<%=num %></p>
+		<p>カテゴリー:${category_name[0].categoryName}</p>
 		<p>お知らせ画像:</p>
 		<p class="position_center"><img  src="../upload/<%=filename %>"></p>
 

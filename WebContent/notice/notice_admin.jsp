@@ -55,7 +55,7 @@
 					</td>
 					<td>${notice_content.name}</td>
 					<td>${notice_content.postDay}</td>
-					<td>　　${notice_content.categoryId}</td>
+					<td>${notice_content.categoryName}</td>
 					<td class="padding_none">
 						<form class="padding_bottom_0" action="../notice/NoticeUpdate.action" method="get">
 							<input type="hidden" name="post_id" value="${notice_content.postId}">
