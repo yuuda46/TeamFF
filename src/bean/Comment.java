@@ -3,7 +3,7 @@ package bean;
 
 public class Comment {
     private String user_id;
-    private String comment_id;
+    private int comment_id;
     private String proposal;
     private String time;
     private String user_name;
@@ -13,7 +13,7 @@ public class Comment {
         return user_id;
     }
 
-    public String getComment_id() {
+    public int getComment_id() {
         return comment_id;
     }
 
@@ -36,7 +36,7 @@ public class Comment {
 		this.user_id = user_id;
 	}
 
-	public void setComment_id(String comment_id) {
+	public void setComment_id(int comment_id) {
 		this.comment_id = comment_id;
 	}
 

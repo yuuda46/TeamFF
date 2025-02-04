@@ -164,7 +164,6 @@ public class Postdao2 extends DAO {
 	    Connection del = getConnection();
 	    System.out.println(del);
 
-
 	    // display カラムを false に更新
 	    PreparedStatement st = del.prepareStatement(
 	        "UPDATE post SET display = false "
@@ -239,7 +238,7 @@ public class Postdao2 extends DAO {
     public void insertComment(String id, String user_id, String proposal, java.util.Date time) throws Exception {
         Connection con = getConnection();
         PreparedStatement st = con.prepareStatement(
-            "INSERT INTO comment (id, user_id, proposal, time) VALUES (?, ?, ?, ?)");
+            "INSERT INTO comment (id, user_id, proposal, time, display) VALUES (?, ?, ?, ?, true)");
         st.setString(1,id);
         st.setString(2,user_id);
         st.setString(3, proposal);
@@ -284,6 +283,7 @@ public class Postdao2 extends DAO {
 		PreparedStatement st=con.prepareStatement(
 			"select comment.user_id, comment.id, comment.comment_id, comment.proposal, comment.time, signup.user_name from comment inner join signup on comment.user_id = signup.id"
 				+ " where comment.id = ? "
+				+ " AND display = true "
 				+" order by time desc");
 
 		st.setString(1, id);
@@ -294,7 +294,7 @@ public class Postdao2 extends DAO {
 			Comment p=new Comment();
 
 			p.setUser_name(rs.getString("user_name"));
-			p.setComment_id(rs.getString("comment_id"));
+			p.setComment_id(rs.getInt("comment_id"));
 			p.setProposal(rs.getString("proposal"));
 			p.setTime(rs.getString("time"));
 
@@ -332,6 +332,79 @@ public class Postdao2 extends DAO {
 
 		st.close();
 		con.close();
+
+		return list;
+	}
+
+	public List<Comment> deleteComment(int commentId) throws Exception {
+	    List<Comment> list = new ArrayList<>();
+
+	    // コネクションを取得
+	    Connection con = getConnection();
+	    System.out.println(con);
+
+	    // display カラムを false に更新（コメント削除）
+	    PreparedStatement st = con.prepareStatement(
+	        "UPDATE comment SET display = false WHERE comment_id = ?"
+	    );
+	    st.setInt(1, commentId);
+	    st.executeUpdate();  // コメントの非表示更新
+
+	    // 更新後のコメントデータを再取得（削除されたコメントの詳細を取得するクエリ）
+	    PreparedStatement st2 = con.prepareStatement(
+	        "SELECT comment_id, proposal, time, user_id FROM comment WHERE comment_id = ?"
+	    );
+	    st2.setInt(1, commentId);
+	    ResultSet rs = st2.executeQuery();
+
+	    // 結果をリストに追加
+	    while (rs.next()) {
+	        Comment c = new Comment();
+	        c.setComment_id(rs.getInt("comment_id"));
+	        c.setProposal(rs.getString("proposal"));
+	        c.setTime(rs.getString("time"));
+	        c.setUser_id(rs.getString("user_id"));
+	        list.add(c);
+	    }
+
+	    // クローズ処理
+	    st.close();
+	    st2.close();
+	    con.close();
+
+	    return list;
+	}
+
+	public List<Comment> comment_detail(int id) throws Exception {
+		List<Comment> list=new ArrayList<>();
+
+		Connection con=getConnection();
+
+		PreparedStatement st=con.prepareStatement(
+			"select comment_id, proposal, time from comment "
+			+ "where comment_id = ?");
+
+		st.setInt(1, id);
+
+
+		ResultSet rs=st.executeQuery();
+
+		System.out.println(rs);
+
+		while (rs.next()){
+			Comment p=new Comment();
+			p.setComment_id(rs.getInt("comment_id"));
+			System.out.println("aaa");
+			p.setProposal(rs.getString("proposal"));
+			p.setTime(rs.getString("time"));
+
+
+			list.add(p);
+		}
+
+		st.close();
+		con.close();
+
 
 		return list;
 	}

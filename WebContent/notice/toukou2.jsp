@@ -10,7 +10,8 @@
 <%@ page import="bean.Comment, java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-
+<%@ page import="bean.Comment" %>
+<%@ page import="java.util.List" %>
 
 
 <c:import url="/common/base.jsp">
@@ -29,12 +30,14 @@
                 <p><%= p.getPostDay() %></p>
 
 
-             <!-- ユーザー名と投稿のnameが一致する場合にボタンを表示 -->
+             <!-- ユーザーが管理者権限を持っている場合にボタンを表示 -->
             <%
-                    // セッションからユーザー名を取得
-                    String username = (String) session.getAttribute("username");
-                    String postName = p.getName();
-                    if (username != null && username.equals(postName)) {
+         		// セッションからadminフラグを取得
+            	Boolean isAdmin = (Boolean) session.getAttribute("admin");
+
+          		// 管理者フラグがtrueの場合にメニューを表示
+             	if (isAdmin != null && isAdmin) {
+
                 %>
 
                     <!-- 削除ボタンをこのフォーム内で扱う -->
@@ -82,12 +85,21 @@
             <p>No.${comment.comment_id}</p>
             <p>コメント💬 ${comment.proposal}</p>
             <p>🕝 ${comment.time}</p>
+
+			<!-- 管理者のみ削除ボタンを表示 -->
+		    <c:if test="${sessionScope.admin}">
+		        <form action="../notice/CommentDelete.action" method="post" style="display: inline;">
+		            <input type="hidden" name="commentId" value="${comment.comment_id}">
+		            <input type="hidden" name="items" value="${items}">
+		            <button type="submit">コメントを削除する</button>
+		        </form>
+		    </c:if>
             <hr>
         </c:forEach>
-        <% } else { %>
-            <p>コメントはありません。</p>
-        <% } %>
-    </c:param>
+	        <% } else { %>
+	            <p>コメントはありません。</p>
+	        <% } %>
+	</c:param>
 </c:import>
 
 <!-- @include file="../footer.html" -->

@@ -1,7 +1,7 @@
 package notice;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
@@ -18,23 +18,14 @@ public class ToukouUploadAction extends Action {
 		HttpServletRequest request, HttpServletResponse response
 		) throws ServletException,IOException {
 		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out=response.getWriter();
+//		PrintWriter out=response.getWriter();
 		try{
 
 			PostDAO dao2 = new PostDAO();
-
 			HttpSession session = request.getSession();
 			String user_name = (String) session.getAttribute("username");
-			//System.out.println("id:"+id);
 			String title=request.getParameter("title");
-			//System.out.println("title:"+title);
-			//String name=request.getParameter("name");
-			//System.out.println("name:"+name);
 			String content=request.getParameter("content");
-			//System.out.println("content:"+content);
-
-
-
 
 
 			LocalDate localDate = LocalDate.now();

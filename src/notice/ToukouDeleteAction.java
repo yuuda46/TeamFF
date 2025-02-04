@@ -26,7 +26,7 @@ public class ToukouDeleteAction extends HttpServlet {
 
         try {
 
-        	//toukou.jspからデータを取得する
+        	//index.jspからデータを取得する
 			String id = request.getParameter("items");
 
 
