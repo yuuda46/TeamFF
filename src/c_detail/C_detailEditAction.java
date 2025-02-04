@@ -41,3 +41,4 @@ public class C_detailEditAction extends Action {
         return "edit.jsp";
     }
 }
+
