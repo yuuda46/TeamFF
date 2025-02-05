@@ -277,7 +277,7 @@ button {
     <h2>パスワードの再設定</h2>
     <div class="container" id="resetFormContainer">
 
-   <%
+<%
     // 初期化
     String message = "";
     List<String> errorMessages = new ArrayList<String>();
@@ -315,16 +315,22 @@ button {
                 // サーバモードでデータベース接続
                 conn = DriverManager.getConnection(url, dbUser, dbPassword);
 
-                // ユーザー名と現在のパスワードを照合
-                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
+                // ユーザー名が存在するか確認
+                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
                 stmt = conn.prepareStatement(query);
                 stmt.setString(1, username);
-                stmt.setString(2, currentPassword);
                 rs = stmt.executeQuery();
 
-                // ユーザー名またはパスワードが間違っている場合
+                // ユーザー名が存在しない場合
                 if (!rs.next()) {
-                    errorMessages.add("・現在のパスワードが違います。"); // 現在のパスワードが違う場合のエラーメッセージ
+                    errorMessages.add("・ユーザーが見つかりません。");
+                } else {
+                    // ユーザー名が存在している場合、現在のパスワードの照合
+                    String dbPasswordFromDb = rs.getString("PASSWORD");
+
+                    if (!currentPassword.equals(dbPasswordFromDb)) {
+                        errorMessages.add("・現在のパスワードが違います。");
+                    }
                 }
             } catch (Exception e) {
                 errorMessages.add("エラーが発生しました: " + e.getMessage());
