@@ -36,7 +36,6 @@
                             <th class="test-boder test-table-wide">金額</th>
                             <th class="test-boder test-table-wide">期限</th>
 
-                            <th class="test-boder test-table-wide"></th>
                         </tr>
                         <c:forEach var="Collection" items="${Post}">
                         <%-- 期限をDate型に変換 --%>
