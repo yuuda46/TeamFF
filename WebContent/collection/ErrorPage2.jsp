@@ -25,8 +25,8 @@
 			<a>何度もこの画面が表示される場合、管理者に問い合わせてください。</a></label>
 
 
-		<form action="../collection/CollectionList.action" method="get">
-          <button type="submit" class="CollectionList.action">
+		<form action="../collection/CollectionDeposit.action" method="get">
+          <button type="submit" class="CollectionDeposit.action">
           未入金確認画面に戻る
           </button>
         </form>
