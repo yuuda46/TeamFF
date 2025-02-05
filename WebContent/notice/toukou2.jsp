@@ -13,7 +13,7 @@
 <%@ page import="bean.Comment" %>
 <%@ page import="java.util.List" %>
 
-
+<link rel="stylesheet" href="../css/notice.css">
 <c:import url="/common/base.jsp">
     <c:param name="content">
         <%
@@ -57,7 +57,9 @@
 	                <%= request.getAttribute("errorMessage") %>
 	            </div>
 	        <% } %>
-
+		</form>
+		<!-- 現在表示されている投稿情報の表示 -->
+        <form name="pos" action="../notice/commentSubmit" method="post">
 		<hr size="2" class="a" color="gray">
         <h1>コメント🖊</h1>
 
