@@ -136,10 +136,37 @@ h1 {
 }
 
 /* ラベルのスタイル */
+/* ラベルと入力欄、ボタンの間隔を調整 */
 label {
     display: block;
     text-align: left;
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* ラベルと入力欄の間に10pxの間隔を追加 */
+}
+
+input[type="password"], input[type="text"] {
+    display: block;
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* 入力欄同士の間隔を15pxに変更 */
+}
+
+button {
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #000000;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px; /* ボタンと入力欄の間に20pxの間隔を追加 */
 }
 
 footer {
@@ -179,13 +206,63 @@ h2 {
     font-weight: bold; /* 「こちら」の部分を太字 */
     color: inherit; /* 「こちら」の部分の色を親の色（黒色）に合わせる */
 }
-    .error {
-        color: red;             /* エラーメッセージを赤文字に */
-        font-size: 14px;        /* フォントサイズを調整 */
-        text-align: left;       /* 文字を左揃えに */
-        margin-top: 10px;       /* 上部に余白を追加 */
-        padding-left: 20px;     /* 左に少し余白を追加 */
-    }
+ /* エラーメッセージのスタイル */
+/* label と input の間隔を調整 */
+label {
+    display: block;
+    margin-bottom: 5px;  /* label と input の間隔を狭める */
+}
+
+/* 入力欄のスタイル */
+input[type="text"], input[type="password"] {
+    display: block;
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;  /* 入力欄同士の間隔を調整 */
+}
+
+/* エラーメッセージのスタイル */
+.error {
+    color: red;             /* エラーメッセージを赤文字に */
+    font-size: 14px;        /* フォントサイズを調整 */
+    text-align: left;       /* 文字を左揃えに */
+    margin-top: 10px;       /* 上部に余白を追加 */
+    padding-left: 0px;      /* 左の余白を調整 */
+    width: 300px;           /* 幅を入力欄と同じに設定 */
+    margin-left: 0px;       /* 左の余白をなくして調整 */
+}
+
+.error ul {
+    padding-left: 20px; /* 左にスペースを追加してリストアイテムが見やすくなる */
+    list-style-type: none; /* リストマーカー（●）を非表示に */
+}
+
+.error li {
+    margin-bottom: 5px;  /* 各エラーメッセージの間隔を調整 */
+}
+
+/* ボタンのスタイル */
+button {
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #000000;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px; /* ボタンと入力欄の間に余白 */
+}
+
+
+
 </style>
 
 <%
@@ -240,11 +317,11 @@ h2 {
                         rs = stmt.executeQuery();
 
                         if (!rs.next()) {
-                            errorMessages.add("現在のパスワードが間違っています。");
+                            errorMessages.add("・現在のパスワードが間違っています。");
                         }
-                    } catch (Exception e) {
-                        errorMessages.add("エラーが発生しました: " + e.getMessage());
-                    } finally {
+                  } catch (Exception e) {
+                	  errorMessages.add("・エラーが発生しました: " + e.getMessage());
+                  } finally {
                         try {
                             if (rs != null) rs.close();
                             if (stmt != null) stmt.close();
@@ -257,12 +334,12 @@ h2 {
 
                 // パスワードのチェック（5文字以上の半角英数字）
                 if (newPassword == null || !newPassword.matches(passwordRegex)) {
-                    errorMessages.add("新しいパスワードは半角英数字5文字以上で入力してください。");
+                    errorMessages.add("・半角英数字5文字以上で入力してください。");
                 }
 
                 // パスワードに同じ文字が連続して使われていないかチェック
                 if (newPassword != null && newPassword.matches(".*(\\w)\\1.*")) {
-                    errorMessages.add("パスワードには同じ文字を連続して使用できません。");
+                    errorMessages.add("・パスワードには同じ文字を連続して使用できません。");
                 }
 
                 // エラーがなければパスワードを更新
@@ -292,8 +369,6 @@ h2 {
                         } else {
                             errorMessages.add("ユーザーが見つかりません。");
                         }
-                    } catch (Exception e) {
-                        errorMessages.add("エラーが発生しました: " + e.getMessage());
                     } finally {
                         // リソースを閉じる
                         try {
@@ -307,33 +382,28 @@ h2 {
             }
         %>
 
-        <%-- メッセージ表示 --%>
-        <% if (!message.isEmpty()) { %>
-        <div class="message"><%= message %></div>
-        <% } %>
-        <% if (!errorMessages.isEmpty()) { %>
-        <div class="error">
-        <ul>
-            <% for (String error : errorMessages) { %>
-            <li><%= error %></li>
-            <% } %>
-        </ul>
-        </div>
-        <% } %>
-
         <%-- パスワードリセットフォーム --%>
         <form method="POST" action="">
-            <label for="username">ユーザー名:</label>
-            <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
+    <label for="username">ユーザー名:</label>
+    <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
 
-            <label for="currentPassword">現在のパスワード:</label>
-            <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力" required>
+    <label for="currentPassword">現在のパスワード:</label>
+    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力" required>
 
-            <label for="newPassword">新しいパスワード:</label>
-            <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
+    <label for="newPassword">新しいパスワード:</label>
+    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
 
-            <button type="submit">パスワードを変更</button>
-        </form>
+    <%-- エラーメッセージ表示 --%>
+    <% if (!errorMessages.isEmpty()) { %>
+        <div class="error">
+            <% for (String error : errorMessages) { %>
+                <%= error %> <!-- 各エラーメッセージを横一文で表示 -->
+            <% } %>
+        </div>
+    <% } %>
+
+    <button type="submit">パスワードを変更</button>
+</form>
 
         <!-- ログイン画面に戻るリンク -->
        <p style="text-align: center;">
@@ -362,6 +432,7 @@ h2 {
     .highlight:hover {
         color: #cc0000; /* ホバー時に少し濃い赤色 */
     }
+
 </style>
 
     </div>
