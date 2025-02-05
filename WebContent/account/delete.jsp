@@ -9,6 +9,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 
+<head>
+    <meta charset="UTF-8">
+    <title>アカウント削除確認</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <link rel="stylesheet" href="../css/accountInfo.css">
+</head>
+<body>
+
 <header>
 
 
@@ -18,12 +26,7 @@
 
 
 </header>
-<head>
-    <meta charset="UTF-8">
-    <title>アカウント削除確認</title>
-    <link rel="stylesheet" href="../css/accountInfo.css">
-</head>
-<body>
+
 <section class="mo-3">
     <h2>アカウント削除確認</h2>
     <p>以下のアカウントを削除してよろしいですか？</p>

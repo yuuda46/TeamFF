@@ -3,6 +3,17 @@ body {
     margin: 0;
     padding: 0;
     background-color: #ffffff; /* 背景色 */
+    font-family: 'Noto Serif JP', sans-serif;
+}
+
+button {
+	font-family: 'Noto Serif JP', sans-serif;
+}
+select {
+	font-family: 'Noto Serif JP', sans-serif;
+}
+input {
+	font-family: 'Noto Serif JP', sans-serif;
 }
 
 .container {

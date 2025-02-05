@@ -2,6 +2,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
+
+<head>
+    <!-- Link to the same stylesheet as the first JSP -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <link rel="stylesheet" href="../css/form.css">
+
+</head>
+
+<body>
+
 <header>
     <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
 <nav class="menubar">
@@ -15,14 +25,6 @@
 </nav>
 </header>
 
-<head>
-    <!-- Link to the same stylesheet as the first JSP -->
-    <link rel="stylesheet" href="../css/form.css">
-
-</head>
-
-
-<body>
     <h2>お問い合わせフォーム</h2>
     <form action="contactForm.jsp" method="post">
         <label for="name">お名前:</label>

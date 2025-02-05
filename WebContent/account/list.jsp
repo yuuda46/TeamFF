@@ -3,6 +3,15 @@
 
 
 <html>
+
+<head>
+    <title>アカウント一覧</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <link rel="stylesheet" href="../css/account.css">
+
+</head>
+<body>
+
 <header>
     <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
     <% String username = (String) session.getAttribute("username"); %>
@@ -33,12 +42,6 @@
         </div>
     <% } %>
 </header>
-<head>
-    <title>アカウント一覧</title>
-    <link rel="stylesheet" href="../css/account.css">
-
-</head>
-<body>
 
 <section class="mo-3">
     <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">個人情報一覧</h2>

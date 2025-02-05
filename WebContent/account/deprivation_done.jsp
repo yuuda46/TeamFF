@@ -8,6 +8,18 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>アカウント権限を外す</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <link rel="stylesheet" href="../css/account2.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
 <header>
 
 
@@ -16,15 +28,6 @@
 
 
 </header>
-<head>
-    <meta charset="UTF-8">
-    <title>アカウント権限を外す</title>
-    <link rel="stylesheet" href="../css/account2.css">
-    <style>
-
-    </style>
-</head>
-<body>
 
     <div class="main-container">
     <h2>アカウント権限を外しました</h2>

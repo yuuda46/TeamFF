@@ -2,16 +2,19 @@
 
 <!DOCTYPE html>
 <html lang="ja">
-<header>
-    <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-</header>
 
 <head>
     <!-- Link to the same stylesheet as the first JSP -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
     <link rel="stylesheet" href="../css/account.css">
 </head>
 
 <body>
+
+<header>
+    <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+</header>
+
 <section class="mo-4">
     <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">入力情報確認</h2>
 

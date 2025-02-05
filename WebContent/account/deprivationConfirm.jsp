@@ -2,8 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ja">
-<header>
 
+<head>
+    <meta charset="UTF-8">
+    <title>権限剥奪確認</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <link rel="stylesheet" href="../css/accountInfo.css">
+</head>
+<body>
+
+<header>
 
 <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
 
@@ -11,12 +19,7 @@
 
 
 </header>
-<head>
-    <meta charset="UTF-8">
-    <title>権限剥奪確認</title>
-    <link rel="stylesheet" href="../css/accountInfo.css">
-</head>
-<body>
+
 <section class="mo-3">
     <h2>アカウント権限剥奪確認</h2>
     <p>以下のアカウントの権限を外しますか？</p>

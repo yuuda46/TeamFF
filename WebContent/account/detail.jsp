@@ -4,6 +4,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 
+<head>
+
+    <title>アカウント情報</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <link rel="stylesheet" href="../css/accountInfo.css">
+</head>
+<body>
+
 <header>
 
 
@@ -12,12 +20,7 @@
 
 
 </header>
-<head>
 
-    <title>アカウント情報</title>
-    <link rel="stylesheet" href="../css/accountInfo.css">
-</head>
-<body>
 <section class="mo-3">
     <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">アカウント情報</h2>
 

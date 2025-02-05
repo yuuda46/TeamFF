@@ -6,6 +6,16 @@ header {
     background: url(../images/mainimg.jpg) no-repeat center center / cover; /* 背景画像の読み込み */
 }
 
+button {
+	font-family: 'Noto Serif JP', sans-serif;
+}
+select {
+	font-family: 'Noto Serif JP', sans-serif;
+}
+input {
+	font-family: 'Noto Serif JP', sans-serif;
+}
+
 /* ロゴ画像のスタイル */
 header #logo img {
     display: block;
@@ -21,6 +31,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
+    font-family: 'Noto Serif JP', sans-serif;
 }
 h1{
 	margin: 0;

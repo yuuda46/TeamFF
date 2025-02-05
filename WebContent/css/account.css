@@ -18,6 +18,10 @@ header #logo img {
 
 body {
 	margin: 0;
+	font-family: 'Noto Serif JP', sans-serif;
+}
+input {
+	font-family: 'Noto Serif JP', sans-serif;
 }
 
 h1{
@@ -112,6 +116,10 @@ form label {
 }
 
 /* ボタンスタイル */
+button {
+	font-family: 'Noto Serif JP', sans-serif;
+}
+
 button[type="submit"],
 button[type="button"] {
     width: 300px; /* 幅を指定 */

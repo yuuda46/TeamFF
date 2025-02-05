@@ -7,6 +7,18 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>アカウント削除完了</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
+    <link rel="stylesheet" href="../css/account2.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
 <header>
 
 
@@ -15,15 +27,6 @@
 
 
 </header>
-<head>
-    <meta charset="UTF-8">
-    <title>アカウント削除完了</title>
-    <link rel="stylesheet" href="../css/account2.css">
-    <style>
-
-    </style>
-</head>
-<body>
 
     <div class="main-container">
     <h2>アカウント削除</h2>

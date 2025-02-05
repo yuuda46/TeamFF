@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 
-<header>
-    <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-
-</header>
 <head>
 
     <title>登録完了</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
     <link rel="stylesheet" href="../css/account.css">
 
         <script>
@@ -30,6 +27,12 @@
 </head>
 
 <body>
+
+<header>
+    <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+
+</header>
+
     <div class="main-container">
         <h2>登録が完了しました。</h2>
         <p id="countdown">5秒後にログイン画面に移動します。</p>

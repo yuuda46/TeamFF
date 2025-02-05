@@ -1,5 +1,15 @@
 /* 共通 */
 /* 背景画像の設定 */
+button {
+	font-family: 'Noto Serif JP', sans-serif;
+}
+select {
+	font-family: 'Noto Serif JP', sans-serif;
+}
+input {
+	font-family: 'Noto Serif JP', sans-serif;
+}
+
 header {
     height: 300px; /* 高さを画面の一部に設定 */
     position: relative;
@@ -16,9 +26,9 @@ header #logo img {
     bottom: 80px; /* 画像を下から20pxに配置 */
 }
 
-
 body {
 	margin: 0;
+	font-family: 'Noto Serif JP', sans-serif;
 }
 
 h1{

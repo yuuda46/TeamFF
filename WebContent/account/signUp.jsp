@@ -4,19 +4,12 @@
 
 <!DOCTYPE html>
 <html lang="ja">
-<header>
 
-
-<h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-
-
-
-
-</header>
 <head>
     <meta charset="UTF-8">
     <title>新規登録</title>
     <!-- style.cssを読み込む -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
     <link rel="stylesheet" href="../css/account.css">
     <script>
         // パスワード表示/非表示切り替え
@@ -34,6 +27,17 @@
 </head>
 
 <body>
+
+<header>
+
+
+<h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+
+
+
+
+</header>
+
     <section class="mo-4">
 
 
