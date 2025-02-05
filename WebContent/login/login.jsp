@@ -272,8 +272,6 @@ p a {
         }
     %>
 
-
-<!-- ログインフォーム -->
 <!-- ログインフォーム -->
 <form method="POST" action="login.jsp" autocomplete="off">
     <div class="form-group">
@@ -301,6 +299,7 @@ p a {
 
     <button type="submit" class="login-btn">ログイン</button>
 </form>
+
 
 <!-- 戻るボタン -->
 <p style="text-align: center;">
