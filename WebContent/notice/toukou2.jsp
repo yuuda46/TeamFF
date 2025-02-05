@@ -25,7 +25,7 @@
         <form name="pos" action="../notice/commentSubmit" method="post">
             <% for (Post2 p : list) { %>
                 <h1><%= p.getTitle() %></h1>
-                <p class="f"><%= p.getContent() %></p>
+                <p class="f"><%= p.getContent().replace("\n", "<br>") %></p>
                 <p><%= p.getName() %></p>
                 <p><%= p.getPostDay() %></p>
 
@@ -60,7 +60,7 @@
 		</form>
 		<!-- 現在表示されている投稿情報の表示 -->
         <form name="pos" action="../notice/commentSubmit" method="post">
-		<hr size="2" class="a" color="gray">
+		<hr size="2" class="notice_line" color="gray">
         <h1>コメント🖊</h1>
 
             <!-- コメント入力欄 -->
@@ -96,7 +96,7 @@
 		            <button type="submit">コメントを削除する</button>
 		        </form>
 		    </c:if>
-            <hr>
+            <hr class="container">
         </c:forEach>
 	        <% } else { %>
 	            <p>コメントはありません。</p>

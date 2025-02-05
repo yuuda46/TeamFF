@@ -1,7 +1,6 @@
 package notice;
 
 import java.io.IOException;
-//import java.io.PrintWriter;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
@@ -14,53 +13,57 @@ import dao.PostDAO;
 import tool.Action;
 
 public class ToukouUploadAction extends Action {
-	public String execute(
-		HttpServletRequest request, HttpServletResponse response
-		) throws ServletException,IOException {
-		response.setContentType("text/html; charset=UTF-8");
-//		PrintWriter out=response.getWriter();
-		try{
+    public String execute(
+            HttpServletRequest request, HttpServletResponse response
+    ) throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
 
-			PostDAO dao2 = new PostDAO();
-			HttpSession session = request.getSession();
-			String user_name = (String) session.getAttribute("username");
-			String title=request.getParameter("title");
-			String content=request.getParameter("content");
+        try {
+            // セッションからユーザー名を取得
+            HttpSession session = request.getSession();
+            String user_name = (String) session.getAttribute("username");
 
+            // フォームからタイトルとコンテンツを取得
+            String title = request.getParameter("title");
+            String content = request.getParameter("content");
 
-			LocalDate localDate = LocalDate.now();
+            // タイトルが21文字以上ならエラー
+            if (title != null && title.length() > 20) {
+                request.setAttribute("errorMessage", "タイトルは20文字以内で入力してください。");
+                return "toukou_form.jsp";  // フォーム画面に戻る
+            }
 
-			java.sql.Date post_day= java.sql.Date.valueOf(localDate);
+            // 現在の日付を取得
+            LocalDate localDate = LocalDate.now();
+            java.sql.Date post_day = java.sql.Date.valueOf(localDate);
 
+            // 投稿オブジェクトを作成
+            Post p = new Post();
+            p.setTitle(title);
+            p.setContent(content);
+            p.setName(user_name);
+            p.setPostDay(post_day);
 
-			Post p = new Post();
-			p.setTitle(title);
-			p.setContent(content);
-			p.setName(user_name);
-			p.setPostDay(post_day);
+            // 投稿をデータベースに保存
+            PostDAO dao2 = new PostDAO();
+            int line = dao2.insert2(p);  // 投稿を保存
 
-			int line = dao2.insert2(p);
-//			dao2.insertPost(title, content, user_name,  post_day);
+            // 改行コードを <br> タグに置換
+            String indent_content = content.replace("\n", "<br>");
 
+            // フォームデータをリクエストにセット
+            request.setAttribute("title", title);
+            request.setAttribute("name", user_name);
+            request.setAttribute("content", indent_content);
 
-			String content1 = request.getParameter("content");
+        } catch (Exception e) {
+            // エラー発生時にフォーム画面に戻す
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "投稿の処理中にエラーが発生しました。");
+            return "toukou_form.jsp";
+        }
 
-
-			String indent_content = content1.replace("\n", "<br>");
-
-
-			request.setAttribute("title", title);
-			request.setAttribute("name", user_name);
-			request.setAttribute("content", indent_content);
-
-//		} catch (IllegalArgumentException e) {
-//			request.setAttribute("errorMessage", e.getMessage());
-//            e.printStackTrace(out);
-//            return "toukou_form.jsp";
-		} catch (Exception e) {
-
-	            return "toukou_form.jsp";
-		}
-		return "toukou_result.jsp";
-	}
+        // 投稿成功時、結果ページに遷移
+        return "toukou_result.jsp";
+    }
 }

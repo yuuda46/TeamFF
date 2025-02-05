@@ -29,7 +29,7 @@
             <h3>投稿が完了しました！</h3>
             <p>タイトル: ${title}</p>
             <p>ユーザーネーム: ${name}</p>
-            <p>内容: ${content}</p>
+            <p><c:out value="${content}" escapeXml="false" /></p> <!-- <br>をそのまま表示 -->
         </c:if>
 
 		<form action="Tokou.action" method="post">

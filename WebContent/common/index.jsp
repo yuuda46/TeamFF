@@ -3,6 +3,7 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -91,8 +92,17 @@
                     <div>件数:${list2.size()}件</div>
                     <c:forEach var="post" items="${list2}">
                         <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
+                        <p>
+					        <c:choose>
+					            <c:when test="${fn:length(post.content) > 75}">
+					                ${fn:substring(post.content, 0, 75)}...
+					            </c:when>
+					            <c:otherwise>
+					                ${post.content}
+					            </c:otherwise>
+					        </c:choose>
+				    	</p>
                         <p>${post.postDay}</p>
-                        <p>${post.content}</p>
                         <hr>
                     </c:forEach>
                 </c:when>
