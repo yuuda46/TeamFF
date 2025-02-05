@@ -21,7 +21,7 @@
                 <div class="test-wide mx-3">
                     <%-- signid フィールド --%>
                     <div class="col-xl select-wide">
-                        <label class="form-label" for="signid">利用者ID (Sign ID)</label><br>
+                        <label class="form-label" for="signid">ユーザ名 (Sign ID)</label><br>
                         <input type="text" name="signid" placeholder="利用者IDを入力してください" required="required" value="${param.signid}"> <%-- ここを修正しました --%>
                     </div>
                     <div class="col-xl text-center">
@@ -74,9 +74,37 @@
                                 <td class="test-table-wide test-boder">${Collection.id}</td>
                                 <td class="test-table-wide test-boder">${Collection.title}</td>
                                 <td class="test-table-wide test-boder">${Collection.post_day}</td>
-                                <td class="test-table-wide test-boder">${Collection.monetary}</td>
-                                <td class="test-table-wide test-boder">${Collection.deadline}</td>
-                                <td class="test-table-wide test-boder">${Collection.transferee}</td>
+                                                                <td class="test-table-wide test-boder">
+								    <c:choose>
+								        <c:when test="${empty Collection.monetary or Collection.monetary == 0}">
+								            -
+								        </c:when>
+								        <c:otherwise>
+								            ${Collection.monetary}
+								        </c:otherwise>
+								    </c:choose>
+								</td>
+                                <td class="test-table-wide test-boder">
+								    <c:choose>
+								        <c:when test="${empty Collection.deadline}">
+								            -
+								        </c:when>
+								        <c:otherwise>
+								            ${Collection.deadline}
+								        </c:otherwise>
+								    </c:choose>
+								</td>
+
+								<td class="test-table-wide test-boder">
+								    <c:choose>
+								        <c:when test="${empty Collection.transferee}">
+								            -
+								        </c:when>
+								        <c:otherwise>
+								            ${Collection.transferee}
+								        </c:otherwise>
+								    </c:choose>
+								</td>
                                 <td class="text-center test-boder">
                                     <%-- signid をリンクに追加 --%>
                                     <a href="../collection/CollectionDepositCheck.action?no=${Collection.id}&signid=${param.signid}"> <%-- ここを修正しました --%>
