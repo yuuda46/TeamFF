@@ -43,15 +43,7 @@
                     </div>
 
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>振込先</label><br>
-                        <input class="select-shape" type="text" name="transferee" placeholder="振込先を入力してください" required="required" value="${transferee}"><br>
-                        <c:if test="${not empty errorTransferee}">
-                            <div id="error-message" style="color:red;">${errorTransferee}</div>
-                        </c:if>
-                    </div>
-                </div>
+
 
                 <button type="submit" class="C_detail.action">データを登録</button>
             </form>

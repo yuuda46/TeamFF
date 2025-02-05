@@ -21,10 +21,7 @@
                     <input class="select-shape" type="date" name="deadline" required="required" value="${deadline}">
                 </div>
 
-                <div class="form-group">
-                    <label>振込先</label><br>
-                    <input class="select-shape" type="text" name="transferee" placeholder="振込先を入力してください" required="required" value="${transferee}">
-                </div>
+
 
                 <button type="submit" class="btn btn-primary">確認画面へ</button>
             </form>

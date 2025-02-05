@@ -35,7 +35,7 @@
                             <th class="test-boder test-table-wide">投稿日</th>
                             <th class="test-boder test-table-wide">金額</th>
                             <th class="test-boder test-table-wide">期限</th>
-                            <th class="test-boder test-table-wide">振込先</th>
+
                             <th class="test-boder test-table-wide"></th>
                         </tr>
                         <c:forEach var="Collection" items="${Post}">
@@ -76,16 +76,7 @@
 								    </c:choose>
 								</td>
 
-								<td class="test-table-wide test-boder">
-								    <c:choose>
-								        <c:when test="${empty Collection.transferee}">
-								            -
-								        </c:when>
-								        <c:otherwise>
-								            ${Collection.transferee}
-								        </c:otherwise>
-								    </c:choose>
-								</td>
+
 
 
 

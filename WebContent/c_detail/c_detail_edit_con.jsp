@@ -22,14 +22,14 @@
         <table border="1">
             <tr><th>金額</th><td>${param.monetary} 円</td></tr>
             <tr><th>期限</th><td>${param.deadline}</td></tr>
-            <tr><th>振込先</th><td>${param.transferee}</td></tr>
+
         </table>
 
         <form action="../c_detail/C_detailUpdate.action" method="post">
             <input type="hidden" name="postid" value="${param.postid}">
             <input type="hidden" name="monetary" value="${param.monetary}">
             <input type="hidden" name="deadline" value="${param.deadline}">
-            <input type="hidden" name="transferee" value="${param.transferee}">
+
             <button type="submit">編集を確定</button>
         </form>
 
