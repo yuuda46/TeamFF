@@ -277,111 +277,117 @@ button {
     <h2>パスワードの再設定</h2>
     <div class="container" id="resetFormContainer">
 
-        <%
-            // 初期化
-            String message = "";
-            List<String> errorMessages = new ArrayList<String>();
+   <%
+    // 初期化
+    String message = "";
+    List<String> errorMessages = new ArrayList<String>();
 
-            // パスワードに関する正規表現（半角英数字5文字以上）
-            String passwordRegex = "^[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上
-            // パスワードに同じ文字が連続して使われていないか確認する正規表現
-            String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字が1回連続する場合にマッチ
+    // パスワードに関する正規表現（半角英数字5文字以上）
+    String passwordRegex = "^[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上
+    // パスワードに同じ文字が連続して使われていないか確認する正規表現
+    String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字が1回連続する場合にマッチ
 
-            // POSTリクエスト時の処理
-            if ("POST".equalsIgnoreCase(request.getMethod())) {
-                String username = request.getParameter("username");
-                String currentPassword = request.getParameter("currentPassword");
-                String newPassword = request.getParameter("newPassword");
+    // POSTリクエスト時の処理
+    if ("POST".equalsIgnoreCase(request.getMethod())) {
+        String username = request.getParameter("username");
+        String currentPassword = request.getParameter("currentPassword");
+        String newPassword = request.getParameter("newPassword");
 
-                // 現在のパスワードが正しいか確認
-                if (currentPassword == null || currentPassword.isEmpty()) {
-                    errorMessages.add("現在のパスワードを入力してください。");
-                } else {
-                    // データベース接続情報
-                    String url = "jdbc:postgresql://localhost:5432/team_f"; // サーバモードでの接続
-                    String dbUser = "postgres";  // ユーザー名
-                    String dbPassword = "Team_F";  // パスワード
-                    Connection conn = null;
-                    PreparedStatement stmt = null;
-                    ResultSet rs = null;
+        // ユーザー名が空でないか確認
+        if (username == null || username.isEmpty()) {
+            errorMessages.add("・ユーザー名を入力してください。");
+        }
 
-                    try {
-                        Class.forName("org.postgresql.Driver");
-                        // サーバモードでデータベース接続
-                        conn = DriverManager.getConnection(url, dbUser, dbPassword);
+        // 現在のパスワードが正しいか確認
+        if (currentPassword == null || currentPassword.isEmpty()) {
+            errorMessages.add("・現在のパスワードを入力してください。");
+        } else {
+            // データベース接続情報
+            String url = "jdbc:postgresql://localhost:5432/team_f"; // サーバモードでの接続
+            String dbUser = "postgres";  // ユーザー名
+            String dbPassword = "Team_F";  // パスワード
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
 
-                        // ユーザー名と現在のパスワードを照合
-                        String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
-                        stmt = conn.prepareStatement(query);
-                        stmt.setString(1, username);
-                        stmt.setString(2, currentPassword);
-                        rs = stmt.executeQuery();
+            try {
+                Class.forName("org.postgresql.Driver");
+                // サーバモードでデータベース接続
+                conn = DriverManager.getConnection(url, dbUser, dbPassword);
 
-                        if (!rs.next()) {
-                            errorMessages.add("・現在のパスワードが間違っています。");
-                        }
-                  } catch (Exception e) {
-                	  errorMessages.add("・エラーが発生しました: " + e.getMessage());
-                  } finally {
-                        try {
-                            if (rs != null) rs.close();
-                            if (stmt != null) stmt.close();
-                            if (conn != null) conn.close(); // 接続を閉じる
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                // ユーザー名と現在のパスワードを照合
+                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
+                stmt = conn.prepareStatement(query);
+                stmt.setString(1, username);
+                stmt.setString(2, currentPassword);
+                rs = stmt.executeQuery();
+
+                // ユーザー名またはパスワードが間違っている場合
+                if (!rs.next()) {
+                    errorMessages.add("・ユーザーが見つかりません。"); // ユーザーが見つからなければエラーメッセージを追加
                 }
-
-                // パスワードのチェック（5文字以上の半角英数字）
-                if (newPassword == null || !newPassword.matches(passwordRegex)) {
-                    errorMessages.add("・半角英数字5文字以上で入力してください。");
-                }
-
-                // パスワードに同じ文字が連続して使われていないかチェック
-                if (newPassword != null && newPassword.matches(".*(\\w)\\1.*")) {
-                    errorMessages.add("・同じ文字を連続して使用できません。");
-                }
-
-                // エラーがなければパスワードを更新
-                if (errorMessages.isEmpty()) {
-                    // データベース接続情報
-                    String url = "jdbc:postgresql://localhost:5432/team_f"; // サーバモードでの接続
-                    String dbUser = "postgres";  // ユーザー名
-                    String dbPassword = "Team_F";  // パスワード
-                    Connection conn = null;
-                    PreparedStatement stmt = null;
-
-                    try {
-                        Class.forName("org.postgresql.Driver");
-                        // サーバモードでデータベース接続
-                        conn = DriverManager.getConnection(url, dbUser, dbPassword);
-                        String query = "UPDATE SIGNUP SET PASSWORD = ? WHERE USER_NAME = ?";
-                        stmt = conn.prepareStatement(query);
-                        stmt.setString(1, newPassword);
-                        stmt.setString(2, username);
-
-                        int updated = stmt.executeUpdate();
-
-                        if (updated > 0) {
-                            message = "パスワードが正常にリセットされました。";
-                            response.sendRedirect("login.jsp");
-                            return;
-                        } else {
-                            errorMessages.add("ユーザーが見つかりません。");
-                        }
-                    } finally {
-                        // リソースを閉じる
-                        try {
-                            if (stmt != null) stmt.close();
-                            if (conn != null) conn.close(); // 接続を閉じる
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    }
+            } catch (Exception e) {
+                errorMessages.add("エラーが発生しました: " + e.getMessage());
+            } finally {
+                try {
+                    if (rs != null) rs.close();
+                    if (stmt != null) stmt.close();
+                    if (conn != null) conn.close(); // 接続を閉じる
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
-        %>
+        }
+
+        // パスワードのチェック（5文字以上の半角英数字）
+        if (newPassword == null || !newPassword.matches(passwordRegex)) {
+            errorMessages.add("・半角英数字5文字以上で入力してください。");
+        }
+
+        // パスワードに同じ文字が連続して使われていないかチェック
+        if (newPassword != null && newPassword.matches(".*(\\w)\\1.*")) {
+            errorMessages.add("・パスワードには同じ文字を連続して使用できません。");
+        }
+
+        // エラーがなければパスワードを更新
+        if (errorMessages.isEmpty()) {
+            // データベース接続情報
+            String url = "jdbc:postgresql://localhost:5432/team_f"; // サーバモードでの接続
+            String dbUser = "postgres";  // ユーザー名
+            String dbPassword = "Team_F";  // パスワード
+            Connection conn = null;
+            PreparedStatement stmt = null;
+
+            try {
+                Class.forName("org.postgresql.Driver");
+                // サーバモードでデータベース接続
+                conn = DriverManager.getConnection(url, dbUser, dbPassword);
+                String query = "UPDATE SIGNUP SET PASSWORD = ? WHERE USER_NAME = ?";
+                stmt = conn.prepareStatement(query);
+                stmt.setString(1, newPassword);
+                stmt.setString(2, username);
+
+                int updated = stmt.executeUpdate();
+
+                if (updated > 0) {
+                    message = "パスワードが正常にリセットされました。";
+                    response.sendRedirect("login.jsp");
+                    return;
+                } else {
+                    errorMessages.add("ユーザーが見つかりません。");
+                }
+            } finally {
+                // リソースを閉じる
+                try {
+                    if (stmt != null) stmt.close();
+                    if (conn != null) conn.close(); // 接続を閉じる
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+%>
 
         <%-- パスワードリセットフォーム --%>
         <form method="POST" action="">
