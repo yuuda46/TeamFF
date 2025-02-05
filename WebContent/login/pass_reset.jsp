@@ -5,6 +5,7 @@
 <header>
     <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
     <title>パスワードリセット</title>
+    <h3 class="titlesize">PsReset</h3>
 </header>
 
 <style>
