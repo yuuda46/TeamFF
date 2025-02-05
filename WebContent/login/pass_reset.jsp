@@ -324,7 +324,7 @@ button {
 
                 // ユーザー名またはパスワードが間違っている場合
                 if (!rs.next()) {
-                    errorMessages.add("・ユーザーが見つかりません。"); // ユーザーが見つからなければエラーメッセージを追加
+                    errorMessages.add("・現在のパスワードが違います。"); // 現在のパスワードが違う場合のエラーメッセージ
                 }
             } catch (Exception e) {
                 errorMessages.add("エラーが発生しました: " + e.getMessage());
@@ -388,6 +388,7 @@ button {
         }
     }
 %>
+
 
         <%-- パスワードリセットフォーム --%>
         <form method="POST" action="">
