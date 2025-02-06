@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="../css/notice.css">
 <c:import url="/common/base.jsp">
 <c:param name="content">
-<div class="container3">
+<div class="container">
         <%
             List<Post2> list = (List<Post2>) request.getAttribute("content");
             if (list != null && !list.isEmpty()) {
@@ -101,11 +101,11 @@
 		            <input type="hidden" name="commentId" value="${comment.comment_id}">
 		            <input type="hidden" name="items" value="${items}">
 		            <div class="position_right">
-		            <button class="button_style button_button" type="submit">コメントを削除する</button>
+		            <button class="button_style button_button " type="submit">コメントを削除する</button>
 		            </div>
 		        </form>
 		    </c:if>
-            <hr class=" position_right">
+            <hr>
         </c:forEach>
 	        <% } else { %>
 	            <p>コメントはありません。</p>
