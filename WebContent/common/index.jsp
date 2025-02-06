@@ -80,15 +80,19 @@
     // ユーザーがログインしているか確認
     if (username != null) {
 %>
-    <h2>掲示板</h2>
+
+    <h1 class="notice_left">掲示板</h1>
     <%-- ここにコンテンツを挟む --%>
-    <form action="../notice/ToukouForm.action" method="post">
-		<button type="submit">議題投稿する</button>
+
+    <form class="position_right" action="../notice/ToukouForm.action" method="post">
+		<button class="button_style il_button  margin_top_30px" type="submit">議題投稿する</button>
 	</form>
         <form action="../notice/Tokou.action" method="get">
             <c:choose>
                 <c:when test="${not empty list2}">
-                    <div>件数:${list2.size()}件</div>
+                	<div class="position_right ">
+                    <div class="top_margin ">件数:${list2.size()}件</div>
+                    </div>
                     <c:forEach var="post" items="${list2}">
                         <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
                         <p>
