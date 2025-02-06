@@ -64,7 +64,7 @@
         <h1>コメント🖊</h1>
 
             <!-- コメント入力欄 -->
-		    <textarea name="proposalContent" id="textarea" placeholder="コメントを入力"  required="required" rows="5"></textarea>
+		    <textarea class="preview img " name="proposalContent" id="textarea" placeholder="コメントを入力"  required="required" rows="5"></textarea>
 		    <input type="hidden" name="items" value="${items}" required="required">
 		    <button id="filter-button" value="遷移" type="submit">送信</button>
 		</form>

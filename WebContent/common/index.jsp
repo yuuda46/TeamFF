@@ -5,6 +5,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<link rel="stylesheet" href="../css/notice.css">
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -70,7 +71,7 @@
 
 
 
-
+<div class="container3">
 
 <!-- 掲示板機能ここから -->
 <%
@@ -78,13 +79,10 @@
     if (username != null) {
 %>
     <h2>掲示板</h2>
-    <c:import url="/common/base2.jsp">
-    <c:param name="content">
     <%-- ここにコンテンツを挟む --%>
     <form action="ToukouForm.action" method="post">
 		<button type="submit">議題投稿する</button>
 	</form>
-
 
         <form action="../notice/Tokou.action" method="get">
             <c:choose>
@@ -108,8 +106,7 @@
                 </c:when>
             </c:choose>
         </form>
-    </c:param>
-    </c:import>
+
 <%
     } else {
 %>
@@ -170,7 +167,11 @@
 %>
 <!-- 掲示板機能ここまで -->
 
+</div>
 
+	<footer>
+	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+	</footer>
 
 <!--jQueryファイルの読み込み-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
