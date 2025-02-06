@@ -7,11 +7,9 @@
 
 <!DOCTYPE html>
 <html lang="ja">
-<header>
-    <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-</header>
 
 <head>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
     <link rel="stylesheet" href="../css/account2.css">
 
     <meta charset="UTF-8">
@@ -35,6 +33,11 @@
     </script>
 </head>
 <body>
+
+<header>
+    <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+</header>
+
 <div class="main-container">
     <h1>ログアウトしました</h1>
     <p id="countdown">5秒後にホーム画面へ戻ります</p> <!-- カウントダウン表示 -->
