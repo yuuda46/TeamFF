@@ -82,7 +82,7 @@
 %>
     <h2>掲示板</h2>
     <%-- ここにコンテンツを挟む --%>
-    <form action="ToukouForm.action" method="post">
+    <form action="../notice/ToukouForm.action" method="post">
 		<button type="submit">議題投稿する</button>
 	</form>
         <form action="../notice/Tokou.action" method="get">

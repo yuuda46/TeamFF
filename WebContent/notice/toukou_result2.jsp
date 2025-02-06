@@ -26,17 +26,17 @@
 
         <!-- 投稿が正常に完了した場合の表示 -->
         <c:if test="${empty errorMessage}">
-            <h3>投稿内容はこちらでよろしいでしょうか？</h3>
+            <h3>投稿が完了しました！</h3>
             <p>タイトル: ${title}</p>
             <p>ユーザーネーム: ${name}</p>
             <p><c:out value="${content}" escapeXml="false" /></p> <!-- <br>をそのまま表示 -->
         </c:if>
 
-		<form action="../notice/ToukouUpload2.action" method="post">
+		<form action="Tokou.action" method="post">
 			<input type="hidden" name="title" value=<%=title %>>
 			<input type="hidden" name="name" value=<%=name %>>
 			<input type="hidden" name="content" value="<%=content %>">
-			<button type="submit">内容を確認</button>
+			<button type="submit">戻る</button>
 		</form>
 
 	</c:param>

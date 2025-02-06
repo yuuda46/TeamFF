@@ -15,7 +15,8 @@
 
 <link rel="stylesheet" href="../css/notice.css">
 <c:import url="/common/base.jsp">
-    <c:param name="content">
+<c:param name="content">
+<div class="container3">
         <%
             List<Post2> list = (List<Post2>) request.getAttribute("content");
             if (list != null && !list.isEmpty()) {
@@ -101,7 +102,9 @@
 	        <% } else { %>
 	            <p>コメントはありません。</p>
 	        <% } %>
+	     </div>
 	</c:param>
 </c:import>
+
 
 <!-- @include file="../footer.html" -->
