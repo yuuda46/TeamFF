@@ -73,8 +73,8 @@ public class SignUpAction extends Action {
             if (Pattern.matches(".*[\\p{IsHan}\\p{IsHiragana}].*", password)) {
                 errorPassword = "パスワードにはひらがなや漢字を使用できません。";
             }
-            if (Pattern.matches(".*[\\p{IsHan}\\p{IsHiragana}].*", email)) {
-                errorEmail = "メールアドレスにはひらがなや漢字を使用できません。";
+            if (Pattern.matches(".*[\\p{IsHan}\\p{IsHiragana}\\p{IsKatakana}].*", email)) {
+                errorEmail = "メールアドレスには漢字・ひらがな・カタカナを使用できません。";
             }
             if (!Pattern.matches("^\\d{2,4}-\\d{3,4}-\\d{3,4}$", phone_number)) {
                 errorPhoneNumber = "電話番号は「-」を2つ含めた形式で入力してください。";
