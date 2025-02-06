@@ -470,7 +470,12 @@ header .dropdown .dropdown-menu li a:hover {
 	left: 40%;		/*ロゴやメニューが入っているブロックに対して、左からの配置場所の指定。*/
 	top: 40px;	/*ロゴやメニューが入っているブロックに対して、下からの配置場所の指定。*/
 }
-
+.dropdown-menu2 {
+	column-count: 2;
+}
+.li_width {
+	width: 80px;
+}
 /*メニュー
 ---------------------------------------------------------------------------*/
 /*メニューブロック全体への指定*/
@@ -518,3 +523,4 @@ header .dropdown .dropdown-menu li a:hover {
 	max-width : 960px;
 	margin : 0 auto;
 }
+ 
