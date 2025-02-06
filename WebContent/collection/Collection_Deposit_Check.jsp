@@ -53,7 +53,7 @@
                             <th class="test-boder test-table-wide">投稿日</th>
                             <th class="test-boder test-table-wide">金額</th>
                             <th class="test-boder test-table-wide">期限</th>
-                            <th class="test-boder test-table-wide">振込先</th>
+
                         </tr>
                         <c:forEach var="Collection" items="${Post}">
                             <%-- 期限をDate型に変換 --%>
@@ -70,7 +70,7 @@
                                 <td class="test-table-wide test-boder">${Collection.post_day}</td>
                                 <td class="test-table-wide test-boder">${Collection.monetary}</td>
                                 <td class="test-table-wide test-boder">${Collection.deadline}</td>
-                                <td class="test-table-wide test-boder">${Collection.transferee}</td>
+
                             </tr>
                         <%--ここでsignidとcollectionidをCompleteActionに渡して登録 --%>
                         <td class="text-center student-table-wide">

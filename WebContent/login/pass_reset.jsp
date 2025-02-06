@@ -171,11 +171,11 @@ button {
 }
 
 footer {
-    color: #000000; /* 文字色 */
+    color: #fff; /* 文字色 */
     text-align: center;
     font-size: 85%; /* 文字サイズ */
     padding: 10px 0; /* 上下の余白を追加 */
-    background-color: #f8f8f8; /* 背景色を薄いグレーに設定 */
+    background-color: #000; /* 背景色を薄いグレーに設定 */
     margin-top: 60px; /* 青い枠線の下に表示されるように余白を追加 */
 }
 
@@ -452,7 +452,7 @@ button {
     </div>
 
     <footer>
-        <small>Copyright&copy; <a href="index.html" style="text-decoration: underline; color: #007bff; border: none; background: transparent;">SAMPLE COMPANY</a> All Rights Reserved.</small>
+        <small>Copyright&copy;SAMPLE COMPANY All Rights Reserved.</small>
     </footer>
 
     <!-- スクロール機能の読み込み -->

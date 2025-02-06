@@ -44,6 +44,7 @@ public class ToukouDeleteAction extends HttpServlet {
             }
 
 			request.setAttribute("list2", list);
+			request.setAttribute("items", id);
 
 
 			 // 削除後の情報を表示するためにJSPにフォワード

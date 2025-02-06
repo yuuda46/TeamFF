@@ -34,10 +34,12 @@
         </form>
 
         <button type="submit" onclick="history.back()">戻る</button>
-    </section>
 
+    </section>
     <footer>
         <small>Copyright&copy;SAMPLE COMPANY All Rights Reserved.</small>
     </footer>
+
 </body>
+
 </html>

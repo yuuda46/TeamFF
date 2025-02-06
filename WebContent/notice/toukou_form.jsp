@@ -7,21 +7,26 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
+<link rel="stylesheet" href="../css/notice.css">
 <c:import url="/common/base.jsp">
 	<c:param name="content">
+		<div class="container2">
 		<form action="../notice/ToukouUpload.action" method="post">
 			<div>
+				<div class="padding_top_10 padding_bottom_10">
 		        タイトル:
-		        <input  type="text" name="title" required="required" value="${param.title}" placeholder="20文字以内で入力してください"><br>
-
-		        <textarea name="content"  required="required" rows="5" cols="50" maxlength="10000" placeholder="本文を入力してください">${param.content}</textarea>
+		        <input class="border_style tea" type="text" name="title" required="required" value="${param.title}" placeholder="20文字以内で入力してください"><br>
+				</div>
+				<div class="padding_top_10 padding_bottom_10 ">
+		        <textarea class="textarea border_style" name="content"  required="required" rows="5" cols="50" maxlength="10000" placeholder="本文を入力してください">${param.content}</textarea>
+		    	</div>
 		    </div>
 
 			<%--改行を保持したままjavaに送信するためのテキストエリア --%>
 			<%--rows:テキストエリアの縦幅(行) cols:テキストエリアの横幅(文字) --%>
-
-			<button type="submit">投稿</button>
-
+			<div class="position_right">
+			<button class="button_style detail_button" type="submit">投稿</button>
+			</div>
 		</form>
 
 	<!-- エラーメッセージ表示 -->
@@ -30,5 +35,6 @@
                 <p>${errorMessage}</p>
             </div>
         </c:if>
+        </div>
 	</c:param>
 </c:import>

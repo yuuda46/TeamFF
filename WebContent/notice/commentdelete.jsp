@@ -8,6 +8,7 @@
 <%@ page import="bean.Post2" %>
 <%@ page import="java.util.List" %>
 
+<link rel="stylesheet" href="../css/notice.css">
 <c:import url="/common/base.jsp">
     <c:param name="content">
 		<h2>このコメントを本当に削除してもよろしいでしょうか？</h2>
@@ -22,16 +23,18 @@
 		        </ul>
 		    </div>
 
+			<div class="notice_center">
 		    <form  method="post" action="../notice/ToukouNotice.action">
 		        <input type="hidden" name="commentId" value="${Commentdel[0].comment_id}">
 		        <input type="hidden" name="items" value="${items}">
-		        <input type="submit" value="削除" />
+		        <button type="submit" class="button_style detail_button">削除</button> <!-- 削除ボタン -->
 		    </form>
 
-		    <form action="Tokou.action" method="get">
-		        <input type="submit" value="戻る" />
+		    <form action="../notice/ToukouNotice.action" method="get">
+		    	<input type="hidden" name="items" value="${items}">
+		        <button type="submit" class="margin_left_800 button_style detail_button">戻る</button> <!-- 戻るボタン -->
 		    </form>
-
+			</div>
 		</c:if>
 
 		<c:if test="${empty Commentdel}">

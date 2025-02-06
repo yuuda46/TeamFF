@@ -15,7 +15,8 @@
 
 <link rel="stylesheet" href="../css/notice.css">
 <c:import url="/common/base.jsp">
-    <c:param name="content">
+<c:param name="content">
+<div class="container">
         <%
             List<Post2> list = (List<Post2>) request.getAttribute("content");
             if (list != null && !list.isEmpty()) {
@@ -26,8 +27,8 @@
             <% for (Post2 p : list) { %>
                 <h1><%= p.getTitle() %></h1>
                 <p class="f"><%= p.getContent().replace("\n", "<br>") %></p>
-                <p><%= p.getName() %></p>
-                <p><%= p.getPostDay() %></p>
+                <p>投稿者👤:<%= p.getName() %></p>
+                <p>投稿時間⌚:<%= p.getPostDay() %></p>
 
 
              <!-- ユーザーが管理者権限を持っている場合にボタンを表示 -->
@@ -41,9 +42,9 @@
                 %>
 
                     <!-- 削除ボタンをこのフォーム内で扱う -->
-            <div>
+            <div class="position_right">
             <input type="hidden" name="items" value="${items}">
-            <input type="submit" name="delete" value="掲示板から削除する" formaction="../notice/ToukouDelete.action">
+            <input class="button_style button_button" type="submit" name="delete" value="掲示板から削除する" formaction="../notice/ToukouDelete.action">
 			</div>
                 <%
                     }
@@ -64,9 +65,15 @@
         <h1>コメント🖊</h1>
 
             <!-- コメント入力欄 -->
-		    <textarea class="preview img " name="proposalContent" id="textarea" placeholder="コメントを入力"  required="required" rows="5"></textarea>
+            <div class="padding_top_10 padding_bottom_10 ">
+		    <textarea class="tarea border_style" name="proposalContent" id="textarea" placeholder="コメントを入力"  required="required" rows="5"></textarea>
+		    </div>
+
 		    <input type="hidden" name="items" value="${items}" required="required">
-		    <button id="filter-button" value="遷移" type="submit">送信</button>
+		    <div class="position_right">
+		    <button class="button_style  detail_button" id="filter-button" value="遷移" type="submit">送信</button>
+			</div>
+
 		</form>
         <%
             } else {
@@ -93,15 +100,19 @@
 		        <form action="../notice/CommentDelete.action" method="post" style="display: inline;">
 		            <input type="hidden" name="commentId" value="${comment.comment_id}">
 		            <input type="hidden" name="items" value="${items}">
-		            <button type="submit">コメントを削除する</button>
+		            <div class="position_right">
+		            <button class="button_style button_button " type="submit">コメントを削除する</button>
+		            </div>
 		        </form>
 		    </c:if>
-            <hr class="container">
+            <hr>
         </c:forEach>
 	        <% } else { %>
 	            <p>コメントはありません。</p>
 	        <% } %>
+	     </div>
 	</c:param>
 </c:import>
+
 
 <!-- @include file="../footer.html" -->

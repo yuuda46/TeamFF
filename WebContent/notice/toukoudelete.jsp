@@ -9,8 +9,10 @@
 <%@ page import="bean.Post2" %>
 <%@ page import="java.util.List" %>
 
+<link rel="stylesheet" href="../css/notice.css">
 <c:import url="/common/base.jsp">
     <c:param name="content">
+    <div class="container">
         <title>投稿削除確認</title>
         <h2>この投稿内容を本当に削除してもよろしいでしょうか？</h2>
 
@@ -24,17 +26,22 @@
                     <li><strong>投稿日時:</strong> ${list2[0].postDay}</li>
                 </ul>
             </div>
+            <div class="notice_center">
             <form action="Tokou.action" method="post">
-                <input type="hidden" name="items" value="${list2[0].postId}">
-                <input type="submit" value="はい" />
+                <input type="hidden" name="items" value="${list2[0].postId}" />
+                <input type="hidden" name="items" value="${items}">
+                <button type="submit" class="button_style detail_button">はい</button>
             </form>
-            <form action="Tokou.action" method="get">
-                <input type="submit" value="戻る" />
+            <form action="../notice/ToukouNotice.action" method="get">
+            	<input type="hidden" name="items" value="${items}">
+                <button type="submit" class="margin_left_800 button_style detail_button">戻る</button>
             </form>
+            </div>
         </c:if>
         <c:if test="${empty list2}">
             <p>削除する投稿が見つかりません。</p>
         </c:if>
+       </div>
     </c:param>
 </c:import>
 

@@ -71,6 +71,7 @@ public class AccountDAO extends DAO {
           while (rs.next()) {
 
         	  Account account = new Account();
+        	  account.setId(rs.getString("id"));
               account.setName(rs.getString("name"));
               account.setUser_name(rs.getString("user_name"));
               account.setPassword(rs.getString("password"));

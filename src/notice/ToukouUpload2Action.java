@@ -1,15 +1,18 @@
 package notice;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.Post;
+import dao.PostDAO;
 import tool.Action;
 
-public class ToukouUploadAction extends Action {
+public class ToukouUpload2Action extends Action {
     public String execute(
             HttpServletRequest request, HttpServletResponse response
     ) throws ServletException, IOException {
@@ -30,6 +33,20 @@ public class ToukouUploadAction extends Action {
                 return "toukou_form.jsp";  // フォーム画面に戻る
             }
 
+            // 現在の日付を取得
+            LocalDate localDate = LocalDate.now();
+            java.sql.Date post_day = java.sql.Date.valueOf(localDate);
+
+            // 投稿オブジェクトを作成
+            Post p = new Post();
+            p.setTitle(title);
+            p.setContent(content);
+            p.setName(user_name);
+            p.setPostDay(post_day);
+
+            // 投稿をデータベースに保存
+            PostDAO dao2 = new PostDAO();
+            int line = dao2.insert2(p);  // 投稿を保存
 
             // 改行コードを <br> タグに置換
             String indent_content = content.replace("\n", "<br>");
@@ -47,6 +64,6 @@ public class ToukouUploadAction extends Action {
         }
 
         // 投稿成功時、結果ページに遷移
-        return "toukou_result.jsp";
+        return "toukou_result2.jsp";
     }
 }

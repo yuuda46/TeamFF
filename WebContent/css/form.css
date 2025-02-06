@@ -114,6 +114,11 @@ h2 {
     color: #333;
     margin-bottom: 20px;
 }
+p{
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
 
 footer {
 	clear: both;

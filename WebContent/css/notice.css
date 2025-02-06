@@ -42,6 +42,9 @@
 .margin-1px {
 	margin-top: 1px;
 }
+.margin_top_30px {
+	margin-top: 30px;
+}
 .margin_top_50px {
 	margin-top: 50px;
 }
@@ -92,6 +95,9 @@
 }
 .margin_left_45 {
 	margin-left: 45px;
+}
+.margin_left_800 {
+	margin-left: 10px;
 }
 .padding_left_12 {
 	padding-left: 12px;
@@ -156,6 +162,11 @@
 	position: relative;
 }
 
+.t_element{
+	position: absolute;
+	right: 0;
+	margin: 0 auto;
+}
 /*セレクトボックスのCSS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .select_size {
@@ -186,6 +197,22 @@
 .admin_text {
 	height: 24px;
 	width: 80%;
+}
+
+.textarea {
+	max-width: 770px;
+	width: 100%;
+	height: 120px;
+}
+
+.tea {
+	width: 35.1%;
+}
+
+.tarea {
+	max-width: 1000px;
+	width: 100%;
+	height: 120px;
 }
 
 /*ボタンのCSS
@@ -242,6 +269,18 @@
 	color: #ff4765;
 	background-color: rgba(233,236,239,0.4);
 	cursor: pointer; /* マウスポインタを変更する */
+}
+
+.il_button {
+	height: 35px;
+	width: 120px;
+	font-size: 15px;
+}
+
+.button_button {
+	height: 35px;
+	width: 170px;
+	font-size: 15px;
 }
 
 /*文字のCSS
@@ -320,4 +359,11 @@ p.preview img {
 	margin: auto;
 	z-index: 15;
 	pointer-events: none;
+}
+
+/*枠線のCSS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.border_style {
+	border-radius: 5px;
+	border-width: 2px;
 }

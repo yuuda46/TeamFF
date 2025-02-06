@@ -401,7 +401,12 @@ public class Postdao2 extends DAO {
 			p.setComment_id(rs.getInt("comment_id"));
 			System.out.println("aaa");
 			p.setProposal(rs.getString("proposal"));
-			p.setTime(rs.getString("time"));
+			 // time—ñ‚Ì•¶Žš—ñ‚©‚çƒ~ƒŠ•b•”•ª‚ðØ‚èŽÌ‚Ä
+		    String time = rs.getString("time");
+		    if (time != null && time.length() > 19) {
+		        time = time.substring(0, 19); // 'YYYY-MM-DD HH:MM:SS' ‚Ì•”•ª‚¾‚¯‚ðŽæ“¾
+		    }
+		    p.setTime(time);
 
 
 			list.add(p);
