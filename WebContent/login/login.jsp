@@ -7,15 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ログインページ</title>
-<header>
 
-
-<h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
-<h3 class="titlesize">Login</h3>
-
-
-
-</header>
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
 
 <style>
 /* 共通 */
@@ -53,6 +46,7 @@ body {
     min-height: 100vh; /* ビューポートの高さに合わせて最小高さを設定 */
     display: flex;
     flex-direction: column; /* コンテンツを縦に並べる */
+    font-family: 'Noto Serif JP', sans-serif;
 }
 
 
@@ -79,6 +73,7 @@ input[type="text"], input[type="password"], button, .reset-button, .back-button 
     border-radius: 4px;
     box-sizing: border-box;
     margin-bottom: 10px; /* 入力欄とボタンの間にスペース */
+    font-family: 'Noto Serif JP', sans-serif;
 }
 
 /* ボタンのスタイル */
@@ -88,6 +83,7 @@ button {
     cursor: pointer;
     border: none;
     font-size: 16px;
+    font-family: 'Noto Serif JP', sans-serif;
 }
 
 button:hover {
@@ -193,6 +189,16 @@ p a {
 %>
 
 <body>
+
+<header>
+
+
+<h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
+<h3 class="titlesize">Login</h3>
+
+
+
+</header>
 
 <h2>Login</h2>
 
