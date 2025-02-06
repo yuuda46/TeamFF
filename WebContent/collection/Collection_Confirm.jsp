@@ -14,7 +14,7 @@
 
    <%-- <c:import url="/common/sidemenu.jsp"></c:import> --%>
 
-<link rel="stylesheet" href="../css/collection.css">
+<link rel="stylesheet" href="../css/collection_C.css">
 
     <div class="function">
         <section class="mo-4">
@@ -28,27 +28,27 @@
                 <c:when test="${Confirm.size() > 0}">
                     <table class="test-table table-hover mx-3">
                         <tr>
-                            <th class="test-boder test-table-wide">集金完了番号</th>
-                            <th class="test-boder test-table-wide">投稿番号</th>
-                            <th class="test-boder test-table-wide">投稿タイトル</th>
-                            <th class="test-boder test-table-wide">投稿日</th>
-                            <th class="test-boder test-table-wide">詳細番号</th>
-                            <th class="test-boder test-table-wide">金額</th>
-                            <th class="test-boder test-table-wide">ユーザーID</th>
-                            <th class="test-boder test-table-wide">ユーザー名</th>
-                            <th class="test-boder test-table-wide">納金日</th>
+                            <th class="test-boder-C test-table-wide-C">集金完了番号</th>
+                            <th class="test-boder-C test-table-wide-C">投稿番号</th>
+                            <th class="test-boder-C test-table-wide-C">投稿タイトル</th>
+                            <th class="test-boder-C test-table-wide-C">投稿日</th>
+                            <th class="test-boder-C test-table-wide-C">詳細番号</th>
+                            <th class="test-boder-C test-table-wide-C">金額</th>
+                            <th class="test-boder-C test-table-wide-C">ユーザーID</th>
+                            <th class="test-boder-C test-table-wide-C">ユーザー名</th>
+                            <th class="test-boder-C test-table-wide-C">納金日</th>
                         </tr>
                         <c:forEach var="collection" items="${Confirm}">
                             <tr>
-                                <td class="test-table-wide test-border">${collection.paymentID}</td>
-                                <td class="test-table-wide test-border">${collection.postID}</td>
-                                <td class="test-table-wide test-border">${collection.title}</td>
-                                <td class="test-table-wide test-border">${collection.post_day}</td>
-                                <td class="test-table-wide test-border">${collection.detailid}</td>
-                                <td class="test-table-wide test-border">${collection.monetary}</td>
-                                <td class="test-table-wide test-border">${collection.signID}</td>
-                                <td class="test-table-wide test-border">${collection.name}</td>
-                                <td class="test-table-wide test-border">${collection.depositdate}</td>
+                                <td class="test-table-wide-C test-boder-C">${collection.paymentID}</td>
+                                <td class="test-table-wide-C test-boder-C">${collection.postID}</td>
+                                <td class="test-table-wide-C test-boder-C">${collection.title}</td>
+                                <td class="test-table-wide-C test-boder-C">${collection.post_day}</td>
+                                <td class="test-table-wide-C test-boder-C">${collection.detailid}</td>
+                                <td class="test-table-wide-C test-boder-C">${collection.monetary}</td>
+                                <td class="test-table-wide-C test-boder-C">${collection.signID}</td>
+                                <td class="test-table-wide-C test-boder-C">${collection.name}</td>
+                                <td class="test-table-wide-C test-boder-C">${collection.depositdate}</td>
                             </tr>
                         </c:forEach>
                     </table>
