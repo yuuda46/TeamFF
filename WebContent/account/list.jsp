@@ -48,6 +48,7 @@
     <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">個人情報一覧</h2>
     <table border="1">
         <tr>
+        	<th>ID</th>
             <th>名前</th>
             <th>ユーザー名</th>
             <th>電話番号</th>
@@ -62,6 +63,7 @@
     <c:forEach var="account" items="${accountList}">
         <c:if test="${account.admini == true}">
             <tr>
+            	<td>${account.id}</td>
                 <td>${account.name}</td>
                 <td>${account.user_name}</td>
                 <td>${account.phone_number}</td>
@@ -78,6 +80,7 @@
     <c:forEach var="account" items="${accountList}">
         <c:if test="${empty account.admini}">
             <tr>
+            	<td>${account.id}</td>
                 <td>${account.name}</td>
                 <td>${account.user_name}</td>
                 <td>${account.phone_number}</td>
