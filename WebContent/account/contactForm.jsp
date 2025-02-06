@@ -16,9 +16,9 @@
     <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
 <nav class="menubar">
 <ul>
-<li><a href="../notice/Tokou.action">ホーム</a></li>
-<li><a href="../notice/Notice.action">投稿</a></li>
+<li><a href="../notice/Notice.action">回覧物</a></li>
 <li><a href="../notice/Tokou.action">掲示板</a></li>
+<li><a href="../notice/ToukouForm.action">掲示板投稿</a></li>
 <li><a href="../collection/CollectionList.action">集金一覧</a></li>
 <li><a href="../account/contactForm.jsp">お問い合わせ</a></li>
 </ul>
