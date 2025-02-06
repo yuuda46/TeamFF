@@ -83,7 +83,6 @@
     <form action="ToukouForm.action" method="post">
 		<button type="submit">議題投稿する</button>
 	</form>
-
         <form action="../notice/Tokou.action" method="get">
             <c:choose>
                 <c:when test="${not empty list2}">

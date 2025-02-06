@@ -514,3 +514,7 @@ header .dropdown .dropdown-menu li a:hover {
 }
 
 /* ここまでbase.jspのCSS */
+.container3 {
+	max-width : 960px;
+	margin : 0 auto;
+}
