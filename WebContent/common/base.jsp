@@ -48,7 +48,6 @@
 				<li><a href="../notice/NoticeAdmin.action">回覧物編集</a></li>
             	<li><a href="../c_detail/C_detailList.action">集金物投稿</a></li>
             	<li><a href="../collection/CollectionDeposit.action">集金完了</a></li>
-            	<li><a href="../collection/CollectionConfirm.action">納金確認</a></li>
             </ul>
         </div>
     <% } %>
@@ -69,9 +68,9 @@
 ${param.content}
 </div>
 
-    <footer>
-	<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
-	</footer>
+<footer>
+<small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+</footer>
 
 
 <!--jQueryファイルの読み込み-->

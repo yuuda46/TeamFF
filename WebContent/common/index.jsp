@@ -5,7 +5,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<link rel="stylesheet" href="../css/notice.css">
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -19,6 +19,7 @@
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/style2.css">
+<link rel="stylesheet" href="../css/notice.css">
 </head>
 
 <body>

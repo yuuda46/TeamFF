@@ -10,10 +10,13 @@
 	Integer category=(Integer)request.getAttribute("category");
 %>
 <link rel="stylesheet" href="../css/notice.css">
+<script type="text/javascript" src="path_to/jquery.min.js"></script>
+<script type="text/javascript" src="path_to/jquery.simplePagination.js"></script>
 
 <c:import url="/common/base.jsp">
 
 	<c:param name="content">
+	<div id="pagination">
 	<div  class="container">
 	<form action="../notice/Notice.action" method="get">
 		<div class="notice_center">
@@ -55,8 +58,15 @@
 
 	</div>
 
-	<script type="text/javascript">
-		var hoge = '<%=request.getAttribute("category") %>';
+	</div>
+
+	<script>
+		$(function() {
+		    $(selector).pagination({
+		        items: 100,
+		        itemsOnPage: 10,
+		    });
+		});
 	</script>
 
 	<script type="text/javascript">
