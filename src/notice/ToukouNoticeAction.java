@@ -21,43 +21,42 @@ public class ToukouNoticeAction extends Action {
 		PrintWriter out=response.getWriter();
 
 		try{
-
 			String id = request.getParameter("items");
 			//System.out.println("items" + id);
 
 			if (id == null || id.isEmpty()) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "IDãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“");
                 return null;
             }
 
 
-			// ƒRƒƒ“ƒgíœ‘ÎÛ‚ÌƒRƒƒ“ƒgID‚ğæ“¾
+			// ã‚³ãƒ¡ãƒ³ãƒˆå‰Šé™¤å¯¾è±¡ã®ã‚³ãƒ¡ãƒ³ãƒˆIDã‚’å–å¾—
             String commentIdParam = request.getParameter("commentId");
 //            System.out.println("commentIdParam" + commentIdParam);
             if (commentIdParam != null && !commentIdParam.isEmpty()) {
-                // ƒRƒƒ“ƒgíœˆ—
+                // ã‚³ãƒ¡ãƒ³ãƒˆå‰Šé™¤å‡¦ç†
                 int commentId = Integer.parseInt(commentIdParam);
                 Postdao2 dao1 = new Postdao2();
 
-                // ƒRƒƒ“ƒg‚ğíœ
-                dao1.deleteComment(commentId); // deleteCommentƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚ÄƒRƒƒ“ƒg‚ğíœ
+                // ã‚³ãƒ¡ãƒ³ãƒˆã‚’å‰Šé™¤
+                dao1.deleteComment(commentId); // deleteCommentãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¦ã‚³ãƒ¡ãƒ³ãƒˆã‚’å‰Šé™¤
 
-                // íœŒã‚Ì“Šeî•ñ‚ğÄæ“¾
+                // å‰Šé™¤å¾Œã®æŠ•ç¨¿æƒ…å ±ã‚’å†å–å¾—
                 List<Post2> list9 = dao1.tokou();
                 request.setAttribute("list2", list9);
 
-                // íœŒã‚Ì“Šeˆê——ƒy[ƒW‚ÉƒŠƒ_ƒCƒŒƒNƒg
+                // å‰Šé™¤å¾Œã®æŠ•ç¨¿ä¸€è¦§ãƒšãƒ¼ã‚¸ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
                 response.sendRedirect("../notice/ToukouNotice.action?items="+ id);
-                return null; // ƒŠƒ_ƒCƒŒƒNƒgŒã‚Íˆ—‚ğI—¹
+                return null; // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå¾Œã¯å‡¦ç†ã‚’çµ‚äº†
             }
 
 
-	     // Postdao2‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬
+	     // Postdao2ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆ
 			Postdao2 dao=new Postdao2();
 			List<Post2> list=dao.notice_detail(id);
 			if (list == null || list.isEmpty()) {
-                request.setAttribute("errorMessage", "w’è‚³‚ê‚½“Še‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
-                return "toukou2.jsp";  // “Še‚ª‘¶İ‚µ‚È‚¢ê‡‚ÌƒGƒ‰[ƒƒbƒZ[ƒW
+                request.setAttribute("errorMessage", "æŒ‡å®šã•ã‚ŒãŸæŠ•ç¨¿ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“");
+                return "toukou2.jsp";  // æŠ•ç¨¿ãŒå­˜åœ¨ã—ãªã„å ´åˆã®ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
             }
 
 			Postdao2 com=new Postdao2();
@@ -69,10 +68,10 @@ public class ToukouNoticeAction extends Action {
 
 
 		}catch (Exception e) {
-			 // —\Šú‚µ‚È‚¢ƒGƒ‰[‚Ìê‡
-            request.setAttribute("errorMessage", "ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B‚à‚¤ˆê“x‚¨‚µ‚­‚¾‚³‚¢B");
-            e.printStackTrace(out);  // ƒGƒ‰[ƒƒO‚ğo—Í
-            return "toukou2.jsp";  // ƒGƒ‰[ƒƒbƒZ[ƒW‚ğ•\¦‚µ‚ÄƒtƒH[ƒ€‚É–ß‚é
+			 // äºˆæœŸã—ãªã„ã‚¨ãƒ©ãƒ¼ã®å ´åˆ
+            request.setAttribute("errorMessage", "ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚ã‚‚ã†ä¸€åº¦ãŠè©¦ã—ãã ã•ã„ã€‚");
+            e.printStackTrace(out);  // ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’å‡ºåŠ›
+            return "toukou2.jsp";  // ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã—ã¦ãƒ•ã‚©ãƒ¼ãƒ ã«æˆ»ã‚‹
 		}
 
 		return "toukou2.jsp";
