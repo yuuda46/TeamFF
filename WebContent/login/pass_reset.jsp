@@ -353,7 +353,7 @@ button {
 
         // パスワードに同じ文字が連続して使われていないかチェック
         if (newPassword != null && newPassword.matches(".*(\\w)\\1.*")) {
-            errorMessages.add("・パスワードには同じ文字を連続して使用できません。");
+            errorMessages.add("・同じ文字や数字を連続して使用できません。");
         }
 
         // エラーがなければパスワードを更新
