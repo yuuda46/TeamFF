@@ -22,25 +22,31 @@ public class CollectionConfirmAction extends Action {
         PrintWriter out = response.getWriter();
 
         try {
-            // CollectionDAOのインスタンス化
-            CollectionDAO dao = new CollectionDAO();
-            // リクエストからPostIDを取得
-            String postID = request.getParameter("postID");
+        	String Post_id = request.getParameter("postid");
 
-            // デバッグ出力
-            System.out.println("postID: " + postID);
+        	// デバッグ用にリクエストパラメータを出力
+            System.out.println("Received Sign_id: " + Post_id);
 
-            // Completed_searchメソッドの呼び出し
-            List<Collection> list = dao.Completed_search(postID);
+//            内容
+            Collection p = new Collection();
+            p.setPostID(Post_id);
 
-            // デバッグ出力
-            System.out.println("List size in Action: " + list.size());
+            CollectionDAO search = new CollectionDAO();
+            List<Collection> list = search.Completed_search(p.getPostID());
 
-            // テストメッセージ
-            System.out.println("Debug: Action executed successfully");
+//            postのタイトル部分
+            Collection E = new Collection();
+            E.setPostID(Post_id);
+
+            CollectionDAO Element = new CollectionDAO();
+            List<Collection> list3 = Element.Completed_search_Post(E.getPostID());
+
+            System.out.println("Search results: " + list);
+            System.out.println("Search results postElement: " + list3);
 
             // データをJSPへ渡す
             request.setAttribute("Confirm", list);
+            request.setAttribute("Element", list3);
 
         } catch (Exception e) {
             e.printStackTrace(out);
@@ -50,4 +56,3 @@ public class CollectionConfirmAction extends Action {
     }
 
 }
-//ここからプルダウンを採用して投稿毎に表示できるようにした方がいいかもしれないが時間がない。
