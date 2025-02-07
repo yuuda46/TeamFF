@@ -43,8 +43,8 @@
 
                     <!-- 削除ボタンをこのフォーム内で扱う -->
             <div class="position_right">
-            <input type="hidden" name="items" value="${items}">
-            <input class="button_style button_button" type="submit" name="delete" value="掲示板から削除する" formaction="../notice/ToukouDelete.action">
+	            <input type="hidden" name="items" value="${items}">
+	            <input class="button_style button_button" type="submit" name="delete" value="掲示板から削除する" formaction="../notice/ToukouDelete.action">
 			</div>
                 <%
                     }
@@ -89,7 +89,7 @@
         %>
 
         <!-- コメント情報の表示 -->
-
+        <hr>
         <c:forEach var="comment" items="<%=list4 %>">
             <p>No.${comment.comment_id}</p>
             <p>コメント💬 ${comment.proposal}</p>
