@@ -200,7 +200,7 @@ p a {
 
 </header>
 
-<h2>Login</h2>
+<h2>ログインページ</h2>
 
 <div class="container" id="loginFormContainer">
     <%
@@ -279,7 +279,6 @@ p a {
     %>
 
 
-<!-- ログインフォーム -->
 <!-- ログインフォーム -->
 <form method="POST" action="login.jsp" autocomplete="off">
     <div class="form-group">
