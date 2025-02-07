@@ -12,7 +12,7 @@ import bean.Comment;
 
 public class Postdao2 extends DAO {
 
-  //Postƒe[ƒuƒ‹‚Ì’†‚Ìƒf[ƒ^‚ğ‘S‚Äæ‚èo‚·
+  //Postãƒ†ãƒ¼ãƒ–ãƒ«ã®ä¸­ã®ãƒ‡ãƒ¼ã‚¿ã‚’å…¨ã¦å–ã‚Šå‡ºã™
 	public List<Post2> all() throws Exception {
 		List<Post2> list=new ArrayList<>();
 
@@ -160,19 +160,19 @@ public class Postdao2 extends DAO {
 	public List<Post2> delete(String id) throws Exception {
 	    List<Post2> list = new ArrayList<>();
 
-	    // ƒRƒlƒNƒVƒ‡ƒ“‚ğæ“¾
+	    // ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ã‚’å–å¾—
 	    Connection del = getConnection();
 	    System.out.println(del);
 
-	    // display ƒJƒ‰ƒ€‚ğ false ‚ÉXV
+	    // display ã‚«ãƒ©ãƒ ã‚’ false ã«æ›´æ–°
 	    PreparedStatement st = del.prepareStatement(
 	        "UPDATE post SET display = false "
 	    		+" WHERE id = ?");
 
 	    st.setString(1, id);
-	    st.executeUpdate(); // UPDATE‚ğÀs
+	    st.executeUpdate(); // UPDATEã‚’å®Ÿè¡Œ
 
-	    // XVŒã‚Ìƒf[ƒ^‚ğÄæ“¾iíœ‚³‚ê‚½“Še‚ÌÚ×‚ğæ“¾‚·‚éƒNƒGƒŠj
+	    // æ›´æ–°å¾Œã®ãƒ‡ãƒ¼ã‚¿ã‚’å†å–å¾—ï¼ˆå‰Šé™¤ã•ã‚ŒãŸæŠ•ç¨¿ã®è©³ç´°ã‚’å–å¾—ã™ã‚‹ã‚¯ã‚¨ãƒªï¼‰
 	    PreparedStatement st2 = del.prepareStatement(
 	        "SELECT id, title, content, name, post_day FROM post"
 	    		+" WHERE id = ?");
@@ -180,7 +180,7 @@ public class Postdao2 extends DAO {
 	    st2.setString(1, id);
 	    ResultSet rs = st2.executeQuery();
 
-	    // Œ‹‰Ê‚ğƒŠƒXƒg‚É’Ç‰Á
+	    // çµæœã‚’ãƒªã‚¹ãƒˆã«è¿½åŠ 
 	    while (rs.next()) {
 	        Post2 p = new Post2();
 	        p.setPostId(rs.getString("id"));
@@ -191,7 +191,7 @@ public class Postdao2 extends DAO {
 	        list.add(p);
 	    }
 
-	    // ƒNƒ[ƒYˆ—
+	    // ã‚¯ãƒ­ãƒ¼ã‚ºå‡¦ç†
 	    st.close();
 	    st2.close();
 	    del.close();
@@ -202,7 +202,7 @@ public class Postdao2 extends DAO {
 
 
 	/**
-	 * Product•\‚©‚çƒL[ƒ[ƒh‚ğŒŸõ‚µAŠY“–‚·‚é¤•i‚ÌList‚ğ•Ô‹p‚·‚éB
+	 * Productè¡¨ã‹ã‚‰ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã‚’æ¤œç´¢ã—ã€è©²å½“ã™ã‚‹å•†å“ã®Listã‚’è¿”å´ã™ã‚‹ã€‚
 	 * @param keyword
 	 * @return list<Product>
 	 * @throws Exception
@@ -258,21 +258,21 @@ public class Postdao2 extends DAO {
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //	    request.setCharacterEncoding("UTF-8");
 //
-//	    String proposal = request.getParameter("proposal"); // ƒeƒLƒXƒgƒGƒŠƒA‚Ì“à—e
-//	    java.util.Date time = new java.util.Date(); // Œ»İ‚Ì“ú
+//	    String proposal = request.getParameter("proposal"); // ãƒ†ã‚­ã‚¹ãƒˆã‚¨ãƒªã‚¢ã®å†…å®¹
+//	    java.util.Date time = new java.util.Date(); // ç¾åœ¨ã®æ—¥æ™‚
 //
 //	    try {
 //	        Postdao2 dao = new Postdao2();
 //	        dao.insertComment(0, , proposal, time);
-//	     // “Še“à—e‚ğƒŠƒNƒGƒXƒg‘®«‚Éİ’è‚·‚é
+//	     // æŠ•ç¨¿å†…å®¹ã‚’ãƒªã‚¯ã‚¨ã‚¹ãƒˆå±æ€§ã«è¨­å®šã™ã‚‹
 //	        request.setAttribute("proposal", proposal);
 //	        request.setAttribute("time", time);
-//	     // ƒŠƒ_ƒCƒŒƒNƒg‚Ü‚½‚ÍAÄ“xƒŠƒNƒGƒXƒg‘®«‚Æ‚µ‚Äİ’è‚µJSP‚É•Ô‚·ˆ—
+//	     // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã¾ãŸã¯ã€å†åº¦ãƒªã‚¯ã‚¨ã‚¹ãƒˆå±æ€§ã¨ã—ã¦è¨­å®šã—JSPã«è¿”ã™å‡¦ç†
 //	        response.sendRedirect("toukou2.jsp?");
 //
 //	    } catch (Exception e) {
 //	        e.printStackTrace();
-//	        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ƒf[ƒ^‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½w");
+//	        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸw");
 //	    }
 //	}
 
@@ -296,10 +296,10 @@ public class Postdao2 extends DAO {
 			p.setUser_name(rs.getString("user_name"));
 			p.setComment_id(rs.getInt("comment_id"));
 			p.setProposal(rs.getString("proposal"));
-			 // time—ñ‚Ì•¶š—ñ‚©‚çƒ~ƒŠ•b•”•ª‚ğØ‚èÌ‚Ä
+			 // timeåˆ—ã®æ–‡å­—åˆ—ã‹ã‚‰ãƒŸãƒªç§’éƒ¨åˆ†ã‚’åˆ‡ã‚Šæ¨ã¦
 		    String time = rs.getString("time");
 		    if (time != null && time.length() > 19) {
-		        time = time.substring(0, 19); // 'YYYY-MM-DD HH:MM:SS' ‚Ì•”•ª‚¾‚¯‚ğæ“¾
+		        time = time.substring(0, 19); // 'YYYY-MM-DD HH:MM:SS' ã®éƒ¨åˆ†ã ã‘ã‚’å–å¾—
 		    }
 		    p.setTime(time);
 
@@ -317,7 +317,7 @@ public class Postdao2 extends DAO {
 		List<Comment> list=new ArrayList<>();
 //a
 		Connection con=getConnection();
-		//select id from signup‚Åid‚ğæ“¾‚·‚é‚¯‚Çuser_name‚Æpassword‚Ì‚¨‚È‚¶id
+		//select id from signupã§idã‚’å–å¾—ã™ã‚‹ã‘ã©user_nameã¨passwordã®ãŠãªã˜id
 		PreparedStatement st=con.prepareStatement(
 			"select id from signup "
 			+ "where user_name = ? and password = ?");
@@ -344,25 +344,25 @@ public class Postdao2 extends DAO {
 	public List<Comment> deleteComment(int commentId) throws Exception {
 	    List<Comment> list = new ArrayList<>();
 
-	    // ƒRƒlƒNƒVƒ‡ƒ“‚ğæ“¾
+	    // ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ã‚’å–å¾—
 	    Connection con = getConnection();
 	    System.out.println(con);
 
-	    // display ƒJƒ‰ƒ€‚ğ false ‚ÉXViƒRƒƒ“ƒgíœj
+	    // display ã‚«ãƒ©ãƒ ã‚’ false ã«æ›´æ–°ï¼ˆã‚³ãƒ¡ãƒ³ãƒˆå‰Šé™¤ï¼‰
 	    PreparedStatement st = con.prepareStatement(
 	        "UPDATE comment SET display = false WHERE comment_id = ?"
 	    );
 	    st.setInt(1, commentId);
-	    st.executeUpdate();  // ƒRƒƒ“ƒg‚Ì”ñ•\¦XV
+	    st.executeUpdate();  // ã‚³ãƒ¡ãƒ³ãƒˆã®éè¡¨ç¤ºæ›´æ–°
 
-	    // XVŒã‚ÌƒRƒƒ“ƒgƒf[ƒ^‚ğÄæ“¾iíœ‚³‚ê‚½ƒRƒƒ“ƒg‚ÌÚ×‚ğæ“¾‚·‚éƒNƒGƒŠj
+	    // æ›´æ–°å¾Œã®ã‚³ãƒ¡ãƒ³ãƒˆãƒ‡ãƒ¼ã‚¿ã‚’å†å–å¾—ï¼ˆå‰Šé™¤ã•ã‚ŒãŸã‚³ãƒ¡ãƒ³ãƒˆã®è©³ç´°ã‚’å–å¾—ã™ã‚‹ã‚¯ã‚¨ãƒªï¼‰
 	    PreparedStatement st2 = con.prepareStatement(
 	        "SELECT comment_id, proposal, time, user_id FROM comment WHERE comment_id = ?"
 	    );
 	    st2.setInt(1, commentId);
 	    ResultSet rs = st2.executeQuery();
 
-	    // Œ‹‰Ê‚ğƒŠƒXƒg‚É’Ç‰Á
+	    // çµæœã‚’ãƒªã‚¹ãƒˆã«è¿½åŠ 
 	    while (rs.next()) {
 	        Comment c = new Comment();
 	        c.setComment_id(rs.getInt("comment_id"));
@@ -372,7 +372,7 @@ public class Postdao2 extends DAO {
 	        list.add(c);
 	    }
 
-	    // ƒNƒ[ƒYˆ—
+	    // ã‚¯ãƒ­ãƒ¼ã‚ºå‡¦ç†
 	    st.close();
 	    st2.close();
 	    con.close();
@@ -401,10 +401,10 @@ public class Postdao2 extends DAO {
 			p.setComment_id(rs.getInt("comment_id"));
 			System.out.println("aaa");
 			p.setProposal(rs.getString("proposal"));
-			 // time—ñ‚Ì•¶š—ñ‚©‚çƒ~ƒŠ•b•”•ª‚ğØ‚èÌ‚Ä
+			 // timeåˆ—ã®æ–‡å­—åˆ—ã‹ã‚‰ãƒŸãƒªç§’éƒ¨åˆ†ã‚’åˆ‡ã‚Šæ¨ã¦
 		    String time = rs.getString("time");
 		    if (time != null && time.length() > 19) {
-		        time = time.substring(0, 19); // 'YYYY-MM-DD HH:MM:SS' ‚Ì•”•ª‚¾‚¯‚ğæ“¾
+		        time = time.substring(0, 19); // 'YYYY-MM-DD HH:MM:SS' ã®éƒ¨åˆ†ã ã‘ã‚’å–å¾—
 		    }
 		    p.setTime(time);
 

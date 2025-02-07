@@ -28,45 +28,45 @@ public class CommentDeleteAction extends HttpServlet {
             Boolean isAdmin = (Boolean) session.getAttribute("admin");
 
             if (isAdmin == null || !isAdmin) {
-                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Œ ŒÀ‚ª‚ ‚è‚Ü‚¹‚ñ");
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "æ¨©é™ãŒã‚ã‚Šã¾ã›ã‚“");
                 return;
             }
 
-            // ƒRƒƒ“ƒgID‚ğæ“¾ (StringŒ^‚Åæ“¾‚³‚ê‚é‚Ì‚ÅAint‚É•ÏŠ·)
+            // ã‚³ãƒ¡ãƒ³ãƒˆIDã‚’å–å¾— (Stringå‹ã§å–å¾—ã•ã‚Œã‚‹ã®ã§ã€intã«å¤‰æ›)
             String commentIdParam = request.getParameter("commentId");
             String postId = request.getParameter("postId");
 
-            // commentId‚ª‹ó‚Ìê‡‚ÍƒGƒ‰[
+            // commentIdãŒç©ºã®å ´åˆã¯ã‚¨ãƒ©ãƒ¼
             if (commentIdParam == null || commentIdParam.isEmpty()) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ƒRƒƒ“ƒgID‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ã‚³ãƒ¡ãƒ³ãƒˆIDãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“");
                 return;
             }
 
 
-            // commentId ‚ğ int Œ^‚É•ÏŠ·
+            // commentId ã‚’ int å‹ã«å¤‰æ›
             int commentId = Integer.parseInt(commentIdParam);
-            // ƒRƒƒ“ƒgíœˆ—idisplay ‚ğ false ‚É‚·‚éj
+            // ã‚³ãƒ¡ãƒ³ãƒˆå‰Šé™¤å‡¦ç†ï¼ˆdisplay ã‚’ false ã«ã™ã‚‹ï¼‰
             Postdao2 dao = new Postdao2();
 //            dao.deleteComment(commentId);
 
-         // ƒRƒƒ“ƒg‚ğíœ‘ÎÛ‚Æ‚µ‚Äæ“¾
+         // ã‚³ãƒ¡ãƒ³ãƒˆã‚’å‰Šé™¤å¯¾è±¡ã¨ã—ã¦å–å¾—
             List<Comment> comment = dao.comment_detail(commentId);
             if (comment == null) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "w’è‚³‚ê‚½ƒRƒƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "æŒ‡å®šã•ã‚ŒãŸã‚³ãƒ¡ãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“");
                 return;
             }
 
-            // ƒRƒƒ“ƒgî•ñ‚ğƒŠƒNƒGƒXƒg‘®«‚ÉƒZƒbƒg
+            // ã‚³ãƒ¡ãƒ³ãƒˆæƒ…å ±ã‚’ãƒªã‚¯ã‚¨ã‚¹ãƒˆå±æ€§ã«ã‚»ãƒƒãƒˆ
             request.setAttribute("Commentdel", comment);
             request.setAttribute("items", id);
 
-            // íœŠm”F‰æ–Ê‚ÉƒtƒHƒ[ƒh
+            // å‰Šé™¤ç¢ºèªç”»é¢ã«ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰
             request.getRequestDispatcher("/notice/commentdelete.jsp").forward(request, response);
 
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ƒRƒƒ“ƒgíœ‚É¸”s‚µ‚Ü‚µ‚½");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ã‚³ãƒ¡ãƒ³ãƒˆå‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸ");
         }
     }
 }

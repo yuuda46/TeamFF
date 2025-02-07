@@ -18,12 +18,12 @@ public class ToukouFormAction extends Action {
 			try{
 
 			} catch (Exception e) {
-	            // ƒGƒ‰[‚ª”­¶‚µ‚½ê‡‚Ìˆ—
+	            // ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ãŸå ´åˆã®å‡¦ç†
 	            out.println("<html><body>");
-	            out.println("<h3>ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B‚à‚¤ˆê“x‚¨‚µ‚­‚¾‚³‚¢B</h3>");
-	            out.println("<p>Ú×: " + e.getMessage() + "</p>");
+	            out.println("<h3>ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚ã‚‚ã†ä¸€åº¦ãŠè©¦ã—ãã ã•ã„ã€‚</h3>");
+	            out.println("<p>è©³ç´°: " + e.getMessage() + "</p>");
 	            out.println("</body></html>");
-	            e.printStackTrace(out); // ƒGƒ‰[ƒƒO‚ğo—Í
+	            e.printStackTrace(out); // ã‚¨ãƒ©ãƒ¼ãƒ­ã‚°ã‚’å‡ºåŠ›
 		}
 			return "toukou_form.jsp";
 		}

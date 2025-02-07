@@ -16,37 +16,37 @@ public class ToukouUploadAction extends Action {
         response.setContentType("text/html; charset=UTF-8");
 
         try {
-            // ƒZƒbƒVƒ‡ƒ“‚©‚çƒ†[ƒU[–¼‚ğæ“¾
+            // ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‹ã‚‰ãƒ¦ãƒ¼ã‚¶ãƒ¼åã‚’å–å¾—
             HttpSession session = request.getSession();
             String user_name = (String) session.getAttribute("username");
 
-            // ƒtƒH[ƒ€‚©‚çƒ^ƒCƒgƒ‹‚ÆƒRƒ“ƒeƒ“ƒc‚ğæ“¾
+            // ãƒ•ã‚©ãƒ¼ãƒ ã‹ã‚‰ã‚¿ã‚¤ãƒˆãƒ«ã¨ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’å–å¾—
             String title = request.getParameter("title");
             String content = request.getParameter("content");
 
-            // ƒ^ƒCƒgƒ‹‚ª21•¶šˆÈã‚È‚çƒGƒ‰[
+            // ã‚¿ã‚¤ãƒˆãƒ«ãŒ21æ–‡å­—ä»¥ä¸Šãªã‚‰ã‚¨ãƒ©ãƒ¼
             if (title != null && title.length() > 20) {
-                request.setAttribute("errorMessage", "ƒ^ƒCƒgƒ‹‚Í20•¶šˆÈ“à‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B");
-                return "toukou_form.jsp";  // ƒtƒH[ƒ€‰æ–Ê‚É–ß‚é
+                request.setAttribute("errorMessage", "ã‚¿ã‚¤ãƒˆãƒ«ã¯20æ–‡å­—ä»¥å†…ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚");
+                return "toukou_form.jsp";  // ãƒ•ã‚©ãƒ¼ãƒ ç”»é¢ã«æˆ»ã‚‹
             }
 
 
-            // ‰üsƒR[ƒh‚ğ <br> ƒ^ƒO‚É’uŠ·
+            // æ”¹è¡Œã‚³ãƒ¼ãƒ‰ã‚’ <br> ã‚¿ã‚°ã«ç½®æ›
             String indent_content = content.replace("\n", "<br>");
 
-            // ƒtƒH[ƒ€ƒf[ƒ^‚ğƒŠƒNƒGƒXƒg‚ÉƒZƒbƒg
+            // ãƒ•ã‚©ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã‚’ãƒªã‚¯ã‚¨ã‚¹ãƒˆã«ã‚»ãƒƒãƒˆ
             request.setAttribute("title", title);
             request.setAttribute("name", user_name);
             request.setAttribute("content", indent_content);
 
         } catch (Exception e) {
-            // ƒGƒ‰[”­¶‚ÉƒtƒH[ƒ€‰æ–Ê‚É–ß‚·
+            // ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿæ™‚ã«ãƒ•ã‚©ãƒ¼ãƒ ç”»é¢ã«æˆ»ã™
             e.printStackTrace();
-            request.setAttribute("errorMessage", "“Še‚Ìˆ—’†‚ÉƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B");
+            request.setAttribute("errorMessage", "æŠ•ç¨¿ã®å‡¦ç†ä¸­ã«ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚");
             return "toukou_form.jsp";
         }
 
-        // “Še¬Œ÷AŒ‹‰Êƒy[ƒW‚É‘JˆÚ
+        // æŠ•ç¨¿æˆåŠŸæ™‚ã€çµæœãƒšãƒ¼ã‚¸ã«é·ç§»
         return "toukou_result.jsp";
     }
 }

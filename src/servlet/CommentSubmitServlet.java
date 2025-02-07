@@ -6,7 +6,7 @@ import java.net.URLEncoder;
 //import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.List;
-import java.sql.Timestamp; // Timestamp‚ğƒCƒ“ƒ|[ƒg
+import java.sql.Timestamp; // Timestampã‚’ã‚¤ãƒ³ãƒãƒ¼ãƒˆ
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,15 +27,15 @@ public class CommentSubmitServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        String proposal = request.getParameter("proposalContent"); // ƒeƒLƒXƒgƒGƒŠƒA‚Ì“à—e
-//        Date time = new Date(); // Œ»İ‚Ì“ú
+        String proposal = request.getParameter("proposalContent"); // ãƒ†ã‚­ã‚¹ãƒˆã‚¨ãƒªã‚¢ã®å†…å®¹
+//        Date time = new Date(); // ç¾åœ¨ã®æ—¥æ™‚
         Timestamp time = new Timestamp(System.currentTimeMillis());
 
-        // ƒRƒƒ“ƒg‚ª‹ó‚Å‚È‚¢‚©Šm”F
+        // ã‚³ãƒ¡ãƒ³ãƒˆãŒç©ºã§ãªã„ã‹ç¢ºèª
         if (proposal == null || proposal.trim().isEmpty()) {
-            String errorMessage = "ƒRƒƒ“ƒg“à—e‚ª‹ó‚Å‚·BƒRƒƒ“ƒg‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B";
-            System.out.println("ƒGƒ‰[ƒƒbƒZ[ƒW: " + errorMessage); // ƒfƒoƒbƒO—p
-            // ƒGƒ‰[ƒƒbƒZ[ƒW‚ğrequest‚ÉƒZƒbƒg‚µAƒŠƒ_ƒCƒŒƒNƒg
+            String errorMessage = "ã‚³ãƒ¡ãƒ³ãƒˆå†…å®¹ãŒç©ºã§ã™ã€‚ã‚³ãƒ¡ãƒ³ãƒˆã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚";
+            System.out.println("ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸: " + errorMessage); // ãƒ‡ãƒãƒƒã‚°ç”¨
+            // ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’requestã«ã‚»ãƒƒãƒˆã—ã€ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
             request.setAttribute("errorMessage", errorMessage);
             String id = request.getParameter("items");
             request.getRequestDispatcher("/teee/notice/ToukouNotice.action?items=" + id).forward(request, response);
@@ -44,15 +44,15 @@ public class CommentSubmitServlet extends HttpServlet {
 
         try {
 
-        	//toukou.jsp‚©‚çƒf[ƒ^‚ğæ“¾‚·‚é
+        	//toukou.jspã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
 			String id = request.getParameter("items");
 
 			if (id == null || id.isEmpty()) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "IDãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“");
                 return;
             }
 
-            // w’èID‚Ìƒf[ƒ^‚ğæ“¾
+            // æŒ‡å®šIDã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
 			Postdao2 dao1=new Postdao2();
 			List<Post2> list=dao1.notice_detail(id);
 			request.setAttribute("list2", list);
@@ -62,30 +62,30 @@ public class CommentSubmitServlet extends HttpServlet {
             String user_name = (String) session.getAttribute("username");
             String password = (String) session.getAttribute("password");
 
-         // PostdaoƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚ÄAid_searchƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·
+         // Postdaoã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ã¦ã€id_searchãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™
             Postdao2 comment = new Postdao2();
             List<Comment> userList = comment.id_search(user_name, password);
 
             if (userList.isEmpty()) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ƒ†[ƒU[î•ñ‚ª³‚µ‚­‚ ‚è‚Ü‚¹‚ñ");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ãƒ¦ãƒ¼ã‚¶ãƒ¼æƒ…å ±ãŒæ­£ã—ãã‚ã‚Šã¾ã›ã‚“");
                 return;
             }
 
 //          if (!userList.isEmpty()) {
-            String user_id = userList.get(0).getUser_id();  // user_id‚ğæ“¾
+            String user_id = userList.get(0).getUser_id();  // user_idã‚’å–å¾—
             dao.insertComment(id, user_id, proposal, time);
             request.setAttribute("items", id);
-        	//‡Bgetparamete‚ÅƒqƒhƒDƒ“‚ğæ“¾
-            //System.out.println("‚µ‚ç‚½‚«");
-            // ƒRƒƒ“ƒg‘}“üŒãA“ŠeÚ×ƒy[ƒW‚ÉƒŠƒ_ƒCƒŒƒNƒg
+        	//â‘¢getparameteã§ãƒ’ãƒ‰ã‚¥ãƒ³ã‚’å–å¾—
+            //System.out.println("ã—ã‚‰ãŸã");
+            // ã‚³ãƒ¡ãƒ³ãƒˆæŒ¿å…¥å¾Œã€æŠ•ç¨¿è©³ç´°ãƒšãƒ¼ã‚¸ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
 //            request.getRequestDispatcher("toukou3.jsp")
 //            	.forward(request, response);
-         // ƒRƒƒ“ƒg‘}“üŒãAToukouNoticeAction‚ÉƒŠƒ_ƒCƒŒƒNƒg
+         // ã‚³ãƒ¡ãƒ³ãƒˆæŒ¿å…¥å¾Œã€ToukouNoticeActionã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
             response.sendRedirect("/teee/notice/ToukouNotice.action?items=" + id);
 //        }
             } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ƒf[ƒ^‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸ");
         }
     }
 

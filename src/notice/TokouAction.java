@@ -20,49 +20,48 @@ public class TokouAction extends Action {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            // “Šeíœ‘ÎÛ‚Ì“ŠeID‚ğæ“¾
+            // æŠ•ç¨¿å‰Šé™¤å¯¾è±¡ã®æŠ•ç¨¿IDã‚’å–å¾—
             String postId = request.getParameter("items");
             if (postId != null && !postId.isEmpty()) {
-                // “Šeíœˆ—
+                // æŠ•ç¨¿å‰Šé™¤å‡¦ç†
                 Postdao2 dao = new Postdao2();
-                List<Post2> list = dao.delete(postId); // deleteƒƒ\ƒbƒh‚Å“Še‚ğíœ
+                List<Post2> list = dao.delete(postId); // deleteãƒ¡ã‚½ãƒƒãƒ‰ã§æŠ•ç¨¿ã‚’å‰Šé™¤
 
-                // íœŒã‚Ì“Šeî•ñ‚ğƒŠƒNƒGƒXƒg‘®«‚ÉƒZƒbƒg
+                // å‰Šé™¤å¾Œã®æŠ•ç¨¿æƒ…å ±ã‚’ãƒªã‚¯ã‚¨ã‚¹ãƒˆå±æ€§ã«ã‚»ãƒƒãƒˆ
                 request.setAttribute("list2", list);
 
-                // “ŠeíœŒãA“Šeˆê——ƒy[ƒW‚ÉƒŠƒ_ƒCƒŒƒNƒg
+                // æŠ•ç¨¿å‰Šé™¤å¾Œã€æŠ•ç¨¿ä¸€è¦§ãƒšãƒ¼ã‚¸ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
                 response.sendRedirect("../notice/Tokou.action");
-                return null; // ƒŠƒ_ƒCƒŒƒNƒgŒã‚Íˆ—‚ğI—¹
+                return null; // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå¾Œã¯å‡¦ç†ã‚’çµ‚äº†
             }
-
-//            // ƒRƒƒ“ƒgíœ‘ÎÛ‚ÌƒRƒƒ“ƒgID‚ğæ“¾
+//            // ã‚³ãƒ¡ãƒ³ãƒˆå‰Šé™¤å¯¾è±¡ã®ã‚³ãƒ¡ãƒ³ãƒˆIDã‚’å–å¾—
 //            String commentIdParam = request.getParameter("commentId");
 //            if (commentIdParam != null && !commentIdParam.isEmpty()) {
-//                // ƒRƒƒ“ƒgíœˆ—
+//                // ã‚³ãƒ¡ãƒ³ãƒˆå‰Šé™¤å‡¦ç†
 //                int commentId = Integer.parseInt(commentIdParam);
 //                Postdao2 dao = new Postdao2();
 //
-//                // ƒRƒƒ“ƒg‚ğíœ
-//                dao.deleteComment(commentId); // deleteCommentƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚ÄƒRƒƒ“ƒg‚ğíœ
+//                // ã‚³ãƒ¡ãƒ³ãƒˆã‚’å‰Šé™¤
+//                dao.deleteComment(commentId); // deleteCommentãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¦ã‚³ãƒ¡ãƒ³ãƒˆã‚’å‰Šé™¤
 //
-//                // íœŒã‚Ì“Šeî•ñ‚ğÄæ“¾
+//                // å‰Šé™¤å¾Œã®æŠ•ç¨¿æƒ…å ±ã‚’å†å–å¾—
 //                List<Post2> list = dao.tokou();
 //                request.setAttribute("list2", list);
 //
-//                // íœŒã‚Ì“Šeˆê——ƒy[ƒW‚ÉƒŠƒ_ƒCƒŒƒNƒg
+//                // å‰Šé™¤å¾Œã®æŠ•ç¨¿ä¸€è¦§ãƒšãƒ¼ã‚¸ã«ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
 //                response.sendRedirect("../notice/Tokou.action");
-//                return null; // ƒŠƒ_ƒCƒŒƒNƒgŒã‚Íˆ—‚ğI—¹
+//                return null; // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå¾Œã¯å‡¦ç†ã‚’çµ‚äº†
 //            }
 
-            // “Šeˆê——‚ğ•\¦‚·‚éˆ—
+            // æŠ•ç¨¿ä¸€è¦§ã‚’è¡¨ç¤ºã™ã‚‹å‡¦ç†
             Postdao2 dao = new Postdao2();
             List<Post2> list = dao.tokou();
             request.setAttribute("list2", list);
 
         } catch (Exception e) {
             e.printStackTrace(out);
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ƒGƒ‰[‚ª‹N‚«‚Ü‚µ‚½");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ã‚¨ãƒ©ãƒ¼ãŒèµ·ãã¾ã—ãŸ");
         }
-        return "../common/index.jsp"; // “Šeˆê——‚ğ•\¦
+        return "../common/index.jsp"; // æŠ•ç¨¿ä¸€è¦§ã‚’è¡¨ç¤º
     }
 }

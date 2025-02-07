@@ -26,20 +26,20 @@ public class ToukouDeleteAction extends HttpServlet {
 
         try {
 
-        	//index.jsp‚©‚çƒf[ƒ^‚ğæ“¾‚·‚é
+        	//index.jspã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
 			String id = request.getParameter("items");
 
 
 			if (id == null || id.isEmpty()) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "IDãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“");
                 return;
             }
 
-			// w’èID‚Ìƒf[ƒ^‚ğæ“¾
+			// æŒ‡å®šIDã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
             Postdao2 dao1 = new Postdao2();
             List<Post2> list = dao1.notice_detail(id);
             if (list == null || list.isEmpty()) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "w’è‚³‚ê‚½“Še‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "æŒ‡å®šã•ã‚ŒãŸæŠ•ç¨¿ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“");
                 return;
             }
 
@@ -47,12 +47,12 @@ public class ToukouDeleteAction extends HttpServlet {
 			request.setAttribute("items", id);
 
 
-			 // íœŒã‚Ìî•ñ‚ğ•\¦‚·‚é‚½‚ß‚ÉJSP‚ÉƒtƒHƒ[ƒh
+			 // å‰Šé™¤å¾Œã®æƒ…å ±ã‚’è¡¨ç¤ºã™ã‚‹ãŸã‚ã«JSPã«ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰
             request.getRequestDispatcher("/notice/toukoudelete.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ƒf[ƒ^‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸ");
         }
     }
 }
