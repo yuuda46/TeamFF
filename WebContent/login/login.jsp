@@ -278,7 +278,6 @@ p a {
         }
     %>
 
-
 <!-- ログインフォーム -->
 <form method="POST" action="login.jsp" autocomplete="off">
     <div class="form-group">
@@ -363,6 +362,43 @@ p a {
         font-size: 16px;
         cursor: pointer;
     }
+
+/* フォーム全体を中央に配置 */
+#loginFormContainer {
+    width: 350px; /* フォームの幅 */
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    margin: 0 auto; /* フォーム全体を中央に配置 */
+    text-align: left; /* テキストの配置は左寄せ（ラベルや入力欄など） */
+}
+
+
+
+/* 入力欄やボタンに個別の枠線は変更しない */
+input[type="text"], input[type="password"], button, .reset-button, .back-button {
+    width: 300px; /* 入力欄とボタンを同じ幅にする */
+    height: 40px; /* 入力欄とボタンを同じ高さにする */
+    padding: 10px;
+    border: 1px solid #ccc; /* 枠線を追加 */
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* 入力欄とボタンの間にスペース */
+    font-family: 'Noto Serif JP', sans-serif;
+}
+
+/* ログインボタンに追加のスタイル */
+button {
+    background-color: #00bfff; /* 薄い青色 */
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3; /* ホバー時に色が変わる */
+}
 
 </style>
 
