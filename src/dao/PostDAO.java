@@ -3,8 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import bean.Post;
@@ -27,7 +27,7 @@ public class PostDAO extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("name"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 			p.setCategoryId(rs.getInt("category_id"));
 
 			list.add(p);
@@ -57,7 +57,7 @@ public class PostDAO extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("post_name"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 			p.setCategoryName(rs.getString("category_name"));
 
 			list.add(p);
@@ -90,7 +90,7 @@ public class PostDAO extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("post_name"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 			p.setCategoryId(rs.getInt("category_id"));
 			p.setCategoryName(rs.getString("category_name"));
 
@@ -124,7 +124,7 @@ public class PostDAO extends DAO {
 			p.setPostId(rs.getString("post_id"));
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 			p.setCategoryName(rs.getString("category_name"));
 
 			list.add(p);
@@ -147,8 +147,10 @@ public class PostDAO extends DAO {
 		st.setString(1, post.getTitle());
 		st.setString(2, post.getContent());
 		st.setString(3, post.getName());
-		st.setDate(4, post.getPostDay());
+		st.setTimestamp(4, post.getPostDay());
 		st.setInt(5, post.getCategoryId());
+
+		System.out.println("OK");
 
 		int line= st.executeUpdate();
 
@@ -169,7 +171,7 @@ public class PostDAO extends DAO {
 		st.setString(1, post.getTitle());
 		st.setString(2, post.getContent());
 		st.setString(3, post.getName());
-		st.setDate(4, post.getPostDay());
+		st.setTimestamp(4, post.getPostDay());
 
 		int line= st.executeUpdate();
 
@@ -206,7 +208,7 @@ public class PostDAO extends DAO {
 		System.out.println("SQL complete!!");
 
 		st.setString(1, post.getContent());
-		st.setDate(2, post.getPostDay());
+		st.setTimestamp(2, post.getPostDay());
 		st.setString(3, post.getPostId());
 		int line= st.executeUpdate();
 
@@ -234,7 +236,7 @@ public class PostDAO extends DAO {
 		st.setString(1, post.getTitle());
 		st.setString(2, post.getName());
 		st.setInt(3, post.getCategoryId());
-		st.setDate(4, post.getPostDay());
+		st.setTimestamp(4, post.getPostDay());
 		st.setString(5, post.getPostId());
 		int line= st.executeUpdate();
 
@@ -252,7 +254,8 @@ public class PostDAO extends DAO {
 			"select post.id as post_id, title, content, post.name as post_name, post_day, category_id, category.name as category_name from post "
 			+ "left join category "
 			+ "on category_id = category.id "
-			+ "where category_id is not null");
+			+ "where category_id is not null "
+			+ "order by post_day desc");
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()){
@@ -261,7 +264,7 @@ public class PostDAO extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("post_name"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 			p.setCategoryId(rs.getInt("category_id"));
 			p.setCategoryName(rs.getString("category_name"));
 
@@ -282,7 +285,8 @@ public class PostDAO extends DAO {
 			"select post.id as post_id, title, content, post.name as post_name, post_day, category_id, category.name as category_name from post "
 			+ "left join category "
 			+ "on category_id = category.id "
-			+ "where category_id = ?");
+			+ "where category_id = ? "
+			+ "order by post_day desc");
 
 		st.setInt(1, boot);
 
@@ -294,7 +298,7 @@ public class PostDAO extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("post_name"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 			p.setCategoryId(rs.getInt("category_id"));
 			p.setCategoryName(rs.getString("category_name"));
 
@@ -308,7 +312,7 @@ public class PostDAO extends DAO {
 	}
 
 
-	public void insertPost(String id, String title, String content, String user_name, Date post_day) throws Exception {
+	public void insertPost(String id, String title, String content, String user_name, Timestamp post_day) throws Exception {
         Connection con = getConnection();
         PreparedStatement st = con.prepareStatement(
             "INSERT INTO POST (id, title, content, name, post_day) VALUES (?, ?, ?, ?, ?)");

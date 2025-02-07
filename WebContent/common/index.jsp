@@ -94,7 +94,7 @@
                     <div class="top_margin ">件数:${list2.size()}件</div>
                     </div>
                     <hr>
-                    <c:forEach var="post" items="${list2}">
+                    <c:forEach var="post" items="${list2}" varStatus="loop">
                         <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
                         <p>
 					        <c:choose>
@@ -106,7 +106,7 @@
 					            </c:otherwise>
 					        </c:choose>
 				    	</p>
-                        <p>${post.postDay}</p>
+                        <p>🕑${post_day[loop.index]}</p>
                         <hr>
                     </c:forEach>
                 </c:when>

@@ -1,6 +1,7 @@
 package bean;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Collection {
 
@@ -10,7 +11,7 @@ public class Collection {
 
 	private String postID ;
 	private String title ;
-	private Date post_day ;
+	private Timestamp post_day ;
 
 	private String signID ;
 	private String name ;
@@ -49,10 +50,10 @@ public class Collection {
 		this.title = title;
 	}
 
-	public Date getPost_day() {
+	public Timestamp getPost_day() {
 		return post_day;
 	}
-	public void setPost_day(Date post_day) {
+	public void setPost_day(Timestamp post_day) {
 		this.post_day = post_day;
 	}
 

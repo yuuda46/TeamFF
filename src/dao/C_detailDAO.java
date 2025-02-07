@@ -61,7 +61,7 @@ public class C_detailDAO extends DAO {
 	            p.setId(rs.getString("ID"));
 	            p.setTitle(rs.getString("TITLE"));
 	            p.setContent(rs.getString("CONTENT"));
-	            p.setPost_day(rs.getDate("POST_DAY"));
+	            p.setPost_day(rs.getTimestamp("POST_DAY"));
 
 	            // 追加: c_detail のデータをセット
 	            p.setMonetary(rs.getInt("MONETARY"));

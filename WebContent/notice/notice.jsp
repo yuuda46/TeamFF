@@ -39,7 +39,7 @@
 			<c:when test="${notice_content.size()>0}">
 				<div class="position_right">件数:${notice_content.size()}件</div>
 				<hr class="notice_line">
-				<c:forEach var="notice_content" items="${notice_content}">
+				<c:forEach var="notice_content" items="${notice_content}" varStatus="loop">
 				<div class="parent notice_hight">
 					<form action="../notice/NoticeDetail.action" method="post">
 						<input type="hidden" name="id" value="${notice_content.postId}">
@@ -48,7 +48,7 @@
 					</form>
 					<p class="notice_left margin_top_50px padding_left_20">${notice_content.categoryName}</p>
 					<p class="preview absolute_element position_center child"><img class="image_depth" src="../upload/${notice_content.content}"></p>
-					<p class="position_right padding_top_50px paddeng_right_20">🕑${notice_content.postDay}</p>
+					<p class="position_right padding_top_50px paddeng_right_20">🕑${post_day[loop.index]}</p>
 				</div>
 
 					<hr class="notice_line">

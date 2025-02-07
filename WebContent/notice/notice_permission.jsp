@@ -19,7 +19,7 @@
 	<div class="detail_font container2">
 		<p>タイトル:<%=title %></p>
 		<p>氏名:${name[0].name}</p>
-		<p>カテゴリーID:<%=category_id %></p>
+		<p>カテゴリー:${category[0].categoryName}</p>
 	</div>
 
 	<div class="notice_center detail_top">

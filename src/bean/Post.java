@@ -1,13 +1,14 @@
 package bean;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Post {
 	private String post_id;
 	private String title;
 	private String content;
 	private String name;
-	private Date post_day;
+	private Timestamp post_day;
 	private int category_id;
 	private String category_name;
 
@@ -23,10 +24,10 @@ public class Post {
 	public void setPost_id(String post_id) {
 		this.post_id = post_id;
 	}
-	public Date getPost_day() {
+	public Timestamp getPost_day() {
 		return post_day;
 	}
-	public void setPost_day(Date post_day) {
+	public void setPost_day(Timestamp post_day) {
 		this.post_day = post_day;
 	}
 	public int getCategory_id() {
@@ -53,7 +54,7 @@ public class Post {
 	public String getName() {
 		return name;
 	}
-	public Date getPostDay() {
+	public Timestamp getPostDay() {
 		return post_day;
 	}
 	public int getCategoryId() {
@@ -76,8 +77,8 @@ public class Post {
 	public void setName(String name){
 		this.name=name;
 	}
-	public void setPostDay(Date post_day){
-		this.post_day=post_day;
+	public void setPostDay(Timestamp post_day2){
+		this.post_day=post_day2;
 	}
 	public void setCategoryId(int category_id){
 		this.category_id=category_id;

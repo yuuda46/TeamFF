@@ -38,14 +38,14 @@
 					<th>コンテンツ</th>
 					<th>氏名</th>
 					<th>日付</th>
-					<th>カテゴリー</th>
+					<th class="padding_none">カテゴリー</th>
 					<th></th>
 					<th></th>
 
 				</tr>
-				<c:forEach var="notice_content" items="${notice_content}">
+				<c:forEach var="notice_content" items="${notice_content}" varStatus="loop">
 					<tr>
-					<td>${notice_content.title}</td>
+					<td class="padding_none">${notice_content.title}</td>
 					<td class="padding_none">
 						<form class="padding_bottom_0 text_left" action="../notice/AdminDetail.action?" method="post">
 							<input type="hidden" name="post_id" value="${notice_content.postId}">
@@ -53,9 +53,9 @@
 							<button class="button_style border-none padding_left_12 padding_top_10 padding_bottom_10 text_left" type="submit">${notice_content.content}</button>
 						</form>
 					</td>
-					<td>${notice_content.name}</td>
-					<td>${notice_content.postDay}</td>
-					<td>${notice_content.categoryName}</td>
+					<td class="padding_none">${notice_content.name}</td>
+					<td class="padding_none">${post_day[loop.index]}</td>
+					<td class="padding_none">${notice_content.categoryName}</td>
 					<td class="padding_none">
 						<form class="padding_bottom_0" action="../notice/NoticeUpdate.action" method="get">
 							<input type="hidden" name="post_id" value="${notice_content.postId}">

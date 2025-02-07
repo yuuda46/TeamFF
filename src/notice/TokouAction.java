@@ -2,6 +2,9 @@ package notice;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -56,7 +59,28 @@ public class TokouAction extends Action {
             // 投稿一覧を表示する処理
             Postdao2 dao = new Postdao2();
             List<Post2> list = dao.tokou();
+
+//			list1のサイズを取得
+			int loop = list.size();
+
+//			リストを作成
+			List<String> string_times = new ArrayList<String>();
+
+			for (int i = 0; i < loop; i++) {
+
+//				beenからpost_dayを取得
+				Timestamp timestamp = list.get(i).getPostDay();
+		        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//		        Timestamp型からString型に変換
+		        String string_time = sdf.format(timestamp);
+		        System.out.println(string_time);
+
+//		        リストに入れる
+		        string_times.add(string_time);
+			}
+
             request.setAttribute("list2", list);
+            request.setAttribute("post_day", string_times);
 
         } catch (Exception e) {
             e.printStackTrace(out);

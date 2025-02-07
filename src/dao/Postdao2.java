@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.Post2;
 import bean.Comment;
+import bean.Post2;
 
 
 public class Postdao2 extends DAO {
@@ -28,7 +28,7 @@ public class Postdao2 extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("name"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 			p.setCategoryId(rs.getInt("category_id"));
 
 			list.add(p);
@@ -55,7 +55,7 @@ public class Postdao2 extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("name"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 
 			list.add(p);
 		}
@@ -82,7 +82,7 @@ public class Postdao2 extends DAO {
 			Post2 p=new Post2();
 			p.setPostId(rs.getString("id"));
 			p.setTitle(rs.getString("title"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 
 			list.add(p);
 		}
@@ -110,7 +110,7 @@ public class Postdao2 extends DAO {
 			p.setPostId(rs.getString("id"));
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 			p.setName(rs.getString("name"));
 
 			list2.add(p);
@@ -143,7 +143,7 @@ public class Postdao2 extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("name"));
-			p.setPostDay(rs.getDate("post_day"));
+			p.setPostDay(rs.getTimestamp("post_day"));
 
 			list.add(p);
 		}
@@ -187,7 +187,7 @@ public class Postdao2 extends DAO {
 	        p.setTitle(rs.getString("title"));
 	        p.setContent(rs.getString("content"));
 	        p.setName(rs.getString("name"));
-	        p.setPostDay(rs.getDate("post_day"));
+	        p.setPostDay(rs.getTimestamp("post_day"));
 	        list.add(p);
 	    }
 
@@ -223,7 +223,7 @@ public class Postdao2 extends DAO {
 			p.setTitle(rs.getString("title"));
 			p.setContent(rs.getString("content"));
 			p.setName(rs.getString("name"));
-			p.setPostDay(rs.getDate("category_id"));
+			p.setPostDay(rs.getTimestamp("category_id"));
 			list.add(p);
 		}
 

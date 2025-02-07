@@ -1,7 +1,9 @@
 package notice;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +35,14 @@ public class ToukouUpload2Action extends Action {
                 return "toukou_form.jsp";  // フォーム画面に戻る
             }
 
-            // 現在の日付を取得
-            LocalDate localDate = LocalDate.now();
-            java.sql.Date post_day = java.sql.Date.valueOf(localDate);
+//			LocalDateTime型の日付を取得
+			LocalDateTime localDate = LocalDateTime.now();
+			String string_date = localDate.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss"));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+			LocalDateTime date_time = LocalDateTime.parse(string_date, formatter);
+
+			Timestamp post_day = Timestamp.valueOf(date_time);
+			System.out.println(post_day);
 
             // 投稿オブジェクトを作成
             Post p = new Post();

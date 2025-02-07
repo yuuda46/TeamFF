@@ -17,11 +17,11 @@
 	<div class="container2">
 		<c:choose>
 			<c:when test="${content.size()>0}">
-				<c:forEach var="content" items="${content}">
+				<c:forEach var="content" items="${content}" varStatus="loop">
 					<h1>${content.title}</h1>
 					<div class="detail_flex">
 					<p class="detail_font">${content.categoryName}</p>
-					<p class="detail_font">🕑${content.postDay}</p>
+					<p class="detail_font">🕑${post_day[loop.index]}</p>
 					</div>
 					<p class="detail_font">回覧物</p>
 					<p class="position_center detail_font"><img src="../upload/${content.content}"></p>

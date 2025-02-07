@@ -29,8 +29,12 @@
                 <h1><%= p.getTitle() %></h1>
                 <p class="f"><%= p.getContent().replace("\n", "<br>") %></p>
                 <p>投稿者👤:<%= p.getName() %></p>
-                <p>投稿時間⌚:<%= p.getPostDay() %></p>
-
+                <div class="detail_flex">
+                <p>投稿時間⌚:</p>
+				<c:forEach var="notice_content" items="${content2}">
+					<p>${content2[0]}</p>
+				</c:forEach>
+				</div>
 
              <!-- ユーザーが管理者権限を持っている場合にボタンを表示 -->
             <%

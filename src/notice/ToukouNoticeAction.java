@@ -2,6 +2,9 @@ package notice;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -59,11 +62,47 @@ public class ToukouNoticeAction extends Action {
                 return "toukou2.jsp";  // 投稿が存在しない場合のエラーメッセージ
             }
 
+//			list1のサイズを取得
+			int loop = list.size();
+
+			System.out.println(loop);
+
+//			リストを作成
+			List<String> string_times = new ArrayList<String>();
+
+			for (int i = 0; i < loop; i++) {
+
+////				beenからtitleを取得
+//				String title = list.get(i).getTitle();
+//
+////				beenからcontentを取得
+//				String content = list.get(i).getContent();
+//
+////				beenからname取得
+//				String name = list.get(i).getName();
+
+//				beenからpost_dayを取得
+				Timestamp timestamp = list.get(i).getPostDay();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//				Timestamp型からString型に変換
+				String string_time = sdf.format(timestamp);
+				System.out.println(string_time);
+
+//				リストに入れる
+//				string_times.add(title);
+//				string_times.add(content);
+//				string_times.add(name);
+				string_times.add(string_time);
+			}
+
+			System.out.println(list);
+
 			Postdao2 com=new Postdao2();
 			List<Comment> list4=com.come(id);
 			request.setAttribute("comment", list4);
 			request.setAttribute("list2", list);
             request.setAttribute("content", list);
+            request.setAttribute("content2", string_times);
 			request.setAttribute("items", id);
 
 

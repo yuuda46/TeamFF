@@ -40,7 +40,7 @@ public class CollectionDAO extends DAO {
 	            p.setId(rs.getString("ID"));
 	            p.setTitle(rs.getString("TITLE"));
 	            p.setContent(rs.getString("CONTENT"));
-	            p.setPost_day(rs.getDate("POST_DAY"));
+	            p.setPost_day(rs.getTimestamp("POST_DAY"));
 
 		        // 追加: c_detail のデータもセット
 		        p.setMonetary(rs.getInt("MONETARY"));
@@ -83,7 +83,7 @@ public class CollectionDAO extends DAO {
             p.setId(rs.getString("ID"));
             p.setTitle(rs.getString("TITLE"));
             p.setContent(rs.getString("CONTENT"));
-            p.setPost_day(rs.getDate("POST_DAY"));
+            p.setPost_day(rs.getTimestamp("POST_DAY"));
             p.setMonetary(rs.getInt("monetary"));
             p.setDeadline(rs.getDate("deadline"));
             p.setTransferee(rs.getString("Transferee"));
@@ -155,7 +155,7 @@ public class CollectionDAO extends DAO {
             p.setId(rs.getString("ID"));
             p.setTitle(rs.getString("TITLE"));
             p.setContent(rs.getString("CONTENT"));
-            p.setPost_day(rs.getDate("POST_DAY"));
+            p.setPost_day(rs.getTimestamp("POST_DAY"));
             p.setMonetary(rs.getInt("monetary"));
             p.setDeadline(rs.getDate("deadline"));
             p.setTransferee(rs.getString("Transferee"));
@@ -205,7 +205,7 @@ public class CollectionDAO extends DAO {
 	        p.setDepositdate(rs.getDate("depositDate"));
 	        p.setPostID(rs.getString("postID"));
 	        p.setTitle(rs.getString("title"));
-	        p.setPost_day(rs.getDate("post_day"));
+	        p.setPost_day(rs.getTimestamp("post_day"));
 	        p.setSignID(rs.getString("signID"));
 	        p.setName(rs.getString("name"));
 	        p.setDetailid(rs.getString("detailID"));
@@ -250,7 +250,7 @@ public class CollectionDAO extends DAO {
 
 		        E.setPostID(rs.getString("postID"));
 		        E.setTitle(rs.getString("title"));
-		        E.setPost_day(rs.getDate("post_day"));
+		        E.setPost_day(rs.getTimestamp("post_day"));
 
 		        E.setDetailid(rs.getString("detailID"));
 		        E.setMonetary(rs.getInt("monetary"));

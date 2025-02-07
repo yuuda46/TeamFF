@@ -2,7 +2,9 @@ package notice;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,14 +23,14 @@ public class NoticeUpdateExcuteAction extends Action {
 		try{
 			String post_id = request.getParameter("post_id");
 			System.out.println(post_id);
+
 //			LocalDate型の日付を取得
-			LocalDate localDate = LocalDate.now();
+			LocalDateTime localDate = LocalDateTime.now();
+			String string_date = localDate.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss"));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+			LocalDateTime date_time = LocalDateTime.parse(string_date, formatter);
 
-			System.out.println(localDate);
-
-//			LocalDate型からsql.Date型に変換
-			java.sql.Date post_day= java.sql.Date.valueOf(localDate);
-
+			Timestamp post_day = Timestamp.valueOf(date_time);
 			System.out.println(post_day);
 
 			String title = request.getParameter("title");
