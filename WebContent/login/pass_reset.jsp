@@ -59,6 +59,15 @@ body {
     text-align: center; /* フォーム内のテキストも中央揃え */
     margin-top: 50px; /* 必要に応じて上部に余白を追加 */
 }
+#resetFormContainer {
+    width: 350px; /* 横幅を指定 */
+    padding: 20px;
+    border: 2px solid #ccc; /* 枠線の色 */
+    border-radius: 8px; /* 角丸を追加 */
+    margin: 0 auto; /* 左右中央揃え */
+    background-color: #ffffff; /* 背景色を白に設定 */
+    text-align: left; /* テキストを左寄せに設定 */
+}
 
 /* パスワードリセットフォーム */
 form {
@@ -262,8 +271,6 @@ button {
     margin-top: 10px; /* ボタンと入力欄の間に余白 */
 }
 
-
-
 </style>
 
 <%
@@ -277,7 +284,7 @@ button {
     <h2>パスワードの再設定</h2>
     <div class="container" id="resetFormContainer">
 
-<%
+   <%
     // 初期化
     String message = "";
     List<String> errorMessages = new ArrayList<String>();
@@ -315,22 +322,16 @@ button {
                 // サーバモードでデータベース接続
                 conn = DriverManager.getConnection(url, dbUser, dbPassword);
 
-                // ユーザー名が存在するか確認
-                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
+                // ユーザー名と現在のパスワードを照合
+                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
                 stmt = conn.prepareStatement(query);
                 stmt.setString(1, username);
+                stmt.setString(2, currentPassword);
                 rs = stmt.executeQuery();
 
-                // ユーザー名が存在しない場合
+                // ユーザー名またはパスワードが間違っている場合
                 if (!rs.next()) {
-                    errorMessages.add("・ユーザーが見つかりません。");
-                } else {
-                    // ユーザー名が存在している場合、現在のパスワードの照合
-                    String dbPasswordFromDb = rs.getString("PASSWORD");
-
-                    if (!currentPassword.equals(dbPasswordFromDb)) {
-                        errorMessages.add("・現在のパスワードが違います。");
-                    }
+                    errorMessages.add("・ユーザーが見つかりません。"); // ユーザーが見つからなければエラーメッセージを追加
                 }
             } catch (Exception e) {
                 errorMessages.add("エラーが発生しました: " + e.getMessage());
@@ -395,7 +396,6 @@ button {
     }
 %>
 
-
         <%-- パスワードリセットフォーム --%>
         <form method="POST" action="">
     <label for="username">ユーザー名:</label>
@@ -447,13 +447,14 @@ button {
         color: #cc0000; /* ホバー時に少し濃い赤色 */
     }
 
+
 </style>
 
     </div>
-
-    <footer>
-        <small>Copyright&copy;SAMPLE COMPANY All Rights Reserved.</small>
-    </footer>
+<!-- フッター -->
+<footer>
+    <small>Copyright&copy; SAMPLE COMPANY All Rights Reserved.</small>
+</footer>
 
     <!-- スクロール機能の読み込み -->
     <%@ include file="scroll.jsp" %>
