@@ -93,6 +93,7 @@
                 	<div class="position_right ">
                     <div class="top_margin ">件数:${list2.size()}件</div>
                     </div>
+                    <hr>
                     <c:forEach var="post" items="${list2}">
                         <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
                         <p>

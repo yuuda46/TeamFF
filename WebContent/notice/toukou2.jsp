@@ -19,6 +19,7 @@
 <div class="container">
         <%
             List<Post2> list = (List<Post2>) request.getAttribute("content");
+        	System.out.println(list);
             if (list != null && !list.isEmpty()) {
         %>
 
