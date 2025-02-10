@@ -312,6 +312,7 @@ p a {
 
     <!-- ログインエラーメッセージ（1か所にまとめて表示） -->
     <div class="error-message" style="font-size: 14px; margin-top: 10px; margin-bottom: 15px;">
+        <%= (!usernameError.isEmpty() || !passwordError.isEmpty()) ? "入力内容に誤りがあります。" : "" %>
         <%= !loginMessage.isEmpty() ? loginMessage : "" %>
     </div>
 
