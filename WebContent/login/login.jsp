@@ -220,9 +220,9 @@ p a {
                 usernameError = "・ユーザー名を正しく入力してください。";
             }
 
-            // パスワードが正規表現に一致しない場合、エラーメッセージを設定
-            if (inputPassword.isEmpty()) {
-                passwordError = "・パスワードを入力してください。";
+            // パスワードが5文字未満の場合、エラーメッセージを設定
+            if (inputPassword.length() < 5) {
+                passwordError = "・パスワードが短すぎます。5文字以上で入力してください。";
             }
 
             // 両方にエラーがない場合にのみ、ログイン処理を行う
@@ -311,7 +311,6 @@ p a {
 <p style="text-align: center;">
     <a href="../common/index.jsp" class="back-button">戻る</a>
 </p>
-
 
 <style>
     .form-group {
