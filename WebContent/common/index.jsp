@@ -87,14 +87,13 @@
     <form class="position_right" action="../notice/ToukouForm.action" method="post">
 		<button class="button_style il_button  margin_top_30px" type="submit">議題投稿する</button>
 	</form>
-        <form action="../notice/Tokou.action" method="get">
+
             <c:choose>
                 <c:when test="${not empty list2}">
                 	<div class="position_right ">
                     <div class="top_margin ">件数:${list2.size()}件</div>
                     </div>
-                    <hr>
-                    <c:forEach var="post" items="${list2}" varStatus="loop">
+                    <c:forEach var="post" items="${list2}">
                         <h1><a href="../notice/ToukouNotice.action?items=${post.postId}">${post.title}</a></h1>
                         <p>
 					        <c:choose>
@@ -106,7 +105,7 @@
 					            </c:otherwise>
 					        </c:choose>
 				    	</p>
-                        <p>🕑${post_day[loop.index]}</p>
+                        <p>${post.postDay}</p>
                         <hr>
                     </c:forEach>
                 </c:when>

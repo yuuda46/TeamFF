@@ -80,6 +80,7 @@ public class TokouAction extends Action {
 			}
 
             request.setAttribute("list2", list);
+            System.out.println("list2"+list);
             request.setAttribute("post_day", string_times);
 
         } catch (Exception e) {
