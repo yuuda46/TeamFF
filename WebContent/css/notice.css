@@ -8,7 +8,7 @@
 	float: left;
 }
 
-.notice_right {
+.float_right {
 	float:right;
 }
 
@@ -20,6 +20,12 @@
 	display: flex;
 }
 
+.re_flexbox {
+	display: flex;
+	flex-direction: row-reverse;
+
+
+}
 /*指定した要素の回り込みを解除するCSS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .notice_line {
@@ -77,6 +83,14 @@
 }
 .paddeng_right_20 {
 	padding-right: 20px;
+}
+
+.yy_margin {
+	left: 0;
+}
+
+.oo_margin {
+	right: 0;
 }
 
 /*左に余白をあける
@@ -200,7 +214,7 @@
 }
 
 .textarea {
-	max-width: 770px;
+	max-width: 780px;
 	width: 100%;
 	height: 120px;
 }

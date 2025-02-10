@@ -30,10 +30,10 @@
                 <p class="f"><%= p.getContent().replace("\n", "<br>") %></p>
                 <p>投稿者👤:<%= p.getName() %></p>
                 <div class="detail_flex">
-                <p>投稿時間⌚:</p>
-				<c:forEach var="notice_content" items="${content2}">
-					<p>${content2[0]}</p>
-				</c:forEach>
+	                <p>投稿時間⌚:</p>
+					<c:forEach var="notice_content" items="${content2}">
+						<p>${content2[0]}</p>
+					</c:forEach>
 				</div>
 
              <!-- ユーザーが管理者権限を持っている場合にボタンを表示 -->
@@ -64,19 +64,19 @@
 	            </div>
 	        <% } %>
 		</form>
+
 		<!-- 現在表示されている投稿情報の表示 -->
         <form name="pos" action="../notice/commentSubmit" method="post">
 		<hr size="2" class="notice_line" color="gray">
         <h1>コメント🖊</h1>
-
             <!-- コメント入力欄 -->
             <div class="padding_top_10 padding_bottom_10 ">
-		    <textarea class="tarea border_style" name="proposalContent" id="textarea" placeholder="コメントを入力"  required="required" rows="5"></textarea>
+		    	<textarea class="tarea border_style" name="proposalContent" id="textarea" placeholder="コメントを入力"  required="required" rows="5"></textarea>
 		    </div>
 
 		    <input type="hidden" name="items" value="${items}" required="required">
 		    <div class="position_right">
-		    <button class="button_style  detail_button" id="filter-button" value="遷移" type="submit">送信</button>
+		    	<button class="button_style  detail_button" id="filter-button" value="遷移" type="submit">送信</button>
 			</div>
 
 		</form>
@@ -106,18 +106,18 @@
 		            <input type="hidden" name="commentId" value="${comment.comment_id}">
 		            <input type="hidden" name="items" value="${items}">
 		            <div class="position_right">
-		            <button class="button_style button_button " type="submit">コメントを削除する</button>
+		            	<button class="button_style button_button " type="submit">コメントを削除する</button>
 		            </div>
 		        </form>
 		    </c:if>
             <hr>
         </c:forEach>
-	        <% } else { %>
-	            <p>コメントはありません。</p>
-	        <% } %>
-	     </div>
+        <% } else { %>
+            <p>コメントはありません。</p>
+        <% } %>
+        <form action="../notice/Tokou.action" method="get">
+			<button class="button_style button_size right_margin" type="submit">戻る</button>
+		</form>
+     </div>
 	</c:param>
 </c:import>
-
-
-<!-- @include file="../footer.html" -->
