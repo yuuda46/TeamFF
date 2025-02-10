@@ -7,7 +7,6 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
 <c:import url="/common/base.jsp">
-    <c:param name="scripts"></c:param>
     <c:param name="content">
         <link rel="stylesheet" href="../css/collection.css">
         <div class="function">
@@ -16,21 +15,32 @@
                 <h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">このページには、まだ入金していない項目のみ表示しています</h3>
 
                 <%-- 検索フォーム --%>
-                <form action="CollectionDeposit.action" method="get">
-                <div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
-                <div class="test-wide mx-3">
-                    <%-- signid フィールド --%>
-                    <div class="col-xl select-wide">
-                        <label class="form-label" for="signid">利用者ID (Sign ID)</label><br>
-                        <input type="text" name="signid" placeholder="利用者ID 36桁を入力" required="required" value="${param.signid}"> <%-- ここを修正しました --%>
+                <form action="CollectionDeposit.action" method="get" onsubmit="return validateSignId()">
+                    <div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
+                        <div class="test-wide mx-3">
+                            <%-- signid フィールド --%>
+                            <div class="col-xl select-wide">
+                                <label class="form-label" for="signid">利用者ID (Sign ID)</label><br>
+                                <input type="text" name="signid" id="signid" placeholder="利用者ID 36桁を入力" required="required" value="${param.signid}">
+                            </div>
+                            <div class="col-xl text-center">
+                                <button class="btn btn-secondary" id="filter-button">検索</button>
+                            </div>
+                            <div class="mt-2 text-warning" id="error-message">${errors.get("f1")}</div>
+                        </div>
                     </div>
-                    <div class="col-xl text-center">
-                        <button class="btn btn-secondary" id="filter-button">検索</button>
-                    </div>
-                    <div class="mt-2 text-warning">${errors.get("f1")}</div>
-                </div>
-                </div>
                 </form>
+
+                <script>
+                    function validateSignId() {
+                        var signid = document.getElementById("signid").value;
+                        if (signid.length !== 36) {
+                            document.getElementById("error-message").innerText = "IDが36桁ではありません。入力し直してください。";
+                            return false;
+                        }
+                        return true;
+                    }
+                </script>
 
                 <%-- 名前の表示 --%>
                 <c:if test="${not empty Signup}">
@@ -58,10 +68,9 @@
                             <th class="test-boder test-table-wide">投稿日</th>
                             <th class="test-boder test-table-wide">金額</th>
                             <th class="test-boder test-table-wide">期限</th>
-
                             <th class="test-boder test-table-wide"></th>
                         </tr>
-                        <c:forEach var="Collection" items="${Post}"  varStatus="loop">
+                        <c:forEach var="Collection" items="${Post}">
                             <%-- 期限をDate型に変換 --%>
                             <fmt:parseDate var="deadlineDate" value="${Collection.deadline}" pattern="yyyy-MM-dd" type="date" />
                             <%-- 現在の日付を取得し、Date型に変換 --%>
@@ -73,13 +82,12 @@
                             <tr style="${isExpired ? 'color:red;' : ''}">
                                 <td class="test-table-wide test-boder">${Collection.id}</td>
                                 <td class="test-table-wide test-boder">${Collection.title}</td>
-                                <td class="test-table-wide test-boder">${post_day[loop.index]}</td>
+                                <td class="test-table-wide test-boder">${Collection.post_day}</td>
                                 <td class="test-table-wide test-boder">${Collection.monetary}</td>
                                 <td class="test-table-wide test-boder">${Collection.deadline}</td>
-
                                 <td class="text-center test-boder">
                                     <%-- signid をリンクに追加 --%>
-                                    <a href="../collection/CollectionDepositCheck.action?no=${Collection.id}&signid=${param.signid}"> <%-- ここを修正しました --%>
+                                    <a href="../collection/CollectionDepositCheck.action?no=${Collection.id}&signid=${param.signid}">
                                         <button>入金完了</button>
                                     </a>
                                 </td>
