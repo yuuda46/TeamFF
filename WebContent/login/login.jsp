@@ -232,7 +232,7 @@ p a {
 
             // パスワードが正規表現に一致しない場合、エラーメッセージを設定
             if (!inputPassword.matches(regex)) {
-                passwordError = "・パスワードは半角英数字5文字以上で入力してください。";
+                passwordError = "・半角英数字5文字以上で入力してください。";
             }
 
             // 両方にエラーがない場合にのみ、ログイン処理を行う
@@ -266,6 +266,7 @@ p a {
                         String idFrag = rs.getString("ID");
                         session.setAttribute("sessionId", idFrag);
                         System.out.println("Session ID set: " + idFrag);
+                        // ここでリダイレクトする前にメッセージを設定する
                         response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
                         return; // 処理終了
                     }
