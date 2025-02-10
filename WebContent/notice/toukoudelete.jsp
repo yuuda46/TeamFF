@@ -26,13 +26,13 @@
 	                    <li><strong>投稿日時:</strong> ${post_day[0]}</li>
 	                </ul>
 	            </div>
-	            <div class="detail_flex ">
-	            <form class="" action="../notice/ToukouNotice.action" method="get">
+	            <div class="detail_flex notice_center">
+	            <form class="right_margin" action="../notice/ToukouNotice.action" method="get">
 	            	<input type="hidden" name="items" value="${items}">
 	                <button type="submit" class=" button_style detail_button">戻る</button>
 	            </form>
 
-	            <form class="" action="Tokou.action" method="post">
+	            <form class="margin_left_10" action="Tokou.action" method="post">
 	                <input type="hidden" name="items" value="${list2[0].postId}" />
 	                <input type="hidden" name="items" value="${items}">
 	                <button type="submit" class="button_style detail_button">はい</button>
