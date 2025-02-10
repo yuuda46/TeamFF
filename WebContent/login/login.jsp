@@ -301,7 +301,7 @@ p a {
 
     <!-- ログインエラーメッセージ（1か所にまとめて表示） -->
     <div class="error-message" style="font-size: 14px; margin-top: 10px; margin-bottom: 15px;">
-        <%= !loginMessage.isEmpty() ? loginMessage : "" %>
+        <%= (!usernameError.isEmpty() || !passwordError.isEmpty()) ? usernameError + "<br>" + passwordError : "" %>
     </div>
 
     <button type="submit" class="login-btn">ログイン</button>
