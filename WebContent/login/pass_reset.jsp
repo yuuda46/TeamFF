@@ -30,7 +30,6 @@ header {
     margin-bottom: 30px;  /* ヘッダーの下に30pxの余白を追加 */
 }
 
-
 /* タイトル */
 h3 {
     font-size: 105px;
@@ -102,19 +101,8 @@ button {
     transition: all 0.3s ease;
 }
 
-
 button:hover {
     background-color: #ff4d4d; /* ホバー時の背景色 */
-}
-
-
-/* パスワードを忘れたボタンと戻るボタンのスタイル */
-.reset-button, .back-button {
-    display: inline-block; /* インラインブロック要素にして、横並びを防ぐ */
-}
-
-.reset-button:hover, .back-button:hover {
-    background-color: #ff0000; /* ホバー時の色 */
 }
 
 h1 {
@@ -200,77 +188,24 @@ h2 {
     margin-top: 10px; /* ログインフォームの上部の余白を縮める */
 }
 
-
-/* 通常時のリンクのスタイル */
-.login-link {
-    color: black; /* 通常時は黒色 */
-    text-decoration: none; /* 下線を消す */
-    font-size: 16px; /* フォントサイズ */
-}
-
-.login-link:hover {
-    color: darkred; /* ホバー時に濃い赤色 */
-}
-
-.highlight {
-    font-weight: bold; /* 「こちら」の部分を太字 */
-    color: inherit; /* 「こちら」の部分の色を親の色（黒色）に合わせる */
-}
- /* エラーメッセージのスタイル */
-/* label と input の間隔を調整 */
-label {
-    display: block;
-    margin-bottom: 5px;  /* label と input の間隔を狭める */
-}
-
-/* 入力欄のスタイル */
-input[type="text"], input[type="password"] {
-    display: block;
-    width: 300px;
-    height: 40px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-bottom: 10px;  /* 入力欄同士の間隔を調整 */
-}
-
-/* エラーメッセージのスタイル */
 .error {
-    color: red;             /* エラーメッセージを赤文字に */
-    font-size: 14px;        /* フォントサイズを調整 */
-    text-align: left;       /* 文字を左揃えに */
-    margin-top: 10px;       /* 上部に余白を追加 */
-    padding-left: 0px;      /* 左の余白を調整 */
-    width: 300px;           /* 幅を入力欄と同じに設定 */
-    margin-left: 0px;       /* 左の余白をなくして調整 */
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    margin-top: 10px;
+    padding-left: 0px;
+    width: 300px;
+    margin-left: 0px;
 }
 
 .error ul {
-    padding-left: 20px; /* 左にスペースを追加してリストアイテムが見やすくなる */
-    list-style-type: none; /* リストマーカー（●）を非表示に */
+    padding-left: 20px;
+    list-style-type: none;
 }
 
 .error li {
-    margin-bottom: 5px;  /* 各エラーメッセージの間隔を調整 */
+    margin-bottom: 5px;
 }
-
-/* ボタンのスタイル */
-button {
-    width: 300px;
-    height: 40px;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #000000;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 10px; /* ボタンと入力欄の間に余白 */
-}
-
 </style>
 
 <%
@@ -285,53 +220,43 @@ button {
     <div class="container" id="resetFormContainer">
 
    <%
-    // 初期化
     String message = "";
     List<String> errorMessages = new ArrayList<String>();
 
-    // パスワードに関する正規表現（半角英数字5文字以上）
     String passwordRegex = "^[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上
-    // パスワードに同じ文字が連続して使われていないか確認する正規表現
     String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字が1回連続する場合にマッチ
 
-    // POSTリクエスト時の処理
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         String username = request.getParameter("username");
         String currentPassword = request.getParameter("currentPassword");
         String newPassword = request.getParameter("newPassword");
 
-        // ユーザー名が空でないか確認
         if (username == null || username.isEmpty()) {
             errorMessages.add("・ユーザー名を入力してください。");
         }
 
-        // 現在のパスワードが正しいか確認
         if (currentPassword == null || currentPassword.isEmpty()) {
             errorMessages.add("・現在のパスワードを入力してください。");
         } else {
-            // データベース接続情報
-            String url = "jdbc:postgresql://localhost:5432/team_f"; // サーバモードでの接続
-            String dbUser = "postgres";  // ユーザー名
-            String dbPassword = "Team_F";  // パスワード
+            String url = "jdbc:postgresql://localhost:5432/team_f";
+            String dbUser = "postgres";
+            String dbPassword = "Team_F";
             Connection conn = null;
             PreparedStatement stmt = null;
             ResultSet rs = null;
 
             try {
                 Class.forName("org.postgresql.Driver");
-                // サーバモードでデータベース接続
                 conn = DriverManager.getConnection(url, dbUser, dbPassword);
 
-                // ユーザー名と現在のパスワードを照合
                 String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
                 stmt = conn.prepareStatement(query);
                 stmt.setString(1, username);
                 stmt.setString(2, currentPassword);
                 rs = stmt.executeQuery();
 
-                // ユーザー名またはパスワードが間違っている場合
                 if (!rs.next()) {
-                    errorMessages.add("・ユーザーが見つかりません。"); // ユーザーが見つからなければエラーメッセージを追加
+                    errorMessages.add("・現在のパスワードが違います。");
                 }
             } catch (Exception e) {
                 errorMessages.add("エラーが発生しました: " + e.getMessage());
@@ -339,35 +264,30 @@ button {
                 try {
                     if (rs != null) rs.close();
                     if (stmt != null) stmt.close();
-                    if (conn != null) conn.close(); // 接続を閉じる
+                    if (conn != null) conn.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
         }
 
-        // パスワードのチェック（5文字以上の半角英数字）
         if (newPassword == null || !newPassword.matches(passwordRegex)) {
-            errorMessages.add("・半角英数字5文字以上で入力してください。");
+            errorMessages.add("・新しいパスワードは5文字以上で入力してください。");
         }
 
-        // パスワードに同じ文字が連続して使われていないかチェック
         if (newPassword != null && newPassword.matches(".*(\\w)\\1.*")) {
             errorMessages.add("・同じ文字や数字を連続して使用できません。");
         }
 
-        // エラーがなければパスワードを更新
         if (errorMessages.isEmpty()) {
-            // データベース接続情報
-            String url = "jdbc:postgresql://localhost:5432/team_f"; // サーバモードでの接続
-            String dbUser = "postgres";  // ユーザー名
-            String dbPassword = "Team_F";  // パスワード
+            String url = "jdbc:postgresql://localhost:5432/team_f";
+            String dbUser = "postgres";
+            String dbPassword = "Team_F";
             Connection conn = null;
             PreparedStatement stmt = null;
 
             try {
                 Class.forName("org.postgresql.Driver");
-                // サーバモードでデータベース接続
                 conn = DriverManager.getConnection(url, dbUser, dbPassword);
                 String query = "UPDATE SIGNUP SET PASSWORD = ? WHERE USER_NAME = ?";
                 stmt = conn.prepareStatement(query);
@@ -381,13 +301,12 @@ button {
                     response.sendRedirect("login.jsp");
                     return;
                 } else {
-                    errorMessages.add("ユーザーが見つかりません。");
+                    errorMessages.add("・ユーザーが見つかりません。");
                 }
             } finally {
-                // リソースを閉じる
                 try {
                     if (stmt != null) stmt.close();
-                    if (conn != null) conn.close(); // 接続を閉じる
+                    if (conn != null) conn.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -396,68 +315,37 @@ button {
     }
 %>
 
-        <%-- パスワードリセットフォーム --%>
         <form method="POST" action="">
-    <label for="username">ユーザー名:</label>
-    <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
+            <label for="username">ユーザー名:</label>
+            <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
 
-    <label for="currentPassword">現在のパスワード:</label>
-    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力" required>
+            <label for="currentPassword">現在のパスワード:</label>
+            <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力" required>
 
-    <label for="newPassword">新しいパスワード:</label>
-    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
+            <label for="newPassword">新しいパスワード:</label>
+            <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
 
-    <%-- エラーメッセージ表示 --%>
-  <% if (!errorMessages.isEmpty()) { %>
-    <div class="error">
-        <% for (String error : errorMessages) { %>
-            <p><%= error %></p> <!-- 各エラーメッセージを個別の<p>タグで表示 -->
-        <% } %>
-    </div>
-<% } %>
+            <%-- エラーメッセージ表示 --%>
+            <% if (!errorMessages.isEmpty()) { %>
+                <div class="error">
+                    <% for (String error : errorMessages) { %>
+                        <p><%= error %></p>
+                    <% } %>
+                </div>
+            <% } %>
 
-    <button type="submit">パスワードを変更</button>
-</form>
+            <button type="submit">パスワードを変更</button>
+        </form>
 
-        <!-- ログイン画面に戻るリンク -->
-       <p style="text-align: center;">
-    ログイン画面に戻る方は <a href="login.jsp" class="login-link"><span class="highlight">こちら</span></a>
-</p>
-
-
-<style>
-    .reset-link {
-        font-size: 16px; /* フォントサイズ */
-        color: black; /* 通常時のリンクの色 */
-        text-decoration: none; /* 下線を除去 */
-    }
-
-    .reset-link:hover {
-        color: black; /* リンク全体の色はホバー時も黒 */
-    }
-
-    /* 「こちら」部分の色を赤色、下線あり */
-    .highlight {
-        color: #ff0000; /* 通常時の色を赤色 */
-        text-decoration: underline; /* 下線を表示 */
-    }
-
-    /* 「こちら」部分にホバー時に少し濃い赤色を適用 */
-    .highlight:hover {
-        color: #cc0000; /* ホバー時に少し濃い赤色 */
-    }
-
-
-</style>
+        <p style="text-align: center;">
+            ログイン画面に戻る方は <a href="login.jsp" class="login-link"><span class="highlight">こちら</span></a>
+        </p>
 
     </div>
 <!-- フッター -->
 <footer>
     <small>Copyright&copy; SAMPLE COMPANY All Rights Reserved.</small>
 </footer>
-
-    <!-- スクロール機能の読み込み -->
-    <%@ include file="scroll.jsp" %>
 
 </body>
 </html>
