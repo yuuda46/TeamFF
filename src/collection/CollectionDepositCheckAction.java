@@ -66,6 +66,6 @@ public class CollectionDepositCheckAction extends Action {
         } catch (Exception e) {
             e.printStackTrace(out);
         }
-        return "Collection_Deposit_Check.jsp" ;
+        return "Collection_Deposit_Check.jsp";
     }
 }
