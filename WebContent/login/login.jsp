@@ -223,10 +223,8 @@ p a {
         String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上、英字と数字を両方含む
         // ユーザー名は1文字以上の任意の文字列
         String usernameRegex = ".{1,}"; // 1文字以上
-        // ユーザー名とパスワードのチェック
 
         if (inputUsername != null && inputPassword != null) {
-
             // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
             if (!inputUsername.matches(usernameRegex)) {
                 usernameError = "・ユーザー名を正しく入力してください。";
@@ -234,51 +232,46 @@ p a {
 
             // パスワードが正規表現に一致しない場合、エラーメッセージを設定
             if (!inputPassword.matches(regex)) {
-                passwordError = "・半角英数字5文字以上で入力してください";
+                passwordError = "・パスワードは半角英数字5文字以上で入力してください。";
             }
 
-            // 両方にエラーがある場合
-            if (!usernameError.isEmpty() && !passwordError.isEmpty()) {
-                loginMessage = "";  // 両方のエラーが出る場合は、追加メッセージは表示しない
-            } else {
-                // ユーザー名とパスワードの両方が正しい場合の処理
-                if (usernameError.isEmpty() && passwordError.isEmpty()) {
-                    // データベース接続
-                    Class.forName("org.postgresql.Driver");
-                    conn = DriverManager.getConnection(url, dbUser, dbPassword);
-                    // ユーザー名とパスワードの組み合わせを確認するクエリ
-                    String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
-                    stmt = conn.prepareStatement(query);
-                    stmt.setString(1, inputUsername.trim()); // 入力値をトリム
-                    // クエリ実行
-                    rs = stmt.executeQuery();
+            // 両方にエラーがない場合にのみ、ログイン処理を行う
+            if (usernameError.isEmpty() && passwordError.isEmpty()) {
+                // データベース接続
+                Class.forName("org.postgresql.Driver");
+                conn = DriverManager.getConnection(url, dbUser, dbPassword);
+                // ユーザー名とパスワードの組み合わせを確認するクエリ
+                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
+                stmt = conn.prepareStatement(query);
+                stmt.setString(1, inputUsername.trim()); // 入力値をトリム
+                // クエリ実行
+                rs = stmt.executeQuery();
 
-                    if (rs.next()) {
-                        // ユーザー名が見つかった場合に、パスワードのチェック
-                        String storedPassword = rs.getString("PASSWORD");
-                        if (!inputPassword.equals(storedPassword)) {
-                            // パスワードが違う場合
-                            loginMessage = "・パスワードが間違っています。";
-                        } else {
-                            // ログイン成功時
-                            loginMessage = "ログイン成功";
-                            // セッションを設定
-                            session.setAttribute("username", inputUsername);
-                            session.setAttribute("password", inputPassword);
-                            // 管理者フラグの取得とセッション保存
-                            String adminFlag = rs.getString("ADMINI");
-                            session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有無
-                            // ログイン成功後、トップページへリダイレクト
-                            String idFrag = rs.getString("ID");
-                            session.setAttribute("sessionId", idFrag);
-                            System.out.println("Session ID set: " + idFrag);
-                            response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
-                            return; // 処理終了
-                        }
+                if (rs.next()) {
+                    // ユーザー名が見つかった場合に、パスワードのチェック
+                    String storedPassword = rs.getString("PASSWORD");
+                    if (!inputPassword.equals(storedPassword)) {
+                        // パスワードが違う場合
+                        loginMessage = "・パスワードが間違っています。";
                     } else {
-                        // ユーザー名が見つからない場合
-                        loginMessage = "・ユーザーが見つかりません。";
+                        // ログイン成功時
+                        loginMessage = "ログイン成功";
+                        // セッションを設定
+                        session.setAttribute("username", inputUsername);
+                        session.setAttribute("password", inputPassword);
+                        // 管理者フラグの取得とセッション保存
+                        String adminFlag = rs.getString("ADMINI");
+                        session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有無
+                        // ログイン成功後、トップページへリダイレクト
+                        String idFrag = rs.getString("ID");
+                        session.setAttribute("sessionId", idFrag);
+                        System.out.println("Session ID set: " + idFrag);
+                        response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
+                        return; // 処理終了
                     }
+                } else {
+                    // ユーザー名が見つからない場合
+                    loginMessage = "・ユーザーが見つかりません。";
                 }
             }
         }
