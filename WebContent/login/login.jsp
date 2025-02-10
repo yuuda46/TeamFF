@@ -228,6 +228,7 @@ p a {
 
                 // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
                 if (!inputUsername.matches(usernameRegex)) {
+                	usernameError = "・ユーザー名を正しく入力してください。";
                 }
 
                 // パスワードが正規表現に一致しない場合、エラーメッセージを設定
