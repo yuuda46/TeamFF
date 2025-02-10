@@ -226,13 +226,6 @@ p a {
 
         boolean isValid = true; // 入力が有効かどうかを示すフラグ
 
-        if (inputUsername != null && inputPassword != null) {
-            // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
-            if (!inputUsername.matches(usernameRegex)) {
-                usernameError = "・ユーザー名を正しく入力してください。";
-                isValid = false;
-            }
-
             // パスワードが正規表現に一致しない場合、エラーメッセージを設定
             if (!inputPassword.matches(regex)) {
                 passwordError = "・パスワードは半角英数字5文字以上で入力してください。";
@@ -277,8 +270,7 @@ p a {
                     // ユーザー名が見つからない場合
                     loginMessage = "・ユーザーが見つかりません。";
                 }
-            }
-        }
+              }
     } catch (Exception e) {
         loginMessage = "・データベースエラー: " + e.getMessage();
     } finally {
