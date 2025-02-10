@@ -207,7 +207,8 @@ p a {
     String url = "jdbc:postgresql://localhost:5432/team_f";  // データベースURL
     String dbUser = "postgres";  // ユーザー名
     String dbPassword = "Team_F";  // パスワード
-    List<String> errorMessages = new ArrayList<>();  // エラーメッセージをリストで管理
+    String usernameError = "";  // ユーザー名エラーメッセージ
+    String passwordError = "";  // パスワードエラーメッセージ
     String loginMessage = "";  // ログインメッセージ
     Connection conn = null;
     PreparedStatement stmt = null;
@@ -224,74 +225,69 @@ p a {
         String usernameRegex = ".{1,}"; // 1文字以上
 
         if (inputUsername != null && inputPassword != null) {
-            // ユーザー名が正規表現に一致しない場合、エラーメッセージをリストに追加
+            // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
             if (!inputUsername.matches(usernameRegex)) {
-                errorMessages.add("・ユーザー名を正しく入力してください。");
+                usernameError = "・ユーザー名を正しく入力してください。";
             }
 
-            // パスワードが正規表現に一致しない場合、エラーメッセージをリストに追加
+            // パスワードが正規表現に一致しない場合、エラーメッセージを設定
             if (!inputPassword.matches(regex)) {
-                errorMessages.add("・半角英数字5文字以上で入力してください。");
-            }
-
-            // パスワードが5文字以下の場合のチェック（先にチェックして早期リターン）
-            if (inputPassword.length() <= 5) {
-                errorMessages.add("・パスワードは5文字以上で入力してください。");
+                passwordError = "・パスワードは半角英数字5文字以上で入力してください。";
             }
 
             // 両方にエラーがない場合にのみ、ログイン処理を行う
-            if (errorMessages.isEmpty()) {
+            if (usernameError.isEmpty() && passwordError.isEmpty()) {
                 // データベース接続
                 Class.forName("org.postgresql.Driver");
+                conn = DriverManager.getConnection(url, dbUser, dbPassword);
+                // ユーザー名とパスワードの組み合わせを確認するクエリ
+                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
+                stmt = conn.prepareStatement(query);
+                stmt.setString(1, inputUsername.trim()); // 入力値をトリム
+                // クエリ実行
+                rs = stmt.executeQuery();
 
-                try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword)) {
-                    // ユーザー名とパスワードの組み合わせを確認するクエリ
-                    String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
-                    try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                        stmt.setString(1, inputUsername.trim()); // 入力値をトリム
-                        // クエリ実行
-                        try (ResultSet rs = stmt.executeQuery()) {
-                            if (rs.next()) {
-                                // ユーザー名が見つかった場合に、パスワードのチェック
-                                String storedPassword = rs.getString("PASSWORD");
-                                if (!inputPassword.equals(storedPassword)) {
-                                    // パスワードが違う場合
-                                    loginMessage = "・パスワードが違います。";
-                                } else {
-                                    // ログイン成功時
-                                    loginMessage = "ログイン成功";
-                                    // セッションを設定
-                                    session.setAttribute("username", inputUsername);
-                                    session.setAttribute("password", inputPassword);
-                                    // 管理者フラグの取得とセッション保存
-                                    String adminFlag = rs.getString("ADMINI");
-                                    session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有無
-                                    // ログイン成功後、トップページへリダイレクト
-                                    String idFrag = rs.getString("ID");
-                                    session.setAttribute("sessionId", idFrag);
-                                    System.out.println("Session ID set: " + idFrag);
-                                    response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
-                                    return; // 処理終了
-                                }
-                            } else {
-                                // ユーザー名が見つからない場合
-                                loginMessage = "・ユーザーが見つかりません。";
-                            }
-                        }
+                if (rs.next()) {
+                    // ユーザー名が見つかった場合に、パスワードのチェック
+                    String storedPassword = rs.getString("PASSWORD");
+                    if (!inputPassword.equals(storedPassword)) {
+                        // パスワードが違う場合
+                        loginMessage = "・パスワードが違います。";
+                    } else {
+                        // ログイン成功時
+                        loginMessage = "ログイン成功";
+                        // セッションを設定
+                        session.setAttribute("username", inputUsername);
+                        session.setAttribute("password", inputPassword);
+                        // 管理者フラグの取得とセッション保存
+                        String adminFlag = rs.getString("ADMINI");
+                        session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有無
+                        // ログイン成功後、トップページへリダイレクト
+                        String idFrag = rs.getString("ID");
+                        session.setAttribute("sessionId", idFrag);
+                        System.out.println("Session ID set: " + idFrag);
+                        response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
+                        return; // 処理終了
                     }
+                } else {
+                    // ユーザー名が見つからない場合
+                    loginMessage = "・ユーザーが見つかりません。";
                 }
             }
         }
     } catch (Exception e) {
         loginMessage = "・データベースエラー: " + e.getMessage();
-    }
-
-    // エラーメッセージがある場合、JSPに渡す
-    if (!errorMessages.isEmpty()) {
-        request.setAttribute("errorMessages", errorMessages);
+    } finally {
+        // リソースのクローズ
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 %>
-
 <!-- ログインフォーム -->
 <form method="POST" action="login.jsp" autocomplete="off">
     <div class="form-group">
@@ -320,11 +316,11 @@ p a {
     <button type="submit" class="login-btn">ログイン</button>
 </form>
 
-
 <!-- 戻るボタン -->
 <p style="text-align: center;">
     <a href="../common/index.jsp" class="back-button">戻る</a>
 </p>
+
 
 <style>
     .form-group {
