@@ -18,8 +18,11 @@
 		<c:choose>
 			<c:when test="${content.size()>0}">
 				<c:forEach var="content" items="${content}">
-					<p class="detail_font">回覧物</p>
+					<p class="notice_left detail_font margin_top_0">タイトル:</p>
+					<p class="position_center detail_font">${content.title}</p>
+					<p class="detail_font notice_line">回覧物</p>
 					<p class="position_center detail_font"><img src="../upload/${content.content}"></p>
+					<p class="position_center detail_font">${content.content}</p>
 				</c:forEach>
 			</c:when>
 

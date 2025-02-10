@@ -34,35 +34,35 @@
 			<div class="position_right">件数:${notice_content.size()}件</div>
 			<table border="1">
 				<tr>
-					<th>タイトル</th>
-					<th>コンテンツ</th>
+					<th class="title_text_vol">タイトル</th>
+					<th class="button_text_vol">コンテンツ</th>
 					<th>氏名</th>
-					<th>日付</th>
-					<th class="padding_none">カテゴリー</th>
-					<th></th>
-					<th></th>
+					<th class="date_text_vol">日付</th>
+					<th class="padding_none category_text_vol">カテゴリー</th>
+					<th class="admin_button"></th>
+					<th class="admin_button"></th>
 
 				</tr>
 				<c:forEach var="notice_content" items="${notice_content}" varStatus="loop">
 					<tr>
-					<td class="padding_none">${notice_content.title}</td>
-					<td class="padding_none">
+					<td class="padding_top_0 padding_bottom_0 title_text_vol">${notice_content.title}</td>
+					<td class="padding_none admin_content_button">
 						<form class="padding_bottom_0 text_left" action="../notice/AdminDetail.action?" method="post">
 							<input type="hidden" name="post_id" value="${notice_content.postId}">
 							<input type="hidden" name="category_id" value=<%=category%>>
-							<button class="button_style border-none padding_left_12 padding_top_10 padding_bottom_10 text_left" type="submit">${notice_content.content}</button>
+							<button class="button_style border-none padding_left_12 padding_top_10 padding_bottom_10 text_left button_text_vol" type="submit">${notice_content.content}</button>
 						</form>
 					</td>
-					<td class="padding_none">${notice_content.name}</td>
-					<td class="padding_none">${post_day[loop.index]}</td>
-					<td class="padding_none">${notice_content.categoryName}</td>
-					<td class="padding_none">
+					<td class="padding_top_0 padding_bottom_0">${notice_content.name}</td>
+					<td class="padding_top_0 padding_bottom_0 date_text_vol">${post_day[loop.index]}</td>
+					<td class="padding_top_0 padding_bottom_0 category_text_vol">${notice_content.categoryName}</td>
+					<td class="padding_none admin_button">
 						<form class="padding_bottom_0" action="../notice/NoticeUpdate.action" method="get">
 							<input type="hidden" name="post_id" value="${notice_content.postId}">
 							<button class="button_style border-none hit_judgment_mechanics" type="submit">編集</button>
 						</form>
 					</td>
-					<td class="padding_none">
+					<td class="padding_none admin_button">
 						<form class="padding_bottom_0" action="../notice/DeletePermission.action" method="get">
 							<input type="hidden" name="post_id" value="${notice_content.postId}">
 							<button class="button_style border-none hit_judgment_mechanics" type="submit">削除</button>

@@ -125,6 +125,13 @@
 .padding_none {
 	padding: 0;
 }
+.padding_top_0 {
+	padding-top: 0;
+}
+
+.margin_top_0 {
+	margin-top: 0;
+}
 
 /*右寄せするCSS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -296,6 +303,16 @@
 	width: 170px;
 	font-size: 15px;
 }
+.admin_button {
+	width: 50;
+}
+
+.button_text_vol {
+	width: 250px; /* ボタンの最大幅を指定 */
+	white-space: nowrap; /* テキストを折り返さない */
+	overflow: hidden; /* はみ出た部分を非表示 */
+	text-overflow: ellipsis; /* 省略記号 (…) を表示 */
+}
 
 /*文字のCSS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -328,6 +345,27 @@
 .notice_hight {
 	height:85px;
 }
+.title_text_vol {
+	width: 150px; /* ボタンの最大幅を指定 */
+	white-space: nowrap; /* テキストを折り返さない */
+	overflow: hidden; /* はみ出た部分を非表示 */
+	text-overflow: ellipsis; /* 省略記号 (…) を表示 */
+}
+
+.category_text_vol {
+	width: 90px;
+}
+
+.date_text_vol {
+	width: 120px;
+}
+
+.name_text_vol {
+	width: 160px; /* ボタンの最大幅を指定 */
+	white-space: nowrap; /* テキストを折り返さない */
+	overflow: hidden; /* はみ出た部分を非表示 */
+	text-overflow: ellipsis; /* 省略記号 (…) を表示 */
+}
 
 /* テーブルのCSS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -338,6 +376,7 @@ table {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	background-color: #ffffff;
 	font-size: 14px;
+	table-layout: fixed;
 }
 
 table th, table td {

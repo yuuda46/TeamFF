@@ -15,23 +15,33 @@
 <c:import url="/common/base.jsp">
 	<c:param name="content">
 
-	<form class="detail_font container2" action="../notice/NoticePermission.action" method="get">
-		タイトル:<input class="admin_text form_top margin_left_45" type="text" name="title" required="required" value="${notice_content.title}"><br>
-		カテゴリー:<select class="form_top admin_select margin_left_27" name="num" id="notice-f1-select">
-						<option value=0>----------</option>
-						<c:forEach var="select_list" items="${select_list}">
-						<option value=${select_list.categoryId } <c:if test="${select_list.categoryName==f2}">selected</c:if>>${select_list.categoryName}</option>
-						</c:forEach>
-					</select><br>
+	<form class="detail_font container2 padding_top_10" action="../notice/NoticePermission.action" method="get">
+		<div class="padding_top_10">
+			タイトル:<input class="admin_text form_top margin_left_45" type="text" name="title" required="required" value="${notice_content.title}"><br>
+		</div>
+		<div class="padding_top_10">
+			カテゴリー:<select class="form_top admin_select margin_left_27" name="num" id="notice-f1-select">
+							<option value=0>----------</option>
+							<c:forEach var="select_list" items="${select_list}">
+							<option value=${select_list.categoryId } <c:if test="${select_list.categoryName==f2}">selected</c:if>>${select_list.categoryName}</option>
+							</c:forEach>
+						</select><br>
+		</div>
 		<input type="hidden" name="post_id" value=<%=post_id %>>
-		<button class="button_style keep_button" type="submit">投稿情報編集</button>
+		<div class="padding_top_10 position_right">
+			<button class="button_style keep_button" type="submit">投稿情報編集</button>
+		</div>
+		<hr class="notice_line">
 	</form>
 
 	<p class="detail_font container2">お知らせ画像:</p>
 	<p class="position_center"><img src="../upload/${notice_content.content}"></p>
 	<form class="detail_font container2" action="../notice/PictureUpdate.action" method="get">
 		<input type="hidden" name="post_id" value=<%=post_id %>>
-		<button class="button_style button_size" type="submit">画像編集</button>
+		<div class="padding_top_10 position_right">
+			<button class="button_style button_size" type="submit">画像編集</button>
+		</div>
+		<hr class="notice_line">
 	</form>
 
 	<div class="notice_center detail_top">
