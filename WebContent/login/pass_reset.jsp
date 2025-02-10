@@ -277,7 +277,7 @@ h2 {
         }
 
         if (newPassword == null || !newPassword.matches(passwordRegex)) {
-            errorMessages.add("・新しいパスワードは5文字以上で入力してください。");
+            errorMessages.add("・5文字以上で入力してください。");
         }
 
         if (newPassword != null && newPassword.matches(".*(\\w)\\1.*")) {
@@ -322,13 +322,13 @@ h2 {
 
         <form method="POST" action="">
             <label for="username">ユーザー名:</label>
-            <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
+            <input type="text" id="username" name="username" placeholder="ユーザー名を入力(半角英数字)" required>
 
             <label for="currentPassword">現在のパスワード:</label>
-            <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力" required>
+            <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力(半角英数字)" required>
 
             <label for="newPassword">新しいパスワード:</label>
-            <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
+            <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力(半角英数字)" required>
 
             <%-- エラーメッセージ表示 --%>
             <% if (!errorMessages.isEmpty()) { %>
@@ -351,6 +351,9 @@ h2 {
 <footer>
     <small>Copyright&copy; SAMPLE COMPANY All Rights Reserved.</small>
 </footer>
+
+<!-- スクロール機能の読み込み -->
+<%@ include file="scroll.jsp" %>
 
 </body>
 </html>
