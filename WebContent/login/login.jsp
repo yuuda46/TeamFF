@@ -234,7 +234,7 @@ p a {
 
             // パスワードが正規表現に一致しない場合、エラーメッセージを設定
             if (!inputPassword.matches(regex)) {
-                passwordError = "・パスワードは半角英数字5文字以上で入力してください。";
+                passwordError = "・半角英数字5文字以上で入力してください";
             }
 
             // 両方にエラーがある場合
