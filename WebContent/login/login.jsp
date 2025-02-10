@@ -191,13 +191,8 @@ p a {
 <body>
 
 <header>
-
-
 <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
 <h3 class="titlesize">Login</h3>
-
-
-
 </header>
 
 <h2>ログインページ</h2>
@@ -219,20 +214,15 @@ p a {
         String inputUsername = request.getParameter("username");
         String inputPassword = request.getParameter("password");
 
-        // パスワードの正規表現（半角英数字5文字以上、英字と数字を両方含む）
-        String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上、英字と数字を両方含む
-        // ユーザー名は1文字以上の任意の文字列
-        String usernameRegex = ".{1,}"; // 1文字以上
-
         if (inputUsername != null && inputPassword != null) {
             // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
-            if (!inputUsername.matches(usernameRegex)) {
+            if (inputUsername.isEmpty()) {
                 usernameError = "・ユーザー名を正しく入力してください。";
             }
 
             // パスワードが正規表現に一致しない場合、エラーメッセージを設定
-            if (!inputPassword.matches(regex)) {
-                passwordError = "・パスワードは半角英数字5文字以上で入力してください。";
+            if (inputPassword.isEmpty()) {
+                passwordError = "・パスワードを入力してください。";
             }
 
             // 両方にエラーがない場合にのみ、ログイン処理を行う
@@ -252,7 +242,7 @@ p a {
                     String storedPassword = rs.getString("PASSWORD");
                     if (!inputPassword.equals(storedPassword)) {
                         // パスワードが違う場合
-                        loginMessage = "・パスワードが違います。";
+                        passwordError = "・パスワードが違います。";
                     } else {
                         // ログイン成功時
                         loginMessage = "ログイン成功";
@@ -271,7 +261,7 @@ p a {
                     }
                 } else {
                     // ユーザー名が見つからない場合
-                    loginMessage = "・ユーザーが見つかりません。";
+                    usernameError = "・ユーザーが見つかりません。";
                 }
             }
         }
