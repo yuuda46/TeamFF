@@ -191,60 +191,59 @@ p a {
 <body>
 
 <header>
-
-
 <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
 <h3 class="titlesize">Login</h3>
-
-
-
 </header>
 
 <h2>ログインページ</h2>
 
 <div class="container" id="loginFormContainer">
-    <%
-        String url = "jdbc:postgresql://localhost:5432/team_f";  // データベースURL
-        String dbUser = "postgres";  // ユーザー名
-        String dbPassword = "Team_F";  // パスワード
-        String usernameError = "";  // ユーザー名エラーメッセージ
-        String passwordError = "";  // パスワードエラーメッセージ
-        String loginMessage = "";  // ログインメッセージ
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            // 入力されたユーザー名とパスワードを取得
-            String inputUsername = request.getParameter("username");
-            String inputPassword = request.getParameter("password");
+<%
+    String url = "jdbc:postgresql://localhost:5432/team_f";  // データベースURL
+    String dbUser = "postgres";  // ユーザー名
+    String dbPassword = "Team_F";  // パスワード
+    String usernameError = "";  // ユーザー名エラーメッセージ
+    String passwordError = "";  // パスワードエラーメッセージ
+    String loginMessage = "";  // ログインメッセージ
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
 
-            // パスワードの正規表現（半角英数字5文字以上、英字と数字を両方含む）
-            String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上、英字と数字を両方含む
-            // ユーザー名は1文字以上の任意の文字列
-            String usernameRegex = ".{1,}"; // 1文字以上
-            // ユーザー名とパスワードのチェック
+    try {
+        // 入力されたユーザー名とパスワードを取得
+        String inputUsername = request.getParameter("username");
+        String inputPassword = request.getParameter("password");
 
-            if (inputUsername != null && inputPassword != null) {
+        if (inputUsername != null && inputPassword != null) {
+            // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
+            if (inputUsername.isEmpty()) {
+                usernameError = "・ユーザー名を正しく入力してください。";
+            }
 
-                // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
-                if (!inputUsername.matches(usernameRegex)) {
-                }
+            // パスワードが5文字未満の場合、エラーメッセージを設定
+            if (inputPassword.length() < 5) {
+                passwordError = "・パスワードが短すぎます。5文字以上で入力してください。";
+            }
 
-                // パスワードが正規表現に一致しない場合、エラーメッセージを設定
-                else if (!inputPassword.matches(regex)) {
-                    passwordError = "・半角英数字5文字以上で入力してください。";
-                }
-                    // データベース接続
-                    Class.forName("org.postgresql.Driver");
-                    conn = DriverManager.getConnection(url, dbUser, dbPassword);
-                    // ユーザー名とパスワードの組み合わせを確認するクエリ
-                    String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
-                    stmt = conn.prepareStatement(query);
-                    stmt.setString(1, inputUsername.trim()); // 入力値をトリム
-                    stmt.setString(2, inputPassword.trim());
-                    // クエリ実行
-                    rs = stmt.executeQuery();
-                    if (rs.next()) {
+            // 両方にエラーがない場合にのみ、ログイン処理を行う
+            if (usernameError.isEmpty() && passwordError.isEmpty()) {
+                // データベース接続
+                Class.forName("org.postgresql.Driver");
+                conn = DriverManager.getConnection(url, dbUser, dbPassword);
+                // ユーザー名とパスワードの組み合わせを確認するクエリ
+                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
+                stmt = conn.prepareStatement(query);
+                stmt.setString(1, inputUsername.trim()); // 入力値をトリム
+                // クエリ実行
+                rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    // ユーザー名が見つかった場合に、パスワードのチェック
+                    String storedPassword = rs.getString("PASSWORD");
+                    if (!inputPassword.equals(storedPassword)) {
+                        // パスワードが違う場合
+                        passwordError = "・パスワードが違います。";
+                    } else {
                         // ログイン成功時
                         loginMessage = "ログイン成功";
                         // セッションを設定
@@ -252,31 +251,33 @@ p a {
                         session.setAttribute("password", inputPassword);
                         // 管理者フラグの取得とセッション保存
                         String adminFlag = rs.getString("ADMINI");
-                        session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有
+                        session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有無
                         // ログイン成功後、トップページへリダイレクト
                         String idFrag = rs.getString("ID");
                         session.setAttribute("sessionId", idFrag);
                         System.out.println("Session ID set: " + idFrag);
                         response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
                         return; // 処理終了
-                    } else {
-                        // ログイン失敗時
-                        loginMessage = "・ユーザー名またはパスワードが間違っています。";
                     }
+                } else {
+                    // ユーザー名が見つからない場合
+                    usernameError = "・ユーザーが見つかりません。";
                 }
-        } catch (Exception e) {
-            loginMessage = "・データベースエラー: " + e.getMessage();
-        } finally {
-            // リソースのクローズ
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
-    %>
+    } catch (Exception e) {
+        loginMessage = "・データベースエラー: " + e.getMessage();
+    } finally {
+        // リソースのクローズ
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+%>
 
 <!-- ログインフォーム -->
 <form method="POST" action="login.jsp" autocomplete="off">
