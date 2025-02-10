@@ -191,8 +191,13 @@ p a {
 <body>
 
 <header>
+
+
 <h1 id="logo"><img src="../images/logo.png" alt="SAMPLE COMPANY"></h1>
 <h3 class="titlesize">Login</h3>
+
+
+
 </header>
 
 <h2>ログインページ</h2>
@@ -214,15 +219,20 @@ p a {
         String inputUsername = request.getParameter("username");
         String inputPassword = request.getParameter("password");
 
+        // パスワードの正規表現（半角英数字5文字以上、英字と数字を両方含む）
+        String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上、英字と数字を両方含む
+        // ユーザー名は1文字以上の任意の文字列
+        String usernameRegex = ".{1,}"; // 1文字以上
+
         if (inputUsername != null && inputPassword != null) {
             // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
-            if (inputUsername.isEmpty()) {
+            if (!inputUsername.matches(usernameRegex)) {
                 usernameError = "・ユーザー名を正しく入力してください。";
             }
 
-            // パスワードが5文字未満の場合、エラーメッセージを設定
-            if (inputPassword.length() < 5) {
-                passwordError = "・パスワードが短すぎます。5文字以上で入力してください。";
+            // パスワードが正規表現に一致しない場合、エラーメッセージを設定
+            if (!inputPassword.matches(regex)) {
+                passwordError = "・5文字以上で入力してください。";
             }
 
             // 両方にエラーがない場合にのみ、ログイン処理を行う
@@ -242,7 +252,7 @@ p a {
                     String storedPassword = rs.getString("PASSWORD");
                     if (!inputPassword.equals(storedPassword)) {
                         // パスワードが違う場合
-                        passwordError = "・パスワードが違います。";
+                        loginMessage = "・パスワードが違います。";
                     } else {
                         // ログイン成功時
                         loginMessage = "ログイン成功";
@@ -261,7 +271,7 @@ p a {
                     }
                 } else {
                     // ユーザー名が見つからない場合
-                    usernameError = "・ユーザーが見つかりません。";
+                    loginMessage = "・ユーザーが見つかりません。";
                 }
             }
         }
@@ -292,7 +302,7 @@ p a {
 
     <div class="form-group">
         <label for="password">パスワード:</label>
-        <input type="password" name="password" placeholder="パスワードを入力" value="<%= (request.getParameter("password") != null ? request.getParameter("password") : "") %>" required autocomplete="off">
+        <input type="password" name="password" placeholder="パスワードを入力(半角英字)" value="<%= (request.getParameter("password") != null ? request.getParameter("password") : "") %>" required autocomplete="off">
         <!-- パスワードエラー表示 -->
         <div class="error-message">
             <%= !passwordError.isEmpty() ? passwordError : "" %>
@@ -311,6 +321,7 @@ p a {
 <p style="text-align: center;">
     <a href="../common/index.jsp" class="back-button">戻る</a>
 </p>
+
 
 <style>
     .form-group {
