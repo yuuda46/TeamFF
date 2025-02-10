@@ -249,14 +249,19 @@ h2 {
                 Class.forName("org.postgresql.Driver");
                 conn = DriverManager.getConnection(url, dbUser, dbPassword);
 
-                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
+                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
                 stmt = conn.prepareStatement(query);
                 stmt.setString(1, username);
-                stmt.setString(2, currentPassword);
                 rs = stmt.executeQuery();
 
                 if (!rs.next()) {
-                    errorMessages.add("・現在のパスワードが違います。");
+                    errorMessages.add("・ユーザーが見つかりません。");
+                } else {
+                    // ユーザーが存在する場合、パスワードのチェック
+                    String storedPassword = rs.getString("PASSWORD");
+                    if (!storedPassword.equals(currentPassword)) {
+                        errorMessages.add("・現在のパスワードが違います。");
+                    }
                 }
             } catch (Exception e) {
                 errorMessages.add("エラーが発生しました: " + e.getMessage());
