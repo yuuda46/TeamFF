@@ -306,45 +306,47 @@ button {
         }
 
         // 現在のパスワードが正しいか確認
-        if (currentPassword == null || currentPassword.isEmpty()) {
-            errorMessages.add("・現在のパスワードを入力してください。");
-        } else {
-            // データベース接続情報
-            String url = "jdbc:postgresql://localhost:5432/team_f"; // サーバモードでの接続
-            String dbUser = "postgres";  // ユーザー名
-            String dbPassword = "Team_F";  // パスワード
-            Connection conn = null;
-            PreparedStatement stmt = null;
-            ResultSet rs = null;
+       // 現在のパスワードが正しいか確認
+if (currentPassword == null || currentPassword.isEmpty()) {
+    errorMessages.add("・現在のパスワードを入力してください。");
+} else {
+    // データベース接続情報
+    String url = "jdbc:postgresql://localhost:5432/team_f"; // サーバモードでの接続
+    String dbUser = "postgres";  // ユーザー名
+    String dbPassword = "Team_F";  // パスワード
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
 
-            try {
-                Class.forName("org.postgresql.Driver");
-                // サーバモードでデータベース接続
-                conn = DriverManager.getConnection(url, dbUser, dbPassword);
+    try {
+        Class.forName("org.postgresql.Driver");
+        // サーバモードでデータベース接続
+        conn = DriverManager.getConnection(url, dbUser, dbPassword);
 
-                // ユーザー名と現在のパスワードを照合
-                String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
-                stmt = conn.prepareStatement(query);
-                stmt.setString(1, username);
-                stmt.setString(2, currentPassword);
-                rs = stmt.executeQuery();
+        // ユーザー名と現在のパスワードを照合
+        String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ? AND PASSWORD = ?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, username);
+        stmt.setString(2, currentPassword);
+        rs = stmt.executeQuery();
 
-                // ユーザー名またはパスワードが間違っている場合
-                if (!rs.next()) {
-                    errorMessages.add("・ユーザーが見つかりません。"); // ユーザーが見つからなければエラーメッセージを追加
-                }
-            } catch (Exception e) {
-                errorMessages.add("エラーが発生しました: " + e.getMessage());
-            } finally {
-                try {
-                    if (rs != null) rs.close();
-                    if (stmt != null) stmt.close();
-                    if (conn != null) conn.close(); // 接続を閉じる
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+        // ユーザー名またはパスワードが間違っている場合
+        if (!rs.next()) {
+            errorMessages.add("・ユーザーが見つかりません。"); // ユーザーが見つからなければエラーメッセージを追加
         }
+    } catch (Exception e) {
+        errorMessages.add("エラーが発生しました: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close(); // 接続を閉じる
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 
         // パスワードのチェック（5文字以上の半角英数字）
         if (newPassword == null || !newPassword.matches(passwordRegex)) {
