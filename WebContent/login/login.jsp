@@ -261,7 +261,7 @@ p a {
                         return; // 処理終了
                     } else {
                         // ログイン失敗時
-                        loginMessage = "・ユーザー名またはパスワードが間違っています。";
+                        loginMessage = "・パスワードが間違っています。";
                     }
                 }
         } catch (Exception e) {
