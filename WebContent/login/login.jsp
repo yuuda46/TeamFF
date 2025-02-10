@@ -232,7 +232,7 @@ p a {
 
             // パスワードが正規表現に一致しない場合、エラーメッセージを設定
             if (!inputPassword.matches(regex)) {
-                passwordError = "・半角英数字5文字以上で入力してください。";
+                passwordError = "・5文字以上で入力してください。";
             }
 
             // 両方にエラーがない場合にのみ、ログイン処理を行う
@@ -302,7 +302,7 @@ p a {
 
     <div class="form-group">
         <label for="password">パスワード:</label>
-        <input type="password" name="password" placeholder="パスワードを入力" value="<%= (request.getParameter("password") != null ? request.getParameter("password") : "") %>" required autocomplete="off">
+        <input type="password" name="password" placeholder="パスワードを入力(半角英字)" value="<%= (request.getParameter("password") != null ? request.getParameter("password") : "") %>" required autocomplete="off">
         <!-- パスワードエラー表示 -->
         <div class="error-message">
             <%= !passwordError.isEmpty() ? passwordError : "" %>
