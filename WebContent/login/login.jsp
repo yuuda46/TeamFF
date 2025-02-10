@@ -301,7 +301,7 @@ p a {
 
     <!-- ログインエラーメッセージ（1か所にまとめて表示） -->
     <div class="error-message" style="font-size: 14px; margin-top: 10px; margin-bottom: 15px;">
-        <%= (!usernameError.isEmpty() || !passwordError.isEmpty()) ? usernameError + "<br>" + passwordError : "" %>
+        <%= !loginMessage.isEmpty() ? loginMessage : "" %>
     </div>
 
     <button type="submit" class="login-btn">ログイン</button>
@@ -311,6 +311,7 @@ p a {
 <p style="text-align: center;">
     <a href="../common/index.jsp" class="back-button">戻る</a>
 </p>
+
 
 <style>
     .form-group {
