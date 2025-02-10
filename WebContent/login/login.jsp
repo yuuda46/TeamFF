@@ -323,6 +323,7 @@ p a {
     <a href="../common/index.jsp" class="back-button">戻る</a>
 </p>
 
+
 <style>
     .form-group {
         margin: 5px 0; /* 上下の余白を少し広げる */
