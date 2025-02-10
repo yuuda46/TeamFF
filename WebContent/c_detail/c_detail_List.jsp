@@ -32,11 +32,11 @@
                             <th class="test-boder test-table-wide">投稿日</th>
                             <th class="test-boder test-table-wide"></th>
                         </tr>
-                       <c:forEach var="Collection" items="${Post}">
+                       <c:forEach var="Collection" items="${Post}" varStatus="loop">
 						    <tr>
 						        <td class="test-table-wide test-boder">${Collection.id}</td>
 						        <td class="test-table-wide test-boder">${Collection.title}</td>
-						        <td class="test-table-wide test-boder">${Collection.post_day}</td>
+						        <td class="test-table-wide test-boder">${post_day[loop.index]}</td>
 
 						        <td class="text-center test-boder">
 						            <c:choose>

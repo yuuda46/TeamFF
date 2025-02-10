@@ -2,6 +2,9 @@ package collection;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,6 +39,25 @@ public class CollectionDepositAction extends Action {
                 CollectionDAO search = new CollectionDAO();
                 List<Post> list = search.searchBySignId(p.getSignID());
 
+//    			list1のサイズを取得
+    			int loop = list.size();
+
+//    			リストを作成
+    			List<String> string_times = new ArrayList<String>();
+
+    			for (int i = 0; i < loop; i++) {
+
+//    				beenからpost_dayを取得
+    				Timestamp timestamp = list.get(i).getPost_day();
+    		        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//    		        Timestamp型からString型に変換
+    		        String string_time = sdf.format(timestamp);
+    		        System.out.println(string_time);
+
+//    		        リストに入れる
+    		        string_times.add(string_time);
+    			}
+
                 // n を初期化し、Sign_id を設定
                 Signup n = new Signup();
                 n.setName(Sign_id);
@@ -49,6 +71,8 @@ public class CollectionDepositAction extends Action {
 
                 request.setAttribute("Post", list);
                 request.setAttribute("Signup", list2 );
+                request.setAttribute("post_day", string_times);
+
             } else {
                 // Sign_idがnullまたは空の場合の処理
                 request.setAttribute("error", "Sign_idが見つからないか、空です");

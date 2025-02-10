@@ -2,6 +2,9 @@ package c_detail;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -46,9 +49,29 @@ public class C_detailListAction extends Action {
             int end = Math.min(start + ITEMS_PER_PAGE, totalItems);
             List<Post> paginatedList = allPosts.subList(start, end);
 
+//			list1のサイズを取得
+			int loop = paginatedList.size();
+
+//			リストを作成
+			List<String> string_times = new ArrayList<String>();
+
+			for (int i = 0; i < loop; i++) {
+
+//				beenからpost_dayを取得
+				Timestamp timestamp = paginatedList.get(i).getPost_day();
+		        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		        Timestamp型からString型に変換
+		        String string_time = sdf.format(timestamp);
+		        System.out.println(string_time);
+
+//		        リストに入れる
+		        string_times.add(string_time);
+			}
+
             request.setAttribute("Post", paginatedList);
             request.setAttribute("currentPage", currentPage);
             request.setAttribute("totalPages", totalPages);
+            request.setAttribute("post_day", string_times);
 
         } catch (Exception e) {
             e.printStackTrace(out);

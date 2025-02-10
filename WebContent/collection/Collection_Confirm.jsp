@@ -50,12 +50,12 @@
 		                <th class="test-boder-C test-table-wide-C">詳細番号</th>
 		                <th class="test-boder-C test-table-wide-C">金額</th>
 		            </tr>
-		            <c:forEach var="collection" items="${Element}">
+		            <c:forEach var="collection" items="${Element}" varStatus="loop">
 		                <tr>
 
 		                    <td class="test-table-wide-C test-boder-C">${collection.postID}</td>
 		                    <td class="test-table-wide-C test-boder-C">${collection.title}</td>
-		                    <td class="test-table-wide-C test-boder-C">${collection.post_day}</td>
+		                    <td class="test-table-wide-C test-boder-C">${post_day[loop.index]}</td>
 		                    <td class="test-table-wide-C test-boder-C">${collection.detailid}</td>
 		                    <td class="test-table-wide-C test-boder-C">${collection.monetary}</td>
 		                </tr>
