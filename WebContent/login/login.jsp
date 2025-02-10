@@ -432,7 +432,7 @@ button:hover {
 
     /* 「こちら」部分の色を赤色、下線あり */
     .highlight {
-        color: #ff0000; /* 通常時の色を赤色 */
+        color: #ff4d4d; /* 通常時の色を赤色 */
         text-decoration: underline; /* 下線を表示 */
     }
 
