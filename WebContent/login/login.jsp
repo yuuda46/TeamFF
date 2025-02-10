@@ -224,19 +224,23 @@ p a {
         // ユーザー名は1文字以上の任意の文字列
         String usernameRegex = ".{1,}"; // 1文字以上
 
+        boolean isValid = true; // 入力が有効かどうかを示すフラグ
+
         if (inputUsername != null && inputPassword != null) {
             // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
             if (!inputUsername.matches(usernameRegex)) {
                 usernameError = "・ユーザー名を正しく入力してください。";
+                isValid = false;
             }
 
             // パスワードが正規表現に一致しない場合、エラーメッセージを設定
             if (!inputPassword.matches(regex)) {
                 passwordError = "・パスワードは半角英数字5文字以上で入力してください。";
+                isValid = false;
             }
 
             // 両方にエラーがない場合にのみ、ログイン処理を行う
-            if (usernameError.isEmpty() && passwordError.isEmpty()) {
+            if (isValid) {
                 // データベース接続
                 Class.forName("org.postgresql.Driver");
                 conn = DriverManager.getConnection(url, dbUser, dbPassword);
@@ -288,6 +292,7 @@ p a {
         }
     }
 %>
+
 
 <!-- ログインフォーム -->
 <form method="POST" action="login.jsp" autocomplete="off">
