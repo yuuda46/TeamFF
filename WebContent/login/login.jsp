@@ -203,7 +203,7 @@ p a {
 <h2>ログインページ</h2>
 
 <div class="container" id="loginFormContainer">
-<%
+    <%
     String url = "jdbc:postgresql://localhost:5432/team_f";  // データベースURL
     String dbUser = "postgres";  // ユーザー名
     String dbPassword = "Team_F";  // パスワード
