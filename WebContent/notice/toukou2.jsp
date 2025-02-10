@@ -97,7 +97,7 @@
         <hr>
         <c:forEach var="comment" items="<%=list4 %>">
             <p>No.${comment.comment_id}</p>
-            <p>コメント💬 ${comment.proposal}</p>
+            <p>💬 ${comment.proposal}</p>
             <p>🕝 ${comment.time}</p>
 
 			<!-- 管理者のみ削除ボタンを表示 -->

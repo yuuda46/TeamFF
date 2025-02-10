@@ -23,14 +23,14 @@
 		        </ul>
 		    </div>
 
-			<div class="notice_center">
-		    <form  method="post" action="../notice/ToukouNotice.action">
+			<div class="notice_center re_flexbox">
+		    <form  class="margin_left_10" method="post" action="../notice/ToukouNotice.action">
 		        <input type="hidden" name="commentId" value="${Commentdel[0].comment_id}">
 		        <input type="hidden" name="items" value="${items}">
 		        <button type="submit" class="button_style detail_button">削除</button> <!-- 削除ボタン -->
 		    </form>
 
-		    <form action="../notice/ToukouNotice.action" method="get">
+		    <form class="right_margin" action="../notice/ToukouNotice.action" method="get">
 		    	<input type="hidden" name="items" value="${items}">
 		        <button type="submit" class="margin_left_800 button_style detail_button">戻る</button> <!-- 戻るボタン -->
 		    </form>
