@@ -293,7 +293,7 @@ p a {
 <form method="POST" action="login.jsp" autocomplete="off">
     <div class="form-group">
         <label for="username">ユーザー名:</label>
-        <input type="text" name="username" placeholder="ユーザー名を入力" value="<%= (request.getParameter("username") != null ? request.getParameter("username") : "") %>" required autocomplete="off">
+        <input type="text" name="username" placeholder="ユーザー名を入力(半角英数字)" value="<%= (request.getParameter("username") != null ? request.getParameter("username") : "") %>" required autocomplete="off">
         <!-- ユーザー名エラー表示 -->
         <div class="error-message">
             <%= !usernameError.isEmpty() ? usernameError : "" %>
