@@ -252,7 +252,7 @@ p a {
                     String storedPassword = rs.getString("PASSWORD");
                     if (!inputPassword.equals(storedPassword)) {
                         // パスワードが違う場合
-                        loginMessage = "・パスワードが間違っています。";
+                        loginMessage = "・パスワードが違います。";
                     } else {
                         // ログイン成功時
                         loginMessage = "ログイン成功";
@@ -266,7 +266,6 @@ p a {
                         String idFrag = rs.getString("ID");
                         session.setAttribute("sessionId", idFrag);
                         System.out.println("Session ID set: " + idFrag);
-                        // ここでリダイレクトする前にメッセージを設定する
                         response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
                         return; // 処理終了
                     }
@@ -312,7 +311,6 @@ p a {
 
     <!-- ログインエラーメッセージ（1か所にまとめて表示） -->
     <div class="error-message" style="font-size: 14px; margin-top: 10px; margin-bottom: 15px;">
-        <%= (!usernameError.isEmpty() || !passwordError.isEmpty()) ? "入力内容に誤りがあります。" : "" %>
         <%= !loginMessage.isEmpty() ? loginMessage : "" %>
     </div>
 
@@ -323,7 +321,6 @@ p a {
 <p style="text-align: center;">
     <a href="../common/index.jsp" class="back-button">戻る</a>
 </p>
-
 
 <style>
     .form-group {
