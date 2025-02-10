@@ -23,7 +23,7 @@
 	                    <li><strong>タイトル:</strong> ${list2[0].title}</li>
 	                    <li><strong>内容:</strong> ${list2[0].content}</li>
 	                    <li><strong>投稿者:</strong> ${list2[0].name}</li>
-	                    <li><strong>投稿日時:</strong> ${list2[0].postDay}</li>
+	                    <li><strong>投稿日時:</strong> ${post_day[0]}</li>
 	                </ul>
 	            </div>
 	            <div class="detail_flex ">
