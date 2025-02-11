@@ -430,16 +430,15 @@ button:hover {
         color: black; /* リンク全体の色はホバー時も黒 */
     }
 
-    /* 「こちら」部分の色を赤色、下線あり */
-    .highlight {
-        color: #ff4d4d; /* 通常時の色を赤色 */
-        text-decoration: underline; /* 下線を表示 */
-    }
+.highlight {
+    color: #ff0000; /* 常時赤色に設定 */
+    text-decoration: underline; /* 下線を追加 */
+}
 
-    /* 「こちら」部分にホバー時に少し濃い赤色を適用 */
-    .highlight:hover {
-        color: #cc0000; /* ホバー時に少し濃い赤色 */
-    }
+.highlight:hover {
+    color: #cc0000; /* ホバー時に少し濃い赤色に設定 */
+}
+
 </style>
 
 <!-- CSSスタイル -->
