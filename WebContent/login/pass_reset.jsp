@@ -346,6 +346,28 @@ h2 {
             ログイン画面に戻る方は <a href="login.jsp" class="login-link"><span class="highlight">こちら</span></a>
         </p>
 
+       <style>
+    .reset-link {
+        font-size: 16px; /* フォントサイズ */
+        color: black; /* 通常時のリンクの色 */
+        text-decoration: none; /* 下線を除去 */
+    }
+
+    .reset-link:hover {
+        color: black; /* リンク全体の色はホバー時も黒 */
+    }
+
+.highlight {
+    color: #ff0000; /* 常時赤色に設定 */
+    text-decoration: underline; /* 下線を追加 */
+}
+
+.highlight:hover {
+    color: #cc0000; /* ホバー時に少し濃い赤色に設定 */
+}
+
+</style>
+
     </div>
 <!-- フッター -->
 <footer>
