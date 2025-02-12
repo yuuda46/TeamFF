@@ -223,18 +223,22 @@ h2 {
     String message = "";
     List<String> errorMessages = new ArrayList<String>();
 
-    String passwordRegex = "^[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上
-    String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字が1回連続する場合にマッチ
+    // パスワードの正規表現：5文字以上の半角英数字
+    String passwordRegex = "^[a-zA-Z0-9]{5,}$";
+    // 同じ文字や数字が連続して使われるパターン（正規表現）
+    String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字や数字が1回連続する場合にマッチ
 
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         String username = request.getParameter("username");
         String currentPassword = request.getParameter("currentPassword");
         String newPassword = request.getParameter("newPassword");
 
+        // ユーザー名のチェック
         if (username == null || username.isEmpty()) {
             errorMessages.add("・ユーザー名を入力してください。");
         }
 
+        // 現在のパスワードのチェック
         if (currentPassword == null || currentPassword.isEmpty()) {
             errorMessages.add("・現在のパスワードを入力してください。");
         } else {
@@ -276,14 +280,17 @@ h2 {
             }
         }
 
+        // 新しいパスワードのチェック
         if (newPassword == null || !newPassword.matches(passwordRegex)) {
-            errorMessages.add("・5文字以上で入力してください。");
+            errorMessages.add("・新しいパスワードは5文字以上の半角英数字で入力してください。");
         }
 
-        if (newPassword != null && newPassword.matches(".*(\\w)\\1.*")) {
+        // 同じ文字や数字を連続して使えないチェック
+        if (newPassword != null && newPassword.matches(noRepeatingCharsRegex)) {
             errorMessages.add("・同じ文字や数字を連続して使用できません。");
         }
 
+        // エラーがない場合、パスワード更新処理を実行
         if (errorMessages.isEmpty()) {
             String url = "jdbc:postgresql://localhost:5432/team_f";
             String dbUser = "postgres";
@@ -303,11 +310,13 @@ h2 {
 
                 if (updated > 0) {
                     message = "パスワードが正常にリセットされました。";
-                    response.sendRedirect("login.jsp");
+                    response.sendRedirect("login.jsp");  // ログイン画面にリダイレクト
                     return;
                 } else {
                     errorMessages.add("・ユーザーが見つかりません。");
                 }
+            } catch (Exception e) {
+                errorMessages.add("エラーが発生しました: " + e.getMessage());
             } finally {
                 try {
                     if (stmt != null) stmt.close();
@@ -320,31 +329,31 @@ h2 {
     }
 %>
 
-        <form method="POST" action="">
-            <label for="username">ユーザー名:</label>
-            <input type="text" id="username" name="username" placeholder="ユーザー名を入力(半角英数字)" required>
+<form method="POST" action="">
+    <label for="username">ユーザー名:</label>
+    <input type="text" id="username" name="username" placeholder="ユーザー名を入力(半角英数字)" required>
 
-            <label for="currentPassword">現在のパスワード:</label>
-            <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力(半角英数字)" required>
+    <label for="currentPassword">現在のパスワード:</label>
+    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力(半角英数字)" required>
 
-            <label for="newPassword">新しいパスワード:</label>
-            <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力(半角英数字)" required>
+    <label for="newPassword">新しいパスワード:</label>
+    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力(半角英数字)" required>
 
-            <%-- エラーメッセージ表示 --%>
-            <% if (!errorMessages.isEmpty()) { %>
-                <div class="error">
-                    <% for (String error : errorMessages) { %>
-                        <p><%= error %></p>
-                    <% } %>
-                </div>
+    <%-- エラーメッセージ表示 --%>
+    <% if (!errorMessages.isEmpty()) { %>
+        <div class="error">
+            <% for (String error : errorMessages) { %>
+                <p><%= error %></p>
             <% } %>
+        </div>
+    <% } %>
 
-            <button type="submit">パスワードを変更</button>
-        </form>
+    <button type="submit">パスワードを変更</button>
+</form>
 
-        <p style="text-align: center;">
-            ログイン画面に戻る方は <a href="login.jsp" class="login-link"><span class="highlight">こちら</span></a>
-        </p>
+<p style="text-align: center;">
+    ログイン画面に戻る方は <a href="login.jsp" class="login-link"><span class="highlight">こちら</span></a>
+</p>
 
        <style>
     .reset-link {
