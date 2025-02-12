@@ -219,13 +219,14 @@ h2 {
     <h2>パスワードの再設定</h2>
     <div class="container" id="resetFormContainer">
 
-   <%
+<%
     String message = "";
     List<String> errorMessages = new ArrayList<String>();
 
-    // パスワードの正規表現：5文字以上の半角英数字
-    String passwordRegex = "^[a-zA-Z0-9]{5,}$";
-    // 同じ文字や数字が連続して使われるパターン（正規表現）
+    // パスワードの長さ（5文字以上）のチェック
+    String lengthError = "・新しいパスワードは5文字以上で入力してください。";
+    // 半角英数字のチェック
+    String passwordRegex = "^[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上
     String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字や数字が1回連続する場合にマッチ
 
     if ("POST".equalsIgnoreCase(request.getMethod())) {
@@ -280,9 +281,14 @@ h2 {
             }
         }
 
-        // 新しいパスワードのチェック
-        if (newPassword == null || !newPassword.matches(passwordRegex)) {
-            errorMessages.add("・英字と数字を両方含む必要があります。");
+        // 新しいパスワードの長さチェック（5文字以上）
+        if (newPassword == null || newPassword.length() < 5) {
+            errorMessages.add(lengthError);
+        }
+
+        // 新しいパスワードの英数字チェック（半角英数字のみ）
+        if (newPassword != null && !newPassword.matches("^[a-zA-Z0-9]+$")) {
+            errorMessages.add("・新しいパスワードは半角英数字で入力してください。");
         }
 
         // 同じ文字や数字を連続して使えないチェック
@@ -331,13 +337,13 @@ h2 {
 
 <form method="POST" action="">
     <label for="username">ユーザー名:</label>
-    <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
+    <input type="text" id="username" name="username" placeholder="ユーザー名を入力(半角英数字)" required>
 
     <label for="currentPassword">現在のパスワード:</label>
-    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力" required>
+    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力(半角英数字)" required>
 
     <label for="newPassword">新しいパスワード:</label>
-    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
+    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力(半角英数字)" required>
 
     <%-- エラーメッセージ表示 --%>
     <% if (!errorMessages.isEmpty()) { %>
@@ -354,6 +360,7 @@ h2 {
 <p style="text-align: center;">
     ログイン画面に戻る方は <a href="login.jsp" class="login-link"><span class="highlight">こちら</span></a>
 </p>
+
 
        <style>
     .reset-link {
