@@ -228,6 +228,7 @@ h2 {
     // 半角英数字のチェック
     String passwordRegex = "^[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上
     String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字や数字が1回連続する場合にマッチ
+    String alphabetOnlyRegex = "^[a-zA-Z]{5,}$"; // 英字のみのパスワードにマッチ
 
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         String username = request.getParameter("username");
@@ -289,6 +290,11 @@ h2 {
         // 新しいパスワードの英数字チェック（半角英数字のみ）
         if (newPassword != null && !newPassword.matches("^[a-zA-Z0-9]+$")) {
             errorMessages.add("・新しいパスワードは半角英数字で入力してください。");
+        }
+
+        // 新しいパスワードが英字のみの場合
+        if (newPassword != null && newPassword.matches(alphabetOnlyRegex)) {
+            errorMessages.add("・新しいパスワードは英字だけでは登録できません。");
         }
 
         // 同じ文字や数字を連続して使えないチェック
@@ -360,7 +366,6 @@ h2 {
 <p style="text-align: center;">
     ログイン画面に戻る方は <a href="login.jsp" class="login-link"><span class="highlight">こちら</span></a>
 </p>
-
 
        <style>
     .reset-link {
