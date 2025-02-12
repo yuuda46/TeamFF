@@ -124,10 +124,10 @@
                 <img src="../images/toukou.jpg" alt="アイコン1">
             </div>
             <div class="title">
-                <span>投稿</span>
+                <span>回覧物</span>
             </div>
             <div class="text">
-                連絡文書をカテゴリーごとに絞り込んで閲覧できる
+                回覧物をカテゴリーごとに絞り込んで閲覧できます
             </div>
         </div>
 
