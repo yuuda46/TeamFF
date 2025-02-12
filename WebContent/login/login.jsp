@@ -219,8 +219,8 @@ p a {
         String inputUsername = request.getParameter("username");
         String inputPassword = request.getParameter("password");
 
-        // パスワードの正規表現（半角英数字5文字以上、英字と数字を両方含む）
-        String passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上、英字と数字を両方含む
+        // パスワードの正規表現（英字と数字を両方含む、5文字以上）
+        String passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 英字と数字を両方含む、5文字以上
         // ユーザー名は1文字以上の任意の文字列
         String usernameRegex = ".{1,}"; // 1文字以上
 
@@ -234,7 +234,7 @@ p a {
             if (inputPassword.length() < 5) {
                 passwordError = "・パスワードは5文字以上で入力してください。";
             }
-            // パスワードが正規表現に一致しない場合（英字と数字を両方含んでいない場合）
+            // パスワードが英字と数字を両方含んでいない場合のエラーチェック
             else if (!inputPassword.matches(passwordRegex)) {
                 passwordError = "・パスワードは英字と数字を両方含む必要があります。";
             }
