@@ -13,6 +13,7 @@
 
 <c:import url="/common/base.jsp">
 	<c:param name="content">
+	<h2 class="padding_bottom_0 position_center">回覧物編集</h2>
 	<form class="notice_center" action="../notice/NoticeAdmin.action" method="get">
 		<div class="right_margin top_margin">
 			<select class="select_size detail_font" required id="notice-f1-select" name="f1">
@@ -35,7 +36,7 @@
 			<table border="1">
 				<tr>
 					<th class="title_text_vol">タイトル</th>
-					<th class="button_text_vol">コンテンツ</th>
+					<th class="button_text_vol">詳細情報ページ</th>
 					<th>氏名</th>
 					<th class="date_text_vol">日付</th>
 					<th class="padding_none category_text_vol">カテゴリー</th>
@@ -56,16 +57,16 @@
 					<td class="padding_top_0 padding_bottom_0">${notice_content.name}</td>
 					<td class="padding_top_0 padding_bottom_0 date_text_vol">${post_day[loop.index]}</td>
 					<td class="padding_top_0 padding_bottom_0 category_text_vol">${notice_content.categoryName}</td>
-					<td class="padding_none admin_button">
-						<form class="padding_bottom_0" action="../notice/NoticeUpdate.action" method="get">
+					<td class="padding_none admin_button border-none position_notice">
+						<form class="padding_bottom_0 form_height" action="../notice/NoticeUpdate.action" method="get">
 							<input type="hidden" name="post_id" value="${notice_content.postId}">
-							<button class="button_style border-none hit_judgment_mechanics" type="submit">編集</button>
+							<button class="button_back_ground button_style hit_judgment_mechanics" type="submit">編集</button>
 						</form>
 					</td>
-					<td class="padding_none admin_button">
-						<form class="padding_bottom_0" action="../notice/DeletePermission.action" method="get">
+					<td class="padding_none admin_button border-none position_notice">
+						<form class="padding_bottom_0 form_height" action="../notice/DeletePermission.action" method="get">
 							<input type="hidden" name="post_id" value="${notice_content.postId}">
-							<button class="button_style border-none hit_judgment_mechanics" type="submit">削除</button>
+							<button class="button_back_ground button_style hit_judgment_mechanics" type="submit">削除</button>
 						</form>
 					</td>
 					</tr>

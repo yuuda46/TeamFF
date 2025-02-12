@@ -18,6 +18,7 @@
 	<c:param name="content">
 	<div id="pagination">
 	<div  class="container">
+	<h2 class="position_center padding_bottom_0">回覧物</h2>
 	<form action="../notice/Notice.action" method="get">
 		<div class="notice_center">
 			<div class="right_margin top_margin">

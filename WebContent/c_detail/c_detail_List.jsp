@@ -20,10 +20,11 @@
 
     <div class="function">
         <section class="mo-4">
+        <div class="container">
         <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">集金物登録</h2>
 		<h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold"></h3>
 
-			<div class="container">
+
 	            <c:choose>
 	                <c:when test="${Post.size()>0}">
 	                    <table class="test-table table-hover mx-3">
@@ -39,20 +40,20 @@
 							        <td class="test-table-wide test-boder">${Collection.title}</td>
 							        <td class="test-table-wide test-boder">${post_day[loop.index]}</td>
 
-							        <td class="text-center test-boder">
+							        <td class="text-center test-boder padding_none admin_button border-none position_notice">
 							            <c:choose>
 							                <c:when test="${Collection.judgement eq 'true'}">
 							                    <!-- 編集ボタン -->
-							                    <form action="../c_detail/C_detailEdit.action" method="get">
+							                    <form class="padding_bottom_0 form_height admin_button_width" action="../c_detail/C_detailEdit.action" method="get">
 							                        <input type="hidden" name="postid" value="${Collection.id}">
-							                        <button type="submit">編集</button>
+							                        <button class="button_back_ground button_style hit_judgment_mechanics" type="submit">編集</button>
 							                    </form>
 							                </c:when>
 							                <c:otherwise>
 							                    <!-- 投稿ボタン -->
-							                    <form action="../c_detail/C_detailReceive.action" method="post">
+							                    <form class="padding_bottom_0 form_height admin_button_width" action="../c_detail/C_detailReceive.action" method="post">
 							                        <input type="hidden" name="postid" value="${Collection.id}">
-							                        <button type="submit">投稿</button>
+							                        <button class="button_back_ground button_style hit_judgment_mechanics" type="submit">投稿</button>
 							                    </form>
 							                </c:otherwise>
 							            </c:choose>

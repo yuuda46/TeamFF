@@ -3,11 +3,16 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 
+<link rel="stylesheet" href="../css/notice.css">
+
 <c:import url="/common/base.jsp">
     <c:param name="content">
         <section class="mo-4">
-            <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user">集金物入力</h2>
-            <form class="mx-3" action="c_detail_con.jsp" method="post">
+            <h2 class="titlesize h3 mb-3 fw-normal bg-opacity-10 py-2 px-4 user position_center">集金物入力</h2>
+
+            <div class="container2">
+
+            <form class="mx-3 detail_font" action="c_detail_con.jsp" method="post">
 <%
     // Javaから受け取った postid を取得
     String postid = (String) request.getAttribute("postid");
@@ -17,8 +22,8 @@
 <input type="hidden" name="postid" value="<%= postid %>">
 
 					<div class="form-group">
-					    <label>金額</label><br>
-					    <input class="select-shape"
+					    <label class="right_margin">金額:</label>
+					    <input class="select-shape form_text2 form_top margin_left_10"
 					           type="number"
 					           name="monetary"
 					           placeholder="例:1000(円)"
@@ -35,8 +40,8 @@
 					</div>
 
                     <div class="form-group">
-                        <label>期限</label><br>
-                        <input class="select-shape" type="date" name="deadline" placeholder="期限を入力してください" required="required" value="${deadline}"><br>
+                        <label class="right_margin">期限:</label>
+                        <input class="select-shape form_text3 form_top margin_left_10" type="date" name="deadline" placeholder="期限を入力してください" required="required" value="${deadline}"><br>
                         <c:if test="${not empty errorDeadline}">
                             <div id="error-message" style="color:red;">${errorDeadline}</div>
                         </c:if>
@@ -45,13 +50,13 @@
 
 
 
-                <button type="submit" class="C_detail.action">データを登録</button>
+                <button type="submit" class="C_detail.action button_style keep_button float_right margin_top_18">データを登録</button>
             </form>
 
             <form action="../c_detail/C_detailList.action" method="get">
-                <button class="btn btn-secondary" type="submit">戻る</button>
+                <button class="btn btn-secondary button_style keep_button" type="submit">戻る</button>
             </form>
-
+				</div>
         </section>
 
         <script>

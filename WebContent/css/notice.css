@@ -60,6 +60,9 @@
 .padding_top_10 {
 	padding-top: 10px;
 }
+.margin_top_18 {
+	margin-top: 18px;
+}
 
 /*下に余白をあけるCSS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -188,6 +191,7 @@
 	right: 0;
 	margin: 0 auto;
 }
+
 /*セレクトボックスのCSS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .select_size {
@@ -215,6 +219,18 @@
 	height: 24px;
 	width: 55%;
 }
+
+.form_text2 {
+	position: fixed;
+	height: 24px;
+	width: 55%;
+}
+
+.form_text3 {
+	position: fixed;
+	height: 24px;
+}
+
 .admin_text {
 	height: 24px;
 	width: 80%;
@@ -304,7 +320,8 @@
 	font-size: 15px;
 }
 .admin_button {
-	width: 50;
+	width: 50px;
+	height: 43px;
 }
 
 .button_text_vol {
@@ -312,6 +329,36 @@
 	white-space: nowrap; /* テキストを折り返さない */
 	overflow: hidden; /* はみ出た部分を非表示 */
 	text-overflow: ellipsis; /* 省略記号 (…) を表示 */
+}
+.button_back_ground {
+	background: #DCDCDC;
+	border-radius: 0px;
+	border: 1px #ddd;
+	width: 100%;
+	height: 100%;
+	border-color: #FFFFFF;
+	display: table-cell;
+	vertical-align: middle;
+
+}
+.button_back_ground:hover {
+	background: #D3D3D3;
+}
+.form_height {
+	height: 97%;
+	width: 98%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+}
+.admin_button_width {
+	width: 99%;
+}
+.bottom_button {
+	position: fixed;
+	bottom: 5%;
+	text-align: center;
 }
 
 /*文字のCSS

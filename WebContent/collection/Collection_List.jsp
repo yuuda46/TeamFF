@@ -18,7 +18,7 @@
 
 <link rel="stylesheet" href="../css/collection.css">
 
-    <div class="function">
+    <div class="function container3">
         <section class="mo-4">
         <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">入金ページ</h2>
 		<h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">このページには、まだ入金していない項目のみ表示しています</h3>

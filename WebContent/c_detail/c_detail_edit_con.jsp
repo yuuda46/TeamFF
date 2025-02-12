@@ -33,7 +33,7 @@
             <button type="submit">編集を確定</button>
         </form>
 
-        <button type="button" onclick="history.back()">戻る</button>
+        <button type="submit" onclick="history.back()">戻る</button>
     </section>
 
     <footer>
