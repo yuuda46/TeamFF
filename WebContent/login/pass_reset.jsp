@@ -276,10 +276,12 @@ h2 {
             }
         }
 
+        // 新しいパスワードのバリデーション
         if (newPassword == null || !newPassword.matches(passwordRegex)) {
             errorMessages.add("・5文字以上で入力してください。");
         }
 
+        // 同じ文字を繰り返さないバリデーション
         if (newPassword != null && newPassword.matches(".*(\\w)\\1.*")) {
             errorMessages.add("・同じ文字や数字を連続して使用できません。");
         }
@@ -319,6 +321,7 @@ h2 {
         }
     }
 %>
+
 
         <form method="POST" action="">
             <label for="username">ユーザー名:</label>
