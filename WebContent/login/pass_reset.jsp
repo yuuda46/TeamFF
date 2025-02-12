@@ -224,7 +224,7 @@ h2 {
     List<String> errorMessages = new ArrayList<String>();
 
     // パスワードの長さ（5文字以上）のチェック
-    String lengthError = "・新しいパスワードは5文字以上で入力してください。";
+    String lengthError = "・5文字以上で入力してください。";
     // 半角英数字のチェック
     String passwordRegex = "^[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上
     String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字や数字が1回連続する場合にマッチ
