@@ -204,128 +204,164 @@ p a {
 
 <div class="container" id="loginFormContainer">
 <%
-    String url = "jdbc:postgresql://localhost:5432/team_f";  // データベースURL
-    String dbUser = "postgres";  // ユーザー名
-    String dbPassword = "Team_F";  // パスワード
-    String usernameError = "";  // ユーザー名エラーメッセージ
-    String passwordError = "";  // パスワードエラーメッセージ
-    String loginMessage = "";  // ログインメッセージ
-    Connection conn = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
+    String message = "";
+    List<String> errorMessages = new ArrayList<String>();
 
-    try {
-        // 入力されたユーザー名とパスワードを取得
-        String inputUsername = request.getParameter("username");
-        String inputPassword = request.getParameter("password");
+    // パスワードの長さ（5文字以上）のチェック
+    String lengthError = "・新しいパスワードは5文字以上で入力してください。";
+    // 半角英数字のチェック
+    String passwordRegex = "^[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上
+    String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字や数字が1回連続する場合にマッチ
+    String alphabetOnlyRegex = "^[a-zA-Z]{5,}$"; // 英字のみのパスワードにマッチ
+    String numberOnlyRegex = "^[0-9]{5,}$"; // 数字のみのパスワードにマッチ
+    String alphaNumericRegex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 英字と数字両方を含むパスワード
 
-        // パスワードの正規表現（半角英数字5文字以上、英字と数字を両方含む）
-        String regex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上、英字と数字を両方含む
-        // ユーザー名は1文字以上の任意の文字列
-        String usernameRegex = ".{1,}"; // 1文字以上
+    if ("POST".equalsIgnoreCase(request.getMethod())) {
+        String username = request.getParameter("username");
+        String currentPassword = request.getParameter("currentPassword");
+        String newPassword = request.getParameter("newPassword");
 
-        if (inputUsername != null && inputPassword != null) {
-            // ユーザー名が正規表現に一致しない場合、エラーメッセージを設定
-            if (!inputUsername.matches(usernameRegex)) {
-                usernameError = "・ユーザー名を正しく入力してください。";
-            }
+        // ユーザー名のチェック
+        if (username == null || username.isEmpty()) {
+            errorMessages.add("・ユーザー名を入力してください。");
+        }
 
-            // パスワードが5文字未満の場合のエラーチェック
-            if (inputPassword.length() < 5) {
-                passwordError = "・5文字以上で入力してください。";
-            }
-            // パスワードが正規表現に一致しない場合（英字と数字を両方含んでいない場合）
-            else if (!inputPassword.matches(regex)) {
-                passwordError = "・英字と数字を両方含む必要があります。";
-            }
+        // 現在のパスワードのチェック
+        if (currentPassword == null || currentPassword.isEmpty()) {
+            errorMessages.add("・現在のパスワードを入力してください。");
+        } else {
+            String url = "jdbc:postgresql://localhost:5432/team_f";
+            String dbUser = "postgres";
+            String dbPassword = "Team_F";
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
 
-            // 両方にエラーがない場合にのみ、ログイン処理を行う
-            if (usernameError.isEmpty() && passwordError.isEmpty()) {
-                // データベース接続
+            try {
                 Class.forName("org.postgresql.Driver");
                 conn = DriverManager.getConnection(url, dbUser, dbPassword);
-                // ユーザー名とパスワードの組み合わせを確認するクエリ
+
                 String query = "SELECT * FROM SIGNUP WHERE USER_NAME = ?";
                 stmt = conn.prepareStatement(query);
-                stmt.setString(1, inputUsername.trim()); // 入力値をトリム
-                // クエリ実行
+                stmt.setString(1, username);
                 rs = stmt.executeQuery();
 
-                if (rs.next()) {
-                    // ユーザー名が見つかった場合に、パスワードのチェック
-                    String storedPassword = rs.getString("PASSWORD");
-                    if (!inputPassword.equals(storedPassword)) {
-                        // パスワードが違う場合
-                        loginMessage = "・パスワードが違います。";
-                    } else {
-                        // ログイン成功時
-                        loginMessage = "ログイン成功";
-                        // セッションを設定
-                        session.setAttribute("username", inputUsername);
-                        session.setAttribute("password", inputPassword);
-                        // 管理者フラグの取得とセッション保存
-                        String adminFlag = rs.getString("ADMINI");
-                        session.setAttribute("admin", "true".equalsIgnoreCase(adminFlag)); // 管理者権限の有無
-                        // ログイン成功後、トップページへリダイレクト
-                        String idFrag = rs.getString("ID");
-                        session.setAttribute("sessionId", idFrag);
-                        System.out.println("Session ID set: " + idFrag);
-                        response.sendRedirect("../notice/Tokou.action"); // ログイン成功後、トップページへリダイレクト
-                        return; // 処理終了
-                    }
+                if (!rs.next()) {
+                    errorMessages.add("・ユーザーが見つかりません。");
                 } else {
-                    // ユーザー名が見つからない場合
-                    loginMessage = "・ユーザーが見つかりません。";
+                    // ユーザーが存在する場合、パスワードのチェック
+                    String storedPassword = rs.getString("PASSWORD");
+                    if (!storedPassword.equals(currentPassword)) {
+                        errorMessages.add("・現在のパスワードが違います。");
+                    }
+                }
+            } catch (Exception e) {
+                errorMessages.add("エラーが発生しました: " + e.getMessage());
+            } finally {
+                try {
+                    if (rs != null) rs.close();
+                    if (stmt != null) stmt.close();
+                    if (conn != null) conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
-    } catch (Exception e) {
-        loginMessage = "・データベースエラー: " + e.getMessage();
-    } finally {
-        // リソースのクローズ
-        try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        // 新しいパスワードの長さチェック（5文字以上）
+        if (newPassword == null || newPassword.length() < 5) {
+            errorMessages.add(lengthError);
+        }
+
+        // 新しいパスワードの英数字チェック（半角英数字のみ）
+        if (newPassword != null && !newPassword.matches("^[a-zA-Z0-9]+$")) {
+            errorMessages.add("・新しいパスワードは半角英数字で入力してください。");
+        }
+
+        // 新しいパスワードが英字のみの場合
+        if (newPassword != null && newPassword.matches(alphabetOnlyRegex)) {
+            errorMessages.add("・新しいパスワードは英字だけでは登録できません。");
+        }
+
+        // 新しいパスワードが数字のみの場合
+        if (newPassword != null && newPassword.matches(numberOnlyRegex)) {
+            errorMessages.add("・新しいパスワードは数字だけでは登録できません。");
+        }
+
+        // 英字と数字両方を含むパスワードチェック
+        if (newPassword != null && !newPassword.matches(alphaNumericRegex)) {
+            errorMessages.add("・英字と数字を両方含む必要があります。");
+        }
+
+        // 同じ文字や数字を連続して使えないチェック
+        if (newPassword != null && newPassword.matches(noRepeatingCharsRegex)) {
+            errorMessages.add("・同じ文字や数字を連続して使用できません。");
+        }
+
+        // エラーがない場合、パスワード更新処理を実行
+        if (errorMessages.isEmpty()) {
+            String url = "jdbc:postgresql://localhost:5432/team_f";
+            String dbUser = "postgres";
+            String dbPassword = "Team_F";
+            Connection conn = null;
+            PreparedStatement stmt = null;
+
+            try {
+                Class.forName("org.postgresql.Driver");
+                conn = DriverManager.getConnection(url, dbUser, dbPassword);
+                String query = "UPDATE SIGNUP SET PASSWORD = ? WHERE USER_NAME = ?";
+                stmt = conn.prepareStatement(query);
+                stmt.setString(1, newPassword);
+                stmt.setString(2, username);
+
+                int updated = stmt.executeUpdate();
+
+                if (updated > 0) {
+                    message = "パスワードが正常にリセットされました。";
+                    response.sendRedirect("login.jsp");  // ログイン画面にリダイレクト
+                    return;
+                } else {
+                    errorMessages.add("・ユーザーが見つかりません。");
+                }
+            } catch (Exception e) {
+                errorMessages.add("エラーが発生しました: " + e.getMessage());
+            } finally {
+                try {
+                    if (stmt != null) stmt.close();
+                    if (conn != null) conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 %>
 
-<!-- ログインフォーム -->
-<form method="POST" action="login.jsp" autocomplete="off">
-    <div class="form-group">
-        <label for="username">ユーザー名:</label>
-        <input type="text" name="username" placeholder="ユーザー名を入力" value="<%= (request.getParameter("username") != null ? request.getParameter("username") : "") %>" required autocomplete="off">
-        <!-- ユーザー名エラー表示 -->
-        <div class="error-message">
-            <%= !usernameError.isEmpty() ? usernameError : "" %>
+<form method="POST" action="">
+    <label for="username">ユーザー名:</label>
+    <input type="text" id="username" name="username" placeholder="ユーザー名を入力(半角英数字)" required>
+
+    <label for="currentPassword">現在のパスワード:</label>
+    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力(半角英数字)" required>
+
+    <label for="newPassword">新しいパスワード:</label>
+    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力(半角英数字)" required>
+
+    <%-- エラーメッセージ表示 --%>
+    <% if (!errorMessages.isEmpty()) { %>
+        <div class="error">
+            <% for (String error : errorMessages) { %>
+                <p><%= error %></p>
+            <% } %>
         </div>
-    </div>
+    <% } %>
 
-    <div class="form-group">
-        <label for="password">パスワード:</label>
-        <input type="password" name="password" placeholder="パスワードを入力" value="<%= (request.getParameter("password") != null ? request.getParameter("password") : "") %>" required autocomplete="off">
-        <!-- パスワードエラー表示 -->
-        <div class="error-message">
-            <%= !passwordError.isEmpty() ? passwordError : "" %>
-        </div>
-    </div>
-
-    <!-- ログインエラーメッセージ（1か所にまとめて表示） -->
-    <div class="error-message" style="font-size: 14px; margin-top: 10px; margin-bottom: 15px;">
-        <%= !loginMessage.isEmpty() ? loginMessage : "" %>
-    </div>
-
-    <button type="submit" class="login-btn">ログイン</button>
+    <button type="submit">パスワードを変更</button>
 </form>
 
-<!-- 戻るボタン -->
 <p style="text-align: center;">
-    <a href="../common/index.jsp" class="back-button">戻る</a>
+    ログイン画面に戻る方は <a href="login.jsp" class="login-link"><span class="highlight">こちら</span></a>
 </p>
-
 
 <style>
     .form-group {
