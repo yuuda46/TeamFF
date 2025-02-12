@@ -229,6 +229,8 @@ h2 {
     String passwordRegex = "^[a-zA-Z0-9]{5,}$"; // 半角英数字5文字以上
     String noRepeatingCharsRegex = "(.)\\1"; // 同じ文字や数字が1回連続する場合にマッチ
     String alphabetOnlyRegex = "^[a-zA-Z]{5,}$"; // 英字のみのパスワードにマッチ
+    String numberOnlyRegex = "^[0-9]{5,}$"; // 数字のみのパスワードにマッチ
+    String alphaNumericRegex = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{5,}$"; // 英字と数字両方を含むパスワード
 
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         String username = request.getParameter("username");
@@ -295,6 +297,16 @@ h2 {
         // 新しいパスワードが英字のみの場合
         if (newPassword != null && newPassword.matches(alphabetOnlyRegex)) {
             errorMessages.add("・新しいパスワードは英字だけでは登録できません。");
+        }
+
+        // 新しいパスワードが数字のみの場合
+        if (newPassword != null && newPassword.matches(numberOnlyRegex)) {
+            errorMessages.add("・新しいパスワードは数字だけでは登録できません。");
+        }
+
+        // 英字と数字両方を含むパスワードチェック
+        if (newPassword != null && !newPassword.matches(alphaNumericRegex)) {
+            errorMessages.add("・英字と数字を両方含む必要があります。");
         }
 
         // 同じ文字や数字を連続して使えないチェック
