@@ -372,6 +372,7 @@ header .dropdown {
     position: absolute;
     top: 10px;      /* 上からの位置 */
     right: 10px;    /* 右からの位置 */
+    z-index:10;
 }
 
 header .dropdown .dropdown-menu {
