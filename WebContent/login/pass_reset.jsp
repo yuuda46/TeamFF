@@ -282,7 +282,7 @@ h2 {
 
         // 新しいパスワードのチェック
         if (newPassword == null || !newPassword.matches(passwordRegex)) {
-            errorMessages.add("・新しいパスワードは5文字以上の半角英数字で入力してください。");
+            errorMessages.add("・英字と数字を両方含む必要があります。");
         }
 
         // 同じ文字や数字を連続して使えないチェック
@@ -331,13 +331,13 @@ h2 {
 
 <form method="POST" action="">
     <label for="username">ユーザー名:</label>
-    <input type="text" id="username" name="username" placeholder="ユーザー名を入力(半角英数字)" required>
+    <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
 
     <label for="currentPassword">現在のパスワード:</label>
-    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力(半角英数字)" required>
+    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力" required>
 
     <label for="newPassword">新しいパスワード:</label>
-    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力(半角英数字)" required>
+    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
 
     <%-- エラーメッセージ表示 --%>
     <% if (!errorMessages.isEmpty()) { %>
