@@ -58,7 +58,7 @@
 
 
 
-<h1 id="logo"><a href="index.jsp"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
+<h1 id="logo"><a href="../notice/Tokou.action"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
 <nav id="menubar">
 <ul>
 <li><a href="../notice/Notice.action">回覧物</a></li>

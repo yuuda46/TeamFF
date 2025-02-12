@@ -14,6 +14,7 @@
 
 <c:import url="/common/base.jsp">
 	<c:param name="content">
+	<h2 class="position_center">回覧物投稿</h1>
 	<form class="detail_font container2" action="../notice/Upload" method="post" enctype="multipart/form-data">
 	タイトル:<input class="form_text form_top" type="text" name="title" placeholder="タイトルを入力してください" required="required" value="${title}"><br>
 	<%-- エラー文 --%>

@@ -460,18 +460,16 @@ header .dropdown .dropdown-menu li a:hover {
 /*base.jspのヘッダーのcss*/
 .head {
 	height: 260px;
-	overflow: auto;
+	overflow: visible;
 	position: relative;
 	background : none;
 	background-color: #000000;
 }
 /*ロゴ画像*/
 .head #logo img {
-	display: block;
-	width: 250px;	/*画像の幅*/
 	position: absolute;
-	left: 40%;		/*ロゴやメニューが入っているブロックに対して、左からの配置場所の指定。*/
-	top: 40px;	/*ロゴやメニューが入っているブロックに対して、下からの配置場所の指定。*/
+	top: 100%;
+	width: 250px;	/*画像の幅*/
 }
 .dropdown-menu2 {
 	column-count: 2;
@@ -483,7 +481,6 @@ header .dropdown .dropdown-menu li a:hover {
 ---------------------------------------------------------------------------*/
 /*メニューブロック全体への指定*/
 .menubar {
-	padding-top: 9%;
 	text-align: center;
 }
 /*メニュー１個あたりの指定*/
@@ -525,4 +522,22 @@ header .dropdown .dropdown-menu li a:hover {
 .container3 {
 	max-width : 960px;
 	margin : 0 auto;
+}
+
+/*リンクのCSS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.link_judgement2 {
+	position: absolute;
+	left: 40%;
+}
+.link_parent {
+	position: relative;
+	height: 155px;
+}
+.h1_margin_none {
+	margin: 0;
+	float: none;s
+}
+.ul_top_0 {
+	margin-top: 10;
 }

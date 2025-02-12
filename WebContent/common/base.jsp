@@ -52,10 +52,11 @@
             </ul>
         </div>
     <% } %>
-
-<h1 id="logo"><a href="index.jsp"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
-<nav class="menubar container3">
-<ul>
+<div class="link_parent">
+	<h1 class="h1_margin_none" id="logo"><a class="link_judgement2" href="../notice/Tokou.action"><img src="../images/logo.png" alt="SAMPLE COMPANY"></a></h1>
+</div>
+<nav class="menubar container3 base_padding_top_0">
+<ul class="ul_top_0">
 <li><a href="../notice/Notice.action">回覧物</a></li>
 <li><a href="../notice/Tokou.action">掲示板</a></li>
 <li><a href="../notice/ToukouForm.action">掲示板投稿</a></li>
