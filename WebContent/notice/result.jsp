@@ -18,6 +18,7 @@
 	<c:param name="content">
 
 	<div class="container2">
+		<h2 class="position_center">投稿内容確認</h2>
 		<p>タイトル:<%=title %></p>
 		<p>氏名:${name[0].name}</p>
 		<p>カテゴリー:${category_name[0].categoryName}</p>
