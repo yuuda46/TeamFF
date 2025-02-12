@@ -291,19 +291,8 @@ h2 {
 
         // 新しいパスワードの英数字チェック（半角英数字のみ）
         if (newPassword != null && !newPassword.matches("^[a-zA-Z0-9]+$")) {
-            errorMessages.add("・新しいパスワードは半角英数字で入力してください。");
+            errorMessages.add("・半角英数字で入力してください。");
         }
-
-        // 新しいパスワードが英字のみの場合
-        if (newPassword != null && newPassword.matches(alphabetOnlyRegex)) {
-            errorMessages.add("・新しいパスワードは英字だけでは登録できません。");
-        }
-
-        // 新しいパスワードが数字のみの場合
-        if (newPassword != null && newPassword.matches(numberOnlyRegex)) {
-            errorMessages.add("・新しいパスワードは数字だけでは登録できません。");
-        }
-
         // 英字と数字両方を含むパスワードチェック
         if (newPassword != null && !newPassword.matches(alphaNumericRegex)) {
             errorMessages.add("・英字と数字を両方含む必要があります。");
@@ -355,13 +344,13 @@ h2 {
 
 <form method="POST" action="">
     <label for="username">ユーザー名:</label>
-    <input type="text" id="username" name="username" placeholder="ユーザー名を入力(半角英数字)" required>
+    <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required>
 
     <label for="currentPassword">現在のパスワード:</label>
-    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力(半角英数字)" required>
+    <input type="password" id="currentPassword" name="currentPassword" placeholder="現在のパスワードを入力" required>
 
     <label for="newPassword">新しいパスワード:</label>
-    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力(半角英数字)" required>
+    <input type="password" id="newPassword" name="newPassword" placeholder="新しいパスワードを入力" required>
 
     <%-- エラーメッセージ表示 --%>
     <% if (!errorMessages.isEmpty()) { %>
