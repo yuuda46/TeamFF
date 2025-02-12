@@ -230,9 +230,13 @@ p a {
                 usernameError = "・ユーザー名を正しく入力してください。";
             }
 
-            // パスワードが正規表現に一致しない場合、エラーメッセージを設定
-            if (!inputPassword.matches(regex)) {
+            // パスワードが5文字未満の場合のエラーチェック
+            if (inputPassword.length() < 5) {
                 passwordError = "・5文字以上で入力してください。";
+            }
+            // パスワードが正規表現に一致しない場合（英字と数字を両方含んでいない場合）
+            else if (!inputPassword.matches(regex)) {
+                passwordError = "・英字と数字を両方含む必要があります。";
             }
 
             // 両方にエラーがない場合にのみ、ログイン処理を行う
