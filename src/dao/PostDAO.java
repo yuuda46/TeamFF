@@ -331,4 +331,26 @@ public class PostDAO extends DAO {
         con.close();
 
     }
+
+	public List<Post> collection_search() throws Exception {
+		List<Post> list=new ArrayList<>();
+
+		Connection con=getConnection();
+
+		PreparedStatement st=con.prepareStatement(
+			"select id from post "
+			+ "where category_id = 2");
+		ResultSet rs=st.executeQuery();
+
+		while (rs.next()){
+			Post p=new Post();
+			p.setPostId(rs.getString("id"));
+
+			list.add(p);
+		}
+		st.close();
+		con.close();
+
+		return list;
+	}
 }

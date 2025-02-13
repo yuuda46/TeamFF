@@ -161,3 +161,8 @@
 .position_right {
 	text-align: right;
 }
+
+.button_size {
+	height: 35px;
+	width: 80px;
+}

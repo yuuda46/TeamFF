@@ -102,7 +102,7 @@
                                 <td class="text-center test-boder">
                                     <%-- signid をリンクに追加 --%>
                                     <a href="../collection/CollectionDepositCheck.action?no=${Collection.id}&signid=${param.signid}">
-                                        <button>入金完了</button>
+                                        <button class="button_style button_size">入金完了</button>
                                     </a>
                                 </td>
                             </tr>
