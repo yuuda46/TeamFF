@@ -153,3 +153,11 @@
 	height: 35px;
 	width: 200px;
 }
+
+.float_right {
+	float:right;
+}
+
+.position_right {
+	text-align: right;
+}

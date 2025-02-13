@@ -84,7 +84,7 @@
                             <th class="test-boder test-table-wide">期限</th>
                             <th class="test-boder test-table-wide"></th>
                         </tr>
-                        <c:forEach var="Collection" items="${Post}">
+                        <c:forEach var="Collection" items="${Post}" varStatus="loop">
                             <%-- 期限をDate型に変換 --%>
                             <fmt:parseDate var="deadlineDate" value="${Collection.deadline}" pattern="yyyy-MM-dd" type="date" />
                             <%-- 現在の日付を取得し、Date型に変換 --%>
@@ -96,7 +96,7 @@
                             <tr style="${isExpired ? 'color:red;' : ''}">
                                 <td class="test-table-wide test-boder">${Collection.id}</td>
                                 <td class="test-table-wide test-boder">${Collection.title}</td>
-                                <td class="test-table-wide test-boder">${Collection.post_day}</td>
+                                <td class="test-table-wide test-boder">${post_day[loop.index]}</td>
                                 <td class="test-table-wide test-boder">${Collection.monetary}</td>
                                 <td class="test-table-wide test-boder">${Collection.deadline}</td>
                                 <td class="text-center test-boder">
