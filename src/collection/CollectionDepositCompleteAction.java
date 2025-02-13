@@ -52,12 +52,14 @@ public class CollectionDepositCompleteAction extends Action {
             if (result <= 0) {
                 // 挿入失敗
                 System.out.println("Insert failed, redirecting to ErrorPage1.jsp");
-                response.sendRedirect("ErrorPage1.jsp");
+                String sign_id = signid; // 送信したいデータ
+                response.sendRedirect("ErrorPage1.jsp?sign_id=" + sign_id);
                 return null;
             }
             // 挿入成功
             System.out.println("Insert successful, redirecting to Collection_Deposit_Done.jsp");
-            response.sendRedirect("Collection_Deposit_Done.jsp");
+            String sign_id = signid; // 送信したいデータ
+            response.sendRedirect("Collection_Deposit_Done.jsp?sign_id=" + sign_id);
             return null;
 
         } catch (Exception e) {

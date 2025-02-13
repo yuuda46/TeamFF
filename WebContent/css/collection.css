@@ -118,3 +118,38 @@
     background-color: #6c757d;
     color: white;
 }
+
+.container2 {
+	max-width : 780px;
+	margin : 0 auto;
+}
+
+.position_center {
+	text-align: center;
+}
+
+.notice_center {
+	display:flex;
+	justify-content: center;
+}
+
+.right_margin {
+	margin-right: 10px;
+}
+
+.margin_left_10 {
+	margin-left: 10px;
+}
+
+.detail_font {
+	font-size: 18px;
+}
+
+.padding_bottom_10 {
+	padding-bottom: 10px;
+}
+
+.select_size {
+	height: 35px;
+	width: 200px;
+}

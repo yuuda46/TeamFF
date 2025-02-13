@@ -6,7 +6,10 @@
 <%-- 文字化けの対策 --%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
-
+<%
+	String sign_id=(String)request.getAttribute("sign_id");
+%>
+<link rel="stylesheet" href="../css/collection.css">
 
 <c:import url="/common/base.jsp">
 
@@ -17,8 +20,6 @@
 <%--<c:import url="/common/sidemenu.jsp">
     </c:import> --%>
 
-    <link rel="stylesheet" href="../css/collection.css">
-
         <section class="mo-4">
             <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">入金管理</h2>
 			<label class="btn-position">エラーです、やり直してください。<br>
@@ -26,6 +27,7 @@
 
 
 		<form action="../collection/CollectionDeposit.action" method="get">
+		  <input type="hidden" name="signid" value=<%=sign_id%>>
           <button type="submit" class="CollectionDeposit.action">
           未入金確認画面に戻る
           </button>

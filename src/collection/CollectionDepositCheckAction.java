@@ -62,6 +62,7 @@ public class CollectionDepositCheckAction extends Action {
             request.setAttribute("Post", list);
             request.setAttribute("Signup", list2);
             request.setAttribute("post_day", string_times);
+            request.setAttribute("sign_id", signId);
 
         } catch (Exception e) {
             e.printStackTrace(out);

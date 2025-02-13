@@ -6,25 +6,34 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
+<%
+	String sign_id=(String)request.getAttribute("sign_id");
+%>
+
 <c:import url="/common/base.jsp">
     <c:param name="content">
         <link rel="stylesheet" href="../css/collection.css">
-        <div class="function">
+        <div class="function container3">
             <section class="mo-4">
-                <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold">入金ページ</h2>
-                <h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">このページには、まだ入金していない項目のみ表示しています</h3>
+                <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test large-bold position_center">入金ページ</h2>
 
                 <%-- 検索フォーム --%>
                 <form action="CollectionDeposit.action" method="get" onsubmit="return validateSignId()">
                     <div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
                         <div class="test-wide mx-3">
                             <%-- signid フィールド --%>
-                            <div class="col-xl select-wide">
-                                <label class="form-label" for="signid">利用者ID (Sign ID)</label><br>
-                                <input type="text" name="signid" id="signid" placeholder="利用者ID 36桁を入力" required="required" value="${param.signid}">
-                            </div>
-                            <div class="col-xl text-center">
-                                <button class="btn btn-secondary" id="filter-button">検索</button>
+                            <div class="notice_center">
+	                            <div class="col-xl select-wide">
+	                                <select class="select_size detail_font" required id="notice-f1-select" name="signid">
+										<option value="0">----------</option>
+										<c:forEach var="select" items="${select}">
+											<option value=${select.id } <c:if test="${select.name==f2}">selected</c:if>>${select.name}</option>
+										</c:forEach>
+									</select>
+	                            </div>
+	                            <div class="col-xl text-center">
+	                                <button class="margin_left_10 btn btn-secondary button_size button_style detail_font" id="filter-button">検索</button>
+	                            </div>
                             </div>
                             <div class="mt-2 text-warning" id="error-message">${errors.get("f1")}</div>
                         </div>
@@ -42,8 +51,13 @@
                     }
                 </script>
 
+				<c:if test="${empty Signup}">
+                	<h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">利用者を選択して検索してください</h3>
+                </c:if>
+
                 <%-- 名前の表示 --%>
                 <c:if test="${not empty Signup}">
+                	<h3 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4 C test small-bold">このページには、まだ入金していない項目のみ表示しています</h3>
                     <h3>利用者情報</h3>
                     <table class="test-table table-hover mx-3">
                         <tr>
@@ -97,5 +111,19 @@
                 </c:if>
             </section>
         </div>
+        <script type="text/javascript">
+        window.onload = function() {
+            var signId = '<%=sign_id%>';  // JSPから受け取った sign_id
+            var select = document.getElementById("notice-f1-select");
+
+            for (var i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === signId) {
+                    select.options[i].selected = true;
+                    break;
+                }
+            }
+        };
+
+		</script>
     </c:param>
 </c:import>

@@ -258,4 +258,29 @@ public class AccountDAO extends DAO {
     	 return list;
      }
 
+//     ユーザーIDと氏名を取得するSQL
+     public List<Account>select_id() throws Exception {
+    	 List<Account> list=new ArrayList<>();
+
+    	 Connection con=getConnection();
+    	 PreparedStatement st=con.prepareStatement(
+    			 "select name,id from signup "
+    			 + "where length(id) = 36");
+
+    	 ResultSet rs=st.executeQuery();
+
+    	 while (rs.next()){
+    		 Account account=new Account();
+    		 account.setName(rs.getString("name"));
+    		 account.setId(rs.getString("id"));
+
+    		 list.add(account);
+    	 }
+    	 st.close();
+    	 con.close();
+
+    	 return list;
+     }
+
+
     }
