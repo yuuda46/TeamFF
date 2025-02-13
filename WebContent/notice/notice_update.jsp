@@ -47,6 +47,7 @@
 	<div class="notice_center detail_top">
 
 		<form action="../notice/NoticeAdmin.action" method="get">
+			<input type="hidden" name="f1" value=${notice_content.category_id}>
 			<button class="button_style button_size right_margin" type="submit">戻る</button>
 		</form>
 
