@@ -19,7 +19,7 @@
 	タイトル:<input class="form_text form_top" type="text" name="title" placeholder="タイトルを入力してください" required="required" value="${title}"><br>
 	<%-- エラー文 --%>
 	<div id="error-message" style="color:red;">${error_message_title}</div>
-	カテゴリー:<select class="form_top form_select" id="notice-f1-select" name="num">
+	カテゴリー:<select class="form_top form_select" required="required" id="notice-f1-select" name="num">
 					<option value=0>----------</option>
 					<c:forEach var="select_list" items="${select_list}">
 					<option value=${select_list.categoryId } <c:if test="${select_list.categoryName==f2}">selected</c:if>>${select_list.categoryName}</option>

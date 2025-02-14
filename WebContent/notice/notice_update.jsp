@@ -19,6 +19,7 @@
 		<div class="padding_top_10">
 			タイトル:<input class="admin_text form_top margin_left_45" type="text" name="title" required="required" value="${notice_content.title}"><br>
 		</div>
+		<div id="error-message" style="color:red;">${error_message_title}</div>
 		<div class="padding_top_10">
 			カテゴリー:<select class="form_top admin_select margin_left_27" name="num" id="notice-f1-select">
 							<option value=0>----------</option>
@@ -27,6 +28,7 @@
 							</c:forEach>
 						</select><br>
 		</div>
+		<div id="error" style="color:red;">${error_message_num}</div>
 		<input type="hidden" name="post_id" value=<%=post_id %>>
 		<div class="padding_top_10 position_right">
 			<button class="button_style keep_button" type="submit">投稿情報編集</button>
